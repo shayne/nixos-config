@@ -8,7 +8,7 @@
     isNormalUser = true;
     uid = 1000;
     home = "/home/shayne";
-    extraGroups = [ "wheel" ];
+    extraGroups = [ "docker" "wheel" ];
     shell = pkgs.fish;
     hashedPassword = "$6$UENIoKcP$ku0OwcjMsQaHLhK7FpNGkcBAIMfdqhd74U6ELR3SSIUZidty4hQ4zWZF1y8L82yxaiw4T4pV4T7txN.xa/a6A0";
     openssh.authorizedKeys.keys = [

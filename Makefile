@@ -4,13 +4,13 @@ NIXPORT ?= 22
 NIXUSER ?= shayne
 
 # Settings
-NIXBLOCKDEVICE ?= sda
+NIXBLOCKDEVICE ?= vda
 
 # Get the path to this Makefile and directory
 MAKEFILE_DIR := $(patsubst %/,%,$(dir $(abspath $(lastword $(MAKEFILE_LIST)))))
 
 # The name of the nixosConfiguration in the flake
-NIXNAME ?= wsl2-amd64
+NIXNAME ?= unset
 
 # SSH options that are used. These aren't meant to be overridden but are
 # reused a lot so we just store them up here.
@@ -68,12 +68,12 @@ vm/bootstrap:
 
 # copy our secrets into the VM
 vm/secrets:
-	# # GPG keyring
-	# rsync -av -e 'ssh $(SSH_OPTIONS)' \
-	# 	--exclude='.#*' \
-	# 	--exclude='S.*' \
-	# 	--exclude='*.conf' \
-	# 	$(HOME)/.gnupg/ $(NIXUSER)@$(NIXADDR):~/.gnupg
+	# GPG keyring
+	rsync -av -e 'ssh $(SSH_OPTIONS)' \
+		--exclude='.#*' \
+		--exclude='S.*' \
+		--exclude='*.conf' \
+		$(HOME)/.gnupg/ $(NIXUSER)@$(NIXADDR):~/.gnupg
 	# SSH keys
 	rsync -av -e 'ssh $(SSH_OPTIONS)' \
 		--exclude='environment' \

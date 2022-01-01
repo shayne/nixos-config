@@ -15,14 +15,14 @@
   # We expect to run the VM on hidpi machines.
   # hardware.video.hidpi.enable = true;
   # false for docked setup
-  hardware.video.hidpi.enable = false;
+  # hardware.video.hidpi.enable = false;
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Define your hostname.
-  networking.hostName = "dev";
+  networking.hostName = "nixvm";
 
   # Set your time zone.
   time.timeZone = "America/New_York";
@@ -41,39 +41,39 @@
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
 
-  # setup windowing environment
-  services.xserver = {
-    enable = true;
-    layout = "us";
-    # dpi = 220;
-    # 32" 1440p monitor
-    # dpi = 91; # 27" QHD
-    dpi = 109; # 49" Dual-QHD
+  # # setup windowing environment
+  # services.xserver = {
+  #   enable = true;
+  #   layout = "us";
+  #   # dpi = 220;
+  #   # 32" 1440p monitor
+  #   # dpi = 91; # 27" QHD
+  #   dpi = 109; # 49" Dual-QHD
 
-    desktopManager = {
-      xterm.enable = false;
-      wallpaper.mode = "scale";
-    };
+  #   desktopManager = {
+  #     xterm.enable = false;
+  #     wallpaper.mode = "scale";
+  #   };
 
-    displayManager = {
-      defaultSession = "none+i3";
-      lightdm.enable = true;
+  #   displayManager = {
+  #     defaultSession = "none+i3";
+  #     lightdm.enable = true;
 
-      # AARCH64: For now, on Apple Silicon, we must manually set the
-      # display resolution. This is a known issue with VMware Fusion.
-      sessionCommands = ''
-        ${pkgs.xlibs.xset}/bin/xset r rate 200 40
-      '' + (if currentSystem == "aarch64-linux" then ''
-        ${pkgs.xorg.xrandr}/bin/xrandr --newmode "5120x1440_120.00" 1324.26 5120 5560 6136 7152 1440 1441 1444 1543 -hsync +vsync
-        ${pkgs.xorg.xrandr}/bin/xrandr --addmode Virtual-1 5120x1440_120.00
-        ${pkgs.xorg.xrandr}/bin/xrandr -s 5120x1440_120.00
-      '' else "");
-    };
+  #     # AARCH64: For now, on Apple Silicon, we must manually set the
+  #     # display resolution. This is a known issue with VMware Fusion.
+  #     sessionCommands = ''
+  #       ${pkgs.xlibs.xset}/bin/xset r rate 200 40
+  #     '' + (if currentSystem == "aarch64-linux" then ''
+  #       ${pkgs.xorg.xrandr}/bin/xrandr --newmode "5120x1440_120.00" 1324.26 5120 5560 6136 7152 1440 1441 1444 1543 -hsync +vsync
+  #       ${pkgs.xorg.xrandr}/bin/xrandr --addmode Virtual-1 5120x1440_120.00
+  #       ${pkgs.xorg.xrandr}/bin/xrandr -s 5120x1440_120.00
+  #     '' else "");
+  #   };
 
-    windowManager = {
-      i3.enable = true;
-    };
-  };
+  #   windowManager = {
+  #     i3.enable = true;
+  #   };
+  # };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.mutableUsers = false;
@@ -98,24 +98,24 @@
     gnumake
     killall
     niv
-    rxvt_unicode
-    xclip
+    # rxvt_unicode
+    # xclip
 
     # This is needed for the vmware user tools clipboard to work.
     # You can test if you don't need this by deleting this and seeing
     # if the clipboard sill works.
-    gtkmm3
+    # gtkmm3
 
     # VMware on M1 doesn't support automatic resizing yet and on
     # my big monitor it doesn't detect the resolution either so we just
     # manualy create the resolution and switch to it with this script.
     # This script could be better but its hopefully temporary so just force it.
-    (writeShellScriptBin "xrandr-uw" ''
-      xrandr -s '5120x1440_120.00'
-    '')
-    (writeShellScriptBin "xrandr-mbp" ''
-      xrandr -s 2880x1800
-    '')
+    # (writeShellScriptBin "xrandr-uw" ''
+    #   xrandr -s '5120x1440_120.00'
+    # '')
+    # (writeShellScriptBin "xrandr-mbp" ''
+    #   xrandr -s 2880x1800
+    # '')
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

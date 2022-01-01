@@ -7,6 +7,8 @@ let
   inherit (pkgs.stringsWithDeps) stringAfter;
 in
 {
+  environment.sessionVariables.NIXNAME = "wsl2-amd64";
+
   # imports = [
   #   "${modulesPath}/profiles/minimal.nix"
   # ];

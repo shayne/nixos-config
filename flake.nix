@@ -38,6 +38,11 @@
       system = "x86_64-linux";
       user   = "shayne";
     };
+    nixosConfigurations.vm-unraid= mkVM "vm-unraid" rec {
+      inherit nixpkgs home-manager overlays;
+      system = "x86_64-linux";
+      user   = "shayne";
+    };
     nixosConfigurations.wsl2-amd64 = mkVM "wsl2-amd64" rec {
       inherit nixpkgs home-manager overlays;
       system = "x86_64-linux";
