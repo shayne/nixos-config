@@ -27,17 +27,6 @@
       inputs.neovim-nightly-overlay.overlay
     ];
   in {
-    nixosConfigurations.vm-aarch64 = mkVM "vm-aarch64" rec {
-      inherit nixpkgs home-manager overlays;
-      system = "aarch64-linux";
-      user   = "shayne";
-    };
-
-    nixosConfigurations.vm-intel = mkVM "vm-intel" rec {
-      inherit nixpkgs home-manager overlays;
-      system = "x86_64-linux";
-      user   = "shayne";
-    };
     nixosConfigurations.vm-unraid= mkVM "vm-unraid" rec {
       inherit nixpkgs home-manager overlays;
       system = "x86_64-linux";
