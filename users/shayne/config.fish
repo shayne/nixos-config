@@ -54,9 +54,6 @@ set --universal --erase fish_greeting
 function fish_greeting; end
 funcsave fish_greeting
 
-# bobthefish theme
-set -g theme_color_scheme dracula
-
 # My color scheme
 set -U fish_color_normal normal
 set -U fish_color_command F8F8F2
@@ -83,17 +80,6 @@ set -U fish_pager_color_completion normal
 set -U fish_pager_color_description B3A06D yellow
 set -U fish_pager_color_prefix white --bold --underline
 set -U fish_pager_color_progress brwhite --background=cyan
-
-# Override the nix prompt for the theme so that we show a more concise prompt
-function __bobthefish_prompt_nix -S -d 'Display current nix environment'
-    [ "$theme_display_nix" = 'no' -o -z "$IN_NIX_SHELL" ]
-    and return
-
-    __bobthefish_start_segment $color_nix
-    echo -ns N ' '
-
-    set_color normal
-end
 
 #-------------------------------------------------------------------------------
 # Vars
