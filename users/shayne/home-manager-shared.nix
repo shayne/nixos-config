@@ -127,9 +127,18 @@ let sources = import ../../nix/sources.nix; in {
     }) [
       "fish-fzf"
       "fish-foreign-env"
-      "theme-bobthefish"
+      # "theme-bobthefish"
     ];
   };
+
+  programs.starship = {
+    enable = true;
+    enableFishIntegration = true;
+    # Configuration written to ~/.config/starship.toml
+    settings = {
+    };
+  };
+
 
   programs.git = {
     enable = true;
