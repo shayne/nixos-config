@@ -13,6 +13,8 @@ let sources = import ../../nix/sources.nix; in {
   home.packages = [
     pkgs.bat
     pkgs.exa
+    pkgs.ripgrep
+    pkgs.tealdeer
     pkgs.firefox
     pkgs.fzf
     pkgs.git-crypt
@@ -71,6 +73,7 @@ let sources = import ../../nix/sources.nix; in {
     shellAliases = {
       cat = "bat";
       ls = "exa";
+      grep = "rg";
       ga = "git add";
       gc = "git commit";
       gco = "git checkout";
@@ -107,6 +110,7 @@ let sources = import ../../nix/sources.nix; in {
     shellAliases = {
       cat = "bat";
       ls = "exa";
+      grep = "rg";
       ga = "git add";
       gc = "git commit";
       gco = "git checkout";
