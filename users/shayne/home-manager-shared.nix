@@ -36,7 +36,7 @@ let sources = import ../../nix/sources.nix; in {
     LC_ALL = "en_US.UTF-8";
     EDITOR = "nvim";
     PAGER = "less -FirSwX";
-    MANPAGER = "less -FirSwX";
+    MANPAGER = "sh -c 'col -bx | ${pkgs.bat}/bin/bat -l man -p'";
   };
 
    # tree-sitter parsers
