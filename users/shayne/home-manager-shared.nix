@@ -12,6 +12,7 @@ let sources = import ../../nix/sources.nix; in {
   # not a huge list.
   home.packages = [
     pkgs.bat
+    pkgs.exa
     pkgs.firefox
     pkgs.fzf
     pkgs.git-crypt
@@ -68,6 +69,8 @@ let sources = import ../../nix/sources.nix; in {
     initExtra = builtins.readFile ./bashrc;
 
     shellAliases = {
+      cat = "bat";
+      ls = "exa";
       ga = "git add";
       gc = "git commit";
       gco = "git checkout";
@@ -102,6 +105,8 @@ let sources = import ../../nix/sources.nix; in {
     ]);
 
     shellAliases = {
+      cat = "bat";
+      ls = "exa";
       ga = "git add";
       gc = "git commit";
       gco = "git checkout";
