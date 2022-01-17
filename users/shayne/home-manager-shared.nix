@@ -14,6 +14,7 @@ let sources = import ../../nix/sources.nix; in {
     pkgs.bat
     pkgs.exa
     pkgs.ripgrep
+    pkgs.fd
     pkgs.tealdeer
     pkgs.firefox
     pkgs.fzf
@@ -25,6 +26,7 @@ let sources = import ../../nix/sources.nix; in {
     pkgs.gopls
     pkgs.tree
     pkgs.watch
+    pkgs.traceroute
     # pkgs.zathura
 
     # pkgs.tlaplusToolbox
@@ -74,6 +76,7 @@ let sources = import ../../nix/sources.nix; in {
       cat = "bat";
       ls = "exa";
       grep = "rg";
+      find = "fd";
       ga = "git add";
       gc = "git commit";
       gco = "git checkout";
@@ -111,6 +114,7 @@ let sources = import ../../nix/sources.nix; in {
       cat = "bat";
       ls = "exa";
       grep = "rg";
+      find = "fd";
       ga = "git add";
       gc = "git commit";
       gco = "git checkout";
