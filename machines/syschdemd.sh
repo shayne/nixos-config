@@ -42,8 +42,5 @@ else
 fi
 
 # Pass external environment but filter variables specific to root user.
-exportCmd="$(export -p | $sw/grep -vE ' (HOME|LOGNAME|SHELL|USER)='); export WSLPATH=\"$PATH\""
-
-exec $sw/nsenter -t $(< /run/systemd.pid) -p -m -- $sw/machinectl -q \
-	shell .host /bin/sh -c \
-	"cd \"$PWD\"; $exportCmd; exec @wrapperDir@/su -s $cmd @defaultUser@"
+exportCmd="$(export -p | $sw/grep -E ' (WSL|DISPLAY|WAYLAND)'); export WSLPATH=\"$PATH\"; export VSCODE_WSL_EXT_LOCATION=\"$VSCODE_WSL_EXT_LOCATION\""
+exec $sw/nsenter -t $(< /run/systemd.pid) -p -m -- $sw/machinectl -q --uid=@defaultUser@ shell .host /bin/sh -c "cd \"$PWD\"; $exportCmd; exec $cmd"

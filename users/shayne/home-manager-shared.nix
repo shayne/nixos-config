@@ -11,26 +11,18 @@ let sources = import ../../nix/sources.nix; in {
   # per-project flakes sourced with direnv and nix-shell, so this is
   # not a huge list.
   home.packages = [
-    pkgs.bat
-    pkgs.exa
-    pkgs.ripgrep
-    pkgs.fd
     pkgs.tealdeer
     pkgs.firefox
     pkgs.fzf
     pkgs.git-crypt
     pkgs.htop
     pkgs.jq
-    # pkgs.rofi
     pkgs.go
     pkgs.gopls
+    pkgs.hub
     pkgs.tree
     pkgs.watch
     pkgs.traceroute
-    # pkgs.zathura
-
-    # pkgs.tlaplusToolbox
-    # pkgs.tetex
   ];
 
   #---------------------------------------------------------------------
@@ -45,11 +37,6 @@ let sources = import ../../nix/sources.nix; in {
     PAGER = "less -FirSwX";
     MANPAGER = "less -FirSwX";
   };
-
-  # home.file.".inputrc".source = ./inputrc;
-
-   # xdg.configFile."i3/config".text = builtins.readFile ./i3;
-   # xdg.configFile."rofi/config.rasi".text = builtins.readFile ./rofi;
 
    # tree-sitter parsers
    xdg.configFile."nvim/parser/proto.so".source = "${pkgs.tree-sitter-proto}/parser";
@@ -73,10 +60,6 @@ let sources = import ../../nix/sources.nix; in {
     initExtra = builtins.readFile ./bashrc;
 
     shellAliases = {
-      cat = "bat";
-      ls = "exa";
-      grep = "rg";
-      find = "fd";
       ga = "git add";
       gc = "git commit";
       gco = "git checkout";
@@ -111,10 +94,6 @@ let sources = import ../../nix/sources.nix; in {
     ]);
 
     shellAliases = {
-      cat = "bat";
-      ls = "exa";
-      grep = "rg";
-      find = "fd";
       ga = "git add";
       gc = "git commit";
       gco = "git checkout";
@@ -220,23 +199,6 @@ let sources = import ../../nix/sources.nix; in {
     extraConfig = builtins.readFile ./kitty;
   };
 
-  # programs.i3status = {
-  #   enable = true;
-
-  #   general = {
-  #     colors = true;
-  #     color_good = "#8C9440";
-  #     color_bad = "#A54242";
-  #     color_degraded = "#DE935F";
-  #   };
-
-  #   modules = {
-  #     ipv6.enable = false;
-  #     "wireless _first_".enable = false;
-  #     "battery all".enable = false;
-  #   };
-  # };
-
   programs.neovim = {
     enable = true;
     package = pkgs.neovim-nightly;
@@ -290,13 +252,4 @@ let sources = import ../../nix/sources.nix; in {
     defaultCacheTtl = 31536000;
     maxCacheTtl = 31536000;
   };
-
-  # xresources.extraConfig = builtins.readFile ./Xresources;
-
-  # # Make cursor not tiny on HiDPI screens
-  # xsession.pointerCursor = {
-  #   name = "Vanilla-DMZ";
-  #   package = pkgs.vanilla-dmz;
-  #   size = 16;
-  # };
 }

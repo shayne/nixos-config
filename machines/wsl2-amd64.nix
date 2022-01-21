@@ -31,6 +31,7 @@ in
     gnumake
     killall
     niv
+    wget
   ];
 
   hardware.opengl = {
