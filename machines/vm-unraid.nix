@@ -1,6 +1,7 @@
 { config, pkgs, ... }: {
   imports = [
     ./vm-shared.nix
+    ../secret/modules/cron.nix
   ];
 
   environment.sessionVariables.NIXNAME = "vm-unraid";
