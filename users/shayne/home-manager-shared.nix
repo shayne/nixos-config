@@ -23,6 +23,7 @@ let sources = import ../../nix/sources.nix; in {
     pkgs.tree
     pkgs.watch
     pkgs.traceroute
+    pkgs.google-cloud-sdk
   ];
 
   #---------------------------------------------------------------------
@@ -124,6 +125,9 @@ let sources = import ../../nix/sources.nix; in {
     enableFishIntegration = true;
     # Configuration written to ~/.config/starship.toml
     settings = {
+      gcloud = {
+        disabled = true;
+      };
     };
   };
 
