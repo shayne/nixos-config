@@ -6,4 +6,4 @@ It's entirely based on [mitchellh/nixos-config](https://github.com/mitchellh/nix
 
 ## How I use it
 
-I currently have to instances of this config running. One a WSL2 NixOS install and another KVM/Qemu VM under Unraid.
+I currently have two instances of this config running. One a WSL2 NixOS install and another KVM/Qemu VM under Unraid.
