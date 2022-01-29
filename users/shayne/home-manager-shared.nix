@@ -22,6 +22,7 @@ let sources = import ../../nix/sources.nix; in {
     pkgs.git-crypt
     pkgs.htop
     pkgs.jq
+    pkgs.ripgrep
     pkgs.go
     pkgs.gopls
     pkgs.hub
