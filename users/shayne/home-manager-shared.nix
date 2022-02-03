@@ -15,6 +15,8 @@ let sources = import ../../nix/sources.nix; in {
   # per-project flakes sourced with direnv and nix-shell, so this is
   # not a huge list.
   home.packages = [
+    pkgs.bat
+    pkgs.fd
     pkgs.nix-diff
     pkgs.tealdeer
     pkgs.firefox
@@ -226,11 +228,12 @@ let sources = import ../../nix/sources.nix; in {
 
       customVim.vim-nord
       customVim.nvim-lspconfig
+      customVim.nvim-plenary # required for telescope
+      customVim.nvim-telescope
       customVim.nvim-treesitter
       customVim.nvim-treesitter-playground
       customVim.nvim-treesitter-textobjects
 
-      vimPlugins.ctrlp
       vimPlugins.vim-airline
       vimPlugins.vim-airline-themes
       vimPlugins.vim-eunuch
