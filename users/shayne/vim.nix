@@ -48,6 +48,12 @@ let sources = import ../../nix/sources.nix; in rec {
       src = sources.vim-nord;
     };
 
+    nvim-comment = vimUtils.buildVimPlugin {
+      name = "nvim-comment";
+      src = sources.nvim-comment;
+      buildPhase = ":";
+    };
+
     nvim-plenary = vimUtils.buildVimPlugin {
       name = "nvim-plenary";
       src = sources.nvim-plenary;
