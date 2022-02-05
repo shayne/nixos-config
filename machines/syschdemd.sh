@@ -3,7 +3,7 @@
 set -e
 
 sw="/nix/var/nix/profiles/system/sw/bin"
-systemPath=`${sw}/readlink -f /nix/var/nix/profiles/system`
+systemPath=$(${sw}/readlink -f /nix/var/nix/profiles/system)
 
 # Needs root to work
 if [[ $EUID -ne 0 ]]; then
@@ -19,16 +19,16 @@ if [ ! -e "/run/systemd.pid" ]; then
     PATH=/run/current-system/systemd/lib/systemd:@fsPackagesPath@ \
         LOCALE_ARCHIVE=/run/current-system/sw/lib/locale/locale-archive \
         @daemonize@/bin/daemonize /run/current-system/sw/bin/unshare -fp --mount-proc systemd
-    /run/current-system/sw/bin/pgrep -xf systemd > /run/systemd.pid
+    /run/current-system/sw/bin/pgrep -xf systemd >/run/systemd.pid
 
     # Wait for systemd to start
     status=1
     while [[ $status -gt 0 ]]; do
         $sw/sleep 1
         status=0
-        $sw/nsenter -t $(< /run/systemd.pid) -p -m -- \
-                    $sw/systemctl is-system-running -q --wait 2>/dev/null \
-            || status=$?
+         $sw/nsenter -t $(</run/systemd.pid) -p -m -- \
+            $sw/systemctl is-system-running -q --wait 2>/dev/null ||
+            status=$?
     done
 fi
 
@@ -41,6 +41,12 @@ else
     cmd="$userShell"
 fi
 
-# Pass external environment but filter variables specific to root user.
-exportCmd="$(export -p | $sw/grep -E ' (WSL|DISPLAY|WAYLAND)'); export WSLPATH=\"$PATH\"; export VSCODE_WSL_EXT_LOCATION=\"$VSCODE_WSL_EXT_LOCATION\""
-exec $sw/nsenter -t $(< /run/systemd.pid) -p -m -- $sw/machinectl -q --uid=@defaultUser@ shell .host /bin/sh -c "cd \"$PWD\"; $exportCmd; exec $cmd"
+if [ -z "${INSIDE_NAMESPACE:-}" ]; then
+    # exec $sw/nsenter -t $(< /run/systemd.pid) -p -m -- $sw/machinectl -q --uid=@defaultUser@ shell .host /bin/sh -c "export INSIDE_NAMESPACE=true; cd \"$PWD\"; exec $cmd"
+    # Pass external environment but filter variables specific to root user.
+    exportCmd="$(export -p | $sw/grep -E ' (WSL|DISPLAY|WAYLAND|PULSE_SERVER)'); export WSLPATH=\"$PATH\"; export VSCODE_WSL_EXT_LOCATION=\"$VSCODE_WSL_EXT_LOCATION\" export INSIDE_NAMESPACE=true"
+    exec $sw/nsenter -t $(< /run/systemd.pid) -p -m -- $sw/machinectl -q --uid=@defaultUser@ shell .host /bin/sh -c "cd \"$PWD\"; $exportCmd; exec $cmd"
+else
+    exec $cmd
+fi
+
