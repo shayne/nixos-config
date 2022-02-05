@@ -51,7 +51,7 @@ in
   environment.extraInit = ''PATH="$PATH:$WSLPATH"'';
 
   environment.etc.hosts.enable = false;
-  environment.etc."resolv.conf".enable = false;
+  # environment.etc."resolv.conf".enable = false;
 
   networking.dhcpcd.enable = false;
 
@@ -101,6 +101,16 @@ in
     mountFsTab=true
     root=${automountPath}/
     options=metadata,uid=1000,gid=100
+
+    [network]
+    hostname=wsl
+    generateHosts = false
+    generateResolvConf = false
+  '';
+
+  environment.etc."resolv.conf".text = ''
+    nameserver 10.2.2.10
+    search lan
   '';
 
   system.activationScripts = {
