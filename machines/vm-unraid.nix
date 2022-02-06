@@ -6,6 +6,8 @@
 
   environment.sessionVariables.NIXNAME = "vm-unraid";
 
+  networking.hostName = "devvm";
+
   # Interface is this on Intel Fusion
   networking.interfaces.enp1s0.useDHCP = true;
 
