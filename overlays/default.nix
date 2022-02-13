@@ -7,6 +7,8 @@ self: super: {
   nomad-bin = self.callPackage ../pkgs/nomad-bin.nix {};
   terraform-bin = self.callPackage ../pkgs/terraform-bin.nix {};
 
+  caddy = self.callPackage ../pkgs/caddy.nix {};
+
   # Have to force Go 1.17 because the default is fixed to 1.16
   # for reasons in the nixpkgs repository. We'll undo this when
   # they switch.

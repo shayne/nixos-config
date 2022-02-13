@@ -2,6 +2,7 @@
   imports = [
     ./vm-shared.nix
     ../secret/modules/cron.nix
+    ../secret/modules/caddy.nix
   ];
 
   environment.sessionVariables.NIXNAME = "vm-unraid";
