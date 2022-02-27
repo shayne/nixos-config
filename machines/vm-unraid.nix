@@ -14,6 +14,8 @@
 
   services.qemuGuest.enable = true;
 
+  programs.mosh.enable = true;
+
   # # Shared folder to host works on Intel
   # fileSystems."/host" = {
   #   fsType = "fuse./run/current-system/sw/bin/vmhgfs-fuse";
