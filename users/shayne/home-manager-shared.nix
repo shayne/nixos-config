@@ -172,7 +172,7 @@ let sources = import ../../nix/sources.nix; in {
   programs.tmux = {
     enable = true;
     terminal = "xterm-256color";
-    shortcut = "l";
+    shortcut = "a";
     secureSocket = false;
 
     extraConfig = ''
