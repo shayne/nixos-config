@@ -139,7 +139,6 @@ let sources = import ../../nix/sources.nix; in {
     };
   };
 
-
   programs.git = {
     enable = true;
     userName = "shayne";
@@ -189,28 +188,6 @@ let sources = import ../../nix/sources.nix; in {
     '';
   };
 
-  # programs.alacritty = {
-  #   enable = true;
-
-  #   settings = {
-  #     env.TERM = "xterm-256color";
-
-  #     key_bindings = [
-  #       { key = "K"; mods = "Command"; chars = "ClearHistory"; }
-  #       { key = "V"; mods = "Command"; action = "Paste"; }
-  #       { key = "C"; mods = "Command"; action = "Copy"; }
-  #       { key = "Key0"; mods = "Command"; action = "ResetFontSize"; }
-  #       { key = "Equals"; mods = "Command"; action = "IncreaseFontSize"; }
-  #       { key = "Subtract"; mods = "Command"; action = "DecreaseFontSize"; }
-  #     ];
-  #   };
-  # };
-
-  programs.kitty = {
-    enable = true;
-    extraConfig = builtins.readFile ./kitty;
-  };
-
   programs.neovim = {
     enable = true;
     package = pkgs.neovim-nightly;
@@ -247,17 +224,6 @@ let sources = import ../../nix/sources.nix; in {
 
     extraConfig = (import ./vim-config.nix) { inherit sources; };
   };
-
-  # programs.vscode = {
-  #   enable = true;
-  #   package = pkgs.vscodium;
-  #   extensions = with pkgs.vscode-extensions; [
-  #     vscodevim.vim
-  #     golang.go
-  #     bbenoist.nix
-  #     arrterian.nix-env-selector
-  #   ];
-  # };
 
   services.gpg-agent = {
     enable = true;

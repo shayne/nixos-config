@@ -1,6 +1,6 @@
 configuration {
-  dpi: 109;
-  font: "Monaco for Powerline 12";
+  dpi: 150;
+  font: "PragmataProMono Nerd Font Mono 12";
 }
 
 * {

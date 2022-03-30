@@ -2,7 +2,7 @@
 !------------------------------------------------
 # Xft.dpi: 180
 # Xft.dpi: 91
-Xft.dpi: 109
+Xft.dpi: 150
 Xft.autohint: true
 Xft.antialias: true
 Xft.hinting: true

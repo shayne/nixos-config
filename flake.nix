@@ -28,7 +28,8 @@
       inputs.neovim-nightly-overlay.overlay
 
       (final: prev: {
-          # ...
+        # To get Kitty 0.24.x. Delete this once it hits release.
+        kitty = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.kitty;
       })
     ];
   in {
@@ -41,6 +42,11 @@
     nixosConfigurations.wsl2-amd64 = mkVM "wsl2-amd64" rec {
       inherit nixpkgs home-manager overlays;
       system = "x86_64-linux";
+      user   = "shayne";
+    };
+    nixosConfigurations.macbook = mkVM "macbook" rec {
+      inherit nixpkgs home-manager overlays;
+      system = "aarch64-linux";
       user   = "shayne";
     };
   };
