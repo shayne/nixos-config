@@ -120,9 +120,9 @@
 
   # Make cursor not tiny on HiDPI screens
   xsession.pointerCursor = {
-    name = "Vanilla-DMZ";
+    name = "Vanilla-DMZ-AA";
     package = pkgs.vanilla-dmz;
-    size = 64;
+    size = 32;
   };
 
   services.xcape.enable = true;
