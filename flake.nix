@@ -28,7 +28,7 @@
       inputs.neovim-nightly-overlay.overlay
 
       (final: prev: {
-         # Go we always want the latest version
+        # Go we always want the latest version
         go = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.go_1_18;
 
         # To get Kitty 0.24.x. Delete this once it hits release.
