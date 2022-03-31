@@ -14,24 +14,24 @@ let sources = import ../../nix/sources.nix; in {
   # Packages I always want installed. Most packages I install using
   # per-project flakes sourced with direnv and nix-shell, so this is
   # not a huge list.
-  home.packages = [
-    pkgs.bat
-    pkgs.fd
-    pkgs.nix-diff
-    pkgs.tealdeer
-    pkgs.firefox
-    pkgs.fzf
-    pkgs.git-crypt
-    pkgs.htop
-    pkgs.jq
-    pkgs.ripgrep
-    pkgs.go
-    pkgs.gopls
-    pkgs.hub
-    pkgs.tree
-    pkgs.watch
-    pkgs.traceroute
-    pkgs.google-cloud-sdk
+  home.packages = with pkgs; [
+    bat
+    fd
+    nix-diff
+    tealdeer
+    firefox
+    fzf
+    git-crypt
+    htop
+    jq
+    ripgrep
+    go
+    gopls
+    hub
+    tree
+    watch
+    traceroute
+    google-cloud-sdk
   ];
 
   #---------------------------------------------------------------------
