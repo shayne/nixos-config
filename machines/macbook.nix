@@ -13,6 +13,8 @@
     package = pkgs.nixUnstable;
     extraOptions = ''
       experimental-features = nix-command flakes
+      keep-outputs = true
+      keep-derivations = true
     '';
    };
 
@@ -146,6 +148,10 @@
     killall
     niv
     tailscale
+  ];
+
+  environment.pathsToLink = [
+    "/share/nix-direnv"
   ];
 
   # enable the tailscale service
