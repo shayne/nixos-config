@@ -1,19 +1,6 @@
-{ config, pkgs, lib, modulesPath, ... }:
+{ config, pkgs, lib, inputs, ... }:
 
-let
-  defaultUser = "shayne";
-  automountPath = "/mnt";
-  syschdemd = import ./syschdemd.nix { inherit lib pkgs config defaultUser; };
-  inherit (pkgs.stringsWithDeps) stringAfter;
-in
 {
-  environment.sessionVariables.NIXNAME = "wsl2-amd64";
-
-  # imports = [
-  #   "${modulesPath}/profiles/minimal.nix"
-  # ];
-
-  # use unstable nix so we can access flakes
   nix = {
     package = pkgs.nixUnstable;
     extraOptions = ''
@@ -21,6 +8,13 @@ in
     '';
   };
 
+  environment.sessionVariables.NIXNAME = "wsl2-amd64";
+
+  wsl = {
+    enable = true;
+    automountPath = "/mnt";
+    defaultUser = "shayne";
+  };
 
   # Set your time zone.
   time.timeZone = "America/New_York";
@@ -34,40 +28,13 @@ in
     wget
   ];
 
-  hardware.opengl = {
-    enable = true;
-    # extraPackages = with pkgs; [
-    #   libGL
-    # ];
-    # setLdLibraryPath = true;
-  };
-
-  # WSL is closer to a container than anything else
-  boot.isContainer = true;
+  hardware.opengl.enable = true;
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
 
-  environment.extraInit = ''PATH="$PATH:$WSLPATH"'';
-
-  environment.etc.hosts.enable = false;
   # environment.etc."resolv.conf".enable = false;
 
-  networking.dhcpcd.enable = false;
-
-  users.users.${defaultUser} = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" ];
-  };
-
-  users.users.root = {
-    shell = "${syschdemd}/bin/syschdemd";
-    # Otherwise WSL fails to login as root with "initgroups failed 5"
-    extraGroups = [ "root" ];
-  };
-
-  # Manage fonts. We pull these from a secret directory since most of these
-  # fonts require a purchase.
   fonts = {
     fontDir.enable = true;
 
@@ -80,51 +47,8 @@ in
     ];
   };
 
-  security.sudo = {
-    extraConfig = ''
-      Defaults env_keep+=INSIDE_NAMESPACE
-    '';
-    wheelNeedsPassword = false;
-  };
-
-  # Disable systemd units that don't make sense on WSL
-  systemd.services."serial-getty@ttyS0".enable = false;
-  systemd.services."serial-getty@hvc0".enable = false;
-  systemd.services."getty@tty1".enable = false;
-  systemd.services."autovt@".enable = false;
-
-  systemd.services.firewall.enable = false;
-  systemd.services.systemd-resolved.enable = false;
-  systemd.services.systemd-udevd.enable = false;
-
-  # Don't allow emergency mode, because we don't have a console.
-  systemd.enableEmergencyMode = false;
-
-  environment.etc."wsl.conf".text = ''
-    [automount]
-    enabled=true
-    mountFsTab=true
-    root=${automountPath}/
-    options=metadata,uid=1000,gid=100
-
-    [network]
-    hostname=wsl
-    generateHosts = false
-    generateResolvConf = false
-  '';
-
   environment.etc."resolv.conf".text = ''
     nameserver 10.2.2.10
     search lan
   '';
-
-  system.activationScripts = {
-    copy-launchers = stringAfter [] ''
-      mkdir -p /usr/share/applications
-      for x in applications icons; do
-        echo "Copying /usr/share/$x"
-        ${pkgs.rsync}/bin/rsync -ar --delete $systemConfig/sw/share/$x/. /usr/share/$x
-      done
-    '';
-  };
 }

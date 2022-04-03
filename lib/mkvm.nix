@@ -1,6 +1,6 @@
 # This function creates a NixOS system based on our VM setup for a
 # particular architecture.
-name: { nixpkgs, home-manager, system, user, overlays }:
+name: { nixpkgs, home-manager, system, user, overlays, nixos-wsl }:
 
 nixpkgs.lib.nixosSystem rec {
   inherit system;
@@ -10,6 +10,8 @@ nixpkgs.lib.nixosSystem rec {
     # to go through and apply our system type. We do this first so
     # the overlays are available globally.
     { nixpkgs.overlays = overlays; }
+
+    nixos-wsl.nixosModules.wsl
 
     ../hardware/${name}.nix
     ../machines/${name}.nix

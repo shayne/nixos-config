@@ -19,9 +19,12 @@
 
     # Other packages
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
-  };
 
-  outputs = { self, nixpkgs, home-manager, ... }@inputs: let
+    # wsl
+    nixos-wsl.url = "github:nix-community/NixOS-WSL";
+};
+
+  outputs = { self, nixpkgs, home-manager, nixos-wsl, ... }@inputs: let
     mkVM = import ./lib/mkvm.nix;
 
     overlays = [
@@ -37,18 +40,18 @@
     ];
   in {
     nixosConfigurations.vm-unraid = mkVM "vm-unraid" rec {
-      inherit nixpkgs home-manager overlays;
+      inherit nixpkgs home-manager overlays nixos-wsl;
       system = "x86_64-linux";
       user   = "shayne";
     };
 
     nixosConfigurations.wsl2-amd64 = mkVM "wsl2-amd64" rec {
-      inherit nixpkgs home-manager overlays;
+      inherit nixpkgs home-manager overlays nixos-wsl;
       system = "x86_64-linux";
       user   = "shayne";
     };
     nixosConfigurations.macbook = mkVM "macbook" rec {
-      inherit nixpkgs home-manager overlays;
+      inherit nixpkgs home-manager overlays nixos-wsl;
       system = "aarch64-linux";
       user   = "shayne";
     };
