@@ -236,4 +236,6 @@ let sources = import ../../nix/sources.nix; in {
     defaultCacheTtl = 31536000;
     maxCacheTtl = 31536000;
   };
+
+  services.syncthing.enable = true;
 }
