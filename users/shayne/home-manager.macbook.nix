@@ -46,63 +46,57 @@
     extraConfig = builtins.readFile ./kitty;
   };
 
-  programs.i3status = {
+  programs.i3status-rust = {
     enable = true;
-    enableDefault = false;
-
-    general = {
-      colors = true;
-      color_good = "#8C9440";
-      color_bad = "#A54242";
-      color_degraded = "#DE935F";
-    };
-
-    modules = {
-      "wireless _first_" = {
-        position = 2;
-        settings = {
-          format_up = "W: (%quality at %essid) %ip";
-          format_down = "W: down";
-        };
-      };
-      "battery 0" = {
-         position = 4;
-         settings = {
-           format = "%status %percentage %remaining %emptytime";
-           format_down = "No battery";
-           status_chr = "⚡ CHR";
-           status_bat = "🔋 BAT";
-           status_unk = "? UNK";
-           status_full = "☻ FULL";
-           path = "/sys/class/power_supply/macsmc-battery/uevent";
-           low_threshold = 10;
-         };
-      };
-      "disk /" = {
-        position = 5;
-        settings = {
-          format = "%avail";
-        };
-      };
-      load= {
-        position = 6;
-        settings = {
-          format = "%1min";
-        };
-      };
-      memory = {
-        position = 7;
-        settings = {
-          format = "%used | %available";
-          threshold_degraded = "1G";
-          format_degraded = "MEMORY < %available";
-        };
-      };
-      "tztime local" = {
-        position = 8;
-        settings = { format = "%Y-%m-%d %H:%M:%S"; };
-      };
-    };
+    bars.default.blocks = [
+      {
+        block = "net";
+        device = "wlp1s0f0";
+        format = "{ssid} {signal_strength} {ip} {speed_down;K*b} {graph_down;K*b}";
+        interval = 5;
+      }
+      {
+        block = "battery";
+        interval = 10;
+        format = "{percentage:6#100} {percentage} {time}";
+        device = "macsmc-battery";
+      }
+      {
+        block = "disk_space";
+        path = "/";
+        alias = "/";
+        info_type = "available";
+        unit = "GB";
+        interval = 60;
+        warning = 20.0;
+        alert = 10.0;
+      }
+      {
+        block = "load";
+        format = "1min avg: {1m}";
+        interval = 1;
+      }
+      {
+        block = "memory";
+        format_mem = "{mem_used}/{mem_total}({mem_used_percents})";
+        format_swap = "{swap_used}/{swap_total}({swap_used_percents})";
+        display_type = "memory";
+        icons = true;
+        clickable = true;
+        interval = 5;
+        warning_mem = 80;
+        warning_swap = 80;
+        critical_mem = 95;
+        critical_swap = 95;
+      }
+      {
+        block = "time";
+        format = "%a %d/%m %R";
+        timezone = "US/Eastern";
+        interval = 60;
+        locale = "en_US";
+      }
+    ];
   };
 
   programs.vscode = {

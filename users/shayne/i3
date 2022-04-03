@@ -199,7 +199,7 @@ bindsym $mod+BackSpace mode "$mode_system"
 # finds out, if available)
 bar {
     mode hide
-    status_command i3status
+    status_command i3status-rs ~/.config/i3status-rust/config-default.toml
 
     font pango:PragmataProMono Nerd Font Mono 10
     colors {
