@@ -19,21 +19,22 @@ let sources = import ../../nix/sources.nix; in {
   home.packages = with pkgs; [
     bat
     fd
-    nix-diff
-    tealdeer
     firefox
     fzf
     git-crypt
-    htop
-    jq
-    ripgrep
     go
+    google-cloud-sdk
     gopls
+    htop
+    httpie
     hub
+    jq
+    nix-diff
+    ripgrep
+    tealdeer
+    traceroute
     tree
     watch
-    traceroute
-    google-cloud-sdk
   ];
 
   #---------------------------------------------------------------------
