@@ -48,6 +48,14 @@
     ];
   };
 
+  virtualisation.docker.enable = true;
+
+  # nixpkgs.overlays = [
+  #   (self: super: {
+  #     docker = super.docker.override { iptables = pkgs.iptables-legacy; };
+  #   })
+  # ];
+
   environment.etc."resolv.conf".text = ''
     nameserver 10.2.2.10
     search lan
