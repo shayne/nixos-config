@@ -14,6 +14,7 @@
     enable = true;
     automountPath = "/mnt";
     defaultUser = "shayne";
+    wslConf.network.hostname = "wsl";
   };
 
   # Set your time zone.
