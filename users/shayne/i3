@@ -14,23 +14,13 @@ floating_minimum_size 400x300
 floating_maximum_size -1x-1
 focus_follows_mouse no
 
-# Reading colors from resources
-set_from_resource $back			i3wm.background #1D1F21
-set_from_resource $black		i3wm.color0		#282A2E
-set_from_resource $grey			i3wm.color8		#373B41
-set_from_resource $lightgrey	i3wm.color7		#707880
-set_from_resource $white		i3wm.color15	#C5C8C6
-set_from_resource $yellow		i3wm.color11	#F0C674
-set_from_resource $red			i3wm.color9		#CC6666
-set_from_resource $darkred		i3wm.color1		#A54242
-set_from_resource $green		i3wm.color10	#B5BD56
+client.focused          #6272A4 #6272A4 #F8F8F2 #6272A4   #6272A4
+client.focused_inactive #44475A #44475A #F8F8F2 #44475A   #44475A
+client.unfocused        #282A36 #282A36 #BFBFBF #282A36   #282A36
+client.urgent           #44475A #FF5555 #F8F8F2 #FF5555   #FF5555
+client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
 
-#class                  border      backgr.     text        split
-client.focused          $green     $green       $black      $red
-client.focused_inactive $grey       $grey       $lightgrey  $grey
-client.unfocused        $grey       $grey       $lightgrey  $grey
-client.urgent           $red        $red        $black      $red
-client.background       $back
+client.background       #F8F8F2
 
 #----------------------------------------------------------------------
 # Startup
@@ -203,6 +193,14 @@ bar {
 
     font pango:PragmataProMono Nerd Font Mono 10
     colors {
-        background $back
-    }
+        background #282A36
+        statusline #F8F8F2
+        separator  #44475A
+
+        focused_workspace  #44475A #44475A #F8F8F2
+        active_workspace   #282A36 #44475A #F8F8F2
+        inactive_workspace #282A36 #282A36 #BFBFBF
+        urgent_workspace   #FF5555 #FF5555 #F8F8F2
+        binding_mode       #FF5555 #FF5555 #F8F8F2
+      }
 }
