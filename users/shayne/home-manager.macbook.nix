@@ -113,7 +113,8 @@
   xresources.extraConfig = builtins.readFile ./Xresources;
 
   # Make cursor not tiny on HiDPI screens
-  xsession.pointerCursor = {
+  home.pointerCursor = {
+    x11.enable = true;
     name = "Vanilla-DMZ-AA";
     package = pkgs.vanilla-dmz;
     size = 32;
