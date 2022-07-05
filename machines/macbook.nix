@@ -28,6 +28,9 @@
 
   # boot.kernelBuildIsCross = true;
 
+  # don't build 16K just yet
+  boot.kernelBuildIs16K = false;
+
   # Don't require password for sudo
   security.sudo.wheelNeedsPassword = false;
 
