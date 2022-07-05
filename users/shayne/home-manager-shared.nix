@@ -121,8 +121,8 @@ let sources = import ../../nix/sources.nix; in {
 
       # Two decades of using a Mac has made this such a strong memory
       # that I'm just going to keep it consistent.
-      pbcopy = "xclip";
-      pbpaste = "xclip -o";
+      # pbcopy = "xclip";
+      # pbpaste = "xclip -o";
     };
 
     plugins = map (n: {

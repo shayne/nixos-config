@@ -10,10 +10,10 @@
   xdg.configFile."rofi/config.rasi".text = builtins.readFile ./rofi;
 
   home.packages = (with pkgs; [
+    dconf
+    rofi
     tdesktop
     wireguard-tools
-    rofi
-    dconf
   ]);
 
   gtk = {
@@ -118,6 +118,8 @@
     package = pkgs.vanilla-dmz;
     size = 32;
   };
+
+  services.network-manager-applet.enable = true;
 
   services.xcape.enable = true;
   systemd.user.services.barrierc.Install.WantedBy = lib.mkForce [];
