@@ -15,6 +15,8 @@
     automountPath = "/mnt";
     defaultUser = "shayne";
     wslConf.network.hostname = "wsl";
+
+    docker-native.enable = true;
   };
 
   # Set your time zone.
@@ -48,8 +50,6 @@
     ];
   };
 
-  virtualisation.docker.enable = true;
-
   # nixpkgs.overlays = [
   #   (self: super: {
   #     docker = super.docker.override { iptables = pkgs.iptables-legacy; };
@@ -60,4 +60,6 @@
     nameserver 10.2.2.10
     search lan
   '';
+
+  system.stateVersion = "22.05";
 }
