@@ -21,6 +21,8 @@
   nixpkgs.config.allowUnsupportedSystem = true;
 
   hardware.video.hidpi.enable = true;
+  hardware.bluetooth.enable = true;
+  hardware.pulseaudio.enable = true;
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -63,6 +65,8 @@
   # Enable the X11 windowing system.
   # services.xserver.enable = true;
   # services.xserver.desktopManager.xfce.enable = true;
+
+services.blueman.enable = true;
 
   # setup windowing environment
   services.xserver = {

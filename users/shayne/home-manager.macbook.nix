@@ -11,6 +11,7 @@
 
   home.packages = (with pkgs; [
     dconf
+    gnome.nautilus
     rofi
     tdesktop
     wireguard-tools

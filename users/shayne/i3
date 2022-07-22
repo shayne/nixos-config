@@ -38,7 +38,7 @@ exec --no-startup-id xsetroot -solid $back
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-bindsym $mod+o exec rofi -show run
+bindsym $mod+space exec rofi -show run
 
 # start a terminal
 bindsym $mod+n exec kitty
@@ -72,7 +72,7 @@ bindsym $mod+Shift+e layout toggle split
 bindsym $mod+Shift+space floating toggle
 
 # change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
+bindsym $mod+Shift+t focus mode_toggle
 
 # focus the parent container
 bindsym $mod+Shift+a focus parent
