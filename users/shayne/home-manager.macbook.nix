@@ -109,10 +109,10 @@
   services.xcape.enable = true;
   systemd.user.services.barrierc.Install.WantedBy = lib.mkForce [];
 
-  services.barrier.client = {
-    enable = true;
-    server = "desktop:24800";
-    enableCrypto = false;
-    extraFlags = [ "--disable-crypto" "-f" ];
-  };
+  # barrier.client = {
+  #   enable = true;
+  #   server = "desktop:24800";
+  #   enableCrypto = false;
+  #   extraFlags = [ "--disable-crypto" "-f" ];
+  # };
 }
