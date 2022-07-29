@@ -7,6 +7,7 @@
 {
   imports = [
     ./m1-support
+    ../secret/modules/wireguard.nix
   ];
 
   nix = {
@@ -36,12 +37,14 @@
   # Don't require password for sudo
   security.sudo.wheelNeedsPassword = false;
 
-  networking.hostName = "m1nix"; # Define your hostname.
-  networking.useDHCP = false;
-  # Pick only one of the below networking options.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
-  networking.firewall.checkReversePath = false;
+  networking = {
+    hostName = "m1nix"; # Define your hostname.
+    useDHCP = false;
+
+    # Pick only one of the below networking options.
+    # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+    networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+  };
 
   # Virtualization settings
   virtualisation.docker.enable = true;
@@ -189,7 +192,7 @@ services.blueman.enable = true;
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
-  networking.firewall.enable = false;
+  # networking.firewall.enable = false;
 
   boot.loader.systemd-boot.configurationLimit = 10;
 
