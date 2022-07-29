@@ -38,7 +38,9 @@ exec --no-startup-id xsetroot -solid $back
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-bindsym $mod+space exec rofi -show run
+# bindsym $mod+space exec rofi -show run
+bindsym $mod+space exec ~/.config/rofi/launchers/colorful/launcher.sh
+bindsym $mod+s exec ~/.config/rofi/applets/menu/screenshot.sh
 
 # start a terminal
 bindsym $mod+n exec kitty
