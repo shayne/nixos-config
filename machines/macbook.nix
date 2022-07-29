@@ -72,7 +72,7 @@
   # services.xserver.enable = true;
   # services.xserver.desktopManager.xfce.enable = true;
 
-services.blueman.enable = true;
+  services.blueman.enable = true;
 
   # setup windowing environment
   services.xserver = {

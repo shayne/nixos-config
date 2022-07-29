@@ -104,9 +104,15 @@
     size = 32;
   };
 
-  services.network-manager-applet.enable = true;
+  services = {
+    xcape.enable = true;
 
-  services.xcape.enable = true;
+    network-manager-applet.enable = true;
+    blueman-applet.enable = true;
+    pasystray.enable = true;
+  };
+
+
   systemd.user.services.barrierc.Install.WantedBy = lib.mkForce [];
 
   # barrier.client = {
