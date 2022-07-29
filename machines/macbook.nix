@@ -25,6 +25,9 @@
   hardware.bluetooth.enable = true;
   hardware.pulseaudio.enable = true;
 
+  # "error switching console mode" on boot.
+  boot.loader.systemd-boot.consoleMode = "auto";
+
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = false;
