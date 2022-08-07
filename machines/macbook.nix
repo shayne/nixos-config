@@ -73,6 +73,10 @@
   # services.xserver.desktopManager.xfce.enable = true;
 
   services.blueman.enable = true;
+  services.flatpak.enable = true;
+
+  xdg.portal.enable = true;
+  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
 
   # setup windowing environment
   services.xserver = {
