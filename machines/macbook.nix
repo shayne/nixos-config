@@ -188,8 +188,7 @@
   services.openssh.passwordAuthentication = true;
   services.openssh.permitRootLogin = "no";
 
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+  services.gvfs.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
