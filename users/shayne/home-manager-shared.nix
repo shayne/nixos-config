@@ -35,6 +35,7 @@ let sources = import ../../nix/sources.nix; in {
     traceroute
     tree
     watch
+    python310Packages.pymetar
   ];
 
   #---------------------------------------------------------------------
