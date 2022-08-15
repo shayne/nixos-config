@@ -1,4 +1,4 @@
-{ config, pkgs, lib, inputs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   nix = {
@@ -7,6 +7,8 @@
       experimental-features = nix-command flakes
     '';
   };
+
+  networking.hostName = "wsl";
 
   wsl = {
     enable = true;

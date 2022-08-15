@@ -22,11 +22,9 @@
 
     # wsl
     nixos-wsl.url = "github:nix-community/NixOS-WSL";
-};
+  };
 
   outputs = { self, nixpkgs, home-manager, nixos-wsl, ... }@inputs: let
-    mkVM = import ./lib/mkvm.nix;
-
     overlays = [
       inputs.neovim-nightly-overlay.overlay
 
@@ -38,27 +36,22 @@
         kitty = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.kitty;
       })
     ];
-  in {
-    nixosConfigurations.devvm = mkVM "devvm" rec {
-      inherit nixpkgs home-manager overlays nixos-wsl;
-      system = "x86_64-linux";
-      user   = "shayne";
-    };
 
-    nixosConfigurations.wsl = mkVM "wsl" rec {
-      inherit nixpkgs home-manager overlays nixos-wsl;
-      system = "x86_64-linux";
-      user   = "shayne";
+    mkSystem = import ./lib/mkSystem.nix {
+      inherit inputs overlays;
+      user = "shayne";
+      lib = nixpkgs.lib;
     };
-    nixosConfigurations.macbook = mkVM "macbook" rec {
-      inherit nixpkgs home-manager overlays nixos-wsl;
-      system = "aarch64-linux";
-      user   = "shayne";
-    };
-    nixosConfigurations.pinix = mkVM "pinix" rec {
-      inherit nixpkgs home-manager overlays nixos-wsl;
-      system = "aarch64-linux";
-      user   = "shayne";
-    };
+  in {
+    nixosConfigurations = 
+      mkSystem { name = "devvm";   system = "x86_64-linux"; } //
+      mkSystem { name = "macbook"; system = "aarch64-linux"; } //
+      mkSystem { name = "pinix";   system = "aarch64-linux"; } //
+
+      mkSystem {
+        name = "wsl";
+        system = "x86_64-linux";
+        modules = [ nixos-wsl.nixosModules.wsl ];
+      };
   };
 }
