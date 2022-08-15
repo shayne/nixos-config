@@ -10,6 +10,9 @@
       interfaces.eth0.useDHCP = true;
     };
 
+
+    virtualisation.docker.enable = true;
+
     services.openssh.enable = true;
 
     # Enable GPU acceleration
