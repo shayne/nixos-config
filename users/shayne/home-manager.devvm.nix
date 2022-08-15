@@ -1,9 +1,5 @@
 { pkgs, config, lib, ... }: {
 
-  imports = [
-    ./home-manager-shared.nix
-  ];
-
   home.packages = [
     pkgs.openvscode-server
   ];

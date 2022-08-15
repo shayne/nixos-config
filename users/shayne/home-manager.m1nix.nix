@@ -1,9 +1,5 @@
 { pkgs, lib, ... }: {
 
-  imports = [
-    ./home-manager-shared.nix
-  ];
-
   home.file.".inputrc".source = ./inputrc;
 
   xdg.configFile."i3/config".text = builtins.readFile ./i3;

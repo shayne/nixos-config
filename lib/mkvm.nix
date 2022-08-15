@@ -2,7 +2,10 @@
 # particular architecture.
 name: { nixpkgs, home-manager, system, user, overlays, nixos-wsl }:
 
-nixpkgs.lib.nixosSystem rec {
+let
+    lib = nixpkgs.lib;
+in
+lib.nixosSystem rec {
   inherit system;
 
   modules = [
@@ -16,18 +19,22 @@ nixpkgs.lib.nixosSystem rec {
     ../hardware/${name}.nix
     ../machines/${name}.nix
     ../users/${user}/nixos.nix
+
     home-manager.nixosModules.home-manager {
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
-      home-manager.users.${user} = import ../users/${user}/home-manager.${name}.nix;
+      home-manager.users.${user} = lib.mkMerge [
+          (import ../users/${user}/home-manager-shared.nix)
+          (import ../users/${user}/home-manager.${name}.nix)
+      ];
     }
 
     # We expose some extra arguments so that our modules can parameterize
     # better based on these values.
     {
       config._module.args = {
-          currentSystemName = name;
-          currentSystem = system;
+        currentSystemName = name;
+        currentSystem = system;
       };
     }
   ];
