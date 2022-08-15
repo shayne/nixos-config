@@ -55,7 +55,7 @@
       system = "aarch64-linux";
       user   = "shayne";
     };
-    nixosConfigurations.nixpi = mkVM "nixpi" rec {
+    nixosConfigurations.pinix = mkVM "pinix" rec {
       inherit nixpkgs home-manager overlays nixos-wsl;
       system = "aarch64-linux";
       user   = "shayne";
