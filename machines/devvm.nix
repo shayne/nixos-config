@@ -1,30 +1,73 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, currentSystem, ... }:
+
+{
   imports = [
-    ./vm-shared.nix
     ../secret/modules/cron.nix
     ../secret/modules/caddy.nix
   ];
 
+  # for direnv
+  nix.extraOptions = ''
+      keep-outputs = true
+      keep-derivations = true
+  '';
+
+  # Use the systemd-boot EFI boot loader.
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
+  # Set your time zone.
+  time.timeZone = "America/New_York";
+
+  networking.useDHCP = false;
+
   networking.hostName = "devvm";
 
-  # Interface is this on Intel Fusion
   networking.interfaces.enp1s0.useDHCP = true;
 
-  services.qemuGuest.enable = true;
+  # Don't require password for sudo
+  security.sudo.wheelNeedsPassword = false;
+
+  # Virtualization settings
+  virtualisation.docker.enable = true;
+
+  # Select internationalisation properties.
+  i18n.defaultLocale = "en_US.UTF-8";
+
+  # Define a user account. Don't forget to set a password with ‘passwd’.
+  users.mutableUsers = false;
+
+  # Manage fonts. We pull these from a secret directory since most of these
+  # fonts require a purchase.
+  fonts = {
+    fontDir.enable = true;
+
+    fonts = [
+      pkgs.fira-code
+      (builtins.path {
+        name = "custom-fonts";
+        path = ../secret/fonts;
+        recursive = true;
+      })
+    ];
+  };
+
+  environment.systemPackages = with pkgs; [
+    gnumake
+    killall
+    niv
+  ];
 
   programs.mosh.enable = true;
 
-  # # Shared folder to host works on Intel
-  # fileSystems."/host" = {
-  #   fsType = "fuse./run/current-system/sw/bin/vmhgfs-fuse";
-  #   device = ".host:/";
-  #   options = [
-  #     "umask=22"
-  #     "uid=1000"
-  #     "gid=1000"
-  #     "allow_other"
-  #     "auto_unmount"
-  #     "defaults"
-  #   ];
-  # };
+  services.qemuGuest.enable = true;
+
+  # Enable the OpenSSH daemon.
+  services.openssh.enable = true;
+  services.openssh.passwordAuthentication = true;
+  services.openssh.permitRootLogin = "no";
+
+  networking.firewall.enable = false;
+
+  system.stateVersion = "20.09";
 }
