@@ -10,6 +10,11 @@
       interfaces.eth0.useDHCP = true;
     };
 
+    environment.systemPackages = with pkgs; [
+      gnumake
+      killall
+      niv
+    ];
 
     virtualisation.docker.enable = true;
 
