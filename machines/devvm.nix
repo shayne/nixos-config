@@ -5,8 +5,6 @@
     ../secret/modules/caddy.nix
   ];
 
-  environment.sessionVariables.NIXNAME = "vm-unraid";
-
   networking.hostName = "devvm";
 
   # Interface is this on Intel Fusion

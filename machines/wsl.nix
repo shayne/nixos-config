@@ -8,8 +8,6 @@
     '';
   };
 
-  environment.sessionVariables.NIXNAME = "wsl2-amd64";
-
   wsl = {
     enable = true;
     automountPath = "/mnt";

@@ -39,13 +39,13 @@
       })
     ];
   in {
-    nixosConfigurations.vm-unraid = mkVM "vm-unraid" rec {
+    nixosConfigurations.devvm = mkVM "devvm" rec {
       inherit nixpkgs home-manager overlays nixos-wsl;
       system = "x86_64-linux";
       user   = "shayne";
     };
 
-    nixosConfigurations.wsl2-amd64 = mkVM "wsl2-amd64" rec {
+    nixosConfigurations.wsl = mkVM "wsl" rec {
       inherit nixpkgs home-manager overlays nixos-wsl;
       system = "x86_64-linux";
       user   = "shayne";
