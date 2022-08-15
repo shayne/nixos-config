@@ -240,6 +240,5 @@ let sources = import ../../nix/sources.nix; in {
     maxCacheTtl = 31536000;
   };
 
-  services.syncthing.enable = true;
   services.vscode-server.enable = true;
 }
