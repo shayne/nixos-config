@@ -25,23 +25,20 @@
   };
 
   outputs = { self, nixpkgs, home-manager, nixos-wsl, ... }@inputs: let
+    lib = nixpkgs.lib;
+
     overlays = [
       inputs.neovim-nightly-overlay.overlay
 
       (final: prev: {
         # Go we always want the latest version
-        go = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.go_1_18;
-
-        # To get Kitty 0.24.x. Delete this once it hits release.
-        kitty = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.kitty;
+        go = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.go_1_19;
       })
     ];
 
-    mkSystem = import ./lib/mkSystem.nix {
-      inherit inputs overlays;
+    mkSystem = let
       user = "shayne";
-      lib = nixpkgs.lib;
-    };
+    in import ./lib/mkSystem.nix { inherit lib user inputs overlays; };
   in {
     nixosConfigurations = 
       mkSystem { name = "devvm";   system = "x86_64-linux"; } //
