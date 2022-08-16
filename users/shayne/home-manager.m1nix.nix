@@ -109,8 +109,6 @@
     network-manager-applet.enable = true;
     blueman-applet.enable = true;
     pasystray.enable = true;
-
-    syncthing.enable = true;
   };
 
 
