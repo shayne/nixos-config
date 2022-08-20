@@ -40,9 +40,9 @@
       user = "shayne";
     in import ./lib/mkSystem.nix { inherit lib user inputs overlays; };
   in {
-    nixosConfigurations = 
+    nixosConfigurations =
       mkSystem { name = "devvm";   system = "x86_64-linux"; } //
-      mkSystem { name = "macbook"; system = "aarch64-linux"; } //
+      mkSystem { name = "m1nix"; system = "aarch64-linux"; } //
       mkSystem { name = "pinix";   system = "aarch64-linux"; } //
 
       mkSystem {
