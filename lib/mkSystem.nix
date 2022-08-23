@@ -3,10 +3,11 @@
 with lib;
 with inputs;
 
-{name, system, modules ? [] }: 
+{name, system, modules ? [] }:
 
 let
   args = {
+    inherit user;
     currentSystemName = name;
     currentSystem = system;
   };
