@@ -165,6 +165,7 @@
     killall
     niv
     tailscale
+    xclip
   ];
 
   environment.pathsToLink = [
