@@ -20,6 +20,7 @@ in {
       { nixpkgs.overlays = overlays; }
 
       ../hardware/${name}.nix
+      ../machines/shared.nix
       ../machines/${name}.nix
       ../users/${user}/nixos.nix
 
