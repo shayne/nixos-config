@@ -24,6 +24,10 @@
       };
   };
 
+  programs.fish.shellAliases = {
+    ssh = "kitty +kitten ssh";
+  };
+
   programs.kitty = {
     enable = true;
     extraConfig = builtins.readFile ./kitty;
