@@ -29,6 +29,7 @@ let sources = import ../../nix/sources.nix; in {
     hub
     jq
     nix-diff
+    ookla-speedtest
     ripgrep
     tealdeer
     traceroute
