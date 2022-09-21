@@ -199,7 +199,7 @@
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
-  boot.loader.systemd-boot.configurationLimit = 10;
+  boot.loader.systemd-boot.configurationLimit = 5;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
