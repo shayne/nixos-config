@@ -3,7 +3,7 @@
 let sources = import ../../nix/sources.nix; in {
   imports = [
     ../../secret/modules/ssh.nix
-    "${fetchTarball { url = "https://github.com/msteen/nixos-vscode-server/tarball/master"; sha256 = "1dr3v3mlf61nrs3f3d9qx74y8v5jihkk8wd1li4sglx22aqh4xf6";}}/modules/vscode-server/home.nix"
+    "${fetchTarball { url = "https://github.com/msteen/nixos-vscode-server/tarball/master"; sha256 = "1qga1cmpavyw90xap5kfz8i6yz85b0blkkwvl00sbaxqcgib2rvv";}}/modules/vscode-server/home.nix"
   ];
 
   xdg.enable = true;
