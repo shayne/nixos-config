@@ -22,9 +22,12 @@
 
     # wsl
     nixos-wsl.url = "github:nix-community/NixOS-WSL";
+
+    # mach-nix
+    mach-nix.url = "github:DavHau/mach-nix";
   };
 
-  outputs = { self, nixpkgs, home-manager, nixos-wsl, ... }@inputs: let
+  outputs = { self, nixpkgs, home-manager, ... }@inputs: let
     lib = nixpkgs.lib;
 
     overlays = [
@@ -33,6 +36,7 @@
       (final: prev: {
         # Go we always want the latest version
         go = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.go_1_19;
+        mach-nix = inputs.mach-nix.packages.${prev.system}.mach-nix;
       })
     ];
 
@@ -48,7 +52,7 @@
       mkSystem {
         name = "wsl";
         system = "x86_64-linux";
-        modules = [ nixos-wsl.nixosModules.wsl ];
+        modules = [ inputs.nixos-wsl.nixosModules.wsl ];
       };
   };
 }
