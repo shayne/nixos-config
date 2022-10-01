@@ -16,7 +16,8 @@
     defaultUser = "shayne";
     wslConf.network.hostname = "wsl";
 
-    docker-native.enable = true;
+    docker-desktop.enable = true;
+    # docker-native.enable = true;
   };
 
   # Set your time zone.
