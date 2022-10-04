@@ -6,11 +6,13 @@
     ../secret/modules/caddy.nix
   ];
 
-  # for direnv
-  nix.extraOptions = ''
+  nix = {
+    extraOptions = ''
+      experimental-features = nix-command flakes
       keep-outputs = true
       keep-derivations = true
-  '';
+    ''; # for direnv
+  };
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
