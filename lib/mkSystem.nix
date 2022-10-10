@@ -3,11 +3,11 @@
 with lib;
 with inputs;
 
-{name, system, modules ? [] }:
+{name, system }:
 
 let
   args = {
-    inherit user;
+    inherit user inputs;
     currentSystemName = name;
     currentSystem = system;
   };
@@ -29,14 +29,14 @@ in {
         home-manager.useUserPackages = true;
         home-manager.extraSpecialArgs = args;
         home-manager.users.${user} = lib.mkMerge [
-            (import ../users/${user}/home-manager-shared.nix)
-            (import ../users/${user}/home-manager.${name}.nix)
+          (import ../users/${user}/home-manager-shared.nix)
+          (import ../users/${user}/home-manager.${name}.nix)
         ];
       }
 
       {
         config._module.args = args;
       }
-    ] ++ modules;
+    ];
   };
 }

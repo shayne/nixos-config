@@ -1,6 +1,10 @@
 { config, pkgs, lib, ... }:
 
 {
+  imports = [
+    inputs.nixos-wsl.nixosModules.wsl
+  ];
+
   nix = {
     package = pkgs.nixUnstable;
     extraOptions = ''

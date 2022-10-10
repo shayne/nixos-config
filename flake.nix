@@ -25,6 +25,8 @@
 
     # mach-nix
     mach-nix.url = "github:DavHau/mach-nix";
+
+    nixos-vscode-server.url = "github:msteen/nixos-vscode-server";
   };
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs: let
@@ -48,11 +50,6 @@
       mkSystem { name = "devvm";   system = "x86_64-linux"; } //
       mkSystem { name = "m1nix"; system = "aarch64-linux"; } //
       mkSystem { name = "pinix";   system = "aarch64-linux"; } //
-
-      mkSystem {
-        name = "wsl";
-        system = "x86_64-linux";
-        modules = [ inputs.nixos-wsl.nixosModules.wsl ];
-      };
+      mkSystem { name = "wsl"; system = "x86_64-linux"; };
   };
 }
