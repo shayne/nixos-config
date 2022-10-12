@@ -18,15 +18,10 @@
     };
 
     # Other packages
-    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
-
-    # wsl
     nixos-wsl.url = "github:nix-community/NixOS-WSL";
-
-    # mach-nix
     mach-nix.url = "github:DavHau/mach-nix";
-
     nixos-vscode-server.url = "github:msteen/nixos-vscode-server";
+    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
   };
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs: let
@@ -47,9 +42,9 @@
     in import ./lib/mkSystem.nix { inherit lib user inputs overlays; };
   in {
     nixosConfigurations =
-      mkSystem { name = "devvm";   system = "x86_64-linux"; } //
+      mkSystem { name = "devvm"; system = "x86_64-linux"; } //
       mkSystem { name = "m1nix"; system = "aarch64-linux"; } //
-      mkSystem { name = "pinix";   system = "aarch64-linux"; } //
-      mkSystem { name = "wsl"; system = "x86_64-linux"; };
+      mkSystem { name = "pinix"; system = "aarch64-linux"; } //
+      mkSystem { name = "wsl";   system = "x86_64-linux"; };
   };
 }
