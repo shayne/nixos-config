@@ -5,13 +5,6 @@
     inputs.nixos-wsl.nixosModules.wsl
   ];
 
-  nix = {
-    package = pkgs.nixUnstable;
-    extraOptions = ''
-      experimental-features = nix-command flakes
-    '';
-  };
-
   networking.hostName = "wsl";
 
   wsl = {

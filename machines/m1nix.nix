@@ -10,15 +10,6 @@
     ../secret/modules/wireguard.nix
   ];
 
-  nix = {
-    package = pkgs.nixUnstable;
-    extraOptions = ''
-      experimental-features = nix-command flakes
-      keep-outputs = true
-      keep-derivations = true
-    '';
-   };
-
   nixpkgs.config.allowUnsupportedSystem = true;
 
   hardware.video.hidpi.enable = true;
