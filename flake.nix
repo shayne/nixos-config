@@ -32,12 +32,11 @@
       inputs.neovim-nightly-overlay.overlay
 
       (final: prev: {
-        # Go we always want the latest version
+        fish = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.fish;
         go = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.go_1_19;
-
         mach-nix = inputs.mach-nix.packages.${prev.system}.mach-nix;
-
         openvscode-server = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.openvscode-server;
+        starship = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.starship;
       })
     ];
 
