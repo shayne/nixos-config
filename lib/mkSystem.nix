@@ -38,5 +38,7 @@ in {
         config._module.args = args;
       }
     ];
+
+    specialArgs = { inherit inputs; };
   };
 }
