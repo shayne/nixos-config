@@ -9,6 +9,7 @@
   networking = {
     hostName = "pinix";
     interfaces.eth0.useDHCP = true;
+    firewall.enable = false;
   };
 
   environment.systemPackages = with pkgs; [
