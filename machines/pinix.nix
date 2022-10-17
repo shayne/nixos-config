@@ -1,9 +1,10 @@
 
-{ config, pkgs, lib, user, ... }:
+{ config, pkgs, lib, user, inputs, ... }:
 
 {
   imports = [
-    "${fetchTarball { url = "https://github.com/NixOS/nixos-hardware/archive/936e4649098d6a5e0762058cb7687be1b2d90550.tar.gz"; sha256 = "sha256:06g0061xm48i5w7gz5sm5x5ps6cnipqv1m483f8i9mmhlz77hvlw"; }}/raspberry-pi/4"];
+    inputs.nixos-hardware.nixosModules.raspberry-pi-4
+  ];
 
   networking = {
     hostName = "pinix";

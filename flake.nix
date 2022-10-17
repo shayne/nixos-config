@@ -22,6 +22,7 @@
     mach-nix.url = "github:DavHau/mach-nix";
     nixos-vscode-server.url = "github:msteen/nixos-vscode-server";
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+    nixos-hardware.url = "github:nixos/nixos-hardware";
   };
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs: let
