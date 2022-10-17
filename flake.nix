@@ -2,18 +2,19 @@
   description = "NixOS systems and tools by shayne";
 
   inputs = {
-    # Pin our primary nixpkgs repository. This is the main nixpkgs repository
-    # we'll use for our configurations. Be very careful changing this because
-    # it'll impact your entire system.
     nixpkgs.url = "github:nixos/nixpkgs/release-22.05";
-
-    # We use the unstable nixpkgs repo for some packages.
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
     home-manager = {
       url = "github:nix-community/home-manager/release-22.05";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-      # We want home-manager to use the same set of nixpkgs as our system.
+    # I think technically you're not supposed to override the nixpkgs
+    # used by neovim but recently I had failures if I didn't pin to my
+    # own. We can always try to remove that anytime.
+    neovim-nightly-overlay = {
+      url = "github:nix-community/neovim-nightly-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -21,11 +22,10 @@
     nixos-wsl.url = "github:nix-community/NixOS-WSL";
     mach-nix.url = "github:DavHau/mach-nix";
     nixos-vscode-server.url = "github:msteen/nixos-vscode-server";
-    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     nixos-hardware.url = "github:nixos/nixos-hardware";
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }@inputs: let
+  outputs = { self, nixpkgs, ... }@inputs: let
     lib = nixpkgs.lib;
 
     overlays = [
@@ -34,7 +34,10 @@
       (final: prev: {
         # Go we always want the latest version
         go = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.go_1_19;
+
         mach-nix = inputs.mach-nix.packages.${prev.system}.mach-nix;
+
+        openvscode-server = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.openvscode-server;
       })
     ];
 
