@@ -204,11 +204,11 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1666720338,
-        "narHash": "sha256-7V91ZtTz7zDXb6hivktQ9RlBglP+WEkYFSciPJHwMJw=",
+        "lastModified": 1667148117,
+        "narHash": "sha256-oKgBvHH/vOnzeaitxGmAizxjBzue7gE1G1siKED9teQ=",
         "owner": "nix-community",
         "repo": "NixOS-WSL",
-        "rev": "7bfb8f5aa91fee30a189eae32cda8ddc465076df",
+        "rev": "27679db0469bc51ce4d0b334c74c4b0642d62009",
         "type": "github"
       },
       "original": {
