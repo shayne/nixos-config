@@ -10,6 +10,12 @@
 
   boot.initrd.availableKernelModules = [ "uhci_hcd" "ehci_pci" "ahci" "nvme" "sr_mod" ];
   boot.initrd.kernelModules = [ ];
+  boot.initrd.luks.devices = {
+    root = {
+      device = "/dev/nvme0n1p2";
+      preLVM = true;
+    };
+  };
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
