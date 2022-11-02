@@ -3,7 +3,7 @@ pkgs.stdenv.mkDerivation {
   name = "caddy";
   src = pkgs.fetchurl {
     url = "https://caddyserver.com/api/download?os=linux&arch=amd64&p=github.com%2Fcaddy-dns%2Fcloudflare&idempotency=74165303940021";
-    sha256 = "1jfflkw2wvbdlyr2ikgq9lxa9130z00nyf9r883l7z59wyhyn0y9";
+    sha256 = "sha256-ooNZOkL0Ns4hMD5qnipHpd4aznG+gCKo7QEqctRosjc=";
     name = "caddy";
   };
   phases = ["installPhase" "patchPhase"];
