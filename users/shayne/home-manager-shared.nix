@@ -20,6 +20,7 @@ let sources = import ../../nix/sources.nix; in {
     fd
     firefox
     fzf
+    gcc
     git-crypt
     go
     google-cloud-sdk
