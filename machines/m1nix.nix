@@ -16,17 +16,18 @@
   hardware.bluetooth.enable = true;
   hardware.pulseaudio.enable = true;
 
-  # "error switching console mode" on boot.
-  boot.loader.systemd-boot.consoleMode = "auto";
-
-  # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = false;
-
   # boot.kernelBuildIsCross = true;
-
   # don't build 16K just yet
   boot.kernelBuildIs16K = false;
+  boot.loader = {
+    efi.canTouchEfiVariables = false;
+    systemd-boot = {
+      enable = true;
+      # "error switching console mode" on boot.
+      consoleMode = "auto";
+      configurationLimit = 5;
+    };
+  };
 
   # Don't require password for sudo
   security.sudo.wheelNeedsPassword = false;
@@ -189,8 +190,6 @@
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
-
-  boot.loader.systemd-boot.configurationLimit = 5;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
