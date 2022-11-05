@@ -12,16 +12,19 @@
   # Be careful updating this.
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-
-  # VMware, Parallels both only support this being 0 otherwise you see
-  # "error switching console mode" on boot.
-  boot.loader.systemd-boot.consoleMode = "0";
-
   # Setup qemu so we can run x86_64 binaries
   boot.binfmt.emulatedSystems = ["x86_64-linux"];
+
+  boot.loader = {
+    efi.canTouchEfiVariables = false;
+    systemd-boot = {
+      enable = true;
+      # VMware, Parallels both only support this being 0 otherwise you see
+      # "error switching console mode" on boot.
+      consoleMode = "auto";
+      configurationLimit = 5;
+    };
+  };
 
   nix = {
     # public binary cache that I use for all my derivations. You can keep
