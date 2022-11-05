@@ -3,7 +3,11 @@
 with lib;
 with inputs;
 
-{name, system }:
+let
+  _overlays = overlays;
+in
+
+{name, system, overlays ? [] }:
 
 let
   args = {
@@ -17,7 +21,7 @@ in {
 
     modules = [
 
-      { nixpkgs.overlays = overlays; }
+      { nixpkgs.overlays = _overlays ++ overlays; }
 
       ../hardware/${name}.nix
       ../machines/shared.nix
