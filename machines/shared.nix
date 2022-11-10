@@ -12,4 +12,11 @@
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
     "ookla-speedtest"
   ];
+
+  environment.systemPackages = with pkgs; [
+    gnumake
+    iptables
+    killall
+    niv
+  ];
 }
