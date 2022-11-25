@@ -9,10 +9,12 @@
 
   wsl = {
     enable = true;
-    automountPath = "/mnt";
     defaultUser = "shayne";
-    wslConf.network.hostname = "wsl";
-
+    # nativeSystemd = true;
+    wslConf = {
+      automount.root = "/mnt";
+      network.hostname = "wsl";
+    };
     docker-desktop.enable = true;
     # docker-native.enable = true;
   };
