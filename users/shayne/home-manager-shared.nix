@@ -17,6 +17,7 @@ let sources = import ../../nix/sources.nix; in {
   # not a huge list.
   home.packages = with pkgs; [
     bat
+    bind
     fd
     firefox
     fzf
@@ -38,6 +39,7 @@ let sources = import ../../nix/sources.nix; in {
     traceroute
     tree
     watch
+    whois
     mach-nix
   ];
 
