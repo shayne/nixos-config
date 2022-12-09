@@ -15,7 +15,7 @@
       automount.root = "/mnt";
       network.hostname = "wsl";
     };
-    docker-desktop.enable = true;
+    # docker-desktop.enable = true;
     # docker-native.enable = true;
   };
 

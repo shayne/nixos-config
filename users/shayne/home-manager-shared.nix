@@ -1,6 +1,10 @@
 { config, lib, pkgs, currentSystemName, inputs, ... }:
 
 let sources = import ../../nix/sources.nix; in {
+  # Home-manager 22.11 requires this be set. We never set it so we have
+  # to use the old state version.
+  home.stateVersion = "18.09";
+
   imports = [
     inputs.nixos-vscode-server.nixosModules.home
     ../../secret/modules/ssh.nix

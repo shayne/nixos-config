@@ -2,11 +2,11 @@
   description = "NixOS systems and tools by shayne";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/release-22.05";
+    nixpkgs.url = "github:nixos/nixpkgs/release-22.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-22.05";
+      url = "github:nix-community/home-manager/release-22.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -33,7 +33,6 @@
 
       (final: prev: {
         fish = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.fish;
-        go = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.go_1_19;
         mach-nix = inputs.mach-nix.packages.${prev.system}.mach-nix;
         openvscode-server = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.openvscode-server;
         starship = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.starship;
@@ -51,8 +50,9 @@
       mkSystem { name = "wsl";   system = "x86_64-linux"; } //
       mkSystem { name = "m2vm";  system = "aarch64-linux";
         overlays = [(final: prev: {
-          # TODO: drop after release following NixOS 22.05
-          open-vm-tools = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.open-vm-tools;
+          # Example of bringing in an unstable package:
+          # open-vm-tools = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.open-vm-tools;
+
           # We need Mesa on aarch64 to be built with "svga". The default Mesa
           # build does not include this: https://github.com/Mesa3D/mesa/blob/49efa73ba11c4cacaed0052b984e1fb884cf7600/meson.build#L192
           mesa = prev.callPackage "${inputs.nixpkgs-unstable}/pkgs/development/libraries/mesa" {
