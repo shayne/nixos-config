@@ -33,7 +33,7 @@
       trusted-public-keys = ["mitchellh-nixos-config.cachix.org-1:bjEbXJyLrL1HZZHBbO4QALnI5faYZppzkU4D2s0G8RQ="];
     };
   };
-  
+
   # We expect to run the VM on hidpi machines.
   hardware.video.hidpi.enable = true;
 
@@ -146,7 +146,8 @@
   services.openssh.passwordAuthentication = true;
   services.openssh.permitRootLogin = "no";
 
-  services.tailscale.enable = true;
+  services.tailscale.enable = false;
+  systemd.services.tailscaled.wantedBy = lib.mkForce [];
 
   # Lots of stuff that uses aarch64 that claims doesn't work, but actually works.
   nixpkgs.config.allowUnfree = true;
