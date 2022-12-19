@@ -29,6 +29,8 @@
     };
   };
 
+  boot.supportedFilesystems = [ "ntfs" ];
+
   # Don't require password for sudo
   security.sudo.wheelNeedsPassword = false;
 
