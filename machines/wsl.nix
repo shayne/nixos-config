@@ -16,7 +16,7 @@
       network.hostname = "wsl";
     };
     # docker-desktop.enable = true;
-    # docker-native.enable = true;
+    docker-native.enable = true;
   };
 
   # Set your time zone.
