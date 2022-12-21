@@ -92,6 +92,13 @@
     settings = {
       env.TERM = "xterm-256color";
 
+      font = {
+        normal = {
+          family = "PragmataProMono Nerd Font Mono";
+        };
+        size = 12;
+      };
+
       key_bindings = [
         { key = "K"; mods = "Command"; chars = "ClearHistory"; }
         { key = "V"; mods = "Command"; action = "Paste"; }
