@@ -16,9 +16,16 @@
   hardware.bluetooth.enable = true;
   hardware.pulseaudio.enable = true;
 
+  # Specify path to peripheral firmware files.
+  hardware.asahi.peripheralFirmwareDirectory = ./m1-support/firmware;
+  # Or disable extraction and management of them completely.
+  # hardware.asahi.extractPeripheralFirmware = false;
+  hardware.asahi.useExperimentalGPUDriver = true;
+
   # boot.kernelBuildIsCross = true;
   # don't build 16K just yet
-  boot.kernelBuildIs16K = false;
+  # boot.kernelBuildIs16K = false;
+
   boot.loader = {
     efi.canTouchEfiVariables = false;
     systemd-boot = {
@@ -49,10 +56,6 @@
   # Set your time zone.
   time.timeZone = "America/New_York";
 
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
 
@@ -61,10 +64,6 @@
   #   keyMap = "us";
   #   useXkbConfig = true; # use xkbOptions in tty.
   # };
-
-  # Enable the X11 windowing system.
-  # services.xserver.enable = true;
-  # services.xserver.desktopManager.xfce.enable = true;
 
   services.blueman.enable = true;
   services.flatpak.enable = true;
@@ -85,8 +84,8 @@
     };
 
     libinput = {
-        enable = true;
-        touchpad.naturalScrolling = true;
+      enable = true;
+      touchpad.naturalScrolling = true;
     };
 
     xkbOptions = "ctrl:nocaps";

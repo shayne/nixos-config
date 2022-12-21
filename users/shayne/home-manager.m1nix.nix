@@ -25,7 +25,7 @@
   };
 
   programs.fish.shellAliases = {
-    ssh = "kitty +kitten ssh";
+    # ssh = "kitty +kitten ssh";
   };
 
   programs.kitty = {
@@ -84,6 +84,23 @@
         locale = "en_US";
       }
     ];
+  };
+
+  programs.alacritty = {
+    enable = true;
+
+    settings = {
+      env.TERM = "xterm-256color";
+
+      key_bindings = [
+        { key = "K"; mods = "Command"; chars = "ClearHistory"; }
+        { key = "V"; mods = "Command"; action = "Paste"; }
+        { key = "C"; mods = "Command"; action = "Copy"; }
+        { key = "Key0"; mods = "Command"; action = "ResetFontSize"; }
+        { key = "Equals"; mods = "Command"; action = "IncreaseFontSize"; }
+        { key = "Minus"; mods = "Command"; action = "DecreaseFontSize"; }
+      ];
+    };
   };
 
   programs.vscode = {

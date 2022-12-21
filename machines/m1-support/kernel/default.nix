@@ -1,12 +1,12 @@
 # the Asahi Linux kernel and options that must go along with it
 
-{ config, pkgs, lib, currentSystem, ... }:
+{ config, pkgs, lib, ... }:
 {
   config = {
-    boot.kernelPackages = pkgs.callPackage ./package.nix {
-      inherit currentSystem;
-      crossBuild = config.boot.kernelBuildIsCross;
-      _16KBuild = config.boot.kernelBuildIs16K;
+    boot.kernelPackages = config.hardware.asahi.pkgs.callPackage ./package.nix {
+      inherit (config.boot) kernelPatches;
+      _4KBuild = config.hardware.asahi.use4KPages;
+      withRust = config.hardware.asahi.withRust;
     };
 
     # we definitely want to use CONFIG_ENERGY_MODEL, and
@@ -14,8 +14,43 @@
     # source: https://www.kernel.org/doc/html/latest/scheduler/sched-energy.html
     powerManagement.cpuFreqGovernor = lib.mkOverride 800 "schedutil";
 
-    # our kernel config is weird and doesn't really have any modules
-    boot.initrd.availableKernelModules = lib.mkForce [];
+    boot.initrd.includeDefaultModules = false;
+    boot.initrd.availableKernelModules = [
+      # list of initrd modules stolen from
+      # https://github.com/AsahiLinux/asahi-scripts/blob/f461f080a1d2575ae4b82879b5624360db3cff8c/initcpio/install/asahi
+      "apple-mailbox"
+      "nvme_apple"
+      "pinctrl-apple-gpio"
+      "macsmc"
+      "macsmc-rtkit"
+      "i2c-apple"
+      "tps6598x"
+      "apple-dart"
+      "dwc3"
+      "dwc3-of-simple"
+      "xhci-pci"
+      "pcie-apple"
+      "gpio_macsmc"
+      "phy-apple-atc"
+      "nvmem_apple_efuses"
+      "spi-apple"
+      "spi-hid-apple"
+      "spi-hid-apple-of"
+      "rtc-macsmc"
+      "simple-mfd-spmi"
+      "spmi-apple-controller"
+      "nvmem_spmi_mfd"
+      "apple-dockchannel"
+      "dockchannel-hid"
+      "apple-rtkit-helper"
+
+      # additional stuff necessary to boot off USB for the installer
+      # and if the initrd (i.e. stage 1) goes wrong
+      "usb-storage"
+      "xhci-plat-hcd"
+      "usbhid"
+      "hid_generic"
+    ];
 
     boot.kernelParams = [
       "earlycon"
@@ -44,18 +79,33 @@
     };
   };
 
-  options.boot.kernelBuildIsCross = lib.mkOption {
+  imports = [
+    ./edge.nix
+
+    (lib.mkRemovedOptionModule [ "boot" "kernelBuildIsCross" ] ''
+      If it should still be true (which is unlikely), replace it
+      with 'hardware.asahi.pkgsSystem = "x86_64-linux"'. Otherwise, delete it.
+    '')
+
+    (lib.mkRemovedOptionModule [ "boot" "kernelBuildIs16K" ] ''
+      Replaced with 'hardware.asahi.use4KPages' which defaults to false.
+    '')
+  ];
+
+  options.hardware.asahi.use4KPages = lib.mkOption {
     type = lib.types.bool;
     default = false;
-    description = "Set that the Asahi Linux kernel should be cross-compiled.";
+    description = ''
+      Build the Asahi Linux kernel with 4K pages to improve compatibility in
+      some cases at the cost of performance in others.
+    '';
   };
 
-  options.boot.kernelBuildIs16K = lib.mkOption {
+  options.hardware.asahi.withRust = lib.mkOption {
     type = lib.types.bool;
-    default = true;
+    default = false;
     description = ''
-      Set that the Asahi Linux kernel should be built with 16K pages and various
-      software patched to be compatible. Some software may still be broken.
+      Build the Asahi Linux kernel with Rust support.
     '';
   };
 }
