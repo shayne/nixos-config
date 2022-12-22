@@ -48,26 +48,6 @@
       mkSystem { name = "m1nix"; system = "aarch64-linux"; } //
       mkSystem { name = "pinix"; system = "aarch64-linux"; } //
       mkSystem { name = "wsl";   system = "x86_64-linux"; } //
-      mkSystem { name = "m2vm";  system = "aarch64-linux";
-        overlays = [(final: prev: {
-          # Example of bringing in an unstable package:
-          # open-vm-tools = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.open-vm-tools;
-
-          # We need Mesa on aarch64 to be built with "svga". The default Mesa
-          # build does not include this: https://github.com/Mesa3D/mesa/blob/49efa73ba11c4cacaed0052b984e1fb884cf7600/meson.build#L192
-          mesa = prev.callPackage "${inputs.nixpkgs-unstable}/pkgs/development/libraries/mesa" {
-              llvmPackages = final.llvmPackages_latest;
-              inherit (final.darwin.apple_sdk.frameworks) OpenGL;
-              inherit (final.darwin.apple_sdk.libs) Xplugin;
-              galliumDrivers = [
-                # From meson.build
-                "v3d" "vc4" "freedreno" "etnaviv" "nouveau"
-                "tegra" "virgl" "lima" "panfrost" "swrast"
-                # We add this so we get the vmwgfx module
-                "svga"
-              ];
-          };
-        })];
-      };
+      mkSystem { name = "m2vm";  system = "aarch64-linux"; };
   };
 }
