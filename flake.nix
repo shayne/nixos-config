@@ -36,6 +36,7 @@
         mach-nix = inputs.mach-nix.packages.${prev.system}.mach-nix;
         openvscode-server = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.openvscode-server;
         starship = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.starship;
+        tailscale = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.tailscale;
       })
     ];
 
