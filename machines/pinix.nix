@@ -10,6 +10,7 @@
     hostName = "pinix";
     interfaces.eth0.useDHCP = true;
     firewall.enable = false;
+    nameservers = [ "127.0.0.1" ];
   };
 
   environment.systemPackages = with pkgs; [
