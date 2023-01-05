@@ -10,7 +10,7 @@
   wsl = {
     enable = true;
     defaultUser = "shayne";
-    # nativeSystemd = true;
+    nativeSystemd = true;
     wslConf = {
       automount.root = "/mnt";
       network.hostname = "wsl";

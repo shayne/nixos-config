@@ -19,4 +19,6 @@
     killall
     niv
   ];
+
+  programs.fish.enable = true;
 }
