@@ -59,5 +59,8 @@
     search lan
   '';
 
+  services.tailscale.enable = true;
+  networking.firewall.checkReversePath = "loose";
+
   system.stateVersion = "22.05";
 }
