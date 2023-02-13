@@ -248,4 +248,5 @@ let sources = import ../../nix/sources.nix; in {
   services.syncthing.enable = if currentSystemName == "pinix" then false else true;
 
   services.vscode-server.enable = true;
+  services.vscode-server.enableFHS = true;
 }
