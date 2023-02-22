@@ -32,9 +32,9 @@
       inputs.neovim-nightly-overlay.overlay
 
       (final: prev: {
-        fish = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.fish;
+        # fish = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.fish;
         mach-nix = inputs.mach-nix.packages.${prev.system}.mach-nix;
-        openvscode-server = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.openvscode-server;
+        # openvscode-server = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.openvscode-server;
         starship = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.starship;
         tailscale = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.tailscale;
       })
