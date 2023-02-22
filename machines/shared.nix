@@ -1,6 +1,11 @@
-{ lib, pkgs, ... }:
+{ lib, pkgs, inputs, ... }:
 
 {
+
+  imports = [
+    inputs.vscode-server.nixosModule
+  ];
+
   # Enable nix flakes
   nix.package = pkgs.nixFlakes;
   nix.extraOptions = ''
@@ -21,4 +26,6 @@
   ];
 
   programs.fish.enable = true;
+
+  services.vscode-server.enable = true;
 }

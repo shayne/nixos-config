@@ -6,7 +6,6 @@ let sources = import ../../nix/sources.nix; in {
   home.stateVersion = "18.09";
 
   imports = [
-    inputs.nixos-vscode-server.nixosModules.home
     ../../secret/modules/ssh.nix
   ];
 
@@ -246,7 +245,4 @@ let sources = import ../../nix/sources.nix; in {
 
   # syncthing on everything except pinix
   services.syncthing.enable = if currentSystemName == "pinix" then false else true;
-
-  services.vscode-server.enable = true;
-  services.vscode-server.enableFHS = true;
 }

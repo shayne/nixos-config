@@ -62,5 +62,7 @@
   services.tailscale.enable = true;
   networking.firewall.checkReversePath = "loose";
 
+  services.vscode-server.installPath = "~/.vscode-server-insiders";
+
   system.stateVersion = "22.05";
 }

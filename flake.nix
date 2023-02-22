@@ -21,7 +21,7 @@
     # Other packages
     nixos-wsl.url = "github:nix-community/NixOS-WSL";
     mach-nix.url = "github:DavHau/mach-nix";
-    nixos-vscode-server.url = "github:msteen/nixos-vscode-server";
+    vscode-server.url = "github:msteen/nixos-vscode-server";
     nixos-hardware.url = "github:nixos/nixos-hardware";
   };
 
