@@ -66,6 +66,14 @@
   services.openssh.passwordAuthentication = true;
   services.openssh.permitRootLogin = "no";
 
+  services.code-server = {
+    enable = true;
+    user = "shayne";
+    group = "users";
+    port = 3000;
+    auth = "none";
+  };
+
   networking.firewall.enable = false;
 
   system.stateVersion = "20.09";

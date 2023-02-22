@@ -117,7 +117,3 @@ alias fnix "nix-shell --run fish"
 function frun
     nix-shell -p $argv[1] --run $argv[1]
 end
-
-if type -q openvscode-server
-    alias code openvscode-server
-end
