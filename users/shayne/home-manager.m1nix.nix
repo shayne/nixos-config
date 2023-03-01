@@ -7,6 +7,7 @@
 
   home.packages = (with pkgs; [
     dconf
+    firefox
     gnome.nautilus
     rofi
     scrot

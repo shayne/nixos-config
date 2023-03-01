@@ -22,13 +22,11 @@ let sources = import ../../nix/sources.nix; in {
     bat
     bind
     fd
-    firefox
     fzf
     gcc
     gh
     git-crypt
     go
-    google-cloud-sdk
     gopls
     htop
     httpie
@@ -38,12 +36,10 @@ let sources = import ../../nix/sources.nix; in {
     ookla-speedtest
     python3
     ripgrep
-    tealdeer
     traceroute
     tree
     watch
     whois
-    mach-nix
   ];
 
   #---------------------------------------------------------------------
