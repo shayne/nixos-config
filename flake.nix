@@ -32,6 +32,7 @@
       inputs.neovim-nightly-overlay.overlay
 
       (final: prev: {
+        code-server = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.code-server;
         # fish = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.fish;
         mach-nix = inputs.mach-nix.packages.${prev.system}.mach-nix;
         # openvscode-server = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.openvscode-server;
