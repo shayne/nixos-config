@@ -2,7 +2,7 @@
 
 This repository contains my NixOS system configurations. It started as a fork of [mitchellh/nixos-config](https://github.com/mitchellh/nixos-config/) and much of the structure remains.
 
-There are 5 separate machine configs:
+There exist several separate machine configs:
 
 - devvm - x86_64-linux kvm/qemu vm
 - m1nix - M1 MacBook Pro [running natively](https://github.com/tpwrules/nixos-m1/)
