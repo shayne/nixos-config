@@ -10,6 +10,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    tailscale = {
+      url = "github:tailscale/tailscale/v1.38.4";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # I think technically you're not supposed to override the nixpkgs
     # used by neovim but recently I had failures if I didn't pin to my
     # own. We can always try to remove that anytime.
@@ -38,7 +43,7 @@
         mach-nix = inputs.mach-nix.packages.${prev.system}.mach-nix;
         # openvscode-server = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.openvscode-server;
         starship = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.starship;
-        tailscale = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.tailscale;
+        tailscale = inputs.tailscale.packages.${prev.system}.tailscale;
       })
     ];
 
