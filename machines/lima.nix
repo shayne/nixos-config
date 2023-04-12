@@ -17,6 +17,9 @@
   services.openssh.permitRootLogin = "yes";
   users.users.root.password = "nixos";
 
+  services.tailscale.enable = true;
+  networking.firewall.checkReversePath = "loose";
+
   security = {
     sudo.wheelNeedsPassword = false;
   };
