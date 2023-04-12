@@ -16,6 +16,9 @@ SSH_OPTIONS=-o PubkeyAuthentication=no -o UserKnownHostsFile=/dev/null -o Strict
 switch:
 	sudo nixos-rebuild switch --flake .
 
+impure:
+	sudo nixos-rebuild switch --impure --flake .
+
 test:
 	sudo nixos-rebuild test --flake .
 
