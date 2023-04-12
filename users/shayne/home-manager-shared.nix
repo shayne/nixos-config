@@ -232,6 +232,13 @@ let sources = import ../../nix/sources.nix; in {
     extraConfig = (import ./vim-config.nix) { inherit sources; };
   };
 
+  programs.password-store = {
+    enable = true;
+    settings = {
+      PASSWORD_STORE_KEY = "6BF403B0";
+    };
+  };
+
   services.gpg-agent = {
     enable = true;
 
