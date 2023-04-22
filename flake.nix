@@ -50,6 +50,7 @@
         # openvscode-server = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.openvscode-server;
         starship = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.starship;
         tailscale = inputs.tailscale.packages.${prev.system}.tailscale;
+        wslu = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.wslu;
       })
     ];
 
