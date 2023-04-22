@@ -198,15 +198,20 @@ let sources = import ../../nix/sources.nix; in {
   programs.neovim = {
     enable = true;
     package = pkgs.neovim-nightly;
+
     viAlias = true;
     vimAlias = true;
     vimdiffAlias = true;
 
     plugins = with pkgs; [
+      customVim.vim-cue
       customVim.vim-fish
       customVim.vim-fugitive
+      customVim.vim-glsl
       customVim.vim-misc
+      customVim.vim-pgsql
       customVim.vim-tla
+      customVim.vim-zig
       customVim.pigeon
       customVim.AfterColors
 

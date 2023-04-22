@@ -3,6 +3,11 @@ self: super:
 let sources = import ../../nix/sources.nix; in rec {
   # My vim config
   customVim = with self; {
+    vim-cue = vimUtils.buildVimPlugin {
+      name = "vim-cue";
+      src = sources.vim-cue;
+    };
+
     vim-fish = vimUtils.buildVimPlugin {
       name = "vim-fish";
       src = sources.vim-fish;
@@ -13,14 +18,29 @@ let sources = import ../../nix/sources.nix; in rec {
       src = sources.vim-fugitive;
     };
 
+    vim-glsl = vimUtils.buildVimPlugin {
+      name = "vim-glsl";
+      src = sources.vim-glsl;
+    };
+
     vim-misc = vimUtils.buildVimPlugin {
       name = "vim-misc";
       src = sources.vim-misc;
     };
 
+    vim-pgsql = vimUtils.buildVimPlugin {
+      name = "vim-pgsql";
+      src = sources.vim-pgsql;
+    };
+
     vim-tla = vimUtils.buildVimPlugin {
       name = "tla.vim";
       src = sources.vim-tla;
+    };
+
+    vim-zig = vimUtils.buildVimPlugin {
+      name = "zig.vim";
+      src = sources.vim-zig;
     };
 
     dracula = vimUtils.buildVimPlugin {
