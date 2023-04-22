@@ -10,6 +10,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nixos-wsl = {
+      url = "github:nix-community/NixOS-WSL";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     tailscale = {
       url = "github:tailscale/tailscale/v1.38.4";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -20,11 +25,12 @@
     # own. We can always try to remove that anytime.
     neovim-nightly-overlay = {
       url = "github:nix-community/neovim-nightly-overlay";
-      inputs.nixpkgs.follows = "nixpkgs";
+      # Fails when following nixpkgs, maybe unstable would be
+      # fine but I don't think it matters.
+      # inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # Other packages
-    nixos-wsl.url = "github:nix-community/NixOS-WSL";
     mach-nix.url = "github:DavHau/mach-nix";
     vscode-server.url = "github:msteen/nixos-vscode-server";
     nixos-hardware.url = "github:nixos/nixos-hardware";
