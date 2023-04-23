@@ -40,6 +40,7 @@ let sources = import ../../nix/sources.nix; in {
     tree
     watch
     whois
+    zoxide
   ];
 
   #---------------------------------------------------------------------
@@ -131,6 +132,7 @@ let sources = import ../../nix/sources.nix; in {
     }) [
       "fish-fzf"
       "fish-foreign-env"
+      "zoxide.fish"
     ];
   };
 

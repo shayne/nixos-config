@@ -346,5 +346,17 @@
         "type": "tarball",
         "url": "https://github.com/ziglang/zig.vim/archive/a0d9adedafeb1a33a0159d16ddcdf194b7cea881.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "zoxide.fish": {
+        "branch": "master",
+        "description": "⚡️🐟 Fish plugin for zoxide",
+        "homepage": "",
+        "owner": "kidonng",
+        "repo": "zoxide.fish",
+        "rev": "bfd5947bcc7cd01beb23c6a40ca9807c174bba0e",
+        "sha256": "1ppql44gkliv5iwr9i9yx7qhzpgg9gi0sia557b6d4kx3xf59bqy",
+        "type": "tarball",
+        "url": "https://github.com/kidonng/zoxide.fish/archive/bfd5947bcc7cd01beb23c6a40ca9807c174bba0e.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     }
 }
