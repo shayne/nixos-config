@@ -1,6 +1,21 @@
 { config, lib, pkgs, currentSystemName, inputs, ... }:
 
-let sources = import ../../nix/sources.nix; in {
+let sources =
+    import ../../nix/sources.nix;
+
+    shellAliases = {
+      ga = "git add";
+      gc = "git commit -v";
+      gco = "git checkout";
+      gcp = "git cherry-pick";
+      gdiff = "git diff";
+      gl = "git prettylog";
+      gp = "git push";
+      gs = "git status";
+      gt = "git tag";
+    };
+in
+{
   # Home-manager 22.11 requires this be set. We never set it so we have
   # to use the old state version.
   home.stateVersion = "18.09";
@@ -77,17 +92,7 @@ let sources = import ../../nix/sources.nix; in {
     historyControl = [ "ignoredups" "ignorespace" ];
     initExtra = builtins.readFile ./bashrc;
 
-    shellAliases = {
-      ga = "git add";
-      gc = "git commit";
-      gco = "git checkout";
-      gcp = "git cherry-pick";
-      gdiff = "git diff";
-      gl = "git prettylog";
-      gp = "git push";
-      gs = "git status";
-      gt = "git tag";
-    };
+    inherit shellAliases;
   };
 
   programs.direnv= {
@@ -97,11 +102,6 @@ let sources = import ../../nix/sources.nix; in {
     };
     config = {
       whitelist = {
-      #   prefix= [
-      #     "$HOME/code/go/src/github.com/hashicorp"
-      #     "$HOME/code/go/src/github.com/mitchellh"
-      #   ];
-
         exact = ["$HOME/.envrc"];
       };
     };
@@ -114,17 +114,7 @@ let sources = import ../../nix/sources.nix; in {
       "set -g SHELL ${pkgs.fish}/bin/fish"
     ]);
 
-    shellAliases = {
-      ga = "git add";
-      gc = "git commit";
-      gco = "git checkout";
-      gcp = "git cherry-pick";
-      gdiff = "git diff";
-      gl = "git prettylog";
-      gp = "git push";
-      gs = "git status";
-      gt = "git tag";
-    };
+    inherit shellAliases;
 
     plugins = map (n: {
       name = n;
