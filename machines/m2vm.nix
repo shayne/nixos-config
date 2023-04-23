@@ -141,11 +141,6 @@
   #   enableSSHSupport = true;
   # };
 
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
-  services.openssh.passwordAuthentication = true;
-  services.openssh.permitRootLogin = "no";
-
   services.tailscale.enable = false;
   systemd.services.tailscaled.wantedBy = lib.mkForce [];
 

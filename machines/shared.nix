@@ -31,6 +31,10 @@
     niv
   ];
 
+
+  services.openssh.enable = true;
+  services.openssh.permitRootLogin = "no";
+
   programs.fish.enable = true;
 
   services.vscode-server.enable = true;

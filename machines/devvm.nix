@@ -61,11 +61,6 @@
   services.qemuGuest.enable = true;
   services.tailscale.enable = true;
 
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
-  services.openssh.passwordAuthentication = true;
-  services.openssh.permitRootLogin = "no";
-
   services.code-server = {
     enable = true;
     user = "shayne";

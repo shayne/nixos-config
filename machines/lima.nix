@@ -13,10 +13,6 @@
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.loader.grub.configurationLimit = 2;
 
-  services.openssh.enable = true;
-  services.openssh.permitRootLogin = "yes";
-  users.users.root.password = "nixos";
-
   services.tailscale.enable = true;
   networking.firewall.checkReversePath = "loose";
 
