@@ -34,6 +34,7 @@ in
   # per-project flakes sourced with direnv and nix-shell, so this is
   # not a huge list.
   home.packages = with pkgs; [
+    aws-vault
     bat
     bind
     fd
@@ -69,6 +70,7 @@ in
     EDITOR = "nvim";
     PAGER = "less -FirSwX";
     MANPAGER = "sh -c 'col -bx | ${pkgs.bat}/bin/bat -l man -p'";
+    AWS_VAULT_BACKEND = "pass";
   };
 
    # tree-sitter parsers
