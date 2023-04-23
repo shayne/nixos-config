@@ -14,6 +14,12 @@
     keep-derivations = true
   '';
 
+  nix.gc = {
+    automatic = true;
+    dates = "03:15";
+    options = "-d";
+  };
+
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
     "ookla-speedtest"
   ];
@@ -28,4 +34,5 @@
   programs.fish.enable = true;
 
   services.vscode-server.enable = true;
+
 }
