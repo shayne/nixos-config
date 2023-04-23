@@ -16,10 +16,6 @@
   services.tailscale.enable = true;
   networking.firewall.checkReversePath = "loose";
 
-  security = {
-    sudo.wheelNeedsPassword = false;
-  };
-
   environment.systemPackages = with pkgs; [
     gnumake
     killall

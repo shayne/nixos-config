@@ -53,9 +53,6 @@
   # Set your time zone.
   time.timeZone = "America/New_York";
 
-  # Don't require password for sudo
-  security.sudo.wheelNeedsPassword = false;
-
   # Virtualization settings
   virtualisation.docker.enable = true;
 

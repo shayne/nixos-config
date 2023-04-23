@@ -22,9 +22,6 @@
 
   networking.interfaces.enp1s0.useDHCP = true;
 
-  # Don't require password for sudo
-  security.sudo.wheelNeedsPassword = false;
-
   # Virtualization settings
   virtualisation.docker.enable = true;
 

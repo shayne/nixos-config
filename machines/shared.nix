@@ -35,6 +35,8 @@
   services.openssh.enable = true;
   services.openssh.permitRootLogin = "no";
 
+  security.sudo.wheelNeedsPassword = false;
+
   programs.fish.enable = true;
 
   services.vscode-server.enable = true;

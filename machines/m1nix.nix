@@ -38,9 +38,6 @@
 
   boot.supportedFilesystems = [ "ntfs" ];
 
-  # Don't require password for sudo
-  security.sudo.wheelNeedsPassword = false;
-
   networking = {
     hostName = "m1nix"; # Define your hostname.
     useDHCP = false;
