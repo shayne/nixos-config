@@ -11,6 +11,7 @@ let sources =
       gdiff = "git diff";
       gl = "git prettylog";
       gp = "git push";
+      gpf = "git push --force-with-lease";
       gs = "git status";
       gt = "git tag";
     };
