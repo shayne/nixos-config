@@ -5,6 +5,7 @@ let sources =
 
     shellAliases = {
       ga = "git add";
+      gam = "git amend";
       gc = "git commit -v";
       gco = "git checkout";
       gcp = "git cherry-pick";
