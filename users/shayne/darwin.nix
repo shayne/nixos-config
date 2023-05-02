@@ -7,6 +7,9 @@
 
   homebrew = {
     enable = true;
+    brews = [
+        "lima"
+    ];
     casks  = [
       # "1password"
       # "alfred"
