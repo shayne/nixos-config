@@ -16,20 +16,18 @@ let
     currentSystem = system;
   };
 in {
-  ${name} = nixosSystem {
+  ${name} = darwin.lib.darwinSystem {
     inherit system;
 
     modules = [
 
       { nixpkgs.overlays = _overlays ++ overlays; }
 
-      ../hardware/${name}.nix
       ../machines/shared.nix
-      ../machines/shared-linux.nix
       ../machines/${name}.nix
-      ../users/${user}/nixos.nix
+      ../users/${user}/darwin.nix
 
-      home-manager.nixosModules.home-manager {
+      home-manager.darwinModules.home-manager {
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
         home-manager.extraSpecialArgs = args;

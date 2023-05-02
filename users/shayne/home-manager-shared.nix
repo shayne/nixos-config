@@ -3,6 +3,8 @@
 let sources =
     import ../../nix/sources.nix;
 
+    isLinux = pkgs.stdenv.isLinux;
+
     shellAliases = {
       ga = "git add";
       gam = "git amend";
@@ -54,12 +56,13 @@ in
     ookla-speedtest
     python3
     ripgrep
-    traceroute
     tree
     watch
     whois
     zoxide
-  ];
+  ] ++ (lib.optionals isLinux [
+    traceroute
+  ]);
 
   #---------------------------------------------------------------------
   # Env vars and dotfiles
@@ -241,7 +244,7 @@ in
   };
 
   services.gpg-agent = {
-    enable = true;
+    enable = isLinux;
 
     # cache the keys forever so we don't get asked for a password
     defaultCacheTtl = 31536000;
@@ -249,5 +252,5 @@ in
   };
 
   # syncthing on everything except pinix
-  services.syncthing.enable = if currentSystemName == "pinix" then false else true;
+  services.syncthing.enable = if isLinux then if currentSystemName == "pinix" then false else true else false;
 }

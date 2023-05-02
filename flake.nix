@@ -15,6 +15,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    darwin = {
+      url = "github:LnL7/nix-darwin";
+
+      # We want to use the same set of nixpkgs as our system.
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     tailscale = {
       url = "github:tailscale/tailscale/v1.38.4";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -56,14 +63,21 @@
 
     mkSystem = let
       user = "shayne";
-    in import ./lib/mkSystem.nix { inherit lib user inputs overlays; };
+    in
+    import ./lib/mkSystem.nix { inherit lib user inputs overlays; };
+    mkDarwin = let
+      user = "shayne";
+    in
+    import ./lib/mkDarwin.nix { inherit lib user inputs overlays; };
   in {
     nixosConfigurations =
-      mkSystem { name = "devvm"; system = "x86_64-linux"; } //
-      mkSystem { name = "m1nix"; system = "aarch64-linux"; } //
-      mkSystem { name = "pinix"; system = "aarch64-linux"; } //
-      mkSystem { name = "lima";  system = "aarch64-linux"; } //
-      mkSystem { name = "wsl";   system = "x86_64-linux"; } //
+      mkSystem { name = "devvm"; system = "x86_64-linux"; }   //
+      mkSystem { name = "m1nix"; system = "aarch64-linux"; }  //
+      mkSystem { name = "pinix"; system = "aarch64-linux"; }  //
+      mkSystem { name = "lima";  system = "aarch64-linux"; }  //
+      mkSystem { name = "wsl";   system = "x86_64-linux"; }   //
       mkSystem { name = "m2vm";  system = "aarch64-linux"; };
+    darwinConfigurations =
+      mkDarwin { name = "m2air"; system = "aarch64-darwin"; };
   };
 }

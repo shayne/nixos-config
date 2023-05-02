@@ -3,6 +3,9 @@ NIXADDR ?= unset
 NIXPORT ?= 22
 NIXUSER ?= shayne
 
+UNAME := $(shell uname)
+HOSTNAME := $(shell hostname -s)
+
 # Settings
 NIXBLOCKDEVICE ?= nvme0n1
 
@@ -14,10 +17,14 @@ MAKEFILE_DIR := $(patsubst %/,%,$(dir $(abspath $(lastword $(MAKEFILE_LIST)))))
 SSH_OPTIONS=-o PubkeyAuthentication=no -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no
 
 switch:
-	sudo nixos-rebuild switch --flake .
-
-impure:
+ifeq ($(UNAME), Darwin)
+	nix build ".#darwinConfigurations.${HOSTNAME}.system"
+	./result/sw/bin/darwin-rebuild switch --flake "$$(pwd)#${HOSTNAME}"
+else ifeq ($(HOSTNAME), lima)
 	sudo nixos-rebuild switch --impure --flake .
+else
+	sudo nixos-rebuild switch --flake .
+endif
 
 test:
 	sudo nixos-rebuild test --flake .
