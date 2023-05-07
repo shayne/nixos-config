@@ -60,6 +60,9 @@ in
     watch
     whois
     zoxide
+
+    # Node is required for Copilot.vim
+    pkgs.nodejs
   ] ++ (lib.optionals isLinux [
     traceroute
   ]);
@@ -206,6 +209,7 @@ in
     vimdiffAlias = true;
 
     plugins = with pkgs; [
+      customVim.vim-copilot
       customVim.vim-cue
       customVim.vim-fish
       customVim.vim-fugitive
