@@ -229,6 +229,7 @@ in
       customVim.pigeon
       customVim.AfterColors
 
+      customVim.vim-devicons
       customVim.vim-nord
       customVim.nvim-comment
       customVim.nvim-lspconfig
