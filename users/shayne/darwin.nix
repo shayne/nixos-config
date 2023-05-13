@@ -18,11 +18,14 @@
       # "google-chrome"
       # "imageoptim"
       "istat-menus"
+      "maccy"
       # "monodraw"
       "rectangle"
       # "screenflow"
       # "slack"
-      # "spotify"
+      "signal"
+      "spotify"
+      "syncthing"
     ];
   };
 
