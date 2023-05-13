@@ -258,6 +258,6 @@ in
     maxCacheTtl = 31536000;
   };
 
-  # syncthing on everything except pinix
+  # syncthing on everything except pinix and darwin
   services.syncthing.enable = if isLinux then if currentSystemName == "pinix" then false else true else false;
 }
