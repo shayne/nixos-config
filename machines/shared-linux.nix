@@ -4,12 +4,6 @@
     inputs.vscode-server.nixosModule
   ];
 
-  nix.gc = {
-    automatic = true;
-    dates = "03:15";
-    options = "-d";
-  };
-
   environment.systemPackages = with pkgs; [
     iptables
   ];
@@ -20,4 +14,4 @@
   security.sudo.wheelNeedsPassword = false;
 
   services.vscode-server.enable = true;
-} 
+}

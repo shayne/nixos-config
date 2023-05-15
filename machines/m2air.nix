@@ -16,11 +16,6 @@
       substituters = ["https://mitchellh-nixos-config.cachix.org"];
       trusted-public-keys = ["mitchellh-nixos-config.cachix.org-1:bjEbXJyLrL1HZZHBbO4QALnI5faYZppzkU4D2s0G8RQ="];
     };
-    gc = {
-      automatic = true;
-      interval = { Weekday = 0; Hour = 0; Minute = 0; };
-      options = "--delete-older-than 30d";
-    };
   };
 
   # zsh is the default shell on Mac and we want to make sure that we're
