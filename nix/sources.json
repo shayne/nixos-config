@@ -291,12 +291,12 @@
         "branch": "master",
         "description": "My Vim configuration files.",
         "homepage": null,
-        "owner": "mitchellh",
+        "owner": "shayne",
         "repo": "vim-misc",
-        "rev": "1205bd43e9b692d253572eddaf784977ae46f35b",
-        "sha256": "1n6dsgppzgy95inq6mbqmphgbv7s97aslfmwdgasd8zy8grbd623",
+        "rev": "a83a05f4792d10f5d9780313e0c66216b7d240e7",
+        "sha256": "0qnfh4a4p3yqgq35wbkhglp5fsfpfi3pykkzwycj1d007bb8vw4a",
         "type": "tarball",
-        "url": "https://github.com/mitchellh/vim-misc/archive/1205bd43e9b692d253572eddaf784977ae46f35b.tar.gz",
+        "url": "https://github.com/shayne/vim-misc/archive/a83a05f4792d10f5d9780313e0c66216b7d240e7.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "vim-nord": {
