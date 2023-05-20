@@ -18,6 +18,8 @@ let sources =
       gpf = "git push --force-with-lease";
       gs = "git status";
       gt = "git tag";
+
+      godlv = "dlv exec --api-version 2 --listen=127.0.0.1:2345 --headless";
     };
 in
 {
