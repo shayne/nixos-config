@@ -65,7 +65,8 @@ in
     zoxide
 
     # Node is required for Copilot.vim
-    pkgs.nodejs
+    nodejs
+    nodePackages.prettier
   ] ++ (lib.optionals isLinux [
     traceroute
   ]);
@@ -242,6 +243,7 @@ in
       vimPlugins.vim-markdown
       vimPlugins.vim-nix
       vimPlugins.typescript-vim
+      vimPlugins.vim-prettier
     ];
 
     extraConfig = (import ./vim-config.nix) { inherit sources; };
