@@ -4,6 +4,10 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/release-22.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    systems.url = "github:nix-systems/x86_64-linux";
+    flake-utils.url = "github:numtide/flake-utils";
+    flake-utils.inputs.systems.follows = "systems";
+    pre-commit-hooks.url = "github:cachix/pre-commit-hooks.nix";
 
     home-manager = {
       url = "github:nix-community/home-manager/release-22.11";
@@ -43,41 +47,62 @@
     nixos-hardware.url = "github:nixos/nixos-hardware";
   };
 
-  outputs = { self, nixpkgs, ... }@inputs: let
-    lib = nixpkgs.lib;
+  outputs = { self, nixpkgs, flake-utils, ... }@inputs:
+    let
+      lib = nixpkgs.lib;
 
-    overlays = [
-      inputs.neovim-nightly-overlay.overlay
+      overlays = [
+        inputs.neovim-nightly-overlay.overlay
 
-      (final: prev: {
-        code-server = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.code-server;
-        # fish = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.fish;
-        go = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.go_1_20;
-        mach-nix = inputs.mach-nix.packages.${prev.system}.mach-nix;
-        # openvscode-server = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.openvscode-server;
-        starship = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.starship;
-        tailscale = inputs.tailscale.packages.${prev.system}.tailscale;
-        wslu = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.wslu;
-      })
-    ];
+        (final: prev: {
+          code-server = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.code-server;
+          # fish = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.fish;
+          go = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.go_1_20;
+          mach-nix = inputs.mach-nix.packages.${prev.system}.mach-nix;
+          # openvscode-server = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.openvscode-server;
+          starship = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.starship;
+          tailscale = inputs.tailscale.packages.${prev.system}.tailscale;
+          wslu = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.wslu;
+        })
+      ];
 
-    mkSystem = let
-      user = "shayne";
+      mkSystem =
+        let
+          user = "shayne";
+        in
+        import ./lib/mkSystem.nix { inherit lib user inputs overlays; };
+      mkDarwin =
+        let
+          user = "shayne";
+        in
+        import ./lib/mkDarwin.nix { inherit lib user inputs overlays; };
     in
-    import ./lib/mkSystem.nix { inherit lib user inputs overlays; };
-    mkDarwin = let
-      user = "shayne";
-    in
-    import ./lib/mkDarwin.nix { inherit lib user inputs overlays; };
-  in {
-    nixosConfigurations =
-      mkSystem { name = "devvm"; system = "x86_64-linux"; }   //
-      mkSystem { name = "m1nix"; system = "aarch64-linux"; }  //
-      mkSystem { name = "pinix"; system = "aarch64-linux"; }  //
-      mkSystem { name = "lima";  system = "aarch64-linux"; }  //
-      mkSystem { name = "wsl";   system = "x86_64-linux"; }   //
-      mkSystem { name = "m2vm";  system = "aarch64-linux"; };
-    darwinConfigurations =
-      mkDarwin { name = "m2air"; system = "aarch64-darwin"; };
-  };
+    flake-utils.lib.eachDefaultSystem
+      (system:
+        let
+          pkgs = nixpkgs.legacyPackages.${system};
+        in
+        {
+          formatter = pkgs.nixpkgs-fmt;
+
+          checks = {
+            pre-commit-check = inputs.pre-commit-hooks.lib.${system}.run {
+              src = ./.;
+              hooks = {
+                nixpkgs-fmt.enable = true;
+              };
+            };
+          };
+        }) // {
+
+      nixosConfigurations =
+        mkSystem { name = "devvm"; system = "x86_64-linux"; } //
+        mkSystem { name = "m1nix"; system = "aarch64-linux"; } //
+        mkSystem { name = "pinix"; system = "aarch64-linux"; } //
+        mkSystem { name = "lima"; system = "aarch64-linux"; } //
+        mkSystem { name = "wsl"; system = "x86_64-linux"; } //
+        mkSystem { name = "m2vm"; system = "aarch64-linux"; };
+      darwinConfigurations =
+        mkDarwin { name = "m2air"; system = "aarch64-darwin"; };
+    };
 }
