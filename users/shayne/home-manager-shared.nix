@@ -8,6 +8,7 @@ let sources =
     shellAliases = {
       ga = "git add";
       gam = "git amend";
+      gbc = "git branch --merged | grep -v '\*' | awk '{ print $1; }' | xargs -pr git branch -d";
       gc = "git commit -v";
       gco = "git checkout";
       gcp = "git cherry-pick";
@@ -168,9 +169,10 @@ in
       color.ui = true;
       core.askPass = ""; # needs to be empty to use terminal for ask pass
       credential.helper = "store"; # want to make this more secure
+      fetch.prune = true;
       github.user = "shayne";
-      push.default = "tracking";
       init.defaultBranch = "main";
+      push.default = "tracking";
     };
   };
 
