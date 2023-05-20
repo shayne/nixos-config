@@ -3,11 +3,13 @@
 , pkgs
 , pkgsCross
 , m1n1
-}: let
+}:
+let
   # u-boot's buildInputs get a different hash and don't build right if we try to
   # cross-build for aarch64 on itself for whatever reason
   buildPkgs = if pkgs.stdenv.system == "aarch64-linux" then pkgs else pkgsCross.aarch64-multiplatform;
-in (buildPkgs.buildUBoot rec {
+in
+(buildPkgs.buildUBoot rec {
   src = fetchFromGitHub {
     # tracking: https://github.com/AsahiLinux/PKGBUILDs/blob/stable/uboot-asahi/PKGBUILD
     owner = "AsahiLinux";

@@ -1,5 +1,6 @@
 { callPackage ? pkgs.callPackage
-, pkgs ? import <nixpkgs> {} }:
+, pkgs ? import <nixpkgs> { }
+}:
 
 callPackage (import ./hashicorp/generic.nix) {
   name = "nomad";

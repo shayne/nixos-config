@@ -18,11 +18,11 @@
   ]);
 
   gtk = {
-      enable = true;
-      theme = {
-          name = "Dracula";
-          package = pkgs.dracula-theme;
-      };
+    enable = true;
+    theme = {
+      name = "Dracula";
+      package = pkgs.dracula-theme;
+    };
   };
 
   programs.fish.shellAliases = {
@@ -141,7 +141,7 @@
   };
 
 
-  systemd.user.services.barrierc.Install.WantedBy = lib.mkForce [];
+  systemd.user.services.barrierc.Install.WantedBy = lib.mkForce [ ];
 
   # barrier.client = {
   #   enable = true;

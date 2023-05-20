@@ -1,4 +1,4 @@
-{ pkgs ? import <nixpkgs> {} }:
+{ pkgs ? import <nixpkgs> { } }:
 pkgs.stdenv.mkDerivation {
   name = "caddy";
   src = pkgs.fetchurl {
@@ -6,10 +6,10 @@ pkgs.stdenv.mkDerivation {
     sha256 = "sha256-ooNZOkL0Ns4hMD5qnipHpd4aznG+gCKo7QEqctRosjc=";
     name = "caddy";
   };
-  phases = ["installPhase" "patchPhase"];
+  phases = [ "installPhase" "patchPhase" ];
   installPhase = ''
-      mkdir -p $out/bin
-      cp $src $out/bin/caddy
-      chmod +x $out/bin/caddy
+    mkdir -p $out/bin
+    cp $src $out/bin/caddy
+    chmod +x $out/bin/caddy
   '';
 }

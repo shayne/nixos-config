@@ -2,7 +2,8 @@
 {
   config = {
     assertions = lib.mkIf config.hardware.asahi.extractPeripheralFirmware [
-      { assertion = config.hardware.asahi.peripheralFirmwareDirectory != null;
+      {
+        assertion = config.hardware.asahi.peripheralFirmwareDirectory != null;
         message = ''
           Asahi peripheral firmware extraction is enabled but the firmware
           location appears incorrect.
@@ -10,25 +11,28 @@
       }
     ];
 
-    hardware.firmware = let
-      asahi-fwextract = pkgs.callPackage ../asahi-fwextract {};
-    in lib.mkIf ((config.hardware.asahi.peripheralFirmwareDirectory != null)
-        && config.hardware.asahi.extractPeripheralFirmware) [
-      (pkgs.stdenv.mkDerivation {
-        name = "asahi-peripheral-firmware";
+    hardware.firmware =
+      let
+        asahi-fwextract = pkgs.callPackage ../asahi-fwextract { };
+      in
+      lib.mkIf
+        ((config.hardware.asahi.peripheralFirmwareDirectory != null)
+          && config.hardware.asahi.extractPeripheralFirmware) [
+        (pkgs.stdenv.mkDerivation {
+          name = "asahi-peripheral-firmware";
 
-        nativeBuildInputs = [ asahi-fwextract pkgs.cpio ];
+          nativeBuildInputs = [ asahi-fwextract pkgs.cpio ];
 
-        buildCommand = ''
-          mkdir extracted
-          asahi-fwextract ${/. + config.hardware.asahi.peripheralFirmwareDirectory} extracted
+          buildCommand = ''
+            mkdir extracted
+            asahi-fwextract ${/. + config.hardware.asahi.peripheralFirmwareDirectory} extracted
 
-          mkdir -p $out/lib/firmware
-          cat extracted/firmware.cpio | cpio -id --quiet --no-absolute-filenames
-          mv vendorfw/* $out/lib/firmware
-        '';
-      })
-    ];
+            mkdir -p $out/lib/firmware
+            cat extracted/firmware.cpio | cpio -id --quiet --no-absolute-filenames
+            mv vendorfw/* $out/lib/firmware
+          '';
+        })
+      ];
   };
 
   options.hardware.asahi = {
@@ -43,18 +47,20 @@
 
     peripheralFirmwareDirectory = lib.mkOption {
       type = lib.types.nullOr lib.types.path;
-      default = let
-        paths = [
-          # path when the system is operating normally
-          "/boot/asahi"
-          # path when the system is mounted in the installer
-          "/mnt/boot/asahi"
-        ];
+      default =
+        let
+          paths = [
+            # path when the system is operating normally
+            "/boot/asahi"
+            # path when the system is mounted in the installer
+            "/mnt/boot/asahi"
+          ];
 
-        validPaths = (builtins.filter
-          (p: builtins.pathExists (p + "/all_firmware.tar.gz"))
-          paths) ++ [ null ];
-      in builtins.elemAt validPaths 0;
+          validPaths = (builtins.filter
+            (p: builtins.pathExists (p + "/all_firmware.tar.gz"))
+            paths) ++ [ null ];
+        in
+        builtins.elemAt validPaths 0;
       description = ''
         Path to the directory containing the non-free non-redistributable
         peripheral firmware necessary for features like Wi-Fi. Ordinarily, this

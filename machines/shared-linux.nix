@@ -1,6 +1,6 @@
 { lib, pkgs, inputs, ... }:
 {
-  imports =[
+  imports = [
     inputs.vscode-server.nixosModule
   ];
 

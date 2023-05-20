@@ -1,6 +1,7 @@
 { lib
 , fetchFromGitLab
-, mesa }:
+, mesa
+}:
 
 (mesa.override {
   galliumDrivers = [ "swrast" "asahi" ];

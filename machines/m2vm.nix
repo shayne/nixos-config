@@ -1,4 +1,4 @@
-{ config, pkgs, lib, currentSystem, currentSystemName,... }:
+{ config, pkgs, lib, currentSystem, currentSystemName, ... }:
 
 {
   imports = [
@@ -13,7 +13,7 @@
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # Setup qemu so we can run x86_64 binaries
-  boot.binfmt.emulatedSystems = ["x86_64-linux"];
+  boot.binfmt.emulatedSystems = [ "x86_64-linux" ];
 
   boot.loader = {
     efi.canTouchEfiVariables = false;
@@ -29,8 +29,8 @@
   nix = {
     # mitchellh's public binary cache
     settings = {
-      substituters = ["https://mitchellh-nixos-config.cachix.org"];
-      trusted-public-keys = ["mitchellh-nixos-config.cachix.org-1:bjEbXJyLrL1HZZHBbO4QALnI5faYZppzkU4D2s0G8RQ="];
+      substituters = [ "https://mitchellh-nixos-config.cachix.org" ];
+      trusted-public-keys = [ "mitchellh-nixos-config.cachix.org-1:bjEbXJyLrL1HZZHBbO4QALnI5faYZppzkU4D2s0G8RQ=" ];
     };
   };
 
@@ -139,7 +139,7 @@
   # };
 
   services.tailscale.enable = false;
-  systemd.services.tailscaled.wantedBy = lib.mkForce [];
+  systemd.services.tailscaled.wantedBy = lib.mkForce [ ];
 
   # Lots of stuff that uses aarch64 that claims doesn't work, but actually works.
   nixpkgs.config.allowUnfree = true;

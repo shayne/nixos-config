@@ -23,7 +23,8 @@ let
   rustenv = rust-bin.selectLatestNightlyWith (toolchain: toolchain.minimal.override {
     targets = [ "aarch64-unknown-none-softfloat" ];
   });
-in stdenv.mkDerivation rec {
+in
+stdenv.mkDerivation rec {
   pname = "m1n1";
   version = "1.2.3";
 
@@ -44,7 +45,7 @@ in stdenv.mkDerivation rec {
     dtc
     pkgsCross.aarch64-multiplatform.buildPackages.gcc
   ] ++ lib.optional withChainloading rustenv
-    ++ lib.optional (customLogo != null) imagemagick;
+  ++ lib.optional (customLogo != null) imagemagick;
 
   postPatch = ''
     substituteInPlace proxyclient/m1n1/asm.py \
@@ -73,28 +74,28 @@ in stdenv.mkDerivation rec {
     cp build/m1n1.macho $out/build
     cp build/m1n1.bin $out/build
   '' + (lib.optionalString withTools ''
-    mkdir -p $out/{bin,script,toolchain-bin}
-    cp -r proxyclient $out/script
-    cp -r tools $out/script
+        mkdir -p $out/{bin,script,toolchain-bin}
+        cp -r proxyclient $out/script
+        cp -r tools $out/script
 
-    for toolpath in $out/script/proxyclient/tools/*.py; do
-      tool=$(basename $toolpath .py)
-      script=$out/bin/m1n1-$tool
-      cat > $script <<EOF
-#!/bin/sh
-${pyenv}/bin/python $toolpath "\$@"
-EOF
-      chmod +x $script
-    done
+        for toolpath in $out/script/proxyclient/tools/*.py; do
+          tool=$(basename $toolpath .py)
+          script=$out/bin/m1n1-$tool
+          cat > $script <<EOF
+    #!/bin/sh
+    ${pyenv}/bin/python $toolpath "\$@"
+    EOF
+          chmod +x $script
+        done
 
-    GCC=${pkgsCross.aarch64-multiplatform.buildPackages.gcc}
-    BINUTILS=${pkgsCross.aarch64-multiplatform.buildPackages.binutils-unwrapped}
+        GCC=${pkgsCross.aarch64-multiplatform.buildPackages.gcc}
+        BINUTILS=${pkgsCross.aarch64-multiplatform.buildPackages.binutils-unwrapped}
 
-    ln -s $GCC/bin/*-gcc $out/toolchain-bin/
-    ln -s $GCC/bin/*-ld $out/toolchain-bin/
-    ln -s $BINUTILS/bin/*-objcopy $out/toolchain-bin/
-    ln -s $BINUTILS/bin/*-objdump $out/toolchain-bin/
-    ln -s $GCC/bin/*-nm $out/toolchain-bin/
+        ln -s $GCC/bin/*-gcc $out/toolchain-bin/
+        ln -s $GCC/bin/*-ld $out/toolchain-bin/
+        ln -s $BINUTILS/bin/*-objcopy $out/toolchain-bin/
+        ln -s $BINUTILS/bin/*-objdump $out/toolchain-bin/
+        ln -s $GCC/bin/*-nm $out/toolchain-bin/
   '') + ''
     runHook postInstall
   '';

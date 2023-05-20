@@ -1,26 +1,27 @@
 { config, lib, pkgs, currentSystemName, inputs, ... }:
 
-let sources =
+let
+  sources =
     import ../../nix/sources.nix;
 
-    isLinux = pkgs.stdenv.isLinux;
+  isLinux = pkgs.stdenv.isLinux;
 
-    shellAliases = {
-      ga = "git add";
-      gam = "git amend";
-      gbc = "git branch --merged | grep -v '\*' | awk '{ print $1; }' | xargs -pr git branch -d";
-      gc = "git commit -v";
-      gco = "git checkout";
-      gcp = "git cherry-pick";
-      gdiff = "git diff";
-      gl = "git prettylog";
-      gp = "git push";
-      gpf = "git push --force-with-lease";
-      gs = "git status";
-      gt = "git tag";
+  shellAliases = {
+    ga = "git add";
+    gam = "git amend";
+    gbc = "git branch --merged | grep -v '\*' | awk '{ print $1; }' | xargs -pr git branch -d";
+    gc = "git commit -v";
+    gco = "git checkout";
+    gcp = "git cherry-pick";
+    gdiff = "git diff";
+    gl = "git prettylog";
+    gp = "git push";
+    gpf = "git push --force-with-lease";
+    gs = "git status";
+    gt = "git tag";
 
-      godlv = "dlv exec --api-version 2 --listen=127.0.0.1:2345 --headless";
-    };
+    godlv = "dlv exec --api-version 2 --listen=127.0.0.1:2345 --headless";
+  };
 in
 {
   # Home-manager 22.11 requires this be set. We never set it so we have
@@ -85,14 +86,14 @@ in
     AWS_VAULT_BACKEND = "pass";
   };
 
-   # tree-sitter parsers
-   xdg.configFile."nvim/parser/proto.so".source = "${pkgs.tree-sitter-proto}/parser";
-   xdg.configFile."nvim/queries/proto/folds.scm".source =
-     "${sources.tree-sitter-proto}/queries/folds.scm";
-   xdg.configFile."nvim/queries/proto/highlights.scm".source =
-     "${sources.tree-sitter-proto}/queries/highlights.scm";
-   xdg.configFile."nvim/queries/proto/textobjects.scm".source =
-     ./textobjects.scm;
+  # tree-sitter parsers
+  xdg.configFile."nvim/parser/proto.so".source = "${pkgs.tree-sitter-proto}/parser";
+  xdg.configFile."nvim/queries/proto/folds.scm".source =
+    "${sources.tree-sitter-proto}/queries/folds.scm";
+  xdg.configFile."nvim/queries/proto/highlights.scm".source =
+    "${sources.tree-sitter-proto}/queries/highlights.scm";
+  xdg.configFile."nvim/queries/proto/textobjects.scm".source =
+    ./textobjects.scm;
 
   # Rectangle.app. This has to be imported manually using the app.
   xdg.configFile."rectangle/RectangleConfig.json".text = builtins.readFile ./RectangleConfig.json;
@@ -105,21 +106,21 @@ in
 
   programs.bash = {
     enable = true;
-    shellOptions = [];
+    shellOptions = [ ];
     historyControl = [ "ignoredups" "ignorespace" ];
     initExtra = builtins.readFile ./bashrc;
 
     inherit shellAliases;
   };
 
-  programs.direnv= {
+  programs.direnv = {
     enable = true;
     nix-direnv = {
-        enable = true;
+      enable = true;
     };
     config = {
       whitelist = {
-        exact = ["$HOME/.envrc"];
+        exact = [ "$HOME/.envrc" ];
       };
     };
   };
@@ -133,10 +134,11 @@ in
 
     inherit shellAliases;
 
-    plugins = map (n: {
-      name = n;
-      src  = sources.${n};
-    }) [
+    plugins = map
+      (n: {
+        name = n;
+        src = sources.${n};
+      }) [
       "fish-fzf"
       "fish-foreign-env"
       "zoxide.fish"

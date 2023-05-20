@@ -8,12 +8,15 @@
   ];
 
   config = {
-    hardware.asahi.pkgs = if config.hardware.asahi.pkgsSystem != "aarch64-linux"
-    then import (pkgs.path) {
-        system = config.hardware.asahi.pkgsSystem;
-        crossSystem.system = "aarch64-linux";
-      }
-    else pkgs;
+    hardware.asahi.pkgs =
+      if config.hardware.asahi.pkgsSystem != "aarch64-linux"
+      then
+        import (pkgs.path)
+          {
+            system = config.hardware.asahi.pkgsSystem;
+            crossSystem.system = "aarch64-linux";
+          }
+      else pkgs;
   };
 
   options.hardware.asahi = {

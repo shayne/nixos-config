@@ -44,7 +44,7 @@
 
     # Pick only one of the below networking options.
     # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-    networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+    networkmanager.enable = true; # Easiest to use and most distros use this by default.
   };
 
   # Virtualization settings
@@ -164,7 +164,7 @@
 
   # enable the tailscale service
   services.tailscale.enable = true;
-  systemd.services.tailscaled.wantedBy = lib.mkForce [];
+  systemd.services.tailscaled.wantedBy = lib.mkForce [ ];
   networking.firewall.checkReversePath = "loose";
 
   # Some programs need SUID wrappers, can be configured further or are

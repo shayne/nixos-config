@@ -7,7 +7,7 @@ let
   _overlays = overlays;
 in
 
-{name, system, overlays ? [] }:
+{ name, system, overlays ? [ ] }:
 
 let
   args = {
@@ -15,7 +15,8 @@ let
     currentSystemName = name;
     currentSystem = system;
   };
-in {
+in
+{
   ${name} = nixosSystem {
     inherit system;
 
@@ -29,7 +30,8 @@ in {
       ../machines/${name}.nix
       ../users/${user}/nixos.nix
 
-      home-manager.nixosModules.home-manager {
+      home-manager.nixosModules.home-manager
+      {
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
         home-manager.extraSpecialArgs = args;
