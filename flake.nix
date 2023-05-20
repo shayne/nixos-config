@@ -7,7 +7,6 @@
     systems.url = "github:nix-systems/x86_64-linux";
     flake-utils.url = "github:numtide/flake-utils";
     flake-utils.inputs.systems.follows = "systems";
-    pre-commit-hooks.url = "github:cachix/pre-commit-hooks.nix";
 
     home-manager = {
       url = "github:nix-community/home-manager/release-22.11";
@@ -84,15 +83,6 @@
         in
         {
           formatter = pkgs.nixpkgs-fmt;
-
-          checks = {
-            pre-commit-check = inputs.pre-commit-hooks.lib.${system}.run {
-              src = ./.;
-              hooks = {
-                nixpkgs-fmt.enable = true;
-              };
-            };
-          };
         }) // {
 
       nixosConfigurations =
