@@ -10,7 +10,7 @@ let
     ga = "git add";
     gam = "git amend";
     gap = "git add -p";
-    gbc = "git branch --merged | grep -v '\*' | awk '{ print $1; }' | xargs -pr git branch -d";
+    gbc = "git branch -vv | grep ': gone]' | grep -v '\*' | awk '{ print $1; }' | xargs -pr git branch -D";
     gc = "git commit -v";
     gco = "git checkout";
     gcp = "git cherry-pick";
