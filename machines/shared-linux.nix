@@ -9,7 +9,7 @@
   ];
 
   services.openssh.enable = true;
-  services.openssh.permitRootLogin = "no";
+  services.openssh.settings.PermitRootLogin = "no";
 
   security.sudo.wheelNeedsPassword = false;
 
