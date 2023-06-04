@@ -58,6 +58,9 @@
   services.qemuGuest.enable = true;
   services.tailscale.enable = true;
 
+  nixpkgs.config.permittedInsecurePackages = [
+    "nodejs-16.20.0"
+  ];
   services.code-server = {
     enable = true;
     user = "shayne";
