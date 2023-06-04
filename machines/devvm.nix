@@ -20,7 +20,7 @@
 
   networking.hostName = "devvm";
 
-  networking.interfaces.enp1s0.useDHCP = true;
+  networking.interfaces.ens18.useDHCP = true;
 
   # Virtualization settings
   virtualisation.docker.enable = true;
