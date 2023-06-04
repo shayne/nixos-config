@@ -4,7 +4,7 @@ let
     open = "wslview";
     pbcopy = "clip.exe";
     pbpaste = "powershell.exe Get-Clipboard";
-    clear = "powershell.exe Clear-Host";
+    # clear = "powershell.exe Clear-Host";
   };
 in
 {
