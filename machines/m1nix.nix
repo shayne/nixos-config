@@ -2,22 +2,21 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, inputs, ... }:
 
 {
   imports = [
-    ./m1-support
+    inputs.nixos-apple-silicon.nixosModules.apple-silicon-support
     ../secret/modules/wireguard.nix
   ];
 
   nixpkgs.config.allowUnsupportedSystem = true;
 
-  hardware.video.hidpi.enable = true;
   hardware.bluetooth.enable = true;
   hardware.pulseaudio.enable = true;
 
   # Specify path to peripheral firmware files.
-  hardware.asahi.peripheralFirmwareDirectory = ./m1-support/firmware;
+  hardware.asahi.peripheralFirmwareDirectory = ./apple-silicon-support/firmware;
   # Or disable extraction and management of them completely.
   # hardware.asahi.extractPeripheralFirmware = false;
   hardware.asahi.useExperimentalGPUDriver = true;
@@ -31,7 +30,8 @@
     systemd-boot = {
       enable = true;
       # "error switching console mode" on boot.
-      consoleMode = "auto";
+      # no longer needed?
+      # consoleMode = "auto";
       configurationLimit = 5;
     };
   };

@@ -4,9 +4,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/release-23.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    systems.url = "github:nix-systems/x86_64-linux";
     flake-utils.url = "github:numtide/flake-utils";
-    flake-utils.inputs.systems.follows = "systems";
 
     home-manager = {
       url = "github:nix-community/home-manager/release-23.05";
@@ -44,6 +42,7 @@
     mach-nix.url = "github:DavHau/mach-nix";
     vscode-server.url = "github:msteen/nixos-vscode-server";
     nixos-hardware.url = "github:nixos/nixos-hardware";
+    nixos-apple-silicon.url = "github:tpwrules/nixos-apple-silicon";
   };
 
   outputs = { self, nixpkgs, flake-utils, ... }@inputs:
@@ -88,11 +87,17 @@
 
       nixosConfigurations =
         mkSystem { name = "devvm"; system = "x86_64-linux"; } //
-        mkSystem { name = "m1nix"; system = "aarch64-linux"; } //
         mkSystem { name = "pinix"; system = "aarch64-linux"; } //
         mkSystem { name = "lima"; system = "aarch64-linux"; } //
         mkSystem { name = "wsl"; system = "x86_64-linux"; } //
-        mkSystem { name = "m2vm"; system = "aarch64-linux"; };
+        mkSystem { name = "m2vm"; system = "aarch64-linux"; } //
+        mkSystem {
+          name = "m1nix";
+          system = "aarch64-linux";
+          overlays = [
+            inputs.nixos-apple-silicon.overlays.apple-silicon-overlay
+          ];
+        };
       darwinConfigurations =
         mkDarwin { name = "m2air"; system = "aarch64-darwin"; };
     };
