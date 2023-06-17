@@ -14,7 +14,7 @@
       # "1password"
       # "alfred"
       "cleanshot"
-      # "discord"
+      "discord"
       # "google-chrome"
       # "imageoptim"
       "istat-menus"
