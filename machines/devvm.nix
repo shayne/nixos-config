@@ -59,7 +59,7 @@
   services.tailscale.enable = true;
 
   nixpkgs.config.permittedInsecurePackages = [
-    "nodejs-16.20.0"
+    "nodejs-16.20.1"
   ];
   services.code-server = {
     enable = true;
