@@ -305,10 +305,10 @@
         "homepage": null,
         "owner": "shayne",
         "repo": "vim-misc",
-        "rev": "843279e7b4543f3f440d517211c15d244d3fbc25",
-        "sha256": "0qnfh4a4p3yqgq35wbkhglp5fsfpfi3pykkzwycj1d007bb8vw4a",
+        "rev": "f98c83383dd66c850a8cc68230758b8c71060ecf",
+        "sha256": "1a4cgdwqzkf3sn8yfb12gxrbs3wc59cndy6b4i087ngx5p1vxvkq",
         "type": "tarball",
-        "url": "https://github.com/shayne/vim-misc/archive/843279e7b4543f3f440d517211c15d244d3fbc25.tar.gz",
+        "url": "https://github.com/shayne/vim-misc/archive/f98c83383dd66c850a8cc68230758b8c71060ecf.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "vim-nord": {

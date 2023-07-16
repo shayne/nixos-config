@@ -67,6 +67,7 @@ in
     ookla-speedtest
     python3
     ripgrep
+    rnix-lsp
     tree
     watch
     whois
