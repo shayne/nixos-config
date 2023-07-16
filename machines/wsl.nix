@@ -6,6 +6,8 @@
   ];
 
   networking.hostName = "wsl";
+  networking.nameservers = [ "10.2.5.2" ];
+  networking.search = [ "home.ss.ht" ];
 
   wsl = {
     enable = true;
@@ -14,6 +16,7 @@
     wslConf = {
       automount.root = "/mnt";
       network.hostname = "wsl";
+      network.generateResolvConf = false;
     };
     # docker-desktop.enable = true;
     docker-native.enable = true;
@@ -53,11 +56,6 @@
   #     docker = super.docker.override { iptables = pkgs.iptables-legacy; };
   #   })
   # ];
-
-  environment.etc."resolv.conf".text = ''
-    nameserver 10.2.2.10
-    search lan
-  '';
 
   services.tailscale.enable = true;
   networking.firewall.checkReversePath = "loose";
