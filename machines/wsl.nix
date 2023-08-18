@@ -57,7 +57,10 @@
   #   })
   # ];
 
-  services.tailscale.enable = true;
+  services.tailscale = {
+    enable = true;
+    extraUpFlags = ["--ssh"];
+  };
   networking.firewall.checkReversePath = "loose";
 
   system.stateVersion = "22.05";

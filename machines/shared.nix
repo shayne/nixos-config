@@ -1,5 +1,9 @@
 { lib, pkgs, inputs, ... }:
 {
+  imports = [
+    ../modules/services/tailscale.nix # unstable service override
+  ];
+
   # Enable nix flakes
   nix.package = pkgs.nixFlakes;
   nix.extraOptions = ''
