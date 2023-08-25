@@ -68,12 +68,16 @@ end
 #-------------------------------------------------------------------------------
 # Prompt
 #-------------------------------------------------------------------------------
+
+# starship
+enable_transience
+
 # Do not show any greeting
 set --universal --erase fish_greeting
 function fish_greeting; end
 funcsave fish_greeting
 
-# bobthefish theme
+# dracula theme
 set -g theme_color_scheme dracula
 
 # My color scheme
