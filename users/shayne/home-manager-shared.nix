@@ -58,6 +58,7 @@ in
     gh
     git-crypt
     go
+    gok
     gopls
     htop
     httpie

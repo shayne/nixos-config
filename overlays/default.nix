@@ -8,4 +8,5 @@ final: prev: {
   terraform-bin = final.callPackage ../pkgs/terraform-bin.nix { };
 
   caddy = final.callPackage ../pkgs/caddy.nix { };
+  gok = final.callPackage ../pkgs/gok.nix { };
 }
