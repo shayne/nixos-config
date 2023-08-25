@@ -62,7 +62,7 @@
 
   services.tailscale = {
     enable = true;
-    extraUpFlags = ["--ssh"];
+    extraUpFlags = [ "--ssh" ];
   };
   networking.firewall.checkReversePath = "loose";
 
