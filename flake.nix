@@ -65,16 +65,9 @@
         })
       ];
 
-      mkSystem =
-        let
-          user = "shayne";
-        in
-        import ./lib/mkSystem.nix { inherit lib user inputs overlays; };
-      mkDarwin =
-        let
-          user = "shayne";
-        in
-        import ./lib/mkDarwin.nix { inherit lib user inputs overlays; };
+      user = "shayne";
+      mkSystem = import ./lib/mkSystem.nix { inherit lib user inputs overlays; };
+      mkDarwin = import ./lib/mkDarwin.nix { inherit lib user inputs overlays; };
     in
     flake-utils.lib.eachDefaultSystem
       (system:
