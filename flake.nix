@@ -56,7 +56,7 @@
           # need to override the nodejs version to get the unstable
           # code-server = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.code-server;
           # fish = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.fish;
-          go = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.go_1_20;
+          go = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.go_1_21;
           mach-nix = inputs.mach-nix.packages.${prev.system}.mach-nix;
           # openvscode-server = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.openvscode-server;
           starship = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.starship;
