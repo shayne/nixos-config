@@ -9,6 +9,8 @@
   networking.nameservers = [ "10.2.5.2" ];
   networking.search = [ "home.ss.ht" ];
 
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+
   wsl = {
     enable = true;
     defaultUser = "shayne";
@@ -20,6 +22,7 @@
     };
     # docker-desktop.enable = true;
     docker-native.enable = true;
+    interop.register = true;
   };
 
   # Set your time zone.
