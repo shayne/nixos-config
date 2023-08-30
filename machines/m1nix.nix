@@ -68,47 +68,11 @@
   xdg.portal.enable = true;
   xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
 
-  # setup windowing environment
-  services.xserver = {
-    enable = true;
-    layout = "us";
-    # dpi = 180;
-    dpi = 150;
-
-    desktopManager = {
-      xterm.enable = false;
-      wallpaper.mode = "scale";
-    };
-
-    libinput = {
-      enable = true;
-      touchpad.naturalScrolling = true;
-    };
-
-    xkbOptions = "ctrl:nocaps";
-
-    displayManager = {
-      defaultSession = "none+i3";
-      lightdm = {
-        enable = true;
-        background = "#000000";
-        autoLogin.timeout = 0;
-      };
-
-      autoLogin = {
-        enable = true;
-        user = "shayne";
-      };
-
-      sessionCommands = ''
-        ${pkgs.xorg.xset}/bin/xset r rate 200 40
-      '';
-    };
-
-    windowManager = {
-      i3.enable = true;
-    };
-  };
+  services.xserver.enable = true;
+  services.xserver.displayManager.sddm.enable = true;
+  services.xserver.desktopManager.plasma5.enable = true;
+  programs.dconf.enable = true;
+  services.xserver.displayManager.defaultSession = "plasmawayland";
 
   # Configure keymap in X11
   # services.xserver.layout = "us";
@@ -156,6 +120,7 @@
     niv
     tailscale
     xclip
+    libsForQt5.bismuth
   ];
 
   environment.pathsToLink = [
