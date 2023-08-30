@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/release-23.05";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
 
     home-manager = {
@@ -57,6 +57,7 @@
           # code-server = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.code-server;
           # fish = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.fish;
           go = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.go_1_21;
+          gokrazy = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.gokrazy;
           mach-nix = inputs.mach-nix.packages.${prev.system}.mach-nix;
           # openvscode-server = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.openvscode-server;
           starship = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.starship;
