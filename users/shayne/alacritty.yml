@@ -16,7 +16,7 @@ cursor:
 font:
   size: 13.0
   normal:
-    family: "PragmataProMono Nerd Font Mono"
+    family: "BerkeleyMono Nerd Font"
 
 key_bindings:
   - { key: K, mods: Command, action: ClearHistory }

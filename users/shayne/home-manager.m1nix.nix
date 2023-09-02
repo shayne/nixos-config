@@ -95,7 +95,7 @@
 
       font = {
         normal = {
-          family = "PragmataProMono Nerd Font Mono";
+          family = "BerkeleyMono Nerd Font";
         };
         size = 12;
       };

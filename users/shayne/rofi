@@ -1,6 +1,6 @@
 configuration {
   dpi: 150;
-  font: "PragmataProMono Nerd Font Mono 12";
+  font: "BerkeleyMono Nerd Font 12";
 }
 
 * {
