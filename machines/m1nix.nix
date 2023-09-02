@@ -5,9 +5,8 @@
 { config, pkgs, lib, inputs, ... }:
 
 {
-  imports = [
-    inputs.nixos-apple-silicon.nixosModules.apple-silicon-support
-    ../secret/modules/wireguard.nix
+  imports = with inputs; [
+    nixos-apple-silicon.nixosModules.apple-silicon-support
   ];
 
   nixpkgs.config.allowUnsupportedSystem = true;

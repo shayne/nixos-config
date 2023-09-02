@@ -45,9 +45,6 @@ in
   # Packages
   #---------------------------------------------------------------------
 
-  # Packages I always want installed. Most packages I install using
-  # per-project flakes sourced with direnv and nix-shell, so this is
-  # not a huge list.
   home.packages = with pkgs; [
     aws-vault
     bat
@@ -57,14 +54,15 @@ in
     gcc
     gh
     git-crypt
-    go
-    gokrazy
+    # go
     gopls
     htop
     httpie
     hub
     jq
     nix-diff
+    nodejs # Node is required for Copilot.vim
+    nodePackages.prettier
     ookla-speedtest
     python3
     ripgrep
@@ -74,9 +72,8 @@ in
     whois
     zoxide
 
-    # Node is required for Copilot.vim
-    nodejs
-    nodePackages.prettier
+    # unstable packages
+    unstable.gokrazy
   ] ++ (lib.optionals isLinux [
     traceroute
   ]);
@@ -156,6 +153,7 @@ in
 
   programs.starship = {
     enable = true;
+    package = pkgs.unstable.starship;
     enableFishIntegration = true;
     # Configuration written to ~/.config/starship.toml
     settings = {
@@ -193,8 +191,7 @@ in
 
   programs.go = {
     enable = true;
-    goPath = "code/go";
-    # goPrivate = [ "github.com/mitchellh" "github.com/hashicorp" "rfc822.mx" ];
+    package = pkgs.unstable.go_1_21;
   };
 
   programs.tmux = {

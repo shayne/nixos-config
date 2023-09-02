@@ -14,7 +14,7 @@ in
   };
 
   home.packages = with pkgs; [
-    wslu
+    unstable.wslu
   ];
 
   programs.bash.shellAliases = shellAliases;

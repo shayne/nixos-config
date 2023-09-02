@@ -13,7 +13,6 @@
     scrot
     tdesktop
     viewnior
-    wireguard-tools
     xdg-user-dirs
   ]);
 
@@ -113,7 +112,7 @@
 
   programs.vscode = {
     enable = true;
-    package = pkgs.vscodium;
+    package = pkgs.unstable.vscode;
     extensions = with pkgs.vscode-extensions; [
       vscodevim.vim
       golang.go

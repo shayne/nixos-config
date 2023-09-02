@@ -12,7 +12,6 @@
     scrot
     tdesktop
     viewnior
-    wireguard-tools
     xdg-user-dirs
   ]);
 

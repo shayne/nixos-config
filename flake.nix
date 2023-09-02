@@ -39,34 +39,30 @@
     };
 
     # Other packages
-    mach-nix.url = "github:DavHau/mach-nix";
     vscode-server.url = "github:msteen/nixos-vscode-server";
     nixos-hardware.url = "github:nixos/nixos-hardware";
     nixos-apple-silicon.url = "github:tpwrules/nixos-apple-silicon";
   };
 
   outputs = { self, nixpkgs, flake-utils, ... }@inputs:
+    with inputs;
     let
+      user = "shayne";
       lib = nixpkgs.lib;
 
       overlays = [
-        inputs.neovim-nightly-overlay.overlay
+        neovim-nightly-overlay.overlay
 
         (final: prev: {
-          # need to override the nodejs version to get the unstable
-          # code-server = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.code-server;
-          # fish = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.fish;
-          go = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.go_1_21;
-          gokrazy = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.gokrazy;
-          mach-nix = inputs.mach-nix.packages.${prev.system}.mach-nix;
-          # openvscode-server = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.openvscode-server;
-          starship = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.starship;
-          tailscale = inputs.tailscale.packages.${prev.system}.tailscale;
-          wslu = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.wslu;
+          unstable = import nixpkgs-unstable {
+            system = prev.system;
+            config.allowUnfree = true;
+          };
+
+          tailscale = tailscale.packages.${prev.system}.tailscale;
         })
       ];
 
-      user = "shayne";
       mkSystem = import ./lib/mkSystem.nix { inherit lib user inputs overlays; };
       mkDarwin = import ./lib/mkDarwin.nix { inherit lib user inputs overlays; };
     in
@@ -89,7 +85,7 @@
           name = "m1nix";
           system = "aarch64-linux";
           overlays = [
-            inputs.nixos-apple-silicon.overlays.apple-silicon-overlay
+            nixos-apple-silicon.overlays.apple-silicon-overlay
           ];
         };
       darwinConfigurations =

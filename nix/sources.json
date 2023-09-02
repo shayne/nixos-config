@@ -23,18 +23,6 @@
         "url": "https://github.com/jethrokuan/fzf/archive/479fa67d7439b23095e01b64987ae79a91a4e283.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
-    "go": {
-        "branch": "go1.15.6",
-        "description": "The Go programming language",
-        "homepage": "https://golang.org",
-        "owner": "golang",
-        "repo": "go",
-        "rev": "9b955d2d3fcff6a5bc8bce7bafdc4c634a28e95b",
-        "sha256": "0pg811lfw1pdp0cba4jvsqbwjaqrqz6m7jspbc80r17snd7flk2z",
-        "type": "tarball",
-        "url": "https://github.com/golang/go/archive/9b955d2d3fcff6a5bc8bce7bafdc4c634a28e95b.tar.gz",
-        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
-    },
     "niv": {
         "branch": "master",
         "description": "Easy dependency management for Nix projects",

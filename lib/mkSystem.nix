@@ -22,7 +22,10 @@ in
 
     modules = [
 
-      { nixpkgs.overlays = _overlays ++ overlays; }
+      {
+        nixpkgs.overlays = _overlays ++ overlays;
+        nixpkgs.config.allowUnfree = true;
+      }
 
       ../hardware/${name}.nix
       ../machines/shared.nix
@@ -30,8 +33,7 @@ in
       ../machines/${name}.nix
       ../users/${user}/nixos.nix
 
-      home-manager.nixosModules.home-manager
-      {
+      home-manager.nixosModules.home-manager {
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
         home-manager.extraSpecialArgs = args;
