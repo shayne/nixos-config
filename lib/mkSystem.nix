@@ -25,6 +25,9 @@ in
       {
         nixpkgs.overlays = _overlays ++ overlays;
         nixpkgs.config.allowUnfree = true;
+        nixpkgs.config.permittedInsecurePackages = [
+          "nodejs-16.20.2"
+        ];
       }
 
       ../hardware/${name}.nix
@@ -33,7 +36,8 @@ in
       ../machines/${name}.nix
       ../users/${user}/nixos.nix
 
-      home-manager.nixosModules.home-manager {
+      home-manager.nixosModules.home-manager
+      {
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
         home-manager.extraSpecialArgs = args;

@@ -3,8 +3,10 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/release-23.05";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+
     flake-utils.url = "github:numtide/flake-utils";
+    nix-formatter-pack.url = "github:Gerschtli/nix-formatter-pack";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     home-manager = {
       url = "github:nix-community/home-manager/release-23.05";
@@ -44,22 +46,22 @@
     nixos-apple-silicon.url = "github:tpwrules/nixos-apple-silicon";
   };
 
-  outputs = { self, nixpkgs, flake-utils, ... }@inputs:
+  outputs = { nixpkgs, flake-utils, ... }@inputs:
     with inputs;
     let
       user = "shayne";
-      lib = nixpkgs.lib;
+      inherit (nixpkgs) lib;
 
       overlays = [
         neovim-nightly-overlay.overlay
 
-        (final: prev: {
+        (_final: prev: {
           unstable = import nixpkgs-unstable {
-            system = prev.system;
+            inherit (prev) system;
             config.allowUnfree = true;
           };
 
-          tailscale = tailscale.packages.${prev.system}.tailscale;
+          inherit (tailscale.packages.${prev.system}) tailscale;
         })
       ];
 
@@ -67,13 +69,19 @@
       mkDarwin = import ./lib/mkDarwin.nix { inherit lib user inputs overlays; };
     in
     flake-utils.lib.eachDefaultSystem
-      (system:
-        let
-          pkgs = nixpkgs.legacyPackages.${system};
-        in
-        {
-          formatter = pkgs.nixpkgs-fmt;
-        }) // {
+      (system: {
+        formatter = nix-formatter-pack.lib.mkFormatter {
+          inherit nixpkgs system;
+
+          config = {
+            tools = {
+              deadnix.enable = true;
+              nixpkgs-fmt.enable = true;
+              statix.enable = true;
+            };
+          };
+        };
+      }) // {
 
       nixosConfigurations =
         mkSystem { name = "devvm"; system = "x86_64-linux"; } //

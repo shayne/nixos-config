@@ -1,4 +1,4 @@
-{ lib, pkgs, inputs, ... }:
+{ lib, pkgs, ... }:
 {
   imports = [
     ../modules/services/tailscale.nix # unstable service override

@@ -1,4 +1,4 @@
-{ config, modulesPath, pkgs, lib, ... }:
+{ pkgs, ... }:
 {
   imports = [
     ./lima/init.nix

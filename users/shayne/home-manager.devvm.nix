@@ -1,4 +1,4 @@
-{ pkgs, config, lib, ... }: {
+_: {
 
   services.gpg-agent.pinentryFlavor = "tty";
 

@@ -1,4 +1,4 @@
-{ config, modulesPath, pkgs, lib, ... }:
+{ config, pkgs, lib, ... }:
 
 let
   LIMA_CIDATA_MNT = "/mnt/lima-cidata"; # FIXME: hardcoded

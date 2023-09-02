@@ -1,10 +1,10 @@
-{ config, lib, pkgs, currentSystemName, inputs, ... }:
+{ config, lib, pkgs, currentSystemName, ... }:
 
 let
   sources =
     import ../../nix/sources.nix;
 
-  isLinux = pkgs.stdenv.isLinux;
+  inherit (pkgs.stdenv) isLinux;
 
   shellAliases = {
     ga = "git add";

@@ -27,16 +27,15 @@ let
   fetch_git = name: spec:
     let
       ref =
-        if spec ? ref then spec.ref else
-        if spec ? branch then "refs/heads/${spec.branch}" else
+        spec.ref or (if spec ? branch then "refs/heads/${spec.branch}" else
         if spec ? tag then "refs/tags/${spec.tag}" else
-        abort "In git source '${name}': Please specify `ref`, `tag` or `branch`!";
-      submodules = if spec ? submodules then spec.submodules else false;
+        abort "In git source '${name}': Please specify `ref`, `tag` or `branch`!");
+      submodules = spec.submodules or false;
       submoduleArg =
         let
           nixSupportsSubmodules = builtins.compareVersions builtins.nixVersion "2.4" >= 0;
           emptyArgWithWarning =
-            if submodules == true
+            if submodules
             then
               builtins.trace
                 (
@@ -115,7 +114,7 @@ let
   # the path directly as opposed to the fetched source.
   replace = name: drv:
     let
-      saneName = stringAsChars (c: if isNull (builtins.match "[a-zA-Z0-9]" c) then "_" else c) name;
+      saneName = stringAsChars (c: if ((builtins.match "[a-zA-Z0-9]" c) == null) then "_" else c) name;
       ersatz = builtins.getEnv "NIV_OVERRIDE_${saneName}";
     in
     if ersatz == "" then drv else
@@ -146,22 +145,22 @@ let
   optionalAttrs = cond: as: if cond then as else { };
 
   # fetchTarball version that is compatible between all the versions of Nix
-  builtins_fetchTarball = { url, name ? null, sha256 }@attrs:
+  builtins_fetchTarball = { url, name ? null, ... }@attrs:
     let
       inherit (builtins) lessThan nixVersion fetchTarball;
     in
     if lessThan nixVersion "1.12" then
-      fetchTarball ({ inherit url; } // (optionalAttrs (!isNull name) { inherit name; }))
+      fetchTarball ({ inherit url; } // (optionalAttrs (name != null) { inherit name; }))
     else
       fetchTarball attrs;
 
   # fetchurl version that is compatible between all the versions of Nix
-  builtins_fetchurl = { url, name ? null, sha256 }@attrs:
+  builtins_fetchurl = { url, name ? null, ... }@attrs:
     let
       inherit (builtins) lessThan nixVersion fetchurl;
     in
     if lessThan nixVersion "1.12" then
-      fetchurl ({ inherit url; } // (optionalAttrs (!isNull name) { inherit name; }))
+      fetchurl ({ inherit url; } // (optionalAttrs (name != null) { inherit name; }))
     else
       fetchurl attrs;
 
@@ -182,7 +181,7 @@ let
   # The "config" used by the fetchers
   mkConfig =
     { sourcesFile ? if builtins.pathExists ./sources.json then ./sources.json else null
-    , sources ? if isNull sourcesFile then { } else builtins.fromJSON (builtins.readFile sourcesFile)
+    , sources ? if (sourcesFile == null) then { } else builtins.fromJSON (builtins.readFile sourcesFile)
     , system ? builtins.currentSystem
     , pkgs ? mkPkgs sources system
     }: rec {

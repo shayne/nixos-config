@@ -5,7 +5,7 @@
   xdg.configFile."i3/config".text = builtins.readFile ./i3;
   # xdg.configFile."rofi/config.rasi".text = builtins.readFile ./rofi;
 
-  home.packages = (with pkgs; [
+  home.packages = with pkgs; [
     dconf
     gnome.nautilus
     rofi
@@ -13,7 +13,7 @@
     tdesktop
     viewnior
     xdg-user-dirs
-  ]);
+  ];
 
   gtk = {
     enable = true;

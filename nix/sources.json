@@ -131,18 +131,6 @@
         "url": "https://github.com/nvim-treesitter/nvim-treesitter-textobjects/archive/bd103502252027434ec42f628d2dbf54821d4ce6.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
-    "pack": {
-        "branch": "v0.11.0",
-        "description": "CLI for building apps using Cloud Native Buildpacks",
-        "homepage": "https://buildpacks.io",
-        "owner": "buildpacks",
-        "repo": "pack",
-        "rev": "2cf2c3442f574a2239ea3ee17aad7058fefe5410",
-        "sha256": "1pa7ml9x4cpp7v08720xjqllxkxqsqap987gdzzsa26k218q1fhz",
-        "type": "tarball",
-        "url": "https://github.com/buildpacks/pack/archive/2cf2c3442f574a2239ea3ee17aad7058fefe5410.tar.gz",
-        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
-    },
     "theme-bobthefish": {
         "branch": "master",
         "description": "A Powerline-style, Git-aware fish theme optimized for awesome.",

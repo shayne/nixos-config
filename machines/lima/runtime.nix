@@ -1,4 +1,4 @@
-{ config, modulesPath, pkgs, lib, ... }:
+{ pkgs, lib, ... }:
 
 let
   LIMA_CIDATA_MNT = "/mnt/lima-cidata"; # FIXME: hardcoded
@@ -38,10 +38,9 @@ let
   LIMA_CIDATA_USER = envFromContent "LIMA_CIDATA_USER";
   LIMA_CIDATA_UID = lib.toInt (envFromContent "LIMA_CIDATA_UID");
   LIMA_CIDATA_MOUNTTYPE = envFromContent "LIMA_CIDATA_MOUNTTYPE";
-  LIMA_CIDATA_MOUNTS = lib.toInt (envFromContent "LIMA_CIDATA_MOUNTS");
 
   LIMA_MOUNTPOINTS = envFromContentList "LIMA_CIDATA_MOUNTS_[0-9]+_MOUNTPOINT";
-  LIMA_SSH_KEYS = (lib.elemAt (userData."users") 0)."ssh-authorized-keys";
+  LIMA_SSH_KEYS = (lib.elemAt userData."users" 0)."ssh-authorized-keys";
 
   script_mounts =
     if LIMA_CIDATA_MOUNTTYPE != "9p" then
@@ -52,15 +51,15 @@ let
         ''
       ))) else "";
 
-  fileSystemsMount = (lib.zipAttrsWith (name: values: (lib.elemAt values 0)) (lib.forEach (userData."mounts") (row:
+  fileSystemsMount = builtins.zipAttrsWith (_name: values: (lib.elemAt values 0)) (lib.forEach userData."mounts" (row:
     {
       ${(lib.elemAt row 1)} = {
-        device = (lib.elemAt row 0);
-        fsType = (lib.elemAt row 2);
-        options = (lib.splitString "," (lib.elemAt row 3));
+        device = lib.elemAt row 0;
+        fsType = lib.elemAt row 2;
+        options = lib.splitString "," (lib.elemAt row 3);
       };
     }
-  )));
+  ));
 
   script = ''
     echo "fix symlink for /bin/bash"
