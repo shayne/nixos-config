@@ -24,8 +24,8 @@
     };
 
     tailscale = {
-      url = "github:tailscale/tailscale/v1.38.4";
-      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:tailscale/tailscale";
+      # inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # I think technically you're not supposed to override the nixpkgs

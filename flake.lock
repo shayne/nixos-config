@@ -563,6 +563,22 @@
     },
     "nixpkgs_6": {
       "locked": {
+        "lastModified": 1693563790,
+        "narHash": "sha256-qUx+8lQSCiPXbwWBwRHynHuhQT+6I7kEuDFFNQ6RSPU=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "fd8ad63083882605e8a7f659be6c9509e6e28d28",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixpkgs-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_7": {
+      "locked": {
         "lastModified": 1682134069,
         "narHash": "sha256-TnI/ZXSmRxQDt2sjRYK/8j8iha4B4zP2cnQCZZ3vp7k=",
         "owner": "NixOS",
@@ -687,21 +703,18 @@
       "inputs": {
         "flake-compat": "flake-compat_4",
         "flake-utils": "flake-utils_5",
-        "nixpkgs": [
-          "nixpkgs"
-        ]
+        "nixpkgs": "nixpkgs_6"
       },
       "locked": {
-        "lastModified": 1680714162,
-        "narHash": "sha256-HjN8VzysxQvx5spXgbgbItH3y1bLbfHO+udNQMuyhAk=",
+        "lastModified": 1693617319,
+        "narHash": "sha256-JMC4gJl6EwNYAZHD9Rb3V8KAlTA2+Cn5lYyi8ZzwqEo=",
         "owner": "tailscale",
         "repo": "tailscale",
-        "rev": "043a34500dd2bb07c34e3b28a56cdbc8b5434454",
+        "rev": "c6fadd6d71ac884e74bcedd3942576c397108093",
         "type": "github"
       },
       "original": {
         "owner": "tailscale",
-        "ref": "v1.38.4",
         "repo": "tailscale",
         "type": "github"
       }
@@ -709,7 +722,7 @@
     "vscode-server": {
       "inputs": {
         "flake-utils": "flake-utils_6",
-        "nixpkgs": "nixpkgs_6"
+        "nixpkgs": "nixpkgs_7"
       },
       "locked": {
         "lastModified": 1684517665,
