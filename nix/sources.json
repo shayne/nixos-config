@@ -89,10 +89,10 @@
         "homepage": "",
         "owner": "nvim-telescope",
         "repo": "telescope.nvim",
-        "rev": "2c1ed33a6f6f2db3b69f5421f6b405eda1b07748",
-        "sha256": "1adam01isj51qbihxxkz20l00x1lfvdsbvzs6wamzpycjh4i9bj4",
+        "rev": "3fae9c1e14910e6669bb8ecbb473aba6a9e13b33",
+        "sha256": "0mh0f9wzfdh3vjv52i9h883s8i0zl4qgm3f3ykbi81ah4x25banp",
         "type": "tarball",
-        "url": "https://github.com/nvim-telescope/telescope.nvim/archive/2c1ed33a6f6f2db3b69f5421f6b405eda1b07748.tar.gz",
+        "url": "https://github.com/nvim-telescope/telescope.nvim/archive/3fae9c1e14910e6669bb8ecbb473aba6a9e13b33.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nvim-treesitter": {
@@ -101,10 +101,10 @@
         "homepage": "",
         "owner": "nvim-treesitter",
         "repo": "nvim-treesitter",
-        "rev": "920b37260ebc720b0399bd12954fd2bf8bd18242",
-        "sha256": "1y1khzff03g011viiww1d6a2v8b2ag06s9wayj32pj9hax8srm6i",
+        "rev": "17b943e7c5cc2b2db3ac7b5720fbd42e75a00d8d",
+        "sha256": "03yq7pn0vz93xjjrs6cbypqvqxncxgsadmrvgkx177c3w146w0zl",
         "type": "tarball",
-        "url": "https://github.com/nvim-treesitter/nvim-treesitter/archive/920b37260ebc720b0399bd12954fd2bf8bd18242.tar.gz",
+        "url": "https://github.com/nvim-treesitter/nvim-treesitter/archive/17b943e7c5cc2b2db3ac7b5720fbd42e75a00d8d.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nvim-treesitter-playground": {
@@ -197,10 +197,10 @@
         "homepage": null,
         "owner": "github",
         "repo": "copilot.vim",
-        "rev": "172955782814a49fbebca2d1a2ccce2059103329",
-        "sha256": "12pynm0v1ci5yjwqlkljbq4wpc7w4gpilg0iagb3b3ihmzi1wvcx",
+        "rev": "719dd8d0beab993dbad47a9e86ecb0dbd4a99da5",
+        "sha256": "07shpmy4296mvcqzjs7hhaw1vg81rjncg6r1q8p1jxc6w5gq7b2g",
         "type": "tarball",
-        "url": "https://github.com/github/copilot.vim/archive/172955782814a49fbebca2d1a2ccce2059103329.tar.gz",
+        "url": "https://github.com/github/copilot.vim/archive/719dd8d0beab993dbad47a9e86ecb0dbd4a99da5.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "vim-cue": {
