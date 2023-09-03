@@ -70,11 +70,13 @@
     in
     flake-utils.lib.eachDefaultSystem
       (system: {
+
+        # nix fmt
         formatter = nix-formatter-pack.lib.mkFormatter {
           inherit nixpkgs system;
-
           config = {
             tools = {
+              alejandra.enable = false;
               deadnix.enable = true;
               nixpkgs-fmt.enable = true;
               statix.enable = true;
