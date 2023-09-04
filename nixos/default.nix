@@ -4,6 +4,11 @@
     ../modules/services/tailscale.nix # unstable service override
   ];
 
+  console = {
+    font = "${pkgs.tamzen}/share/consolefonts/TamzenForPowerline10x20.psf";
+    packages = with pkgs; [ tamzen ];
+  };
+
   # Only install the docs I use
   documentation.enable = true;
   documentation.nixos.enable = false;
