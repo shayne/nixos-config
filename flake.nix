@@ -40,10 +40,10 @@
     {
 
       nixosConfigurations =
-        mkSystem { name = "devvm"; system = "x86_64-linux"; } //
+        mkSystem { name = "devvm"; } //
+        mkSystem { name = "wsl"; } //
         mkSystem { name = "pinix"; system = "aarch64-linux"; } //
         mkSystem { name = "lima"; system = "aarch64-linux"; } //
-        mkSystem { name = "wsl"; system = "x86_64-linux"; } //
         mkSystem { name = "m2vm"; system = "aarch64-linux"; } //
         mkSystem { name = "m1nix"; system = "aarch64-linux"; };
       darwinConfigurations =

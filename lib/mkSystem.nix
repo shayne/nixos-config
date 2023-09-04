@@ -1,6 +1,8 @@
 { inputs, outputs, user, stateVersion }:
-
-{ name, system }:
+let
+  defaultSystem = "x86_64-linux";
+in
+{ name, system ? defaultSystem }:
 
 let
   args = {
