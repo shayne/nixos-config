@@ -16,7 +16,6 @@ in
     modules = [
       ../nixos
       ../hardware/${name}.nix
-      ../machines/shared.nix
       ../machines/shared-linux.nix
       ../machines/${name}.nix
 

@@ -1,5 +1,32 @@
-{ config, inputs, outputs, pkgs, user, ... }:
+{ config, lib, inputs, outputs, pkgs, user, ... }:
 {
+  imports = [
+    ../modules/services/tailscale.nix # unstable service override
+  ];
+
+  environment = {
+    # Eject nano and perl from the system
+    defaultPackages = with pkgs; lib.mkForce [
+      gitMinimal
+      gnumake
+      home-manager
+      killall
+      niv
+      rsync
+    ];
+    systemPackages = with pkgs; [
+      neovim-nightly
+      wget
+    ];
+    variables = {
+      EDITOR = "nvim";
+      SYSTEMD_EDITOR = "nvim";
+      VISUAL = "nvim";
+    };
+    # https://github.com/nix-community/home-manager/pull/2408
+    pathsToLink = [ "/share/fish" ];
+  };
+
   nixpkgs = {
     # You can add overlays here
     overlays = [
@@ -28,8 +55,35 @@
     };
   };
 
-  # https://github.com/nix-community/home-manager/pull/2408
-  environment.pathsToLink = [ "/share/fish" ];
+  nix = {
+    gc = {
+      automatic = true;
+      options = "--delete-older-than 10d";
+    };
+
+    # This will add each flake input as a registry
+    # To make nix3 commands consistent with your flake
+    registry = lib.mapAttrs (_: value: { flake = value; }) inputs;
+
+    # This will additionally add your inputs to the system's legacy channels
+    # Making legacy nix commands consistent as well, awesome!
+    nixPath = lib.mapAttrsToList (key: value: "${key}=${value.to.path}") config.nix.registry;
+
+    optimise.automatic = true;
+    package = pkgs.unstable.nix;
+    settings = {
+      auto-optimise-store = true;
+      experimental-features = [ "nix-command" "flakes" ];
+
+      # Avoid unwanted garbage collection when using nix-direnv
+      keep-outputs = true;
+      keep-derivations = true;
+
+      warn-dirty = false;
+    };
+  };
+
+  programs.fish.enable = true;
 
   users.users.${user} = {
     isNormalUser = true;
