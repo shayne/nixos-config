@@ -13,6 +13,7 @@
     casks = [
       # "1password"
       # "alfred"
+      "amethyst"
       "cleanshot"
       "discord"
       # "google-chrome"
@@ -20,6 +21,7 @@
       "istat-menus"
       "maccy"
       # "monodraw"
+      "raycast"
       "rectangle"
       # "screenflow"
       # "slack"
