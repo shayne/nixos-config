@@ -34,8 +34,8 @@
       libx = import ./lib { inherit inputs outputs stateVersion; };
       inherit (nixpkgs) lib;
 
-      mkSystem = import ./lib/mkSystem.nix { inherit user inputs outputs; };
-      mkDarwin = import ./lib/mkDarwin.nix { inherit user inputs outputs; };
+      mkSystem = import ./lib/mkSystem.nix { inherit user inputs outputs stateVersion; };
+      mkDarwin = import ./lib/mkDarwin.nix { inherit user inputs outputs stateVersion; };
     in
     {
 

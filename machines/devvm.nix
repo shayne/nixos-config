@@ -70,6 +70,4 @@
   };
 
   networking.firewall.enable = false;
-
-  system.stateVersion = "20.09";
 }

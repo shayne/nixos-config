@@ -1,4 +1,4 @@
-{ config, lib, inputs, outputs, pkgs, user, ... }:
+{ config, lib, inputs, outputs, pkgs, stateVersion, user, ... }:
 {
   imports = [
     ../modules/services/tailscale.nix # unstable service override
@@ -155,4 +155,6 @@
       ${pkgs.nvd}/bin/nvd --nix-bin-dir=${pkgs.nix}/bin diff /run/current-system "$systemConfig"
     '';
   };
+
+  system.stateVersion = stateVersion;
 }

@@ -31,6 +31,4 @@
   '';
   # ...add user to video
   users.users.${user}.extraGroups = [ "video" ];
-
-  system.stateVersion = "22.05";
 }

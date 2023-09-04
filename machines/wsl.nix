@@ -65,6 +65,4 @@
     extraUpFlags = [ "--ssh" ];
   };
   networking.firewall.checkReversePath = "loose";
-
-  system.stateVersion = "22.05";
 }

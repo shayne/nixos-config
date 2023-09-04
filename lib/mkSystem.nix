@@ -1,4 +1,4 @@
-{ inputs, outputs, user }:
+{ inputs, outputs, user, stateVersion }:
 
 { name, system }:
 
@@ -32,7 +32,7 @@ in
     ];
 
     specialArgs = {
-      inherit inputs outputs user;
+      inherit inputs outputs stateVersion user;
       currentSystemName = name;
       currentSystem = system;
     };
