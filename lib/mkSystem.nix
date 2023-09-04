@@ -1,57 +1,41 @@
-{ lib, inputs, overlays, user }:
+{ inputs, outputs, user }:
 
-with lib;
-with inputs;
-
-let
-  _overlays = overlays;
-in
-
-{ name, system, overlays ? [ ] }:
+{ name, system }:
 
 let
   args = {
-    inherit user inputs;
+    inherit user;
     currentSystemName = name;
     currentSystem = system;
   };
 in
 {
-  ${name} = nixosSystem {
+  ${name} = inputs.nixpkgs.lib.nixosSystem {
     inherit system;
 
     modules = [
-
-      {
-        nixpkgs.overlays = _overlays ++ overlays;
-        nixpkgs.config.allowUnfree = true;
-        nixpkgs.config.permittedInsecurePackages = [
-          "nodejs-16.20.2"
-        ];
-      }
-
+      ../nixos
       ../hardware/${name}.nix
       ../machines/shared.nix
       ../machines/shared-linux.nix
       ../machines/${name}.nix
-      ../users/${user}/nixos.nix
 
-      home-manager.nixosModules.home-manager
+      inputs.home-manager.nixosModules.home-manager
       {
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
         home-manager.extraSpecialArgs = args;
-        home-manager.users.${user} = lib.mkMerge [
+        home-manager.users.${user} = inputs.nixpkgs.lib.mkMerge [
           (import ../users/${user}/home-manager-shared.nix)
           (import ../users/${user}/home-manager.${name}.nix)
         ];
       }
-
-      {
-        config._module.args = args;
-      }
     ];
 
-    specialArgs = { inherit inputs; };
+    specialArgs = {
+      inherit inputs outputs user;
+      currentSystemName = name;
+      currentSystem = system;
+    };
   };
 }

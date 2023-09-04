@@ -55,21 +55,8 @@
       libx = import ./lib { inherit inputs outputs stateVersion; };
       inherit (nixpkgs) lib;
 
-      overlays = [
-        neovim-nightly-overlay.overlay
-
-        (_final: prev: {
-          unstable = import nixpkgs-unstable {
-            inherit (prev) system;
-            config.allowUnfree = true;
-          };
-
-          inherit (tailscale.packages.${prev.system}) tailscale;
-        })
-      ];
-
-      mkSystem = import ./lib/mkSystem.nix { inherit lib user inputs overlays; };
-      mkDarwin = import ./lib/mkDarwin.nix { inherit lib user inputs overlays; };
+      mkSystem = import ./lib/mkSystem.nix { inherit user inputs outputs; };
+      mkDarwin = import ./lib/mkDarwin.nix { inherit user inputs outputs; };
     in
     {
       # nix fmt
@@ -93,14 +80,17 @@
         mkSystem { name = "lima"; system = "aarch64-linux"; } //
         mkSystem { name = "wsl"; system = "x86_64-linux"; } //
         mkSystem { name = "m2vm"; system = "aarch64-linux"; } //
-        mkSystem {
-          name = "m1nix";
-          system = "aarch64-linux";
-          overlays = [
-            nixos-apple-silicon.overlays.apple-silicon-overlay
-          ];
-        };
+        mkSystem { name = "m1nix"; system = "aarch64-linux"; };
       darwinConfigurations =
         mkDarwin { name = "m2air"; system = "aarch64-darwin"; };
+
+      # Custom packages and modifications, exported as overlays
+      overlays = import ./overlays { inherit inputs; };
+
+      # Custom packages; acessible via 'nix build', 'nix shell', etc
+      packages = libx.forAllSystems (system:
+        let pkgs = nixpkgs.legacyPackages.${system};
+        in import ./pkgs { inherit pkgs; }
+      );
     };
 }
