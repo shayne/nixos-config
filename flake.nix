@@ -38,6 +38,23 @@
       mkDarwin = import ./lib/mkDarwin.nix { inherit user inputs outputs; };
     in
     {
+
+      nixosConfigurations =
+        mkSystem { name = "devvm"; system = "x86_64-linux"; } //
+        mkSystem { name = "pinix"; system = "aarch64-linux"; } //
+        mkSystem { name = "lima"; system = "aarch64-linux"; } //
+        mkSystem { name = "wsl"; system = "x86_64-linux"; } //
+        mkSystem { name = "m2vm"; system = "aarch64-linux"; } //
+        mkSystem { name = "m1nix"; system = "aarch64-linux"; };
+      darwinConfigurations =
+        mkDarwin { name = "m2air"; system = "aarch64-darwin"; };
+
+      # Devshell for bootstrapping; acessible via 'nix develop' or 'nix-shell' (legacy)
+      devShells = libx.forAllSystems (system:
+        let pkgs = nixpkgs.legacyPackages.${system};
+        in import ./shell.nix { inherit pkgs; }
+      );
+
       # nix fmt
       formatter = libx.forAllSystems (system:
         nix-formatter-pack.lib.mkFormatter {
@@ -52,16 +69,6 @@
           };
         }
       );
-
-      nixosConfigurations =
-        mkSystem { name = "devvm"; system = "x86_64-linux"; } //
-        mkSystem { name = "pinix"; system = "aarch64-linux"; } //
-        mkSystem { name = "lima"; system = "aarch64-linux"; } //
-        mkSystem { name = "wsl"; system = "x86_64-linux"; } //
-        mkSystem { name = "m2vm"; system = "aarch64-linux"; } //
-        mkSystem { name = "m1nix"; system = "aarch64-linux"; };
-      darwinConfigurations =
-        mkDarwin { name = "m2air"; system = "aarch64-darwin"; };
 
       # Custom packages and modifications, exported as overlays
       overlays = import ./overlays { inherit inputs; };
