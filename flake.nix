@@ -2,47 +2,26 @@
   description = "NixOS systems and tools by shayne";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/release-23.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/release-23.05";
 
     nix-formatter-pack.url = "github:Gerschtli/nix-formatter-pack";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    home-manager = {
-      url = "github:nix-community/home-manager/release-23.05";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    home-manager.url = "github:nix-community/home-manager/release-23.05";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    nixos-wsl = {
-      url = "github:nix-community/NixOS-WSL";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    nixos-wsl.url = "github:nix-community/NixOS-WSL";
+    nixos-wsl.inputs.nixpkgs.follows = "nixpkgs";
 
-    darwin = {
-      url = "github:LnL7/nix-darwin";
-
-      # We want to use the same set of nixpkgs as our system.
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    tailscale = {
-      url = "github:tailscale/tailscale";
-      # inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    # I think technically you're not supposed to override the nixpkgs
-    # used by neovim but recently I had failures if I didn't pin to my
-    # own. We can always try to remove that anytime.
-    neovim-nightly-overlay = {
-      url = "github:nix-community/neovim-nightly-overlay";
-      # Fails when following nixpkgs, maybe unstable would be
-      # fine but I don't think it matters.
-      # inputs.nixpkgs.follows = "nixpkgs";
-    };
+    nix-darwin.url = "github:LnL7/nix-darwin";
+    nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
 
     # Other packages
-    vscode-server.url = "github:msteen/nixos-vscode-server";
-    nixos-hardware.url = "github:nixos/nixos-hardware";
+    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     nixos-apple-silicon.url = "github:tpwrules/nixos-apple-silicon";
+    nixos-hardware.url = "github:nixos/nixos-hardware";
+    tailscale.url = "github:tailscale/tailscale";
+    vscode-server.url = "github:msteen/nixos-vscode-server";
   };
 
   outputs = { nixpkgs, ... }@inputs:

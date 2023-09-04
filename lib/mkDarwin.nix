@@ -17,7 +17,7 @@ let
   };
 in
 {
-  ${name} = darwin.lib.darwinSystem {
+  ${name} = nix-darwin.lib.darwinSystem {
     inherit system;
 
     modules = [
