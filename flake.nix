@@ -4,7 +4,6 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/release-23.05";
 
-    flake-utils.url = "github:numtide/flake-utils";
     nix-formatter-pack.url = "github:Gerschtli/nix-formatter-pack";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
@@ -46,10 +45,14 @@
     nixos-apple-silicon.url = "github:tpwrules/nixos-apple-silicon";
   };
 
-  outputs = { nixpkgs, flake-utils, ... }@inputs:
+  outputs = { nixpkgs, ... }@inputs:
     with inputs;
     let
+      inherit (self) outputs;
       user = "shayne";
+      # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
+      stateVersion = "23.05";
+      libx = import ./lib { inherit inputs outputs stateVersion; };
       inherit (nixpkgs) lib;
 
       overlays = [
@@ -68,11 +71,10 @@
       mkSystem = import ./lib/mkSystem.nix { inherit lib user inputs overlays; };
       mkDarwin = import ./lib/mkDarwin.nix { inherit lib user inputs overlays; };
     in
-    flake-utils.lib.eachDefaultSystem
-      (system: {
-
-        # nix fmt
-        formatter = nix-formatter-pack.lib.mkFormatter {
+    {
+      # nix fmt
+      formatter = libx.forAllSystems (system:
+        nix-formatter-pack.lib.mkFormatter {
           inherit nixpkgs system;
           config = {
             tools = {
@@ -82,8 +84,8 @@
               statix.enable = true;
             };
           };
-        };
-      }) // {
+        }
+      );
 
       nixosConfigurations =
         mkSystem { name = "devvm"; system = "x86_64-linux"; } //
