@@ -27,6 +27,44 @@
     pathsToLink = [ "/share/fish" ];
   };
 
+  fonts = {
+    fontDir.enable = true;
+    fonts = with pkgs; [
+      (nerdfonts.override { fonts = [ "FiraCode" "SourceCodePro" "UbuntuMono" ]; })
+      fira
+      fira-go
+      joypixels
+      liberation_ttf
+      noto-fonts-emoji
+      source-serif
+      ubuntu_font_family
+      work-sans
+    ];
+
+    # Enable a basic set of fonts providing several font styles and families and reasonable coverage of Unicode.
+    enableDefaultFonts = false;
+
+    fontconfig = {
+      antialias = true;
+      defaultFonts = {
+        serif = [ "Source Serif" ];
+        sansSerif = [ "Work Sans" "Fira Sans" "FiraGO" ];
+        monospace = [ "FiraCode Nerd Font Mono" "SauceCodePro Nerd Font Mono" ];
+        emoji = [ "Joypixels" "Noto Color Emoji" ];
+      };
+      enable = true;
+      hinting = {
+        autohint = false;
+        enable = true;
+        style = "hintslight";
+      };
+      subpixel = {
+        rgba = "rgb";
+        lcdfilter = "light";
+      };
+    };
+  };
+
   nixpkgs = {
     # You can add overlays here
     overlays = [
@@ -52,6 +90,8 @@
     config = {
       # Disable if you don't want unfree packages
       allowUnfree = true;
+      # Accept the joypixels license
+      joypixels.acceptLicense = true;
     };
   };
 
