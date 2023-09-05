@@ -29,6 +29,7 @@
     };
     # https://github.com/nix-community/home-manager/pull/2408
     pathsToLink = [ "/share/fish" ];
+    shells = with pkgs; [ bashInteractive zsh fish ];
   };
 
   fonts = {
@@ -77,6 +78,10 @@
   };
 
   nix = {
+    # We install Nix using a separate installer so we don't want nix-darwin
+    # to manage it for us. This tells nix-darwin to just use whatever is running.
+    useDaemon = true;
+
     gc = {
       automatic = true;
       options = "--delete-older-than 10d";
@@ -103,40 +108,32 @@
     };
   };
 
-  programs.fish.enable = true;
-
-  homebrew = {
-    enable = true;
-    brews = [
-      "lima"
-    ];
-    casks = [
-      # "1password"
-      # "alfred"
-      "amethyst"
-      "cleanshot"
-      "discord"
-      # "google-chrome"
-      # "imageoptim"
-      "istat-menus"
-      "maccy"
-      # "monodraw"
-      "raycast"
-      "rectangle"
-      # "screenflow"
-      # "slack"
-      "signal"
-      "spotify"
-      "syncthing"
-    ];
-  };
-
   # The user should already exist, but we need to set this up so Nix knows
   # what our home directory is (https://github.com/LnL7/nix-darwin/issues/423).
   users.users.shayne = {
     home = "/Users/shayne";
     shell = pkgs.fish;
   };
+
+  # zsh is the default shell on Mac and we want to make sure that we're
+  # configuring the rc correctly with nix-darwin paths.
+  programs.zsh.enable = true;
+  programs.zsh.shellInit = ''
+    # Nix
+    if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
+      . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+    fi
+    # End Nix
+  '';
+
+  programs.fish.enable = true;
+  programs.fish.shellInit = ''
+    # Nix
+    if test -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.fish'
+      source '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.fish'
+    end
+    # End Nix
+  '';
 
   system.activationScripts.diff = {
     supportsDryActivation = true;
