@@ -104,6 +104,9 @@
       allowUnfree = true;
       # Accept the joypixels license
       joypixels.acceptLicense = true;
+      permittedInsecurePackages = [
+        "nodejs-16.20.2"
+      ];
     };
   };
 
