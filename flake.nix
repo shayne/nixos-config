@@ -16,8 +16,15 @@
     nix-darwin.url = "github:LnL7/nix-darwin";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
 
-    # Other packages
+    # Neovim breaks on darwin beyond v0.9.1. Must follow nixpkgs for the
+    # neovim-flake input for arm64/darwin to build.
+    # See: https://github.com/nix-community/neovim-nightly-overlay/issues/176
+    neovim-flake.url = "github:neovim/neovim/v0.9.1?dir=contrib";
+    neovim-flake.inputs.nixpkgs.follows = "nixpkgs";
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+    neovim-nightly-overlay.inputs.neovim-flake.follows = "neovim-flake";
+
+    # Other packages
     nixos-apple-silicon.url = "github:tpwrules/nixos-apple-silicon";
     nixos-hardware.url = "github:nixos/nixos-hardware";
     tailscale.url = "github:tailscale/tailscale";
