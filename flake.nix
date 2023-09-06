@@ -38,21 +38,11 @@
       user = "shayne";
       # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
       stateVersion = "23.05";
-      libx = import ./lib { inherit inputs outputs stateVersion; };
+      libx = import ./lib { inherit inputs outputs stateVersion user; };
       inherit (nixpkgs) lib;
-
-      mkSystem = import ./lib/mkSystem.nix { inherit user inputs outputs stateVersion; };
       mkDarwin = import ./lib/mkDarwin.nix { inherit user inputs outputs stateVersion; };
     in
-    {
-
-      nixosConfigurations =
-        mkSystem { name = "devvm"; } //
-        mkSystem { name = "wsl"; } //
-        mkSystem { name = "pinix"; system = "aarch64-linux"; } //
-        mkSystem { name = "lima"; system = "aarch64-linux"; } //
-        mkSystem { name = "m2vm"; system = "aarch64-linux"; } //
-        mkSystem { name = "m1nix"; system = "aarch64-linux"; };
+    (libx.loadMachines ./machines.nix) // {
       darwinConfigurations =
         mkDarwin { name = "m2air"; system = "aarch64-darwin"; };
 
