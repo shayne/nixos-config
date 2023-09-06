@@ -18,4 +18,8 @@
   m1nix = {
     system = "aarch64-linux";
   };
+
+  m2air = {
+    system = "aarch64-darwin";
+  };
 }

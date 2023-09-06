@@ -40,12 +40,8 @@
       stateVersion = "23.05";
       libx = import ./lib { inherit inputs outputs stateVersion user; };
       inherit (nixpkgs) lib;
-      mkDarwin = import ./lib/mkDarwin.nix { inherit user inputs outputs stateVersion; };
     in
     (libx.loadMachines ./machines.nix) // {
-      darwinConfigurations =
-        mkDarwin { name = "m2air"; system = "aarch64-darwin"; };
-
       # Devshell for bootstrapping; acessible via 'nix develop' or 'nix-shell' (legacy)
       devShells = libx.forAllSystems (system:
         let pkgs = nixpkgs.legacyPackages.${system};
