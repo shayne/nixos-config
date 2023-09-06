@@ -1,10 +1,8 @@
 { inputs, outputs, user, stateVersion }:
+{ name, attrs }:
 let
   defaultSystem = "x86_64-linux";
-in
-{ name, system ? defaultSystem }:
-
-let
+  system = attrs.system or defaultSystem;
   args = {
     inherit user;
     currentSystemName = name;
