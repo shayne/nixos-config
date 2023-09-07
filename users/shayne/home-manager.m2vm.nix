@@ -10,9 +10,10 @@
     gnome.nautilus
     rofi
     scrot
-    tdesktop
     viewnior
     xdg-user-dirs
+
+    unstable.telegram-desktop
   ];
 
   gtk = {
