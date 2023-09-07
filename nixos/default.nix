@@ -25,6 +25,8 @@
     packages = with pkgs; [ tamzen ];
   };
 
+  time.timeZone = "America/New_York";
+
   # Only install the docs I use
   documentation.enable = true;
   documentation.nixos.enable = false;
