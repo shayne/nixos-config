@@ -28,11 +28,12 @@ in
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
         home-manager.extraSpecialArgs = args;
-        home-manager.users.${user} = inputs.nixpkgs.lib.mkMerge [
+        home-manager.users.${user} = inputs.nixpkgs.lib.mkMerge ([
           (import ../home-manager)
           (import ../home-manager/${user})
+        ] ++ lib.optionals (builtins.pathExists (../home-manager + "/${user}/${name}")) [
           (import ../home-manager/${user}/${name})
-        ];
+        ]);
       }
     ];
 
