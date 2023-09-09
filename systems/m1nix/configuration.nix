@@ -1,7 +1,3 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
 { config, pkgs, lib, inputs, ... }:
 
 {
@@ -105,7 +101,7 @@
       pkgs.fira-code
       (builtins.path {
         name = "custom-fonts";
-        path = ../secret/fonts;
+        path = ../../secret/fonts;
         recursive = true;
       })
     ];
@@ -149,4 +145,3 @@
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 }
-

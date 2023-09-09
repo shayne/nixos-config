@@ -1,4 +1,3 @@
 .gitattributes !filter !diff
 secret/** filter=git-crypt diff=git-crypt
-machines/m1-support/firmware/** filter=git-crypt diff=git-crypt
-machines/apple-silicon-support/firmware/** filter=git-crypt diff=git-crypt
+systems/m1nix/apple-silicon-support/firmware/** filter=git-crypt diff=git-crypt

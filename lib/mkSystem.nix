@@ -1,32 +1,35 @@
-{ inputs, outputs, user, stateVersion }:
-{ name, attrs }:
+{ name, inputs, outputs, stateVersion, user }:
 let
-  defaultSystem = "x86_64-linux";
-  system = attrs.system or defaultSystem;
+  systemsDir = ../systems;
+  inherit (inputs.nixpkgs) lib;
   args = {
     inherit user;
     currentSystemName = name;
-    currentSystem = system;
   };
+  isDarwin = builtins.pathExists (systemsDir + "/${name}/darwin-configuration.nix");
+  configFile = if isDarwin then "darwin-configuration.nix" else "configuration.nix";
+  configKey = if isDarwin then "darwinConfigurations" else "nixosConfigurations";
+  systemFn = if isDarwin then inputs.nix-darwin.lib.darwinSystem else inputs.nixpkgs.lib.nixosSystem;
+  homeManagerFn = if isDarwin then inputs.home-manager.darwinModules.home-manager else inputs.home-manager.nixosModules.home-manager;
 in
 {
-  ${name} = inputs.nixpkgs.lib.nixosSystem {
-    inherit system;
-
+  ${configKey}.${name} = systemFn {
     modules = [
       ../nixos
-      ../hardware/${name}.nix
-      ../machines/shared-linux.nix
-      ../machines/${name}.nix
-
-      inputs.home-manager.nixosModules.home-manager
+      systemsDir
+      (systemsDir + "/${name}/${configFile}")
+    ] ++ lib.optionals (builtins.pathExists "${systemsDir}/${name}/hardware.nix") [
+      (systemsDir + "/${name}/hardware.nix")
+    ] ++ [
+      homeManagerFn
       {
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
         home-manager.extraSpecialArgs = args;
         home-manager.users.${user} = inputs.nixpkgs.lib.mkMerge [
-          (import ../users/${user}/home-manager-shared.nix)
-          (import ../users/${user}/home-manager.${name}.nix)
+          (import ../home-manager)
+          (import ../home-manager/${user})
+          (import ../home-manager/${user}/${name})
         ];
       }
     ];
@@ -34,7 +37,6 @@ in
     specialArgs = {
       inherit inputs outputs stateVersion user;
       currentSystemName = name;
-      currentSystem = system;
     };
   };
 }

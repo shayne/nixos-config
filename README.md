@@ -1,14 +1,15 @@
 # NixOS System Configurations
 
-This repository contains my NixOS system configurations. It started as a fork of [mitchellh/nixos-config](https://github.com/mitchellh/nixos-config/) and much of the structure remains.
+This repository contains my NixOS system configurations.  As of 2023-09-09 it is undergoing a major overhaul.
 
-There exist several separate machine configs:
+Check back later for more information.
 
-- devvm - x86_64-linux kvm/qemu vm
-- m1nix - aarch64-linux [running natively](https://github.com/tpwrules/nixos-m1/) on a M1 MacBook Pro 
-- m2vm - aarch64-linux vm running under VMWare Fusion Tech Preview (_No longer in use_)
-- m2air - aarch64-darwin running natively on a Macbook Air M2
-- lima - aarch64-linux vm running under [Lima](https://github.com/lima-vm/lima)
-- wsl - x86_64-linux Windows WSL vm
-- pinix - aarch64-linux RPi 4
+For now take a look at the [systems](./systems/) and [home-manager](./home-manager/) directories. A lot of the magic
+happens in [lib/loadSystems.nix](./lib/loadSystems.nix) and [lib/mkSystem.nix](./lib/mkSystem.nix).
 
+## Current systems
+
+- `devvm` - an x86_64 headless VM for development
+- `m1nix` - a 13" M1 MacBook Pro running a NixOS desktop natively ([nixos-apple-silicon](https://github.com/tpwrules/nixos-apple-silicon))
+- `m2air` - a 13" M2 MacBook Air running [nix-darwin](https://github.com/LnL7/nix-darwin)
+- `wsl` - a WSL2 VM running NixOS ([nixos-wsl](https://github.com/nix-community/NixOS-WSL))

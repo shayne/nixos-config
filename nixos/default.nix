@@ -107,7 +107,7 @@
       outputs.overlays.unstable-packages
 
       # TODO: don't do this
-      (import ../users/shayne/vim.nix)
+      (import ../home-manager/shayne/vim.nix)
 
       # Or define it inline, for example:
       # (final: prev: {

@@ -41,7 +41,7 @@
       libx = import ./lib { inherit inputs outputs stateVersion user; };
       inherit (nixpkgs) lib;
     in
-    (libx.loadMachines ./machines.nix) // {
+    libx.loadSystems // {
       # Devshell for bootstrapping; acessible via 'nix develop' or 'nix-shell' (legacy)
       devShells = libx.forAllSystems (system:
         let pkgs = nixpkgs.legacyPackages.${system};

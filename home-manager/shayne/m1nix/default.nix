@@ -1,8 +1,8 @@
 { pkgs, lib, ... }: {
 
-  home.file.".inputrc".source = ./inputrc;
+  home.file.".inputrc".source = ../inputrc;
 
-  xdg.configFile."i3/config".text = builtins.readFile ./i3;
+  xdg.configFile."i3/config".text = builtins.readFile ../i3;
   # xdg.configFile."rofi/config.rasi".text = builtins.readFile ./rofi;
 
   home.packages = with pkgs; [
@@ -31,7 +31,7 @@
 
   programs.kitty = {
     enable = true;
-    extraConfig = builtins.readFile ./kitty;
+    extraConfig = builtins.readFile ../kitty;
   };
 
   programs.i3status-rust = {
@@ -122,7 +122,7 @@
     ];
   };
 
-  xresources.extraConfig = builtins.readFile ./Xresources;
+  xresources.extraConfig = builtins.readFile ../Xresources;
 
   # Make cursor not tiny on HiDPI screens
   home.pointerCursor = {

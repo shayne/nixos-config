@@ -1,6 +1,8 @@
 { pkgs, inputs, ... }:
 
 {
+  nixpkgs.hostPlatform = "x86_64-linux";
+
   imports = [
     inputs.nixos-wsl.nixosModules.wsl
   ];
@@ -48,7 +50,7 @@
     fonts = [
       (builtins.path {
         name = "custom-fonts";
-        path = ../secret/fonts;
+        path = ../../secret/fonts;
         recursive = true;
       })
     ];

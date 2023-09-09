@@ -2,8 +2,8 @@
 
 {
   imports = [
-    ../secret/modules/cron.nix
-    ../secret/modules/caddy.nix
+    ../../secret/modules/cron.nix
+    ../../secret/modules/caddy.nix
   ];
 
   # Be careful updating this.
@@ -41,7 +41,7 @@
       pkgs.fira-code
       (builtins.path {
         name = "custom-fonts";
-        path = ../secret/fonts;
+        path = ../../secret/fonts;
         recursive = true;
       })
     ];

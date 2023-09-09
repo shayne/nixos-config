@@ -4,6 +4,8 @@
 { lib, modulesPath, ... }:
 
 {
+  nixpkgs.hostPlatform = "aarch64-linux";
+
   imports =
     [
       (modulesPath + "/installer/scan/not-detected.nix")
