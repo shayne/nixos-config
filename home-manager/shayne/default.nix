@@ -1,34 +1,7 @@
-{ config, lib, pkgs, currentSystemName, ... }:
+{ config, lib, pkgs, sources, myModulesPath, currentSystemName, ... }:
 
 let
-  sources =
-    import ../../nix/sources.nix;
-
   inherit (pkgs.stdenv) isLinux;
-
-  shellAliases = {
-    ga = "git add";
-    gam = "git amend";
-    gan = "git add -N";
-    gap = "git add -p";
-    gbc = "git branch -vv | grep ': gone]' | grep -v '\*' | awk '{ print $1; }' | xargs -pr git branch -D";
-    gc = "git commit -v";
-    gcd = "cd (git root)";
-    gco = "git checkout";
-    gcp = "git cherry-pick";
-    gdiff = "git diff";
-    gl = "git prettylog";
-    gp = "git push";
-    gpf = "git push --force-with-lease";
-    gpu = "git push -u origin HEAD";
-    gpuf = "git push -u origin HEAD --force-with-lease";
-    gpl = "git pull --rebase";
-    gs = "git status";
-    gst = "git stash";
-    gt = "git tag";
-
-    godlv = "dlv exec --api-version 2 --listen=127.0.0.1:2345 --headless";
-  };
 in
 {
   # Home-manager 22.11 requires this be set. We never set it so we have
@@ -36,6 +9,10 @@ in
   home.stateVersion = "18.09";
 
   imports = [
+    (myModulesPath + "/bash")
+    (myModulesPath + "/fish")
+    (myModulesPath + "/neovim")
+    (myModulesPath + "/tree-sitter")
     ../../secret/modules/ssh.nix
   ];
 
@@ -92,32 +69,11 @@ in
     AWS_VAULT_BACKEND = "pass";
   };
 
-  # tree-sitter parsers
-  xdg.configFile."nvim/parser/proto.so".source = "${pkgs.tree-sitter-proto}/parser";
-  xdg.configFile."nvim/queries/proto/folds.scm".source =
-    "${sources.tree-sitter-proto}/queries/folds.scm";
-  xdg.configFile."nvim/queries/proto/highlights.scm".source =
-    "${sources.tree-sitter-proto}/queries/highlights.scm";
-  xdg.configFile."nvim/queries/proto/textobjects.scm".source =
-    ./textobjects.scm;
-
-  # Rectangle.app. This has to be imported manually using the app.
-  xdg.configFile."rectangle/RectangleConfig.json".text = builtins.readFile ./RectangleConfig.json;
-
   #---------------------------------------------------------------------
   # Programs
   #---------------------------------------------------------------------
 
   programs.gpg.enable = true;
-
-  programs.bash = {
-    enable = true;
-    shellOptions = [ ];
-    historyControl = [ "ignoredups" "ignorespace" ];
-    initExtra = builtins.readFile ./bashrc;
-
-    inherit shellAliases;
-  };
 
   programs.direnv = {
     enable = true;
@@ -127,38 +83,6 @@ in
     config = {
       whitelist = {
         exact = [ "$HOME/.envrc" ];
-      };
-    };
-  };
-
-  programs.fish = {
-    enable = true;
-    interactiveShellInit = lib.strings.concatStrings (lib.strings.intersperse "\n" [
-      (builtins.readFile ./config.fish)
-      "set -g SHELL ${pkgs.fish}/bin/fish"
-    ]);
-
-    inherit shellAliases;
-
-    plugins = map
-      (n: {
-        name = n;
-        src = sources.${n};
-      }) [
-      "fish-fzf"
-      "fish-foreign-env"
-      "zoxide.fish"
-    ];
-  };
-
-  programs.starship = {
-    enable = true;
-    package = pkgs.unstable.starship;
-    enableFishIntegration = true;
-    # Configuration written to ~/.config/starship.toml
-    settings = {
-      gcloud = {
-        disabled = true;
       };
     };
   };
@@ -212,51 +136,6 @@ in
       run-shell ${sources.tmux-pain-control}/pain_control.tmux
       run-shell ${sources.tmux-dracula}/dracula.tmux
     '';
-  };
-
-  programs.neovim = {
-    enable = true;
-    package = pkgs.neovim-nightly;
-
-    viAlias = true;
-    vimAlias = true;
-    vimdiffAlias = true;
-
-    plugins = with pkgs; [
-      customVim.vim-copilot
-      customVim.vim-cue
-      customVim.vim-fish
-      customVim.vim-fugitive
-      customVim.vim-glsl
-      customVim.vim-misc
-      customVim.vim-pgsql
-      customVim.vim-tla
-      customVim.vim-zig
-      customVim.pigeon
-      customVim.AfterColors
-
-      customVim.vim-devicons
-      customVim.vim-nord
-      customVim.nvim-comment
-      customVim.nvim-lspconfig
-      customVim.nvim-plenary # required for telescope
-      customVim.nvim-telescope
-      customVim.nvim-treesitter
-      customVim.nvim-treesitter-playground
-      customVim.nvim-treesitter-textobjects
-
-      vimPlugins.vim-airline
-      vimPlugins.vim-airline-themes
-      vimPlugins.vim-eunuch
-      vimPlugins.vim-gitgutter
-
-      vimPlugins.vim-markdown
-      vimPlugins.vim-nix
-      vimPlugins.typescript-vim
-      vimPlugins.vim-prettier
-    ];
-
-    extraConfig = (import ./vim-config.nix) { inherit sources; };
   };
 
   programs.password-store = {

@@ -43,8 +43,8 @@ bindsym $mod+space exec ~/.config/rofi/launchers/colorful/launcher.sh
 bindsym $mod+s exec ~/.config/rofi/applets/menu/screenshot.sh
 
 # start a terminal
-# bindsym $mod+n exec kitty
-bindsym $mod+n exec alacritty
+bindsym $mod+n exec kitty
+# bindsym $mod+n exec alacritty
 bindsym $mod+d split h
 bindsym $mod+Shift+d split v
 

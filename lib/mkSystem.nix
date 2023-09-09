@@ -5,6 +5,8 @@ let
   args = {
     inherit user;
     currentSystemName = name;
+    myModulesPath = ../home-manager/modules;
+    sources = import ../nix/sources.nix;
   };
   isDarwin = builtins.pathExists (systemsDir + "/${name}/darwin-configuration.nix");
   configFile = if isDarwin then "darwin-configuration.nix" else "configuration.nix";

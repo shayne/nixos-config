@@ -1,8 +1,10 @@
-self: _super:
-
-let sources = import ../../nix/sources.nix; in rec {
+final: _prev:
+let
+  sources = import ../nix/sources.nix;
+in
+rec {
   # My vim config
-  customVim = with self; {
+  customVim = with final; rec {
     vim-copilot = vimUtils.buildVimPlugin {
       name = "vim-copilot";
       src = sources.vim-copilot;
@@ -126,7 +128,7 @@ let sources = import ../../nix/sources.nix; in rec {
     };
   };
 
-  tree-sitter-proto = self.callPackage
+  tree-sitter-proto = final.callPackage
     (sources.nixpkgs + /pkgs/development/tools/parsing/tree-sitter/grammar.nix)
     { }
     {
@@ -135,7 +137,7 @@ let sources = import ../../nix/sources.nix; in rec {
       source = sources.tree-sitter-proto;
     };
 
-  tree-sitter-hcl = self.callPackage
+  tree-sitter-hcl = final.callPackage
     (sources.nixpkgs + /pkgs/development/tools/parsing/tree-sitter/grammar.nix)
     { }
     {

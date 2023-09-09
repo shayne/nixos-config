@@ -1,15 +1,16 @@
-{ pkgs, lib, ... }: {
+{ pkgs, lib, myModulesPath, ... }: {
 
-  home.file.".inputrc".source = ../inputrc;
-
-  xdg.configFile."i3/config".text = builtins.readFile ../i3;
-  # xdg.configFile."rofi/config.rasi".text = builtins.readFile ./rofi;
+  imports = [
+    (myModulesPath + "/i3")
+    (myModulesPath + "/inputrc")
+    (myModulesPath + "/kitty")
+    (myModulesPath + "/xresources")
+  ];
 
   home.packages = with pkgs; [
     dconf
     firefox
     gnome.nautilus
-    rofi
     scrot
     viewnior
     xdg-user-dirs
@@ -27,11 +28,6 @@
 
   programs.fish.shellAliases = {
     # ssh = "kitty +kitten ssh";
-  };
-
-  programs.kitty = {
-    enable = true;
-    extraConfig = builtins.readFile ../kitty;
   };
 
   programs.i3status-rust = {
@@ -121,8 +117,6 @@
       arrterian.nix-env-selector
     ];
   };
-
-  xresources.extraConfig = builtins.readFile ../Xresources;
 
   # Make cursor not tiny on HiDPI screens
   home.pointerCursor = {
