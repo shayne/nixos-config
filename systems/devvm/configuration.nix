@@ -2,8 +2,8 @@
 
 {
   imports = [
-    ../../secret/modules/cron.nix
-    ../../secret/modules/caddy.nix
+    ./caddy.enc.nix
+    ./cron.enc.nix
   ];
 
   # Be careful updating this.
