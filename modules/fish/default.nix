@@ -1,6 +1,6 @@
-{ lib, pkgs, sources, ... }:
+{ inputs, outputs, user, stateVersion, myLibPath, lib, pkgs, sources, ... }:
 let
-  libx = import ../../lib;
+  libx = import myLibPath { inherit inputs outputs user stateVersion; };
 in
 {
   programs.fish = {

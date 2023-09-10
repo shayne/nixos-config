@@ -1,3 +1,0 @@
-{
-  shellAliases = import ./shellAliases.nix;
-}

@@ -1,28 +1,29 @@
 { name, inputs, outputs, stateVersion, user }:
 let
-  systemsDir = ../systems;
   inherit (inputs.nixpkgs) lib;
+  myLibPath = ../lib;
+  myModulesPath = ../modules;
+  systemsPath = ../systems;
   args = {
-    inherit user;
+    inherit user myLibPath myModulesPath;
     currentSystemName = name;
-    myModulesPath = ../home-manager/modules;
     sources = import ../nix/sources.nix;
   };
-  isDarwin = builtins.pathExists (systemsDir + "/${name}/darwin-configuration.nix");
+  isDarwin = builtins.pathExists (systemsPath + "/${name}/darwin-configuration.nix");
   configFile = if isDarwin then "darwin-configuration.nix" else "configuration.nix";
   configKey = if isDarwin then "darwinConfigurations" else "nixosConfigurations";
   systemFn = if isDarwin then inputs.nix-darwin.lib.darwinSystem else inputs.nixpkgs.lib.nixosSystem;
   homeManagerFn = if isDarwin then inputs.home-manager.darwinModules.home-manager else inputs.home-manager.nixosModules.home-manager;
-  baseSystemConfig = systemsDir + "/base/${(if isDarwin then "darwin-configuration.nix" else "nixos-configuration.nix")}";
+  baseSystemConfig = systemsPath + "/base/${(if isDarwin then "darwin-configuration.nix" else "nixos-configuration.nix")}";
 in
 {
   ${configKey}.${name} = systemFn {
     modules = [
       baseSystemConfig
-      systemsDir
-      (systemsDir + "/${name}/${configFile}")
-    ] ++ lib.optionals (builtins.pathExists "${systemsDir}/${name}/hardware.nix") [
-      (systemsDir + "/${name}/hardware.nix")
+      systemsPath
+      (systemsPath + "/${name}/${configFile}")
+    ] ++ lib.optionals (builtins.pathExists "${systemsPath}/${name}/hardware.nix") [
+      (systemsPath + "/${name}/hardware.nix")
     ] ++ [
       homeManagerFn
       {
@@ -39,7 +40,7 @@ in
     ];
 
     specialArgs = {
-      inherit inputs outputs stateVersion user;
+      inherit inputs outputs stateVersion user myLibPath myModulesPath;
       currentSystemName = name;
     };
   };

@@ -1,5 +1,6 @@
+{ inputs, outputs, user, stateVersion, myLibPath, ... }:
 let
-  libx = import ../../lib;
+  libx = import myLibPath { inherit inputs outputs user stateVersion; };
 in
 {
   programs.bash = {
