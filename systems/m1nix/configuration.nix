@@ -11,7 +11,7 @@
   hardware.pulseaudio.enable = true;
 
   # Specify path to peripheral firmware files.
-  hardware.asahi.peripheralFirmwareDirectory = ./apple-silicon-support/firmware;
+  hardware.asahi.peripheralFirmwareDirectory = ./firmware.enc;
   # Or disable extraction and management of them completely.
   # hardware.asahi.extractPeripheralFirmware = false;
   hardware.asahi.useExperimentalGPUDriver = true;
