@@ -1,8 +1,9 @@
 { config, lib, inputs, outputs, pkgs, stateVersion, user, ... }:
 {
   imports = [
-    inputs.vscode-server.nixosModule
+    ../modules/custom-fonts.enc # custom proprietary fonts
     ../modules/services/tailscale.nix # unstable service override
+    inputs.vscode-server.nixosModule
   ];
 
   boot = {

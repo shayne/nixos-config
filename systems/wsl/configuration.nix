@@ -44,18 +44,6 @@
 
   # environment.etc."resolv.conf".enable = false;
 
-  fonts = {
-    fontDir.enable = true;
-
-    fonts = [
-      (builtins.path {
-        name = "custom-fonts";
-        path = ../../secret/fonts;
-        recursive = true;
-      })
-    ];
-  };
-
   # nixpkgs.overlays = [
   #   (self: super: {
   #     docker = super.docker.override { iptables = pkgs.iptables-legacy; };
