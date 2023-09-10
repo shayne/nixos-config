@@ -13,7 +13,7 @@ in
     (myModulesPath + "/fish")
     (myModulesPath + "/neovim")
     (myModulesPath + "/tree-sitter")
-    ../../secret/modules/ssh.nix
+    (myModulesPath + "/ssh")
   ];
 
   xdg.enable = true;
