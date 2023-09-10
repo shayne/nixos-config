@@ -13,12 +13,12 @@ let
   configKey = if isDarwin then "darwinConfigurations" else "nixosConfigurations";
   systemFn = if isDarwin then inputs.nix-darwin.lib.darwinSystem else inputs.nixpkgs.lib.nixosSystem;
   homeManagerFn = if isDarwin then inputs.home-manager.darwinModules.home-manager else inputs.home-manager.nixosModules.home-manager;
-  baseSystemPath = if isDarwin then ../nix-darwin else ../nixos;
+  baseSystemConfig = systemsDir + "/base/${(if isDarwin then "darwin-configuration.nix" else "nixos-configuration.nix")}";
 in
 {
   ${configKey}.${name} = systemFn {
     modules = [
-      baseSystemPath
+      baseSystemConfig
       systemsDir
       (systemsDir + "/${name}/${configFile}")
     ] ++ lib.optionals (builtins.pathExists "${systemsDir}/${name}/hardware.nix") [
