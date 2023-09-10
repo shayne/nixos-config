@@ -1,6 +1,7 @@
 { config, lib, inputs, outputs, pkgs, stateVersion, user, ... }:
 {
   imports = [
+    inputs.vscode-server.nixosModule
     ../modules/services/tailscale.nix # unstable service override
   ];
 
@@ -153,7 +154,14 @@
     };
   };
 
+  security.sudo.wheelNeedsPassword = false;
+
   programs.fish.enable = true;
+
+  services.openssh.enable = true;
+  services.openssh.settings.PermitRootLogin = "no";
+
+  services.vscode-server.enable = true;
 
   users.users.${user} = {
     isNormalUser = true;
