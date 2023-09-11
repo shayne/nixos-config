@@ -1,4 +1,4 @@
-_:
+{ inputs, ... }:
 {
   disabledModules = [ "services/networking/tailscale.nix" ];
 

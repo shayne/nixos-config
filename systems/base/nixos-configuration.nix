@@ -1,8 +1,8 @@
-{ config, lib, inputs, outputs, pkgs, stateVersion, user, ... }:
+{ config, lib, inputs, outputs, pkgs, stateVersion, myModulesPath, ... }:
 {
   imports = [
-    ../modules/custom-fonts.enc # custom proprietary fonts
-    ../modules/services/tailscale.nix # unstable service override
+    (myModulesPath + "/custom-fonts.enc") # custom proprietary fonts
+    (myModulesPath + "/services/tailscale.nix") # unstable service override
     inputs.vscode-server.nixosModule
   ];
 
@@ -163,18 +163,6 @@
   services.openssh.settings.PermitRootLogin = "no";
 
   services.vscode-server.enable = true;
-
-  users.users.${user} = {
-    isNormalUser = true;
-    uid = 1000;
-    home = "/home/${user}";
-    extraGroups = [ "docker" "wheel" ];
-    shell = pkgs.fish;
-    hashedPassword = "$6$UENIoKcP$ku0OwcjMsQaHLhK7FpNGkcBAIMfdqhd74U6ELR3SSIUZidty4hQ4zWZF1y8L82yxaiw4T4pV4T7txN.xa/a6A0";
-    openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKxq71dQw4zBQAe3mtfiNwuCwP0Lu8x9PdRVxy2+T8Pw shayne"
-    ];
-  };
 
   system.activationScripts.diff = {
     supportsDryActivation = true;

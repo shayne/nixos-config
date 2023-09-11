@@ -1,20 +1,35 @@
-{ name, inputs, outputs, stateVersion, user }:
+{ name, inputs, outputs, stateVersion }:
 let
   inherit (inputs.nixpkgs) lib;
   myLibPath = ../lib;
   myModulesPath = ../modules;
   systemsPath = ../systems;
-  args = {
-    inherit user myLibPath myModulesPath;
-    currentSystemName = name;
-    sources = import ../nix/sources.nix;
-  };
+  homeManagerPath = ../home-manager;
+  filterDirs = lib.filterAttrs (_n: v: v == "directory");
+  userDirs =
+    builtins.attrNames
+      (filterDirs (builtins.readDir homeManagerPath));
+  usersForSystem =
+    name: lib.flatten
+      (builtins.map
+        (user:
+        (builtins.map (_v: user)
+          (builtins.filter (n: n == name)
+            (builtins.attrNames (filterDirs (builtins.readDir (homeManagerPath + "/${user}")))))))
+        userDirs);
+  users = usersForSystem name;
   isDarwin = builtins.pathExists (systemsPath + "/${name}/darwin-configuration.nix");
   configFile = if isDarwin then "darwin-configuration.nix" else "configuration.nix";
   configKey = if isDarwin then "darwinConfigurations" else "nixosConfigurations";
   systemFn = if isDarwin then inputs.nix-darwin.lib.darwinSystem else inputs.nixpkgs.lib.nixosSystem;
   homeManagerFn = if isDarwin then inputs.home-manager.darwinModules.home-manager else inputs.home-manager.nixosModules.home-manager;
   baseSystemConfig = systemsPath + "/base/${(if isDarwin then "darwin-configuration.nix" else "nixos-configuration.nix")}";
+  args = {
+    inherit users myLibPath myModulesPath;
+    currentSystemName = name;
+    sources = import ../nix/sources.nix;
+  };
+  recursiveMergeAttrs = builtins.foldl' lib.recursiveUpdate { };
 in
 {
   ${configKey}.${name} = systemFn {
@@ -30,17 +45,27 @@ in
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
         home-manager.extraSpecialArgs = args;
-        home-manager.users.${user} = inputs.nixpkgs.lib.mkMerge ([
-          (import ../home-manager)
-          (import ../home-manager/${user})
-        ] ++ lib.optionals (builtins.pathExists (../home-manager + "/${user}/${name}")) [
-          (import ../home-manager/${user}/${name})
-        ]);
+        home-manager.users = recursiveMergeAttrs (builtins.map
+          (user: {
+            ${user} = inputs.nixpkgs.lib.mkMerge ([
+              (import ../home-manager)
+              (import ../home-manager/${user})
+            ] ++ lib.optionals (builtins.pathExists (../home-manager + "/${user}/${name}")) [
+              (import ../home-manager/${user}/${name})
+            ]);
+          })
+          users);
       }
-    ];
+    ] ++ builtins.map
+      (user:
+        if !isDarwin && (builtins.pathExists (../home-manager + "/${user}/nixos-configuration.nix")) then
+          import (../home-manager + "/${user}/nixos-configuration.nix")
+        else { }
+      )
+      users;
 
     specialArgs = {
-      inherit inputs outputs stateVersion user myLibPath myModulesPath;
+      inherit inputs outputs stateVersion users myLibPath myModulesPath;
       currentSystemName = name;
     };
   };

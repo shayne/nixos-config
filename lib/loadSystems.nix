@@ -1,13 +1,11 @@
-{ inputs, outputs, stateVersion, user, ... }:
+{ inputs, outputs, stateVersion, ... }:
 let
   inherit (inputs.nixpkgs) lib;
-  systemsDir = ../systems;
-  machineDirs =
-    lib.mapAttrsToList (n: _v: n)
+  systemsDir =
+    builtins.attrNames
       (lib.filterAttrs (_n: v: v == "directory")
-        (builtins.readDir systemsDir));
-  systemConfigs = map (name: (import ./mkSystem.nix { inherit name user inputs outputs stateVersion; })) machineDirs;
+        (builtins.readDir ../systems));
+  systemConfigs = map (name: (import ./mkSystem.nix { inherit name inputs outputs stateVersion; })) systemsDir;
   recursiveMergeAttrs = builtins.foldl' lib.recursiveUpdate { };
 in
-# recursiveMergeAttrs systems
 recursiveMergeAttrs systemConfigs
