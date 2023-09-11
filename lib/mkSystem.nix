@@ -2,8 +2,8 @@
 let
   inherit (inputs.nixpkgs) lib;
   myLibPath = ../lib;
-  myModulesPath = ../modules;
   systemsPath = ../systems;
+  myModulesPath = ../modules;
   homeManagerPath = ../home-manager;
   filterDirs = lib.filterAttrs (_n: v: v == "directory");
   userDirs =
@@ -48,18 +48,18 @@ in
         home-manager.users = recursiveMergeAttrs (builtins.map
           (user: {
             ${user} = inputs.nixpkgs.lib.mkMerge ([
-              (import ../home-manager)
-              (import ../home-manager/${user})
-            ] ++ lib.optionals (builtins.pathExists (../home-manager + "/${user}/${name}")) [
-              (import ../home-manager/${user}/${name})
+              (import homeManagerPath)
+              (import (homeManagerPath + "/${user}"))
+            ] ++ lib.optionals (builtins.pathExists (homeManagerPath + "/${user}/${name}")) [
+              (import (homeManagerPath + "/${user}/${name}"))
             ]);
           })
           users);
       }
     ] ++ builtins.map
       (user:
-        if !isDarwin && (builtins.pathExists (../home-manager + "/${user}/nixos-configuration.nix")) then
-          import (../home-manager + "/${user}/nixos-configuration.nix")
+        if !isDarwin && (builtins.pathExists (homeManagerPath + "/${user}/nixos-configuration.nix")) then
+          import (homeManagerPath + "/${user}/nixos-configuration.nix")
         else { }
       )
       users;
