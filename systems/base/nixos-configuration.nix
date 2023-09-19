@@ -147,10 +147,6 @@
       auto-optimise-store = true;
       experimental-features = [ "nix-command" "flakes" ];
 
-      # Avoid unwanted garbage collection when using nix-direnv
-      keep-outputs = true;
-      keep-derivations = true;
-
       warn-dirty = false;
     };
   };
