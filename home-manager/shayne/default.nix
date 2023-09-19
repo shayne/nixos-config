@@ -12,8 +12,9 @@ in
     (myModulesPath + "/bash")
     (myModulesPath + "/fish")
     (myModulesPath + "/neovim")
-    (myModulesPath + "/tree-sitter")
     (myModulesPath + "/ssh")
+    (myModulesPath + "/starship")
+    (myModulesPath + "/tree-sitter")
   ];
 
   xdg.enable = true;

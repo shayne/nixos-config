@@ -28,6 +28,7 @@ let
     inherit users myLibPath myModulesPath;
     currentSystemName = name;
     sources = import ../nix/sources.nix;
+    unstableModulesPath = "${inputs.home-manager-unstable.outPath}";
   };
   recursiveMergeAttrs = builtins.foldl' lib.recursiveUpdate { };
 in

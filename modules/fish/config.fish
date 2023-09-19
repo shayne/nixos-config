@@ -69,9 +69,6 @@ end
 # Prompt
 #-------------------------------------------------------------------------------
 
-# starship
-enable_transience
-
 # Do not show any greeting
 set --universal --erase fish_greeting
 function fish_greeting; end

@@ -272,6 +272,27 @@
         "type": "github"
       }
     },
+    "home-manager-unstable": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1694643239,
+        "narHash": "sha256-pv2k/5FvyirDE8g4TNehzwZ0T4UOMMmqWSQnM/luRtE=",
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "rev": "d9b88b43524db1591fb3d9410a21428198d75d49",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "ref": "master",
+        "repo": "home-manager",
+        "type": "github"
+      }
+    },
     "neovim-flake": {
       "inputs": {
         "flake-utils": "flake-utils",
@@ -596,6 +617,7 @@
     "root": {
       "inputs": {
         "home-manager": "home-manager",
+        "home-manager-unstable": "home-manager-unstable",
         "neovim-flake": "neovim-flake",
         "neovim-nightly-overlay": "neovim-nightly-overlay",
         "nix-darwin": "nix-darwin",
