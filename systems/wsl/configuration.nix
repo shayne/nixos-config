@@ -22,8 +22,6 @@
       network.hostname = "wsl";
       network.generateResolvConf = false;
     };
-    # docker-desktop.enable = true;
-    docker-native.enable = true;
     interop.register = true;
   };
 
@@ -41,6 +39,8 @@
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
+
+  virtualisation.docker.enable = true;
 
   # environment.etc."resolv.conf".enable = false;
 
