@@ -22,6 +22,8 @@ ifeq ($(UNAME), Darwin)
 	./result/sw/bin/darwin-rebuild switch --flake "$$(pwd)#${HOSTNAME}"
 else ifeq ($(HOSTNAME), m1nix)
 	sudo nixos-rebuild switch --impure --flake .
+else ifeq ($(HOSTNAME), m2nix)
+	sudo nixos-rebuild switch --impure --flake .
 else ifeq ($(HOSTNAME), lima)
 	sudo nixos-rebuild switch --impure --flake .
 else
