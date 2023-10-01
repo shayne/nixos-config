@@ -1,8 +1,9 @@
-{ config, pkgs, lib, inputs, ... }:
+{ config, pkgs, lib, inputs, myModulesPath, ... }:
 
 {
   imports = with inputs; [
     nixos-apple-silicon.nixosModules.apple-silicon-support
+    (myModulesPath + "/kde")
   ];
 
   nixpkgs.config.allowUnsupportedSystem = true;
@@ -59,14 +60,11 @@
 
   services.blueman.enable = true;
   services.flatpak.enable = true;
+  programs.dconf.enable = true;
 
   xdg.portal.enable = true;
   xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
 
-  services.xserver.enable = true;
-  services.xserver.displayManager.sddm.enable = true;
-  services.xserver.desktopManager.plasma5.enable = true;
-  programs.dconf.enable = true;
   services.xserver.displayManager.defaultSession = "plasmawayland";
 
   # Configure keymap in X11

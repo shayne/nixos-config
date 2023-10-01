@@ -3,6 +3,7 @@
   imports = [
     (myModulesPath + "/i3")
     (myModulesPath + "/inputrc")
+    (myModulesPath + "/kde/user.nix")
     (myModulesPath + "/kitty")
     (myModulesPath + "/xresources")
   ];
