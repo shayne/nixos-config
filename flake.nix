@@ -33,7 +33,7 @@
     # Other packages
     nixos-apple-silicon.url = "github:tpwrules/nixos-apple-silicon";
     nixos-hardware.url = "github:nixos/nixos-hardware";
-    tailscale.url = "github:tailscale/tailscale";
+    tailscale.url = "https://flakehub.com/f/tailscale/tailscale/*.tar.gz";
     vscode-server.url = "github:msteen/nixos-vscode-server";
   };
 

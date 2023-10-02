@@ -743,17 +743,15 @@
         "nixpkgs": "nixpkgs_6"
       },
       "locked": {
-        "lastModified": 1695951442,
-        "narHash": "sha256-HFAeT9HSkbX2ncX76tjYYKrLsTjFjLfEJdCH9pX+MBk=",
-        "owner": "tailscale",
-        "repo": "tailscale",
-        "rev": "856d32b4a9590a1d8eb6d94349d75644cc837838",
-        "type": "github"
+        "narHash": "sha256-twHQVZ7ahlyQEhFyHm4vaBSilWUmSa29LjOX5oD9U6M=",
+        "rev": "a30a7198bee21c331ab9e561fcc4e3ceb88f7044",
+        "revCount": 6368,
+        "type": "tarball",
+        "url": "https://api.flakehub.com/f/pinned/tailscale/tailscale/1.50.0/018acd31-bfc9-728f-af6b-27355b877af4/source.tar.gz"
       },
       "original": {
-        "owner": "tailscale",
-        "repo": "tailscale",
-        "type": "github"
+        "type": "tarball",
+        "url": "https://flakehub.com/f/tailscale/tailscale/%2A.tar.gz"
       }
     },
     "vscode-server": {
