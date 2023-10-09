@@ -142,7 +142,7 @@
     nixPath = lib.mapAttrsToList (key: value: "${key}=${value.to.path}") config.nix.registry;
 
     optimise.automatic = true;
-    package = pkgs.unstable.nix;
+    package = pkgs.unstable.nixVersions.nix_2_18;
     settings = {
       auto-optimise-store = true;
       experimental-features = [ "nix-command" "flakes" ];
