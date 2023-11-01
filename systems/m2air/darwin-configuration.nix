@@ -16,6 +16,7 @@ _: {
       # "imageoptim"
       "istat-menus"
       "maccy"
+      "macfuse"
       # "monodraw"
       "raycast"
       "rectangle"
