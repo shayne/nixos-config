@@ -3,7 +3,7 @@
 {
   imports = with inputs; [
     nixos-apple-silicon.nixosModules.apple-silicon-support
-    (myModulesPath + "/kde")
+    (myModulesPath + "/hyprland")
   ];
 
   nixpkgs.config.allowUnsupportedSystem = true;
@@ -64,8 +64,6 @@
 
   xdg.portal.enable = true;
   xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-
-  services.xserver.displayManager.defaultSession = "plasmawayland";
 
   # Configure keymap in X11
   # services.xserver.layout = "us";

@@ -1,9 +1,9 @@
 { pkgs, lib, myModulesPath, ... }: {
 
   imports = [
+    (myModulesPath + "/hyprland/user.nix")
     (myModulesPath + "/i3")
     (myModulesPath + "/inputrc")
-    (myModulesPath + "/kde/user.nix")
     (myModulesPath + "/kitty")
     (myModulesPath + "/xresources")
   ];
