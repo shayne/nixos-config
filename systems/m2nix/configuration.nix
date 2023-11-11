@@ -1,4 +1,4 @@
-{ config, pkgs, lib, inputs, myModulesPath, ... }:
+{ config, pkgs, inputs, myModulesPath, ... }:
 
 {
   imports = with inputs; [
