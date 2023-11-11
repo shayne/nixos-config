@@ -14,14 +14,15 @@
       '';
     };
   };
+  # services.xserver.displayManager.defaultSession = "plasmawayland";
 
   # Console TTY uses XKB configuration too
   console.useXkbConfig = true;
 
   # GTK themes in Wayland applications
   programs.dconf.enable = true;
-  environment.plasma5.excludePackages = with pkgs.libsForQt5; [
-    konsole
-    plasma-browser-integration
-  ];
+  # environment.plasma5.excludePackages = with pkgs.libsForQt5; [
+  #   konsole
+  #   plasma-browser-integration
+  # ];
 }
