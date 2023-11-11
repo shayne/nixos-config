@@ -15,7 +15,9 @@
   hardware.asahi.peripheralFirmwareDirectory = ./firmware.enc;
   # Or disable extraction and management of them completely.
   # hardware.asahi.extractPeripheralFirmware = false;
+  hardware.asahi.experimentalGPUInstallMode = "replace";
   hardware.asahi.useExperimentalGPUDriver = true;
+  hardware.asahi.addEdgeKernelConfig = true;
 
   # boot.kernelBuildIsCross = true;
   # don't build 16K just yet
@@ -38,8 +40,6 @@
     hostName = "m2nix"; # Define your hostname.
     useDHCP = false;
 
-    # Pick only one of the below networking options.
-    # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
     networkmanager.enable = true; # Easiest to use and most distros use this by default.
   };
 
