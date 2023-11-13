@@ -47,8 +47,12 @@ in
   systemd.tmpfiles.rules = [
     "d /pool/container-data/sonarr/config 0755 root root -"
     "d /pool/container-data/sonarr/tailscale 0755 root root -"
+
     "d /pool/container-data/radarr/config 0755 root root -"
     "d /pool/container-data/radarr/tailscale 0755 root root -"
+
+    "d /pool/container-data/plex/data 0755 root root -"
+    "d /pool/container-data/plex/tailscale 0755 root root -"
   ];
 
   containers.sonarr = mkContainer {
@@ -87,6 +91,30 @@ in
       services.radarr.dataDir = "/config";
       systemd.tmpfiles.rules = [
         "d /config 0755 radarr radarr -"
+      ];
+    };
+  };
+
+  containers.plex = mkContainer {
+    bindMounts = {
+      "/var/lib/plex" = {
+        hostPath = "/pool/container-data/plex/data";
+        isReadOnly = false;
+      };
+      "/var/lib/tailscale" = {
+        hostPath = "/pool/container-data/plex/tailscale";
+        isReadOnly = false;
+      };
+      "/media" = {
+        hostPath = "/pool/media";
+        isReadOnly = false;
+      };
+    };
+    config = _: {
+      services.plex.enable = true;
+      services.plex.openFirewall = true;
+      systemd.tmpfiles.rules = [
+        "d /var/lib/plex 0755 plex plex -"
       ];
     };
   };
