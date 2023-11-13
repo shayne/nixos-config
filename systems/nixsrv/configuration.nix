@@ -7,13 +7,13 @@ let
       enableTun = true;
       privateNetwork = true;
       hostBridge = "br0";
-      specialArgs = { inherit pkgs; };
     }
     cattrs
     {
       config = args: recursiveMergeAttrs [
         (cattrs.config args)
         {
+          nixpkgs.pkgs = pkgs;
           networking.interfaces.eth0.useDHCP = true;
           services.tailscale.enable = true;
           system.stateVersion = "23.05";
