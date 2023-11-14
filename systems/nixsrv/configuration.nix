@@ -36,7 +36,6 @@ in
   };
 
   networking.interfaces.ens18.useDHCP = true;
-  networking.interfaces.ens19.useDHCP = false;
 
   networking.bridges.br0 = { interfaces = [ ]; };
   networking.interfaces.br0.ipv4.addresses = [{ address = "172.16.0.1"; prefixLength = 24; }];
