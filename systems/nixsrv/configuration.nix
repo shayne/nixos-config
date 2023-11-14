@@ -25,21 +25,41 @@ let
 in
 {
   time.timeZone = "America/New_York";
-
-  networking.hostName = "nixsrv";
-  networking.interfaces.ens18.useDHCP = true;
-  networking.firewall.enable = false;
-
-  networking.bridges = {
-    # nixos container bridge
-    br0 = { interfaces = [ "ens19" ]; };
-  };
-
   i18n.defaultLocale = "en_US.UTF-8";
 
-  environment.systemPackages = with pkgs; [
-    tailscale
-  ];
+  networking.hostName = "nixsrv";
+
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [ 22 ];
+    trustedInterfaces = [ "br0" ];
+  };
+
+  networking.interfaces.ens18.useDHCP = true;
+  networking.interfaces.ens19.useDHCP = false;
+
+  networking.bridges.br0 = { interfaces = [ ]; };
+  networking.interfaces.br0.ipv4.addresses = [{ address = "172.16.0.1"; prefixLength = 24; }];
+
+  networking.nat = {
+    enable = true;
+    internalInterfaces = [ "br0" ];
+    externalInterface = "ens18";
+    extraCommands = ''
+      iptables -A FORWARD -i br0 -s 172.16.0.0/24 -d 10.0.0.0/8 -j DROP
+      iptables -A FORWARD -i br0 -s 172.16.0.0/24 -d 172.16.0.0/12 -j DROP
+      iptables -A FORWARD -i br0 -s 172.16.0.0/24 -d 192.168.0.0/16 -j DROP
+    '';
+  };
+
+  services.dnsmasq = {
+    enable = true;
+    settings = {
+      interface = "br0";
+      dhcp-range = "172.16.0.2,172.16.0.254,24h";
+      listen-address = "172.16.0.1";
+    };
+  };
 
   services.qemuGuest.enable = true;
   services.tailscale.enable = true;
