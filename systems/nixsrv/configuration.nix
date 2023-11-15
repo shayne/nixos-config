@@ -81,6 +81,9 @@ in
 
     "d /pool/container-data/vaultwarden/data 0755 root root -"
     "d /pool/container-data/vaultwarden/tailscale 0755 root root -"
+
+    "d /pool/container-data/whoogle/config 0755 root root -"
+    "d /pool/container-data/whoogle/tailscale 0755 root root -"
   ];
 
   containers.sabnzbd = mkContainer {
@@ -159,4 +162,28 @@ in
     };
   };
 
+  containers.whoogle = mkContainer {
+    bindMounts = mkBinds [
+      "/var/lib/tailscale:/pool/container-data/whoogle/tailscale"
+    ];
+    additionalCapabilities = [
+      # This is a very ugly hack to add the system-call-filter flag to
+      # nspawn. extraFlags is written to an env file as an env var and
+      # does not support spaces in arguments, so I take advantage of
+      # the additionalCapabilities generation to inject the command
+      # line argument.
+      ''all" --system-call-filter="add_key keyctl bpf" --capability="all''
+    ];
+    config = _: {
+      virtualisation.docker.enable = true;
+      virtualisation.oci-containers.backend = "docker";
+      virtualisation.oci-containers.containers = {
+        whoogle = {
+          image = "benbusby/whoogle-search";
+          autoStart = true;
+          ports = [ "127.0.0.1:5000:5000" ];
+        };
+      };
+    };
+  };
 }
