@@ -145,4 +145,18 @@ in
       ];
     };
   };
+
+  containers.ombi = mkContainer {
+    bindMounts = mkBinds [
+      "/var/lib/ombi:/pool/container-data/ombi/config"
+      "/var/lib/tailscale:/pool/container-data/ombi/tailscale"
+    ];
+    config = _: {
+      services.ombi.enable = true;
+      systemd.tmpfiles.rules = [
+        "d /var/lib/ombi 0755 ombi ombi -"
+      ];
+    };
+  };
+
 }
