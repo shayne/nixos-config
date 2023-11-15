@@ -1,27 +1,21 @@
 { config, lib, pkgs, ... }:
 let
-  mkContainer = cattrs: recursiveMergeAttrs [
-    {
-      ephemeral = true;
-      autoStart = true;
-      enableTun = true;
-      privateNetwork = true;
-      hostBridge = "br0";
-    }
-    cattrs
-    {
-      config = args: recursiveMergeAttrs [
-        (cattrs.config args)
-        {
-          nixpkgs.pkgs = pkgs;
-          networking.interfaces.eth0.useDHCP = true;
-          services.tailscale.enable = true;
-          system.stateVersion = "23.05";
-        }
-      ];
-    }
-  ];
-  recursiveMergeAttrs = builtins.foldl' lib.recursiveUpdate { };
+  libx = import ./lib.nix { inherit lib; };
+  inherit (libx) mkBinds;
+  mkContainer = libx.mkContainer {
+    ephemeral = true;
+    autoStart = true;
+    enableTun = true;
+    privateNetwork = true;
+    hostBridge = "br0";
+
+    config = _: {
+      nixpkgs.pkgs = pkgs;
+      networking.interfaces.eth0.useDHCP = true;
+      services.tailscale.enable = true;
+      system.stateVersion = "23.05";
+    };
+  };
 in
 {
   time.timeZone = "America/New_York";
@@ -81,23 +75,20 @@ in
 
     "d /pool/container-data/plex/data 0755 root root -"
     "d /pool/container-data/plex/tailscale 0755 root root -"
+
+    "d /pool/container-data/ombi/config 0755 root root -"
+    "d /pool/container-data/ombi/tailscale 0755 root root -"
+
+    "d /pool/container-data/vaultwarden/data 0755 root root -"
+    "d /pool/container-data/vaultwarden/tailscale 0755 root root -"
   ];
 
   containers.sabnzbd = mkContainer {
-    bindMounts = {
-      "/var/lib/sabnzbd" = {
-        hostPath = "/pool/container-data/sabnzbd/config";
-        isReadOnly = false;
-      };
-      "/var/lib/tailscale" = {
-        hostPath = "/pool/container-data/sabnzbd/tailscale";
-        isReadOnly = false;
-      };
-      "/downloads" = {
-        hostPath = "/pool/downloads";
-        isReadOnly = false;
-      };
-    };
+    bindMounts = mkBinds [
+      "/var/lib/sabnzbd:/pool/container-data/sabnzbd/config"
+      "/var/lib/tailscale:/pool/container-data/sabnzbd/tailscale"
+      "/downloads:/pool/downloads"
+    ];
     config = _: {
       services.sabnzbd.enable = true;
       services.sabnzbd.package = pkgs.unstable.sabnzbd;
@@ -108,24 +99,12 @@ in
   };
 
   containers.sonarr = mkContainer {
-    bindMounts = {
-      "/config" = {
-        hostPath = "/pool/container-data/sonarr/config";
-        isReadOnly = false;
-      };
-      "/var/lib/tailscale" = {
-        hostPath = "/pool/container-data/sonarr/tailscale";
-        isReadOnly = false;
-      };
-      "/downloads" = {
-        hostPath = "/pool/downloads";
-        isReadOnly = false;
-      };
-      "/tv" = {
-        hostPath = "/pool/media/tv";
-        isReadOnly = false;
-      };
-    };
+    bindMounts = mkBinds [
+      "/config:/pool/container-data/sonarr/config"
+      "/var/lib/tailscale:/pool/container-data/sonarr/tailscale"
+      "/downloads:/pool/downloads"
+      "/tv:/pool/media/tv"
+    ];
     config = _: {
       services.sonarr.enable = true;
       services.sonarr.package = pkgs.unstable.sonarr;
@@ -137,24 +116,12 @@ in
   };
 
   containers.radarr = mkContainer {
-    bindMounts = {
-      "/config" = {
-        hostPath = "/pool/container-data/radarr/config";
-        isReadOnly = false;
-      };
-      "/var/lib/tailscale" = {
-        hostPath = "/pool/container-data/radarr/tailscale";
-        isReadOnly = false;
-      };
-      "/downloads" = {
-        hostPath = "/pool/downloads";
-        isReadOnly = false;
-      };
-      "/movies" = {
-        hostPath = "/pool/media/movies";
-        isReadOnly = false;
-      };
-    };
+    bindMounts = mkBinds [
+      "/config:/pool/container-data/radarr/config"
+      "/var/lib/tailscale:/pool/container-data/radarr/tailscale"
+      "/downloads:/pool/downloads"
+      "/movies:/pool/media/movies"
+    ];
     config = _: {
       services.radarr.enable = true;
       services.radarr.dataDir = "/config";
@@ -166,20 +133,11 @@ in
   };
 
   containers.plex = mkContainer {
-    bindMounts = {
-      "/var/lib/plex" = {
-        hostPath = "/pool/container-data/plex/data";
-        isReadOnly = false;
-      };
-      "/var/lib/tailscale" = {
-        hostPath = "/pool/container-data/plex/tailscale";
-        isReadOnly = false;
-      };
-      "/media" = {
-        hostPath = "/pool/media";
-        isReadOnly = false;
-      };
-    };
+    bindMounts = mkBinds [
+      "/var/lib/plex:/pool/container-data/plex/data"
+      "/var/lib/tailscale:/pool/container-data/plex/tailscale"
+      "/media:/pool/media"
+    ];
     config = _: {
       services.plex.enable = true;
       systemd.tmpfiles.rules = [
