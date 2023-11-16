@@ -39,9 +39,11 @@ in
     internalInterfaces = [ "br0" ];
     externalInterface = "ens18";
     extraCommands = ''
-      iptables -A FORWARD -i br0 -s 172.16.0.0/24 -d 10.0.0.0/8 -j DROP
-      iptables -A FORWARD -i br0 -s 172.16.0.0/24 -d 172.16.0.0/12 -j DROP
-      iptables -A FORWARD -i br0 -s 172.16.0.0/24 -d 192.168.0.0/16 -j DROP
+      iptables -A FORWARD -i br0 -m state --state RELATED,ESTABLISHED -j ACCEPT
+
+      iptables -A FORWARD -i br0 -d 10.0.0.0/8 -j DROP
+      iptables -A FORWARD -i br0 -d 172.16.0.0/12 -j DROP
+      iptables -A FORWARD -i br0 -d 192.168.0.0/16 -j DROP
     '';
   };
 
