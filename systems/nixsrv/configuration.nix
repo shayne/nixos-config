@@ -168,14 +168,11 @@ in
     bindMounts = mkBinds [
       "/var/lib/tailscale:/pool/container-data/whoogle/tailscale"
     ];
-    additionalCapabilities = [
-      # This is a very ugly hack to add the system-call-filter flag to
-      # nspawn. extraFlags is written to an env file as an env var and
-      # does not support spaces in arguments, so I take advantage of
-      # the additionalCapabilities generation to inject the command
-      # line argument.
-      ''all" --system-call-filter="add_key keyctl bpf" --capability="all''
+    extraFlags = [
+      "--system-call-filter=keyctl"
+      "--system-call-filter=bpf"
     ];
+    additionalCapabilities = [ "all" ];
     config = _: {
       virtualisation.docker.enable = true;
       virtualisation.oci-containers.backend = "docker";
