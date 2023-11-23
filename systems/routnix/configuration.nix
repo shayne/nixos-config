@@ -28,21 +28,6 @@
         forceSSL = true;
         acmeRoot = null;
       };
-      proxy = domain: base {
-        "/" = {
-          extraConfig = ''
-            proxy_http_version 1.1;
-            proxy_set_header Connection "";
-
-            proxy_ssl_name ${domain};
-            proxy_ssl_server_name on;
-            proxy_ssl_session_reuse on;
-
-            proxy_pass https://${domain};
-            proxy_set_header X_FORWARDED_PROTO https;
-          '';
-        };
-      };
     in
     {
       "default.foo.ss.ht" = base
@@ -54,7 +39,5 @@
             '';
           };
         } // { default = true; };
-      # public services
-      "o.foo.ss.ht" = proxy "ombi.shayne.ts.net";
-    };
+    } // import ./virtual-hosts.enc.nix base;
 }
