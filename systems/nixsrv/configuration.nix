@@ -9,10 +9,11 @@ let
     privateNetwork = true;
     hostBridge = "br0";
 
-    config = _: {
+    config = { config, ... }: {
       nixpkgs.pkgs = pkgs;
       networking.interfaces.eth0.useDHCP = true;
       services.tailscale.enable = true;
+      networking.firewall.allowedUDPPorts = [ config.services.tailscale.port ];
       system.stateVersion = "23.05";
     };
   };
@@ -26,7 +27,7 @@ in
   networking.firewall = {
     enable = true;
     allowedTCPPorts = [ 22 ];
-    trustedInterfaces = [ "br0" ];
+    trustedInterfaces = [ "br0" "tailscale0" ];
   };
 
   networking.interfaces.ens18.useDHCP = true;
@@ -58,6 +59,7 @@ in
 
   services.qemuGuest.enable = true;
   services.tailscale.enable = true;
+  services.tailscale.openFirewall = true;
 
   systemd.tmpfiles.rules = [
     "d /pool/downloads/complete 0777 root root -"
