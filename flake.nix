@@ -77,5 +77,13 @@
         let pkgs = nixpkgs.legacyPackages.${system};
         in import ./pkgs { inherit pkgs; }
       );
+
+      colmena = {
+        meta = {
+          nixpkgs = import inputs.nixpkgs { system = "x86_64-linux"; };
+          nodeNixpkgs = builtins.mapAttrs (_name: value: value.pkgs) self.nixosConfigurations;
+          nodeSpecialArgs = builtins.mapAttrs (_name: value: value._module.specialArgs) self.nixosConfigurations;
+        };
+      } // builtins.mapAttrs (_name: value: { imports = value._module.args.modules; }) self.nixosConfigurations;
     };
 }
