@@ -1,4 +1,4 @@
-{ config, lib, pkgs, sources, myModulesPath, currentSystemName, ... }:
+{ config, lib, pkgs, sources, myModulesPath, ... }:
 
 let
   inherit (pkgs.stdenv) isLinux;

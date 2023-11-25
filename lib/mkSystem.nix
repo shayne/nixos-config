@@ -25,7 +25,7 @@ let
   homeManagerFn = if isDarwin then inputs.home-manager.darwinModules.home-manager else inputs.home-manager.nixosModules.home-manager;
   baseSystemConfig = systemsPath + "/base/${(if isDarwin then "darwin-configuration.nix" else "nixos-configuration.nix")}";
   args = {
-    inherit users myLibPath myModulesPath;
+    inherit inputs users myLibPath myModulesPath;
     currentSystemName = name;
     sources = import ../nix/sources.nix;
     unstableModulesPath = "${inputs.home-manager-unstable.outPath}";
