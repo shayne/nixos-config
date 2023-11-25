@@ -19,4 +19,6 @@ in
 
   programs.bash.shellAliases = shellAliases;
   programs.fish.shellAliases = shellAliases;
+
+  services.syncthing.enable = true;
 }

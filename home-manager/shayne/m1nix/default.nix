@@ -127,6 +127,7 @@
   };
 
   services = {
+    syncthing.enable = true;
     xcape.enable = true;
 
     network-manager-applet.enable = true;
