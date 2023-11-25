@@ -16,6 +16,7 @@
     viewnior
     xdg-user-dirs
 
+    unstable.distrobox
     unstable.telegram-desktop
   ];
 
