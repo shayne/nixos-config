@@ -29,7 +29,7 @@
   #   # xwayland.enable = true;
   # };
 
-  xdg.configFile."hyprland/hyprland.conf".text = builtins.readFile ./hyprland.conf;
+  xdg.configFile."hypr/hyprland.conf".text = builtins.readFile ./hyprland.conf;
 
   programs.wofi.enable = true;
   programs.waybar.enable = true;
