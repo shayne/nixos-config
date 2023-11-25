@@ -65,6 +65,8 @@
   xdg.portal.enable = true;
   xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
 
+  services.xserver.desktopManager.gnome.enable = true;
+
   # Configure keymap in X11
   # services.xserver.layout = "us";
   # services.xserver.xkbOptions = [ # "eurosign:e"; "caps:escape" # map caps to escape.
