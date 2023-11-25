@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 {
   imports = [
     ./dunst.nix
@@ -7,12 +7,16 @@
 
   home.packages = with pkgs; [
     grim
+    hyprpicker
+    light
     neofetch
-    playerctl
+    # playerctl
     slurp
     swaybg
     wl-clipboard
     wofi-emoji
+
+    inputs.hyprland-contrib.packages.${pkgs.system}.grimblast
   ];
 
   # xdg.dataFile."wallpaper/1e1c31.png".source = ../1e1c31.png;

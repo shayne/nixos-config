@@ -35,6 +35,10 @@
     nixos-hardware.url = "github:nixos/nixos-hardware";
     tailscale.url = "https://flakehub.com/f/tailscale/tailscale/*.tar.gz";
     vscode-server.url = "github:msteen/nixos-vscode-server";
+    hyprland-contrib = {
+      url = "github:shayne/hyprwm-contrib";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { nixpkgs, ... }@inputs:
