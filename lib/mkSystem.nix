@@ -49,7 +49,6 @@ in
         home-manager.users = recursiveMergeAttrs (builtins.map
           (user: {
             ${user} = inputs.nixpkgs.lib.mkMerge ([
-              inputs.plasma-manager.homeManagerModules.plasma-manager
               (import homeManagerPath)
               (import (homeManagerPath + "/${user}"))
             ] ++ lib.optionals (builtins.pathExists (homeManagerPath + "/${user}/${name}")) [

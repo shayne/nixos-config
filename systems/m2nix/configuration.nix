@@ -62,9 +62,6 @@
   services.flatpak.enable = true;
   programs.dconf.enable = true;
 
-  xdg.portal.enable = true;
-  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-
   services.xserver.desktopManager.gnome.enable = true;
 
   # Configure keymap in X11
