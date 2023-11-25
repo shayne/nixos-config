@@ -105,7 +105,7 @@
 
   # enable the tailscale service
   services.tailscale.enable = true;
-  systemd.services.tailscaled.wantedBy = lib.mkForce [ ];
+  # systemd.services.tailscaled.wantedBy = lib.mkForce [ ];
   networking.firewall.checkReversePath = "loose";
 
   # Some programs need SUID wrappers, can be configured further or are
