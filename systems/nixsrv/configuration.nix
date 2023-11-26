@@ -176,6 +176,9 @@ in
     ];
     additionalCapabilities = [ "all" ];
     config = _: {
+      imports = [
+        (import ./whoogle.enc.nix { inherit pkgs; })
+      ];
       virtualisation.docker.enable = true;
       virtualisation.oci-containers.backend = "docker";
       virtualisation.oci-containers.containers = {
@@ -183,7 +186,8 @@ in
           image = "benbusby/whoogle-search";
           autoStart = true;
           ports = [ "127.0.0.1:5000:5000" ];
-          environment = import ./whoogle-env.nix;
+          environment = { WHOOGLE_DOTENV = "1"; };
+          environmentFiles = [ ./whoogle.enc.env ];
         };
       };
     };
