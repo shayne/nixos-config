@@ -1,7 +1,6 @@
 { config, lib, pkgs, ... }:
 let
   libx = import ./lib.nix { inherit lib; };
-  inherit (libx) mkBinds;
   mkContainer = libx.mkContainer {
     ephemeral = true;
     autoStart = true;
@@ -91,10 +90,10 @@ in
   ];
 
   containers.sabnzbd = mkContainer {
-    bindMounts = mkBinds [
-      "/var/lib/sabnzbd:/pool/container-data/sabnzbd/config"
-      "/var/lib/tailscale:/pool/container-data/sabnzbd/tailscale"
-      "/downloads:/pool/downloads"
+    extraFlags = [
+      "--bind /pool/container-data/sabnzbd/config:/var/lib/sabnzbd"
+      "--bind /pool/container-data/sabnzbd/tailscale:/var/lib/tailscale"
+      "--bind /pool/downloads:/downloads"
     ];
     config = _: {
       services.sabnzbd.enable = true;
@@ -106,11 +105,11 @@ in
   };
 
   containers.sonarr = mkContainer {
-    bindMounts = mkBinds [
-      "/config:/pool/container-data/sonarr/config"
-      "/var/lib/tailscale:/pool/container-data/sonarr/tailscale"
-      "/downloads:/pool/downloads"
-      "/tv:/pool/media/tv"
+    extraFlags = [
+      "--bind /pool/container-data/sonarr/config:/config"
+      "--bind /pool/container-data/sonarr/tailscale:/var/lib/tailscale"
+      "--bind /pool/downloads:/downloads"
+      "--bind /pool/media/tv:/tv"
     ];
     config = _: {
       services.sonarr.enable = true;
@@ -123,11 +122,11 @@ in
   };
 
   containers.radarr = mkContainer {
-    bindMounts = mkBinds [
-      "/config:/pool/container-data/radarr/config"
-      "/var/lib/tailscale:/pool/container-data/radarr/tailscale"
-      "/downloads:/pool/downloads"
-      "/movies:/pool/media/movies"
+    extraFlags = [
+      "--bind /pool/container-data/radarr/config:/config"
+      "--bind /pool/container-data/radarr/tailscale:/var/lib/tailscale"
+      "--bind /pool/downloads:/downloads"
+      "--bind /pool/media/movies:/movies"
     ];
     config = _: {
       services.radarr.enable = true;
@@ -140,10 +139,10 @@ in
   };
 
   containers.plex = mkContainer {
-    bindMounts = mkBinds [
-      "/var/lib/plex:/pool/container-data/plex/data"
-      "/var/lib/tailscale:/pool/container-data/plex/tailscale"
-      "/media:/pool/media"
+    extraFlags = [
+      "--bind /pool/container-data/plex/data:/var/lib/plex"
+      "--bind /pool/container-data/plex/tailscale:/var/lib/tailscale"
+      "--bind /pool/media:/media"
     ];
     config = _: {
       services.plex.enable = true;
@@ -154,9 +153,9 @@ in
   };
 
   containers.ombi = mkContainer {
-    bindMounts = mkBinds [
-      "/var/lib/ombi:/pool/container-data/ombi/config"
-      "/var/lib/tailscale:/pool/container-data/ombi/tailscale"
+    extraFlags = [
+      "--bind /pool/container-data/ombi/config:/var/lib/ombi"
+      "--bind /pool/container-data/ombi/tailscale:/var/lib/tailscale"
     ];
     config = _: {
       services.ombi.enable = true;
@@ -167,10 +166,8 @@ in
   };
 
   containers.whoogle = mkContainer {
-    bindMounts = mkBinds [
-      "/var/lib/tailscale:/pool/container-data/whoogle/tailscale"
-    ];
     extraFlags = [
+      "--bind /pool/container-data/whoogle/tailscale:/var/lib/tailscale"
       "--system-call-filter=keyctl"
       "--system-call-filter=bpf"
     ];
@@ -190,6 +187,7 @@ in
           environmentFiles = [ ./whoogle.enc.env ];
         };
       };
+      systemd.services.docker-whoogle.after = [ "tailscaled.service" ];
     };
   };
 }

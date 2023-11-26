@@ -13,20 +13,4 @@ in
       ];
     }
   ];
-  mkBinds = paths:
-    let
-      mapPath = pathStr:
-        let
-          parts = lib.splitString ":" pathStr;
-        in
-        {
-          "${lib.head parts}" = {
-            hostPath = lib.last parts;
-            isReadOnly = false;
-          };
-        };
-      mappedPaths = builtins.map mapPath paths;
-      mergeAttrs = acc: elem: acc // elem;
-    in
-    builtins.foldl' mergeAttrs { } mappedPaths;
 }
