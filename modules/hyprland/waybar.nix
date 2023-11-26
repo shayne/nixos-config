@@ -26,7 +26,6 @@
 
         "wlr/workspaces" = {
           format = "{icon}";
-          on-click = "activate";
           sort-by-number = true;
           format-icons = {
             "1" = "";
@@ -100,7 +99,7 @@
       }
 
       window#waybar {
-        font-family: 'Inter', 'RobotoMono Nerd Font';
+        font-family: 'BerkeleyMono Nerd Font';
         font-size: 12px;
       }
 
