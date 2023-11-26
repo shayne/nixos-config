@@ -183,11 +183,11 @@ in
           image = "benbusby/whoogle-search";
           autoStart = true;
           ports = [ "127.0.0.1:5000:5000" ];
+          extraOptions = [ "--dns=8.8.8.8" ];
           environment = { WHOOGLE_DOTENV = "1"; };
           environmentFiles = [ ./whoogle.enc.env ];
         };
       };
-      systemd.services.docker-whoogle.after = [ "tailscaled.service" ];
     };
   };
 }
