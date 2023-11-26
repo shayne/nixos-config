@@ -275,6 +275,18 @@
         "url": "https://github.com/tikhomirov/vim-glsl/archive/bfd330a271933c3372fcfa8ce052970746c8e9dd.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
+    "vim-lastplace": {
+        "branch": "master",
+        "description": "A vim / nvim plugin that intelligently reopens files at your last edit position.",
+        "homepage": "https://www.gregd.org/",
+        "owner": "farmergreg",
+        "repo": "vim-lastplace",
+        "rev": "bb3191b134ade9d1f01014e17c3df91e8911dd5c",
+        "sha256": "0sv05v6q1lkc4xklqly0hf2p4w4schan3gvcf1s6493697hvcc4h",
+        "type": "tarball",
+        "url": "https://github.com/farmergreg/vim-lastplace/archive/bb3191b134ade9d1f01014e17c3df91e8911dd5c.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
     "vim-misc": {
         "branch": "master",
         "description": "My Vim configuration files.",

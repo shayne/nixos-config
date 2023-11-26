@@ -80,6 +80,11 @@ rec {
       src = sources.vim-nord;
     };
 
+    vim-lastplace = vimUtils.buildVimPlugin {
+      name = "vim-lastplace";
+      src = sources.vim-lastplace;
+    };
+
     nvim-comment = vimUtils.buildVimPlugin {
       name = "nvim-comment";
       src = sources.nvim-comment;

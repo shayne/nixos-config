@@ -14,6 +14,7 @@
       customVim.vim-fish
       customVim.vim-fugitive
       customVim.vim-glsl
+      customVim.vim-lastplace
       customVim.vim-misc
       customVim.vim-pgsql
       customVim.vim-tla
