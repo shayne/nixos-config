@@ -162,6 +162,9 @@ in
       "--bind /pool/container-data/ombi/tailscale:/var/lib/tailscale"
     ];
     config = _: {
+      imports = [
+        ./ombi.enc.nix
+      ];
       services.ombi.enable = true;
       systemd.tmpfiles.rules = [
         "d /var/lib/ombi 0755 ombi ombi -"
