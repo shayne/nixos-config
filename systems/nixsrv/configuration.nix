@@ -174,7 +174,7 @@ in
     additionalCapabilities = [ "all" ];
     config = _: {
       imports = [
-        (import ./whoogle.enc.nix { inherit pkgs; })
+        ./whoogle.enc.nix
       ];
       virtualisation.docker.enable = true;
       virtualisation.oci-containers.backend = "docker";
