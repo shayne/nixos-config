@@ -19,10 +19,14 @@
 
   # When applied, the unstable nixpkgs set (declared in the flake inputs) will
   # be accessible through 'pkgs.unstable'
-  unstable-packages = final: _prev: {
+  unstable-packages = final: _prev: rec {
     unstable = import inputs.nixpkgs-unstable {
       inherit (final) system;
       config.allowUnfree = true;
     };
+
+    # Overwrite ombi because the options do not support a
+    # package override.
+    inherit (unstable) ombi;
   };
 }
