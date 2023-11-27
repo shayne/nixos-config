@@ -82,11 +82,11 @@ in
     "d /pool/container-data/ombi/config 0755 root root -"
     "d /pool/container-data/ombi/tailscale 0755 root root -"
 
-    "d /pool/container-data/vaultwarden/data 0755 root root -"
-    "d /pool/container-data/vaultwarden/tailscale 0755 root root -"
-
     "d /pool/container-data/whoogle/config 0755 root root -"
     "d /pool/container-data/whoogle/tailscale 0755 root root -"
+
+    "d /pool/container-data/vaultwarden/data 0755 root root -"
+    "d /pool/container-data/vaultwarden/tailscale 0755 root root -"
   ];
 
   containers.sabnzbd = mkContainer {
@@ -188,6 +188,27 @@ in
           environmentFiles = [ ./whoogle.enc.env ];
         };
       };
+    };
+  };
+
+  containers.vaultwarden = mkContainer {
+    extraFlags = [
+      "--bind /pool/container-data/vaultwarden/data:/var/lib/bitwarden_rs"
+      "--bind /pool/container-data/vaultwarden/tailscale:/var/lib/tailscale"
+    ];
+    config = _: {
+      imports = [
+        ./vaultwarden.enc.nix
+      ];
+      services.vaultwarden.enable = true;
+      services.vaultwarden.package = pkgs.unstable.vaultwarden;
+      services.vaultwarden.webVaultPackage = pkgs.unstable.vaultwarden.webvault;
+      services.vaultwarden.config = {
+        SIGNUPS_ALLOWED = false;
+      };
+      systemd.tmpfiles.rules = [
+        "d /var/lib/bitwarden_rs 0755 vaultwarden vaultwarden -"
+      ];
     };
   };
 }
