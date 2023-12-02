@@ -10,8 +10,7 @@
 
   home.packages = with pkgs; [
     dconf
-    # change back to firefox after sigsegv is fixed
-    firefox-esr
+    firefox
     gnome.nautilus
     scrot
     viewnior
