@@ -155,6 +155,8 @@
   security.sudo.wheelNeedsPassword = false;
 
   programs.fish.enable = true;
+  programs.nano.enable = lib.mkDefault false;
+  programs.nix-ld.enable = true;
 
   services.openssh.enable = true;
   services.openssh.settings.PermitRootLogin = "no";

@@ -44,9 +44,11 @@ in
     nodePackages.prettier
     ookla-speedtest
     python3
+    ramfetch
     ripgrep
     rnix-lsp
     tree
+    upterm # Terminal sharing
     watch
     whois
     zoxide

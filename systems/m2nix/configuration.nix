@@ -102,6 +102,16 @@
     "/share/nix-direnv"
   ];
 
+  xdg.portal = {
+    config = {
+      common = {
+        default = [
+          "gtk"
+        ];
+      };
+    };
+  };
+
   # enable the tailscale service
   services.tailscale.enable = true;
   # systemd.services.tailscaled.wantedBy = lib.mkForce [ ];
