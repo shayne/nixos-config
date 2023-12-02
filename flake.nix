@@ -2,12 +2,12 @@
   description = "NixOS systems and tools by shayne";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/release-23.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/release-23.11";
 
     nix-formatter-pack.url = "github:Gerschtli/nix-formatter-pack";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    home-manager.url = "github:nix-community/home-manager/release-23.05";
+    home-manager.url = "github:nix-community/home-manager/release-23.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     home-manager-unstable.url = "github:nix-community/home-manager/master";
@@ -40,7 +40,7 @@
       inherit (self) outputs;
       user = "shayne";
       # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-      stateVersion = "23.05";
+      stateVersion = "23.11";
       libx = import ./lib { inherit inputs outputs stateVersion user; };
       inherit (nixpkgs) lib;
     in
