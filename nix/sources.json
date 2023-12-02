@@ -65,10 +65,10 @@
         "homepage": "",
         "owner": "neovim",
         "repo": "nvim-lspconfig",
-        "rev": "fcf153fbbf1facd16a71d46b92be8be495123a9f",
-        "sha256": "13h9nx74afvabrn51b4wjb6k6svidbmwq5czl03p3rp37lywkxcw",
+        "rev": "694aaec65733e2d54d393abf80e526f86726c988",
+        "sha256": "16nrq7gxnk33qgpmcnjd8yq738vd7qpr2x77v7xf84qp2443nbkx",
         "type": "tarball",
-        "url": "https://github.com/neovim/nvim-lspconfig/archive/fcf153fbbf1facd16a71d46b92be8be495123a9f.tar.gz",
+        "url": "https://github.com/neovim/nvim-lspconfig/archive/694aaec65733e2d54d393abf80e526f86726c988.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nvim-plenary": {
@@ -101,10 +101,10 @@
         "homepage": "",
         "owner": "nvim-treesitter",
         "repo": "nvim-treesitter",
-        "rev": "1e64838ff575405c32b447b68762649289e8d73c",
-        "sha256": "0pk4w81fn82chz5jn7cymkb1z0adaxca1xbdz09h18szdbcbx2h1",
+        "rev": "80a16deb5146a3eb4648effccda1ab9f45e43e76",
+        "sha256": "0mgm5b80flk5171b3b2gsy2pjdimc0xbjbsdg4qf9hgzjyxf9jmi",
         "type": "tarball",
-        "url": "https://github.com/nvim-treesitter/nvim-treesitter/archive/1e64838ff575405c32b447b68762649289e8d73c.tar.gz",
+        "url": "https://github.com/nvim-treesitter/nvim-treesitter/archive/80a16deb5146a3eb4648effccda1ab9f45e43e76.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nvim-treesitter-playground": {
@@ -125,10 +125,10 @@
         "homepage": "",
         "owner": "nvim-treesitter",
         "repo": "nvim-treesitter-textobjects",
-        "rev": "c71406807b545f4a2c17310197a8c88b976f338d",
-        "sha256": "1cc9h1z0lbq60igrw0n48gjly5a39hs27m42wifjr6bwncy2j4is",
+        "rev": "ec1c5bdb3d87ac971749fa6c7dbc2b14884f1f6a",
+        "sha256": "1kdfwihk8ci827aq4w6xv7vn2740qpmh6dk892cd6yi0ab4zxvxn",
         "type": "tarball",
-        "url": "https://github.com/nvim-treesitter/nvim-treesitter-textobjects/archive/c71406807b545f4a2c17310197a8c88b976f338d.tar.gz",
+        "url": "https://github.com/nvim-treesitter/nvim-treesitter-textobjects/archive/ec1c5bdb3d87ac971749fa6c7dbc2b14884f1f6a.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "theme-bobthefish": {
@@ -149,10 +149,10 @@
         "homepage": "https://draculatheme.com/tmux",
         "owner": "dracula",
         "repo": "tmux",
-        "rev": "77bad738813c5d58e570c1beecfd7cd840a83f8b",
-        "sha256": "0yir2bzp85y3drcjkd58pcpcz6m03g8z68sqpim5l3cs0qi81fda",
+        "rev": "2d1253f611bb3b0641391c2ff306c9b34d11d1e5",
+        "sha256": "0s6w9x78jrk856ma7j40znr1029db584c1ss3pfcx6vcx1dp3i55",
         "type": "tarball",
-        "url": "https://github.com/dracula/tmux/archive/77bad738813c5d58e570c1beecfd7cd840a83f8b.tar.gz",
+        "url": "https://github.com/dracula/tmux/archive/2d1253f611bb3b0641391c2ff306c9b34d11d1e5.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "tmux-pain-control": {
