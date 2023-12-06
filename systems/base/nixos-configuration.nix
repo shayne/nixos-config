@@ -158,7 +158,7 @@
   programs.nano.enable = lib.mkDefault false;
   programs.nix-ld.enable = true;
 
-  services.openssh.enable = true;
+  services.openssh.enable = lib.mkDefault true;
   services.openssh.settings.PermitRootLogin = "no";
 
   services.vscode-server.enable = true;

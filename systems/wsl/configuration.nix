@@ -50,6 +50,8 @@
   #   })
   # ];
 
+  services.openssh.enable = false;
+
   services.tailscale = {
     enable = true;
     extraUpFlags = [ "--ssh" ];
