@@ -47,13 +47,13 @@
   nixpkgs.config.permittedInsecurePackages = [
     "nodejs-16.20.1"
   ];
-  services.code-server = {
-    enable = true;
-    user = "shayne";
-    group = "users";
-    port = 3000;
-    auth = "none";
-  };
+  # services.code-server = {
+  #   enable = true;
+  #   user = "shayne";
+  #   group = "users";
+  #   port = 3000;
+  #   auth = "none";
+  # };
 
   networking.firewall.enable = false;
 }
