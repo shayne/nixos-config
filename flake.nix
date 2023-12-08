@@ -26,7 +26,8 @@
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     nixos-apple-silicon.url = "github:tpwrules/nixos-apple-silicon";
     nixos-hardware.url = "github:nixos/nixos-hardware";
-    tailscale.url = "https://flakehub.com/f/tailscale/tailscale/*.tar.gz";
+    # tailscale.url = "https://flakehub.com/f/tailscale/tailscale/*.tar.gz";
+    tailscale.url = "github:tailscale/tailscale/flyingsquirrel";
     vscode-server.url = "github:msteen/nixos-vscode-server";
     hyprland-contrib = {
       url = "github:shayne/hyprwm-contrib";
