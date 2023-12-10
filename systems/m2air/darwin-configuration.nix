@@ -29,4 +29,12 @@ _: {
   };
 
   services.tailscale.enable = true;
+
+  launchd.daemons.ttl65.serviceConfig = {
+    RunAtLoad = true;
+    UserName = "root";
+    GroupName = "wheel";
+    Program = "/usr/sbin/sysctl";
+    ProgramArguments = [ "/usr/sbin/sysctl" "net.inet.ip.ttl=65" "net.inet6.ip6.hlim=65" ];
+  };
 }
