@@ -92,6 +92,9 @@ in
     "d /pool/container-data/whoogle/config 0755 root root -"
     "d /pool/container-data/whoogle/tailscale 0755 root root -"
 
+    "d /pool/container-data/satisfactory-server/config 0755 root root -"
+    "d /pool/container-data/satisfactory-server/tailscale 0755 root root -"
+
     "d /pool/container-data/vaultwarden/data 0755 root root -"
     "d /pool/container-data/vaultwarden/tailscale 0755 root root -"
   ];
@@ -233,6 +236,40 @@ in
       systemd.tmpfiles.rules = [
         "d /var/lib/bitwarden_rs 0755 vaultwarden vaultwarden -"
       ];
+    };
+  };
+
+  containers.satisfactory-server = mkContainer {
+    extraFlags = [
+      "--bind /pool/container-data/satisfactory-server/config:/config"
+      "--bind /pool/container-data/satisfactory-server/tailscale:/var/lib/tailscale"
+      "--system-call-filter=keyctl"
+      "--system-call-filter=bpf"
+    ];
+    additionalCapabilities = [ "all" ];
+    config = _: {
+      virtualisation.docker.enable = true;
+      virtualisation.oci-containers.backend = "docker";
+      virtualisation.oci-containers.containers = {
+        satisfactory-server = {
+          image = "wolveix/satisfactory-server";
+          ports = [
+            "7777:7777/udp"
+            "15000:15000/udp"
+            "15777:15777/udp"
+          ];
+          environment = {
+            MAXPLAYERS = "6";
+            PGID = "1000";
+            PUID = "1000";
+            ROOTLESS = "false";
+            STEAMBETA = "false";
+          };
+          volumes = [
+            "/config:/config"
+          ];
+        };
+      };
     };
   };
 }
