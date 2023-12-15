@@ -74,6 +74,9 @@ in
     "d /pool/container-data/sabnzbd/config 0755 root root -"
     "d /pool/container-data/sabnzbd/tailscale 0755 root root -"
 
+    "d /pool/container-data/prowlarr/config 0755 root root -"
+    "d /pool/container-data/prowlarr/tailscale 0755 root root -"
+
     "d /pool/container-data/sonarr/config 0755 root root -"
     "d /pool/container-data/sonarr/tailscale 0755 root root -"
 
@@ -104,6 +107,21 @@ in
       services.sabnzbd.package = pkgs.unstable.sabnzbd;
       systemd.tmpfiles.rules = [
         "d /var/lib/sabnzbd 0755 sabnzbd sabnzbd -"
+      ];
+    };
+  };
+
+  containers.prowlarr = mkContainer {
+    extraFlags = [
+      "--bind /pool/container-data/prowlarr/config:/var/lib/private/prowlarr"
+      "--bind /pool/container-data/prowlarr/tailscale:/var/lib/tailscale"
+    ];
+    config = _: {
+      services.prowlarr.enable = true;
+      services.prowlarr.package = pkgs.unstable.prowlarr;
+      systemd.tmpfiles.rules = [
+        "L /var/lib/prowlarr - - - /var/lib/private/prowlarr -"
+        "d /var/lib/private/prowlarr 0755 prowlarr prowlarr -"
       ];
     };
   };
