@@ -253,6 +253,7 @@ in
       virtualisation.oci-containers.containers = {
         satisfactory-server = {
           image = "wolveix/satisfactory-server";
+          extraOptions = [ "--dns=8.8.8.8" ];
           ports = [
             "7777:7777/udp"
             "15000:15000/udp"
