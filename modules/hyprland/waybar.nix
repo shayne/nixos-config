@@ -15,7 +15,7 @@
         layer = "top";
         modules-left = [ "custom/nix" "wlr/workspaces" ];
         modules-center = [ "wlr/taskbar" ];
-        modules-right = [ "network#interface" "network#speed" "cpu" "temperature" "backlight" "battery" "clock" "custom/notification" "tray" ];
+        modules-right = [ "network#interface" "network#speed" "cpu" "temperature" "backlight" "battery" "wireplumber" "clock" "custom/notification" "tray" ];
 
         persistent_workspaces = {
           "1" = [ ];
@@ -52,6 +52,13 @@
 
         "network#speed" = {
           format = "⇡{bandwidthUpBits} ⇣{bandwidthDownBits}";
+        };
+
+        wireplumber = {
+          format = "{volume}% {icon}";
+          format-muted = "";
+          on-click = "helvum";
+          format-icons = [ "" "" "" ];
         };
 
         cpu = {

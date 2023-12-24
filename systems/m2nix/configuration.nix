@@ -9,7 +9,6 @@
   nixpkgs.config.allowUnsupportedSystem = true;
 
   hardware.bluetooth.enable = true;
-  hardware.pulseaudio.enable = true;
 
   # Specify path to peripheral firmware files.
   hardware.asahi.peripheralFirmwareDirectory = ./firmware.enc;
@@ -18,6 +17,7 @@
   hardware.asahi.experimentalGPUInstallMode = "replace";
   hardware.asahi.useExperimentalGPUDriver = true;
   hardware.asahi.addEdgeKernelConfig = true;
+  hardware.asahi.setupAsahiSound = true;
 
   # boot.kernelBuildIsCross = true;
   # don't build 16K just yet
@@ -71,10 +71,6 @@
 
   # Enable CUPS to print documents.
   # services.printing.enable = true;
-
-  # Enable sound.
-  # sound.enable = true;
-  # hardware.pulseaudio.enable = true;
 
   # Enable touchpad support (enabled default in most desktopManager).
 
