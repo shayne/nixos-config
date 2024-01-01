@@ -27,6 +27,8 @@
     nixos-apple-silicon.url = "github:tpwrules/nixos-apple-silicon";
     nixos-hardware.url = "github:nixos/nixos-hardware";
     tailscale.url = "https://flakehub.com/f/tailscale/tailscale/*.tar.gz";
+    # 2024-01-01: add to fix "Module is unknown" issue
+    tailscale.inputs.nixpkgs.follows = "nixpkgs";
     vscode-server.url = "github:msteen/nixos-vscode-server";
     hyprland-contrib = {
       url = "github:shayne/hyprwm-contrib";
