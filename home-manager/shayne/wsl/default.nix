@@ -14,6 +14,7 @@ in
   };
 
   home.packages = with pkgs; [
+    unstable.distrobox
     unstable.wslu
   ];
 
