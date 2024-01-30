@@ -17,6 +17,7 @@
     xdg-user-dirs
 
     unstable.distrobox
+    unstable.signal-desktop
     unstable.telegram-desktop
   ];
 
