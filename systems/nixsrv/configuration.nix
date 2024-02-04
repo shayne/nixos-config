@@ -19,6 +19,7 @@ let
 in
 {
   imports = [
+    ./cron.enc.nix
     ./samba.enc.nix
   ];
 
