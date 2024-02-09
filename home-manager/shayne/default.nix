@@ -52,6 +52,7 @@ in
     zoxide
 
     # unstable packages
+    unstable.devbox
     unstable.gokrazy
   ] ++ (lib.optionals isLinux [
     ramfetch
