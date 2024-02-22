@@ -5,7 +5,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/release-23.11";
 
     nix-formatter-pack.url = "github:Gerschtli/nix-formatter-pack";
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
     home-manager.url = "github:nix-community/home-manager/release-23.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -28,7 +28,7 @@
     nixos-hardware.url = "github:nixos/nixos-hardware";
     tailscale.url = "https://flakehub.com/f/tailscale/tailscale/*.tar.gz";
     # 2024-01-01: add to fix "Module is unknown" issue
-    tailscale.inputs.nixpkgs.follows = "nixpkgs";
+    tailscale.inputs.nixpkgs.follows = "nixpkgs-unstable";
     vscode-server.url = "github:msteen/nixos-vscode-server";
     hyprland-contrib = {
       url = "github:shayne/hyprwm-contrib";
