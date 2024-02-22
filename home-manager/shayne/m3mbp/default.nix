@@ -1,0 +1,6 @@
+{ myModulesPath, ... }:
+{
+  imports = [
+    (myModulesPath + "/rectangle")
+  ];
+}
