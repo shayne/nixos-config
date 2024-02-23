@@ -1,23 +1,32 @@
-{ config, lib, pkgs, modulesPath, ... }:
-
+{ lib, ... }:
 {
   nixpkgs.hostPlatform = lib.mkDefault "aarch64-linux";
 
-  boot.initrd.availableKernelModules = [ "virtio_pci" "xhci_pci" "usbhid" ];
-  boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ ];
-  boot.extraModulePackages = [ ];
-
   fileSystems."/" =
-    { device = "/dev/disk/by-label/nixos";
+    {
+      device = "/dev/disk/by-label/nixos";
       fsType = "xfs";
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-label/boot";
+    {
+      device = "/dev/disk/by-label/boot";
       fsType = "vfat";
     };
 
-  swapDevices = [ ];
+  fileSystems."/mnt/macos" = {
+    device = "share";
+    fsType = "virtiofs";
+  };
 
+  fileSystems."/home/shayne/code" = {
+    device = "/mnt/macos/code";
+    fsType = "fuse.bindfs";
+    options = [
+      "map=0/1000:@0/@100"
+      "x-systemd.requires=/mnt/macos"
+    ];
+  };
+
+  swapDevices = [{ device = "/dev/disk/by-label/swap"; }];
 }
