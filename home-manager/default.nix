@@ -4,7 +4,6 @@
     # To make nix3 commands consistent with your flake
     registry = lib.mapAttrs (_: value: { flake = value; }) inputs;
 
-    package = lib.mkForce pkgs.unstable.nixVersions.nix_2_18;
     settings = {
       auto-optimise-store = true;
       experimental-features = [ "nix-command" "flakes" ];
