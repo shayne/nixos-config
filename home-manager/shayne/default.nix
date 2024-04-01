@@ -106,6 +106,7 @@ in
       root = "rev-parse --show-toplevel";
       amend = "commit --amend --no-edit";
     };
+    diff-so-fancy.enable = true;
     extraConfig = {
       branch.autosetuprebase = "always";
       color.ui = true;
