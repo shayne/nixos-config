@@ -15,6 +15,8 @@
   gpu = "git push -u origin HEAD";
   gpuf = "git push -u origin HEAD --force-with-lease";
   gpl = "git pull --rebase";
+  gr = "git restore";
+  grs = "git restore --staged";
   gs = "git status";
   gst = "git stash";
   gt = "git tag";
