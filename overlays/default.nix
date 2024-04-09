@@ -5,7 +5,7 @@
     # This one brings our custom packages from the 'pkgs' directory
     import ../pkgs { inherit inputs; pkgs = final; } //
     # This one brings our custom vim plugins
-    import ./custom-vim.nix final prev;
+    (import ./custom-vim.nix { inherit inputs; }) final prev;
 
   # This one contains whatever you want to overlay
   # You can change versions, add patches, set compilation flags, anything really.
