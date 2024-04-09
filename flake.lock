@@ -552,6 +552,40 @@
         "type": "gitlab"
       }
     },
+    "nvim-conform": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1705875128,
+        "narHash": "sha256-n5Aes/ckpi5tJyIaDORUaFvZ45DF110PAb5BVeqKkOQ=",
+        "owner": "stevearc",
+        "repo": "conform.nvim",
+        "rev": "3d59cbd01a4b74124c5a6fb23b8cc63e5c2db3d5",
+        "type": "github"
+      },
+      "original": {
+        "owner": "stevearc",
+        "ref": "v5.2.1",
+        "repo": "conform.nvim",
+        "type": "github"
+      }
+    },
+    "nvim-treesitter": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1691831669,
+        "narHash": "sha256-1Iuvq0hVQ7LyBYOkJ5d07NkwbGcR1K61ZZmAAA7ABGs=",
+        "owner": "nvim-treesitter",
+        "repo": "nvim-treesitter",
+        "rev": "63260da18bf273c76b8e2ea0db84eb901cab49ce",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nvim-treesitter",
+        "ref": "v0.9.1",
+        "repo": "nvim-treesitter",
+        "type": "github"
+      }
+    },
     "plasma-manager": {
       "inputs": {
         "home-manager": "home-manager_2",
@@ -586,8 +620,11 @@
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs_4",
         "nixpkgs-unstable": "nixpkgs-unstable",
+        "nvim-conform": "nvim-conform",
+        "nvim-treesitter": "nvim-treesitter",
         "plasma-manager": "plasma-manager",
         "tailscale": "tailscale",
+        "vim-copilot": "vim-copilot",
         "vscode-server": "vscode-server"
       }
     },
@@ -686,6 +723,23 @@
       "original": {
         "type": "tarball",
         "url": "https://flakehub.com/f/tailscale/tailscale/%2A.tar.gz"
+      }
+    },
+    "vim-copilot": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1698163246,
+        "narHash": "sha256-fbGsUU5RYC5FNLsuh5c/wf4zP7gTKZYpdJMnZuacJTA=",
+        "owner": "github",
+        "repo": "copilot.vim",
+        "rev": "c1d9ea495caa608c6652c952ff07ff2fa1afbe0d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "github",
+        "ref": "v1.11.1",
+        "repo": "copilot.vim",
+        "type": "github"
       }
     },
     "vscode-server": {

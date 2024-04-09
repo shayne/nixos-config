@@ -25,6 +25,7 @@
       customVim.vim-devicons
       customVim.vim-nord
       customVim.nvim-comment
+      customVim.nvim-conform
       customVim.nvim-lspconfig
       customVim.nvim-plenary # required for telescope
       customVim.nvim-telescope

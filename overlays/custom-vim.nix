@@ -1,3 +1,4 @@
+{ inputs }:
 final: _prev:
 let
   sources = import ../nix/sources.nix;
@@ -7,7 +8,7 @@ rec {
   customVim = with final; rec {
     vim-copilot = vimUtils.buildVimPlugin {
       name = "vim-copilot";
-      src = sources.vim-copilot;
+      src = inputs.vim-copilot;
     };
 
     vim-cue = vimUtils.buildVimPlugin {
@@ -91,6 +92,11 @@ rec {
       buildPhase = ":";
     };
 
+    nvim-conform = vimUtils.buildVimPlugin {
+      name = "nvim-conform";
+      src = inputs.nvim-conform;
+    };
+
     nvim-plenary = vimUtils.buildVimPlugin {
       name = "nvim-plenary";
       src = sources.nvim-plenary;
@@ -105,7 +111,7 @@ rec {
 
     nvim-treesitter = vimUtils.buildVimPlugin {
       name = "nvim-treesitter";
-      src = sources.nvim-treesitter;
+      src = inputs.nvim-treesitter;
     };
 
     nvim-treesitter-playground = vimUtils.buildVimPlugin {

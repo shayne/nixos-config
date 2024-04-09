@@ -34,6 +34,14 @@
       url = "github:shayne/hyprwm-contrib";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # Non-flakes
+    nvim-conform.url = "github:stevearc/conform.nvim/v5.2.1";
+    nvim-conform.flake = false;
+    nvim-treesitter.url = "github:nvim-treesitter/nvim-treesitter/v0.9.1";
+    nvim-treesitter.flake = false;
+    vim-copilot.url = "github:github/copilot.vim/v1.11.1";
+    vim-copilot.flake = false;
   };
 
   outputs = { nixpkgs, ... }@inputs:
