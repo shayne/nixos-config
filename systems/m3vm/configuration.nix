@@ -1,6 +1,5 @@
 { pkgs, ... }:
 {
-
   # Be careful updating this.
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
@@ -32,6 +31,7 @@
     killall
     niv
     tailscale
+    iptables
   ];
 
   services.qemuGuest.enable = true;

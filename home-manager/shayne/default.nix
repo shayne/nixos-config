@@ -24,6 +24,7 @@ in
   #---------------------------------------------------------------------
 
   home.packages = with pkgs; [
+    age
     aws-vault
     bat
     bind
@@ -45,7 +46,7 @@ in
     ookla-speedtest
     python3
     ripgrep
-    rnix-lsp
+    sops
     tree
     upterm # Terminal sharing
     watch
