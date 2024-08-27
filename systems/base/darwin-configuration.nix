@@ -19,13 +19,12 @@
       killall
       niv
       rsync
-      neovim-nightly
       wget
     ];
     variables = {
-      EDITOR = "nvim";
-      SYSTEMD_EDITOR = "nvim";
-      VISUAL = "nvim";
+      EDITOR = "vim";
+      SYSTEMD_EDITOR = "vim";
+      VISUAL = "vim";
     };
     # https://github.com/nix-community/home-manager/pull/2408
     pathsToLink = [ "/share/fish" ];
@@ -33,8 +32,7 @@
   };
 
   fonts = {
-    fontDir.enable = true;
-    fonts = with pkgs; [
+    packages = with pkgs; [
       (nerdfonts.override { fonts = [ "FiraCode" "SourceCodePro" "UbuntuMono" ]; })
       fira
       fira-go
@@ -51,7 +49,6 @@
     # You can add overlays here
     overlays = [
       # Add overlays your own flake exports (from overlays and pkgs dir):
-      inputs.neovim-nightly-overlay.overlay
       inputs.nixos-apple-silicon.overlays.apple-silicon-overlay
 
       outputs.overlays.additions
@@ -71,6 +68,10 @@
       allowUnfree = true;
       # Accept the joypixels license
       joypixels.acceptLicense = true;
+      permittedInsecurePackages = [
+        "nix-2.15.3"
+        "python3.11-youtube-dl-2021.12.17"
+      ];
     };
   };
 
