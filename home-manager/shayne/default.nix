@@ -47,6 +47,7 @@ in
     python3
     ripgrep
     sops
+    rlwrap
     tree
     upterm # Terminal sharing
     watch
