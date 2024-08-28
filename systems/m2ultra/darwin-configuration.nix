@@ -78,15 +78,13 @@
       "signal"
       "swiftformat-for-xcode"
       "syncthing"
-      # "telegram-desktop"
+      "telegram-desktop"
       "utm"
       "visual-studio-code"
       "vlc"
       "whisky"
     ];
   };
-
-  # services.tailscale.enable = true;
 
   launchd.daemons.ttl65.serviceConfig = {
     RunAtLoad = true;
