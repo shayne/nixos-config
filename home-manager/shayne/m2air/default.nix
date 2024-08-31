@@ -1,6 +1,0 @@
-{ myModulesPath, ... }:
-{
-  imports = [
-    (myModulesPath + "/rectangle")
-  ];
-}
