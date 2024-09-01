@@ -76,6 +76,7 @@
       "screen-studio"
       "shureplus-motiv"
       "signal"
+      "steam"
       "swiftformat-for-xcode"
       "syncthing"
       "telegram-desktop"
