@@ -11,7 +11,7 @@
   time.timeZone = "America/New_York";
 
   networking.useDHCP = false;
-  networking.hostName = "m3vm";
+  networking.hostName = "mvm";
   networking.firewall.enable = false;
   networking.interfaces.enp0s1.useDHCP = true;
 

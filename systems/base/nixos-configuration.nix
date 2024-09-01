@@ -47,7 +47,6 @@
       rsync
     ];
     systemPackages = with pkgs; [
-      neovim-nightly
       wget
     ];
     variables = {
@@ -101,7 +100,6 @@
     # You can add overlays here
     overlays = [
       # Add overlays your own flake exports (from overlays and pkgs dir):
-      inputs.neovim-nightly-overlay.overlay
       inputs.nixos-apple-silicon.overlays.apple-silicon-overlay
 
       outputs.overlays.additions
