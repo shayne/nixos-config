@@ -37,7 +37,6 @@
     brews = [
       "bash"
       "cdrtools"
-      "colima"
       "coreutils"
       "gnu-tar"
       "jq"

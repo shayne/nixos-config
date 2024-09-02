@@ -37,7 +37,6 @@
     brews = [
       "bash"
       "cdrtools"
-      "colima"
       "coreutils"
       "gnu-tar"
       "jq"
@@ -70,6 +69,7 @@
       "multipass"
       "multiviewer-for-f1"
       "obsidian"
+      "orbstack"
       "parsec"
       "raycast"
       "rectangle"

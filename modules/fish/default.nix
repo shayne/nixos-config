@@ -30,6 +30,7 @@ in
     enableFishIntegration = true;
     # Configuration written to ~/.config/starship.toml
     settings = {
+      container.disabled = true;
       gcloud.disabled = true;
     };
   };

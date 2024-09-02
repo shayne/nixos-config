@@ -31,10 +31,10 @@
 
   # Only install the docs I use
   documentation.enable = true;
-  documentation.nixos.enable = false;
+  documentation.nixos.enable = lib.mkForce false;
   documentation.man.enable = true;
-  documentation.info.enable = false;
-  documentation.doc.enable = false;
+  documentation.info.enable = lib.mkForce false;
+  documentation.doc.enable = lib.mkForce false;
 
   environment = {
     # Eject nano and perl from the system
@@ -157,7 +157,7 @@
   programs.nano.enable = lib.mkDefault false;
   programs.nix-ld.enable = true;
 
-  services.openssh.enable = lib.mkDefault true;
+  services.openssh.enable = lib.mkForce true;
   services.openssh.settings.PermitRootLogin = "no";
 
   services.vscode-server.enable = true;
