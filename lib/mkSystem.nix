@@ -61,6 +61,8 @@ in
       (user:
         if !isDarwin && (builtins.pathExists (homeManagerPath + "/${user}/nixos-configuration.nix")) then
           import (homeManagerPath + "/${user}/nixos-configuration.nix")
+        else if isDarwin && (builtins.pathExists (homeManagerPath + "/${user}/darwin-configuration.nix")) then
+          import (homeManagerPath + "/${user}/darwin-configuration.nix")
         else { }
       )
       users;
