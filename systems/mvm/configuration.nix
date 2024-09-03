@@ -1,4 +1,4 @@
-{ pkgs, modulesPath, ... }:
+{ lib, pkgs, modulesPath, ... }:
 {
   imports = [
     # Include the default lxd configuration.
@@ -8,6 +8,20 @@
     # Include the OrbStack-specific configuration.
     ./orbstack.nix
   ];
+
+  users.users.shayne = {
+    uid = lib.mkForce 501;
+    extraGroups = [ "wheel" ];
+
+    # simulate isNormalUser, but with an arbitrary UID
+    isSystemUser = true;
+    isNormalUser = lib.mkForce false;
+    group = "users";
+    createHome = true;
+    home = "/home/shayne";
+    homeMode = "700";
+    useDefaultShell = true;
+  };
 
   networking = {
     dhcpcd.enable = false;
