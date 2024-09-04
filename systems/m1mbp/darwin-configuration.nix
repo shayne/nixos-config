@@ -69,6 +69,7 @@
       "multipass"
       "multiviewer-for-f1"
       "obsidian"
+      "orbstack"
       "parsec"
       "raycast"
       "rectangle"
