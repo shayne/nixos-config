@@ -80,7 +80,8 @@
       "steam"
       "swiftformat-for-xcode"
       "syncthing"
-      "telegram-desktop"
+      # This freezes on quit, using desktop.telegram.org for now
+      # "telegram-desktop"
       "utm"
       "visual-studio-code"
       "vlc"
