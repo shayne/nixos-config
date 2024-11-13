@@ -5,7 +5,6 @@
     registry = lib.mapAttrs (_: value: { flake = value; }) inputs;
 
     settings = {
-      auto-optimise-store = true;
       experimental-features = [ "nix-command" "flakes" ];
       # Avoid unwanted garbage collection when using nix-direnv
       keep-outputs = true;

@@ -9,6 +9,8 @@
     gnugrep
     nil
     youtube-dl
+
+    unstable.devenv
   ];
 
   programs.fish = {

@@ -80,6 +80,8 @@
     # to manage it for us. This tells nix-darwin to just use whatever is running.
     useDaemon = true;
 
+    optimise.automatic = true;
+
     gc = {
       automatic = true;
       options = "--delete-older-than 10d";
@@ -94,7 +96,6 @@
     nixPath = lib.mapAttrsToList (key: value: "${key}=${value.to.path}") config.nix.registry;
 
     settings = {
-      auto-optimise-store = true;
       experimental-features = [ "nix-command" "flakes" ];
       # Avoid unwanted garbage collection when using nix-direnv
       keep-outputs = true;

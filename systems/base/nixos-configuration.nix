@@ -132,6 +132,8 @@
       options = "--delete-older-than 10d";
     };
 
+    optimise.automatic = true;
+
     # This will add each flake input as a registry
     # To make nix3 commands consistent with your flake
     registry = lib.mapAttrs (_: value: { flake = value; }) inputs;
@@ -141,8 +143,8 @@
     nixPath = lib.mapAttrsToList (key: value: "${key}=${value.to.path}") config.nix.registry;
 
     optimise.automatic = true;
+
     settings = {
-      auto-optimise-store = true;
       experimental-features = [ "nix-command" "flakes" ];
       # Avoid unwanted garbage collection when using nix-direnv
       keep-outputs = true;

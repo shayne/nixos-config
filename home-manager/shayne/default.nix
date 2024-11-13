@@ -123,7 +123,7 @@ in
 
   programs.go = {
     enable = true;
-    package = pkgs.unstable.go_1_21;
+    package = pkgs.unstable.go_1_23;
   };
 
   programs.tmux = {

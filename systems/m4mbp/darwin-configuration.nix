@@ -129,4 +129,6 @@
   system.keyboard.remapCapsLockToControl = true;
   # Disable click to show desktop
   system.defaults.WindowManager.EnableStandardClickToShowDesktop = false;
+
+  system.stateVersion = 5;
 }
