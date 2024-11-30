@@ -8,7 +8,7 @@
     docker-client
     gnugrep
     nil
-    youtube-dl
+    yt-dlp
 
     unstable.devenv
   ];
