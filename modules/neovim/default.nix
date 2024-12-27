@@ -1,8 +1,9 @@
-{ pkgs, inputs, sources, ... }:
+{ pkgs, sources, ... }:
 {
   programs.neovim = {
     enable = true;
-    package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
+    # TEMP: Disabled for now due to lua error on start
+    # package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
 
     viAlias = true;
     vimAlias = true;
