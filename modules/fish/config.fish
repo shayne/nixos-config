@@ -66,14 +66,16 @@ if test -d "/opt/homebrew"
     set -q INFOPATH; or set INFOPATH ''; set -gx INFOPATH "/opt/homebrew/share/info" $INFOPATH;
 end
 
+# Add ~/.local/bin
+set -q PATH; or set PATH ''; set -gx PATH  "$HOME/.local/bin" $PATH;
+
 #-------------------------------------------------------------------------------
 # Prompt
 #-------------------------------------------------------------------------------
-
 # Do not show any greeting
 set --universal --erase fish_greeting
 function fish_greeting; end
-funcsave fish_greeting
+funcsave fish_greeting > /dev/null 2>&1
 
 # Dracula Color Palette
 set -l foreground f8f8f2
