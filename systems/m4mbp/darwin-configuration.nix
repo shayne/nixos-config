@@ -9,7 +9,8 @@
   nix.settings.trusted-users = [ "@admin" ];
 
   nix.linux-builder = {
-    enable = true;
+    # Disabled as this does not work with the determinate nix-installer
+    enable = false;
     ephemeral = true;
     maxJobs = 4;
     config = {
