@@ -34,6 +34,7 @@ in
     gh
     git-crypt
     # go
+    google-cloud-sdk
     gopls
     htop
     httpie
