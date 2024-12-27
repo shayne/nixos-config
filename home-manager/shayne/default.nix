@@ -128,6 +128,8 @@ in
   programs.go = {
     enable = true;
     package = pkgs.unstable.go_1_23;
+
+    goPath = "code/go";
   };
 
   programs.tmux = {
