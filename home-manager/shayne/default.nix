@@ -73,7 +73,7 @@ in
     LC_ALL = "en_US.UTF-8";
     EDITOR = "nvim";
     PAGER = "less -FirSwX";
-    MANPAGER = "sh -c 'col -bx | ${pkgs.bat}/bin/bat -l man -p'";
+    MANPAGER = "${pkgs.bat}/bin/bat -l man -p";
     AWS_VAULT_BACKEND = "pass";
   };
 
