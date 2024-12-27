@@ -77,6 +77,9 @@ in
     AWS_VAULT_BACKEND = "pass";
   };
 
+  # Prevent the "Last login" message from showing up
+  home.file.".hushlogin".text = "";
+
   #---------------------------------------------------------------------
   # Programs
   #---------------------------------------------------------------------
