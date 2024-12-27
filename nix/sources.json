@@ -65,10 +65,10 @@
         "homepage": "",
         "owner": "neovim",
         "repo": "nvim-lspconfig",
-        "rev": "d2d153a179ed59aa7134d7ebdf4d7dcb156efa22",
-        "sha256": "0h65i97lsp1vcab1lr7la3w6mqniz5w6bkmxiglcpxmcywmlhqr6",
+        "rev": "ff2b85abaa810f6611233dbe6d31c07510ebf43d",
+        "sha256": "035sly6x5a8f9h3gw1cnacm4d0wdn5iabn3ck7hzas0y6av28vym",
         "type": "tarball",
-        "url": "https://github.com/neovim/nvim-lspconfig/archive/d2d153a179ed59aa7134d7ebdf4d7dcb156efa22.tar.gz",
+        "url": "https://github.com/neovim/nvim-lspconfig/archive/ff2b85abaa810f6611233dbe6d31c07510ebf43d.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nvim-plenary": {
@@ -89,10 +89,10 @@
         "homepage": "",
         "owner": "nvim-telescope",
         "repo": "telescope.nvim",
-        "rev": "85922dde3767e01d42a08e750a773effbffaea3e",
-        "sha256": "0yv3v4nlh42s96r0xa4fvlil4rh4p0q6l50jk8yg0hmc8vxxzbs1",
+        "rev": "2eca9ba22002184ac05eddbe47a7fe2d5a384dfc",
+        "sha256": "0bkpys6dj01x6ycylmf6vrd2mqjibmny9a2hxxrqn0jqqvagm5ly",
         "type": "tarball",
-        "url": "https://github.com/nvim-telescope/telescope.nvim/archive/85922dde3767e01d42a08e750a773effbffaea3e.tar.gz",
+        "url": "https://github.com/nvim-telescope/telescope.nvim/archive/2eca9ba22002184ac05eddbe47a7fe2d5a384dfc.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nvim-treesitter": {
@@ -101,10 +101,10 @@
         "homepage": "",
         "owner": "nvim-treesitter",
         "repo": "nvim-treesitter",
-        "rev": "e1e3108cd23d7f967842261bd66126b6734d8907",
-        "sha256": "0rshzi73cj9pd4phkhhxdf4lqlgncrb1wx798wn05f2bhv9m61az",
+        "rev": "eb3e850acff4d9f2f2dd8dacd75353043c899753",
+        "sha256": "0zmhrhdqj07r2xjsjd0xq114y3cn8zpdscvgviy4k4gx7iv3ir72",
         "type": "tarball",
-        "url": "https://github.com/nvim-treesitter/nvim-treesitter/archive/e1e3108cd23d7f967842261bd66126b6734d8907.tar.gz",
+        "url": "https://github.com/nvim-treesitter/nvim-treesitter/archive/eb3e850acff4d9f2f2dd8dacd75353043c899753.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nvim-treesitter-playground": {
@@ -125,22 +125,10 @@
         "homepage": "",
         "owner": "nvim-treesitter",
         "repo": "nvim-treesitter-textobjects",
-        "rev": "3e450cd85243da99dc23ebbf14f9c70e9a0c26a4",
-        "sha256": "1gn4ph0p36psjc9bdlvs9sg4vm3l9f94wisgxgva5qgh37bs6g2m",
+        "rev": "ad8f0a472148c3e0ae9851e26a722ee4e29b1595",
+        "sha256": "08vlvi9iwhl5qy924s6dmxaczg1yg096vdchp7za5p7wnb7w3zkg",
         "type": "tarball",
-        "url": "https://github.com/nvim-treesitter/nvim-treesitter-textobjects/archive/3e450cd85243da99dc23ebbf14f9c70e9a0c26a4.tar.gz",
-        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
-    },
-    "theme-bobthefish": {
-        "branch": "master",
-        "description": "A Powerline-style, Git-aware fish theme optimized for awesome.",
-        "homepage": "",
-        "owner": "oh-my-fish",
-        "repo": "theme-bobthefish",
-        "rev": "e3b4d4eafc23516e35f162686f08a42edf844e40",
-        "sha256": "1q4ya4ndm7d7kk8ppzvpsxmk0gkdpaqhp4n5j0mpxq7vv6yrhwvi",
-        "type": "tarball",
-        "url": "https://github.com/oh-my-fish/theme-bobthefish/archive/e3b4d4eafc23516e35f162686f08a42edf844e40.tar.gz",
+        "url": "https://github.com/nvim-treesitter/nvim-treesitter-textobjects/archive/ad8f0a472148c3e0ae9851e26a722ee4e29b1595.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "tmux-dracula": {
@@ -149,10 +137,10 @@
         "homepage": "https://draculatheme.com/tmux",
         "owner": "dracula",
         "repo": "tmux",
-        "rev": "ea1a45d1c623cd05f1c42abace905ecc8ecaf058",
-        "sha256": "1x14f3y8rzkff7ymkrfk1v2nw3rdwbayvqxv3r5zmlyrdwpvqdfn",
+        "rev": "5eb04b9db918bdfbf6928fc3b59942efb7de6e54",
+        "sha256": "06bvi2zlfqd4g8z9sviymzj1zd4y4872ckv85lx3gh8ilk4hz3jm",
         "type": "tarball",
-        "url": "https://github.com/dracula/tmux/archive/ea1a45d1c623cd05f1c42abace905ecc8ecaf058.tar.gz",
+        "url": "https://github.com/dracula/tmux/archive/5eb04b9db918bdfbf6928fc3b59942efb7de6e54.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "tmux-pain-control": {
@@ -257,10 +245,10 @@
         "homepage": "https://www.vim.org/scripts/script.php?script_id=2975",
         "owner": "tpope",
         "repo": "vim-fugitive",
-        "rev": "d4877e54cef67f5af4f950935b1ade19ed6b7370",
-        "sha256": "17cf21k77fwsl67m4f1ln17dadz5i5g8fjhsw1cc1y1c3jn1xdh2",
+        "rev": "fcb4db52e7f65b95705aa58f0f2df1312c1f2df2",
+        "sha256": "1iyb3qxyf0x26q7ndx1ycq1ankqwr0bw6qghv8kw1mnr5c9b15rw",
         "type": "tarball",
-        "url": "https://github.com/tpope/vim-fugitive/archive/d4877e54cef67f5af4f950935b1ade19ed6b7370.tar.gz",
+        "url": "https://github.com/tpope/vim-fugitive/archive/fcb4db52e7f65b95705aa58f0f2df1312c1f2df2.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "vim-glsl": {
