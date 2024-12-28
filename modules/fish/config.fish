@@ -77,17 +77,17 @@ set --universal --erase fish_greeting
 function fish_greeting; end
 funcsave fish_greeting > /dev/null 2>&1
 
-# Dracula Color Palette
-set -l foreground f8f8f2
-set -l selection 44475a
-set -l comment 6272a4
-set -l red ff5555
-set -l orange ffb86c
-set -l yellow f1fa8c
-set -l green 50fa7b
-set -l purple bd93f9
-set -l cyan 8be9fd
-set -l pink ff79c6
+# Dracula Color Palette -20%
+set -l foreground c6c6c2
+set -l selection 363948
+set -l comment 4e5b83
+set -l red cc4444
+set -l orange cc9356
+set -l yellow c1c870
+set -l green 40c862
+set -l purple 9776c7
+set -l cyan 6fbaca
+set -l pink cc619e
 
 # Syntax Highlighting Colors
 set -gx fish_color_normal $foreground
