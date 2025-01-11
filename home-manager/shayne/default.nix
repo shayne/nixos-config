@@ -2,6 +2,7 @@
 
 let
   inherit (pkgs.stdenv) isLinux;
+  env = import ./environment.enc.nix;
 in
 {
   # Home-manager 22.11 requires this be set. We never set it so we have
@@ -75,7 +76,7 @@ in
     PAGER = "less -FirSwX";
     MANPAGER = "${pkgs.bat}/bin/bat -l man -p";
     AWS_VAULT_BACKEND = "pass";
-  };
+  } // env;
 
   # Prevent the "Last login" message from showing up
   home.file.".hushlogin".text = "";
