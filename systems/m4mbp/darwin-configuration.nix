@@ -1,6 +1,8 @@
 { config, lib, ... }: {
   nixpkgs.hostPlatform = "aarch64-darwin";
 
+  networking.hostName = "m4mbp";
+
   nix.settings.sandbox = "relaxed";
   nix.settings.extra-sandbox-paths = [
     "/private/var/db/oah" # aot files
@@ -41,6 +43,7 @@
       "coreutils"
       "gnu-tar"
       "jq"
+      "llama.cpp"
       "python3"
       "qemu"
       "samba"
