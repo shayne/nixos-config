@@ -34,6 +34,7 @@
     '';
   };
 
+  programs.nix-index.enable = true;
 
   homebrew = {
     enable = true;
