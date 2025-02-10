@@ -154,3 +154,7 @@ alias fnix "nix-shell --run fish"
 function frun
     nix-shell -p $argv[1] --run $argv[1]
 end
+
+function ,
+  nix run nixpkgs#comma -- "$argv"
+end
