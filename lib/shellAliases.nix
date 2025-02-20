@@ -20,6 +20,7 @@
   gs = "git status";
   gst = "git stash";
   gt = "git tag";
+  maisem = "cowsay -f moomoo 'maisem'
 
   godlv = "dlv exec --api-version 2 --listen=127.0.0.1:2345 --headless";
 }
