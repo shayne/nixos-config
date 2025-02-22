@@ -156,5 +156,5 @@ function frun
 end
 
 function ,
-  nix run nixpkgs#comma -- "$argv"
+  nix run nixpkgs#comma -- "$argv[1]" $argv[2..-1]
 end
