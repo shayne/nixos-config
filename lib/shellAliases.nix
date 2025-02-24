@@ -20,6 +20,7 @@
   gs = "git status";
   gst = "git stash";
   gt = "git tag";
+  grh = "git reset --hard";
 
   godlv = "dlv exec --api-version 2 --listen=127.0.0.1:2345 --headless";
 }
