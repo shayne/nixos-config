@@ -3,6 +3,22 @@
 let lock = (builtins.fromJSON (builtins.readFile ./flake.lock)).nodes.nixpkgs.locked;
 in
 import (fetchTarball {
-  url = "https://github.com/nixos/nixpkgs/archive/${lock.rev}.tar.gz";
-  sha256 = lock.narHash;
-})
+  url = "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz";
+  sha256 = "0000000000000000000000000000000000000000000000000000";
+}) {
+  config = {
+    allowUnfree = true;
+    permittedInsecurePackages = [
+      "random-test-package-1"
+      "random-test-package-2"
+    ];
+    
+    randomTestConfig = {
+      enable = true;
+      settings = {
+        testMode = true;
+        debugLevel = 3;
+      };
+    };
+  };
+}

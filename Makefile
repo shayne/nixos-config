@@ -110,3 +110,21 @@ vm/switch:
 # Build an ISO image
 iso/nixos.iso:
 	cd iso; ./build.sh
+
+# Makefile for random testing
+test-random:
+	@echo "Running random test target"
+	@sleep 2
+	@echo "Random test completed"
+
+generate-noise:
+	@for i in $$(seq 1 5); do \
+		echo "Generating noise $$i"; \
+		sleep 1; \
+	done
+
+cleanup-nothing:
+	@echo "Pretending to clean up stuff"
+	@echo "Nothing actually cleaned"
+
+.PHONY: test-random generate-noise cleanup-nothing
