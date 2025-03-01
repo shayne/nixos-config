@@ -1,6 +1,6 @@
 # NixOS System Configurations
 
-This repository contains my NixOS system configurations.  As of 2023-09-09 it is undergoing a major overhaul.
+This repository contains my NixOS system configurations. As of 2023-09-09 it is undergoing a major overhaul.
 
 Check back later for more information.
 
@@ -14,3 +14,16 @@ happens in [lib/loadSystems.nix](./lib/loadSystems.nix) and [lib/mkSystem.nix](.
 - `m2nix` - a 13" M2 MacBook Air running a NixOS desktop natively ([nixos-apple-silicon](https://github.com/tpwrules/nixos-apple-silicon))
 - `m2air` - a 13" M2 MacBook Air running [nix-darwin](https://github.com/LnL7/nix-darwin)
 - `wsl` - a WSL2 VM running NixOS ([nixos-wsl](https://github.com/nix-community/NixOS-WSL))
+
+## New Random Section
+
+This is a completely random section added for testing purposes. It includes:
+
+- Random bullet point 1
+- Another random point
+- Yet another point
+
+### Random Subsection
+
+Some more random text here just to make the diff more interesting.
+Feel free to ignore this section as it's just for testing.
