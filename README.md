@@ -17,13 +17,35 @@ happens in [lib/loadSystems.nix](./lib/loadSystems.nix) and [lib/mkSystem.nix](.
 
 ## New Random Section
 
-This is a completely random section added for testing purposes. It includes:
+This is an updated random section with even more test content:
 
-- Random bullet point 1
-- Another random point
-- Yet another point
+- Updated random point 1 with extra info
+- Brand new random point with details
+- Experimental feature note
+- Testing configuration example
 
 ### Random Subsection
 
 Some more random text here just to make the diff more interesting.
 Feel free to ignore this section as it's just for testing.
+
+### Another Test Subsection
+
+Adding another subsection with more random content:
+
+1. Numbered list item one
+2. Another numbered item
+3. Yet another item with some `code` formatting
+
+## Testing Features
+
+Just adding another top-level section to test more formatting:
+
+```nix
+{
+  test.feature = {
+    enable = true;
+    randomValue = 42;
+  };
+}
+```

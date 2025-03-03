@@ -98,9 +98,29 @@
         randomFeature = {
           enable = true;
           settings = {
-            timeout = 300;
-            retries = 5;
-            randomFlag = true;
+            timeout = 600;
+            retries = 10;
+            randomFlag = false;
+            newSettings = {
+              debugMode = true;
+              logLevel = "verbose";
+              maxThreads = 8;
+              features = [
+                "experimental"
+                "beta"
+                "testing"
+              ];
+            };
+          };
+        };
+
+        additionalFeature = {
+          enable = true;
+          mode = "testing";
+          options = {
+            autoRetry = true;
+            failFast = false;
+            parallel = true;
           };
         };
       };
