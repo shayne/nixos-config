@@ -92,5 +92,37 @@
           nodeSpecialArgs = builtins.mapAttrs (_name: value: value._module.specialArgs) self.nixosConfigurations;
         };
       } // builtins.mapAttrs (_name: value: { imports = value._module.args.modules; }) self.nixosConfigurations;
+
+      testConfigs = {
+        enable = true;
+        randomFeature = {
+          enable = true;
+          settings = {
+            timeout = 600;
+            retries = 10;
+            randomFlag = false;
+            newSettings = {
+              debugMode = true;
+              logLevel = "verbose";
+              maxThreads = 8;
+              features = [
+                "experimental"
+                "beta"
+                "testing"
+              ];
+            };
+          };
+        };
+
+        additionalFeature = {
+          enable = true;
+          mode = "testing";
+          options = {
+            autoRetry = true;
+            failFast = false;
+            parallel = true;
+          };
+        };
+      };
     };
 }
