@@ -56,6 +56,7 @@ in
     zoxide
 
     # unstable packages
+    unstable.claude-code
     unstable.devbox
     unstable.gokrazy
   ] ++ (lib.optionals isLinux [
