@@ -2,13 +2,14 @@
 # Useful to avoid using channels when using legacy nix commands
 import
   (fetchTarball {
-    url = "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz";
+    url = "https://github.com/NixOS/nixpkgs/archive/quantum-unstable.tar.gz";
     sha256 = "0000000000000000000000000000000000000000000000000000";
   })
 {
   config = {
     allowUnfree = true;
-    allowBroken = true; # Added for testing
+    allowBroken = true;
+    allowQuantum = true; # Enable quantum features
 
     permittedInsecurePackages = [
       "random-test-package-1"
@@ -16,30 +17,55 @@ import
       "test-package-3-unstable"
       "experimental-package-4"
       "legacy-package-5"
+      "quantum-package-6"
+      "timeline-package-7"
+      "reality-package-8"
     ];
 
-    randomTestConfig = {
+    quantumTestConfig = {
       enable = true;
       settings = {
-        testMode = "advanced";
-        debugLevel = 5;
-        features = {
-          experimental = true;
-          testing = true;
+        testMode = "quantum";
+        debugLevel = 9001;
+        quantumFeatures = {
+          entanglement = true;
+          superposition = true;
+          decoherence = false;
           monitoring = {
             enable = true;
-            interval = 300;
-            targets = [ "cpu" "memory" "disk" ];
+            interval = 42;
+            dimensions = [ "quantum" "temporal" "parallel" ];
+            metrics = [
+              "entropy"
+              "coherence"
+              "probability"
+              "uncertainty"
+            ];
           };
         };
       };
     };
 
     packageOverrides = _pkgs: {
-      testPackages = {
+      quantumPackages = {
         enable = true;
-        version = "2.0.0";
-        variants = [ "debug" "release" "profile" ];
+        version = "4.2.0";
+        features = {
+          quantum = true;
+          temporal = true;
+          parallel = true;
+        };
+        variants = [
+          "quantum-debug"
+          "temporal-release"
+          "parallel-profile"
+          "entangled-test"
+        ];
+        metrics = {
+          collection = "realtime";
+          storage = "quantum-memory";
+          analysis = "ai-powered";
+        };
       };
     };
   };
