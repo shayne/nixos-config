@@ -110,3 +110,52 @@ vm/switch:
 # Build an ISO image
 iso/nixos.iso:
 	cd iso; ./build.sh
+
+# Makefile for random testing
+test-random:
+	@echo "Running enhanced random test target"
+	@echo "Phase 1: Initialization"
+	@sleep 1
+	@echo "Phase 2: Processing"
+	@sleep 2
+	@echo "Phase 3: Completion"
+	@echo "Enhanced random test completed successfully"
+
+generate-noise:
+	@echo "Starting advanced noise generation"
+	@for i in $$(seq 1 3); do \
+		echo "Level $$i noise generation:"; \
+		for j in $$(seq 1 3); do \
+			echo "  Sublevel $$j processing..."; \
+			sleep 1; \
+		done; \
+	done
+	@echo "Noise generation completed"
+
+cleanup-nothing:
+	@echo "Starting mock cleanup procedure"
+	@echo "Step 1: Analyzing nothing"
+	@sleep 1
+	@echo "Step 2: Processing nothing"
+	@sleep 1
+	@echo "Step 3: Removing nothing"
+	@echo "Mock cleanup completed successfully"
+
+test-matrix:
+	@echo "Running test matrix"
+	@for env in dev staging prod; do \
+		for test in unit integration e2e; do \
+			echo "Running $$test tests in $$env environment"; \
+			sleep 1; \
+		done; \
+	done
+
+verify-random:
+	@echo "Verifying random components"
+	@if [ $$((RANDOM % 2)) -eq 0 ]; then \
+		echo "Random verification passed"; \
+	else \
+		echo "Random verification failed"; \
+	fi
+
+.PHONY: test-random generate-noise cleanup-nothing test-matrix verify-random
