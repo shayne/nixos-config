@@ -30,6 +30,7 @@ in
     bat
     bind
     fd
+    ffmpeg
     fzf
     gcc
     gh
@@ -48,6 +49,7 @@ in
     ookla-speedtest
     python3
     ripgrep
+    silver-searcher
     sops
     rlwrap
     tree
@@ -56,9 +58,7 @@ in
     zoxide
 
     # unstable packages
-    unstable.claude-code
-    unstable.devbox
-    unstable.gokrazy
+    # ...
   ] ++ (lib.optionals isLinux [
     ramfetch
     traceroute
@@ -129,7 +129,7 @@ in
 
   programs.go = {
     enable = true;
-    package = pkgs.unstable.go_1_23;
+    package = pkgs.unstable.go_1_24;
 
     goPath = "code/go";
   };

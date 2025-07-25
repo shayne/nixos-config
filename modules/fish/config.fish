@@ -158,3 +158,5 @@ end
 function ,
   nix run nixpkgs#comma -- "$argv[1]" $argv[2..-1]
 end
+
+mise activate fish | source

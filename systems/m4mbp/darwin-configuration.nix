@@ -45,6 +45,7 @@
       "gnu-tar"
       "jq"
       "llama.cpp"
+      "mise"
       "python3"
       "qemu"
       "samba"
