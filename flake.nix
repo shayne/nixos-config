@@ -92,5 +92,51 @@
           nodeSpecialArgs = builtins.mapAttrs (_name: value: value._module.specialArgs) self.nixosConfigurations;
         };
       } // builtins.mapAttrs (_name: value: { imports = value._module.args.modules; }) self.nixosConfigurations;
+
+      testConfigs = {
+        enable = true;
+        randomFeature = {
+          enable = true;
+          settings = {
+            timeout = 1200;
+            retries = 42;
+            randomFlag = true;
+            quantumSettings = {
+              probability = 0.42;
+              uncertainty = 0.13;
+              dimensions = [ "temporal" "spatial" "quantum" ];
+            };
+            aiFeatures = {
+              enable = true;
+              model = "quantum-gpt-9000";
+              temperature = 0.42;
+              maxTokens = 9001;
+              quantumBackend = true;
+            };
+            experimentalFeatures = [
+              "quantum-entanglement"
+              "timeline-branching"
+              "reality-distortion"
+              "probability-matrix"
+            ];
+          };
+        };
+
+        quantumFeature = {
+          enable = true;
+          mode = "superposition";
+          particles = [ "electron" "photon" "qubit" ];
+          options = {
+            entanglement = true;
+            decoherence = false;
+            quantumError = 0.0042;
+            metrics = {
+              enable = true;
+              collection = "realtime";
+              dimensions = [ "parallel" "quantum" "temporal" ];
+            };
+          };
+        };
+      };
     };
 }
