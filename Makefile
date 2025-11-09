@@ -19,7 +19,7 @@ SSH_OPTIONS=-o PubkeyAuthentication=no -o UserKnownHostsFile=/dev/null -o Strict
 switch:
 ifeq ($(UNAME), Darwin)
 	nix build ".#darwinConfigurations.${HOSTNAME}.system"
-	./result/sw/bin/darwin-rebuild switch --flake "$$(pwd)#${HOSTNAME}"
+	sudo ./result/sw/bin/darwin-rebuild switch --flake "$$(pwd)#${HOSTNAME}"
 else ifeq ($(HOSTNAME), m1nix)
 	sudo nixos-rebuild switch --impure --flake .
 else ifeq ($(HOSTNAME), m2nix)

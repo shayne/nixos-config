@@ -33,7 +33,8 @@
 
   fonts = {
     packages = with pkgs; [
-      (nerdfonts.override { fonts = [ "FiraCode" "SourceCodePro" "UbuntuMono" ]; })
+      nerd-fonts.fira-code
+      nerd-fonts.ubuntu-mono
       fira
       fira-go
       joypixels
@@ -76,10 +77,6 @@
   };
 
   nix = {
-    # We install Nix using a separate installer so we don't want nix-darwin
-    # to manage it for us. This tells nix-darwin to just use whatever is running.
-    useDaemon = true;
-
     optimise.automatic = true;
 
     gc = {
@@ -106,6 +103,7 @@
 
   # The user should already exist, but we need to set this up so Nix knows
   # what our home directory is (https://github.com/LnL7/nix-darwin/issues/423).
+  system.primaryUser = "shayne";
   users.users.shayne = {
     home = "/Users/shayne";
     shell = pkgs.fish;
