@@ -65,10 +65,10 @@
         "homepage": "",
         "owner": "neovim",
         "repo": "nvim-lspconfig",
-        "rev": "2010fc6ec03e2da552b4886fceb2f7bc0fc2e9c0",
-        "sha256": "1lb85magzq9kghp9xkcxr0lnz975qkfvczk5i4d1q2i7yxzfns9l",
+        "rev": "30a2b191bccf541ce1797946324c9329e90ec448",
+        "sha256": "01aclavrxmfb5xr07riwpbnkwjxmzimrq4bninqjks5889ardsw6",
         "type": "tarball",
-        "url": "https://github.com/neovim/nvim-lspconfig/archive/2010fc6ec03e2da552b4886fceb2f7bc0fc2e9c0.tar.gz",
+        "url": "https://github.com/neovim/nvim-lspconfig/archive/30a2b191bccf541ce1797946324c9329e90ec448.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nvim-plenary": {
@@ -89,10 +89,10 @@
         "homepage": "",
         "owner": "nvim-telescope",
         "repo": "telescope.nvim",
-        "rev": "0294ae3eafe662c438addb8692d9c98ef73a983e",
-        "sha256": "0gc0iysil9wjky08fbq53rxphmbh0mz97g1r4mx10rpm77sr5vgn",
+        "rev": "83a3a713d6b2d2a408491a1b959e55a7fa8678e8",
+        "sha256": "0ccnj6iabapk62l74q5l1c5gddc5969p083kdrfaks4w82az46pa",
         "type": "tarball",
-        "url": "https://github.com/nvim-telescope/telescope.nvim/archive/0294ae3eafe662c438addb8692d9c98ef73a983e.tar.gz",
+        "url": "https://github.com/nvim-telescope/telescope.nvim/archive/83a3a713d6b2d2a408491a1b959e55a7fa8678e8.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nvim-treesitter": {
@@ -185,10 +185,10 @@
         "homepage": null,
         "owner": "github",
         "repo": "copilot.vim",
-        "rev": "da369d90cfd6c396b1d0ec259836a1c7222fb2ea",
-        "sha256": "0pwaw4izic1zajx586vxjn8yslabd2hq42wy1i7px3fj6g2v5gvl",
+        "rev": "f89e977c87180519ba3b942200e3d05b17b1e2fc",
+        "sha256": "0894mjyjjqgb9x1yyhshl8vj85lyxmv4jc8caxpi2brmaqsc83in",
         "type": "tarball",
-        "url": "https://github.com/github/copilot.vim/archive/da369d90cfd6c396b1d0ec259836a1c7222fb2ea.tar.gz",
+        "url": "https://github.com/github/copilot.vim/archive/f89e977c87180519ba3b942200e3d05b17b1e2fc.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "vim-cue": {
@@ -341,10 +341,10 @@
         "homepage": null,
         "owner": "ziglang",
         "repo": "zig.vim",
-        "rev": "0c100863c7901a79d9c4b7a2092e335cc09337cc",
-        "sha256": "1b5pp7ygwx2ydj2g1l6qdm48arpm9g9xyjbqpfhbcy6wxvkn6178",
+        "rev": "1a1112eec20e28c832a06ddb1d0060f6ce652372",
+        "sha256": "0zzh5y7kawkbxsf42bxsxm8hlq21vib7dg3vcd8ysbl5ah6h6azm",
         "type": "tarball",
-        "url": "https://github.com/ziglang/zig.vim/archive/0c100863c7901a79d9c4b7a2092e335cc09337cc.tar.gz",
+        "url": "https://github.com/ziglang/zig.vim/archive/1a1112eec20e28c832a06ddb1d0060f6ce652372.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "zoxide.fish": {
