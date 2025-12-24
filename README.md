@@ -1,16 +1,26 @@
-# NixOS System Configurations
+# NixOS & nix-darwin Configurations
 
-This repository contains my NixOS system configurations.  As of 2023-09-09 it is undergoing a major overhaul.
+This repository houses my NixOS and macOS (nix-darwin) configurations. The system loader lives in
+`lib/loadSystems.nix` and `lib/mkSystem.nix`, with per-host configs under `systems/` and user config under
+`home-manager/`.
 
-Check back later for more information.
+## Structure
 
-For now take a look at the [systems](./systems/) and [home-manager](./home-manager/) directories. A lot of the magic
-happens in [lib/loadSystems.nix](./lib/loadSystems.nix) and [lib/mkSystem.nix](./lib/mkSystem.nix).
+- `systems/base/`: shared defaults for Linux and Darwin
+- `systems/<hostname>/`: per-host overrides (current host: `m4mbp`)
+- `home-manager/<user>/`: shared user config and per-host overlays
+- `modules/`: reusable Nix modules
+- `overlays/` + `pkgs/`: custom overlays/packages
 
-## Current systems
+## Common Commands
 
-- `devvm` - an x86_64 headless VM for development
-- `m1nix` - a 13" M1 MacBook Pro running a NixOS desktop natively ([nixos-apple-silicon](https://github.com/tpwrules/nixos-apple-silicon))
-- `m2nix` - a 13" M2 MacBook Air running a NixOS desktop natively ([nixos-apple-silicon](https://github.com/tpwrules/nixos-apple-silicon))
-- `m2air` - a 13" M2 MacBook Air running [nix-darwin](https://github.com/LnL7/nix-darwin)
-- `wsl` - a WSL2 VM running NixOS ([nixos-wsl](https://github.com/nix-community/NixOS-WSL))
+- `make lint`: run `deadnix`, `nixpkgs-fmt`, and `statix` (same as pre-commit)
+- `make check`: run lint + `nix flake check --all-systems`, then build the current host
+- `make` or `make switch`: build and switch the current host (Darwin uses `darwin-rebuild switch`)
+- `make test`: NixOS test build (Linux only)
+
+## Current Systems
+
+- `m4mbp` — Apple Silicon MacBook Pro running nix-darwin
+
+The repo remains multi-system capable (aarch64/x86_64, Linux/Darwin) for future hosts.
