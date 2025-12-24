@@ -30,7 +30,6 @@ let
     sources = import ../nix/sources.nix;
     unstableModulesPath = "${inputs.home-manager-unstable.outPath}";
   };
-  recursiveMergeAttrs = builtins.foldl' lib.recursiveUpdate { };
 in
 {
   ${configKey}.${name} = systemFn {
@@ -47,16 +46,17 @@ in
           useGlobalPkgs = true;
           useUserPackages = true;
           extraSpecialArgs = args;
-          users = recursiveMergeAttrs (builtins.map
-            (user: {
-              ${user} = inputs.nixpkgs.lib.mkMerge ([
-                (import homeManagerPath)
-                (import (homeManagerPath + "/${user}"))
+          sharedModules = [
+            homeManagerPath
+          ];
+          users = lib.genAttrs users (user: {
+            imports =
+              [
+                (homeManagerPath + "/${user}")
               ] ++ lib.optionals (builtins.pathExists (homeManagerPath + "/${user}/${name}")) [
-                (import (homeManagerPath + "/${user}/${name}"))
-              ]);
-            })
-            users);
+                (homeManagerPath + "/${user}/${name}")
+              ];
+          });
         };
       }
     ] ++ builtins.map
