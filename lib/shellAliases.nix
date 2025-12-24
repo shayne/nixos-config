@@ -27,4 +27,5 @@
   amp = "npx @sourcegraph/amp@latest";
   claude = "npx @anthropic-ai/claude-code@latest";
   ytsubs = "uvx ytsubs@latest";
+  cmtr = "uvx cmtr@latest";
 }
