@@ -3,5 +3,4 @@
 
 { pkgs ? (import ../nixpkgs.nix) { }, ... }: {
   caddy = pkgs.callPackage ../pkgs/caddy.nix { };
-  orcaslicer = pkgs.callPackage ../pkgs/orcaslicer.nix { };
 }

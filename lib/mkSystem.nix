@@ -43,19 +43,21 @@ in
     ] ++ [
       homeManagerFn
       {
-        home-manager.useGlobalPkgs = true;
-        home-manager.useUserPackages = true;
-        home-manager.extraSpecialArgs = args;
-        home-manager.users = recursiveMergeAttrs (builtins.map
-          (user: {
-            ${user} = inputs.nixpkgs.lib.mkMerge ([
-              (import homeManagerPath)
-              (import (homeManagerPath + "/${user}"))
-            ] ++ lib.optionals (builtins.pathExists (homeManagerPath + "/${user}/${name}")) [
-              (import (homeManagerPath + "/${user}/${name}"))
-            ]);
-          })
-          users);
+        home-manager = {
+          useGlobalPkgs = true;
+          useUserPackages = true;
+          extraSpecialArgs = args;
+          users = recursiveMergeAttrs (builtins.map
+            (user: {
+              ${user} = inputs.nixpkgs.lib.mkMerge ([
+                (import homeManagerPath)
+                (import (homeManagerPath + "/${user}"))
+              ] ++ lib.optionals (builtins.pathExists (homeManagerPath + "/${user}/${name}")) [
+                (import (homeManagerPath + "/${user}/${name}"))
+              ]);
+            })
+            users);
+        };
       }
     ] ++ builtins.map
       (user:

@@ -6,10 +6,12 @@
   # ];
 
   # Only install the docs I use
-  documentation.enable = true;
-  documentation.man.enable = true;
-  documentation.info.enable = false;
-  documentation.doc.enable = false;
+  documentation = {
+    enable = true;
+    man.enable = true;
+    info.enable = false;
+    doc.enable = false;
+  };
 
   environment = {
     systemPackages = with pkgs; [
@@ -39,9 +41,9 @@
       fira-go
       joypixels
       liberation_ttf
-      noto-fonts-emoji
+      noto-fonts-color-emoji
       source-serif
-      ubuntu_font_family
+      ubuntu-classic
       work-sans
     ];
   };
@@ -103,7 +105,15 @@
 
   # The user should already exist, but we need to set this up so Nix knows
   # what our home directory is (https://github.com/LnL7/nix-darwin/issues/423).
-  system.primaryUser = "shayne";
+  system = {
+    primaryUser = "shayne";
+    activationScripts.diff = {
+      supportsDryActivation = true;
+      text = ''
+        ${pkgs.nvd}/bin/nvd --nix-bin-dir=${pkgs.nix}/bin diff /run/current-system "$systemConfig"
+      '';
+    };
+  };
   users.users.shayne = {
     home = "/Users/shayne";
     shell = pkgs.fish;
@@ -111,28 +121,26 @@
 
   # zsh is the default shell on Mac and we want to make sure that we're
   # configuring the rc correctly with nix-darwin paths.
-  programs.zsh.enable = true;
-  programs.zsh.shellInit = ''
-    # Nix
-    if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
-      . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
-    fi
-    # End Nix
-  '';
-
-  programs.fish.enable = true;
-  programs.fish.shellInit = ''
-    # Nix
-    if test -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.fish'
-      source '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.fish'
-    end
-    # End Nix
-  '';
-
-  system.activationScripts.diff = {
-    supportsDryActivation = true;
-    text = ''
-      ${pkgs.nvd}/bin/nvd --nix-bin-dir=${pkgs.nix}/bin diff /run/current-system "$systemConfig"
-    '';
+  programs = {
+    zsh = {
+      enable = true;
+      shellInit = ''
+        # Nix
+        if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
+          . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+        fi
+        # End Nix
+      '';
+    };
+    fish = {
+      enable = true;
+      shellInit = ''
+        # Nix
+        if test -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.fish'
+          source '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.fish'
+        end
+        # End Nix
+      '';
+    };
   };
 }

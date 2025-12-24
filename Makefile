@@ -20,18 +20,28 @@ switch:
 ifeq ($(UNAME), Darwin)
 	nix build ".#darwinConfigurations.${HOSTNAME}.system"
 	sudo ./result/sw/bin/darwin-rebuild switch --flake "$$(pwd)#${HOSTNAME}"
-else ifeq ($(HOSTNAME), m1nix)
-	sudo nixos-rebuild switch --impure --flake .
-else ifeq ($(HOSTNAME), m2nix)
-	sudo nixos-rebuild switch --impure --flake .
-else ifeq ($(HOSTNAME), lima)
-	sudo nixos-rebuild switch --impure --flake .
 else
 	sudo nixos-rebuild switch --flake .
 endif
 
 test:
 	sudo nixos-rebuild test --flake .
+
+lint:
+	@echo "Running deadnix..."
+	nix run nixpkgs#deadnix -- --fail .
+	@echo "Running nixpkgs-fmt..."
+	nix run nixpkgs#nixpkgs-fmt -- .
+	@echo "Running statix..."
+	nix run nixpkgs#statix -- check .
+
+check: lint
+	nix flake check --all-systems
+ifeq ($(UNAME), Darwin)
+	nix build ".#darwinConfigurations.${HOSTNAME}.system"
+else
+	sudo nixos-rebuild build --flake .
+endif
 
 # bootstrap a brand new VM. The VM should have NixOS ISO on the CD drive
 # and just set the password of the root user to "root". This will install

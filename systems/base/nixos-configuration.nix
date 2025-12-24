@@ -30,11 +30,13 @@
   time.timeZone = "America/New_York";
 
   # Only install the docs I use
-  documentation.enable = true;
-  documentation.nixos.enable = lib.mkForce false;
-  documentation.man.enable = true;
-  documentation.info.enable = lib.mkForce false;
-  documentation.doc.enable = lib.mkForce false;
+  documentation = {
+    enable = true;
+    nixos.enable = lib.mkForce false;
+    man.enable = true;
+    info.enable = lib.mkForce false;
+    doc.enable = lib.mkForce false;
+  };
 
   environment = {
     # Eject nano and perl from the system
@@ -61,7 +63,9 @@
   fonts = {
     fontDir.enable = true;
     packages = with pkgs; [
-      (nerdfonts.override { fonts = [ "FiraCode" "SourceCodePro" "UbuntuMono" ]; })
+      nerd-fonts.fira-code
+      nerd-fonts.sauce-code-pro
+      nerd-fonts.ubuntu-mono
       fira
       fira-go
       joypixels
@@ -132,8 +136,6 @@
       options = "--delete-older-than 10d";
     };
 
-    optimise.automatic = true;
-
     # This will add each flake input as a registry
     # To make nix3 commands consistent with your flake
     registry = lib.mapAttrs (_: value: { flake = value; }) inputs;
@@ -155,21 +157,27 @@
 
   security.sudo.wheelNeedsPassword = false;
 
-  programs.fish.enable = true;
-  programs.nano.enable = lib.mkDefault false;
-  programs.nix-ld.enable = true;
-
-  services.openssh.enable = lib.mkDefault true;
-  services.openssh.settings.PermitRootLogin = "no";
-
-  services.vscode-server.enable = true;
-
-  system.activationScripts.diff = {
-    supportsDryActivation = true;
-    text = ''
-      ${pkgs.nvd}/bin/nvd --nix-bin-dir=${pkgs.nix}/bin diff /run/current-system "$systemConfig"
-    '';
+  programs = {
+    fish.enable = true;
+    nano.enable = lib.mkDefault false;
+    nix-ld.enable = true;
   };
 
-  system.stateVersion = stateVersion;
+  services = {
+    openssh = {
+      enable = lib.mkDefault true;
+      settings.PermitRootLogin = "no";
+    };
+    vscode-server.enable = true;
+  };
+
+  system = {
+    activationScripts.diff = {
+      supportsDryActivation = true;
+      text = ''
+        ${pkgs.nvd}/bin/nvd --nix-bin-dir=${pkgs.nix}/bin diff /run/current-system "$systemConfig"
+      '';
+    };
+    inherit stateVersion;
+  };
 }

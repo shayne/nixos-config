@@ -3,35 +3,82 @@
 
   networking.hostName = "m4mbp";
 
-  nix.settings.sandbox = "relaxed";
-  nix.settings.extra-sandbox-paths = [
-    "/private/var/db/oah" # aot files
-    "/Library/Apple" # rossetta runtime
-  ];
-  nix.settings.trusted-users = [ "@admin" ];
-
-  nix.linux-builder = {
-    # Disabled as this does not work with the determinate nix-installer
-    enable = false;
-    ephemeral = true;
-    maxJobs = 4;
-    config = {
-      virtualisation = {
-        darwin-builder = {
-          diskSize = 40 * 1024;
-          memorySize = 8 * 1024;
+  nix = {
+    settings = {
+      sandbox = "relaxed";
+      extra-sandbox-paths = [
+        "/private/var/db/oah" # aot files
+        "/Library/Apple" # rossetta runtime
+      ];
+      trusted-users = [ "@admin" ];
+    };
+    linux-builder = {
+      # Disabled as this does not work with the determinate nix-installer
+      enable = false;
+      ephemeral = true;
+      maxJobs = 4;
+      config = {
+        virtualisation = {
+          darwin-builder = {
+            diskSize = 40 * 1024;
+            memorySize = 8 * 1024;
+          };
+          cores = 6;
         };
-        cores = 6;
       };
     };
   };
 
   security.pam.services.sudo_local.touchIdAuth = true;
 
-  system.systemBuilderArgs = lib.mkIf (config.nix.settings.sandbox == "relaxed") {
-    sandboxProfile = ''
-      (allow file-read* file-write* process-exec mach-lookup (subpath "${builtins.storeDir}"))
-    '';
+  system = {
+    systemBuilderArgs = lib.mkIf (config.nix.settings.sandbox == "relaxed") {
+      sandboxProfile = ''
+        (allow file-read* file-write* process-exec mach-lookup (subpath "${builtins.storeDir}"))
+      '';
+    };
+    defaults = {
+      NSGlobalDomain = {
+        # Disable press-and-hold for keys in favor of key repeat
+        ApplePressAndHoldEnabled = false;
+        # Enable full keyboard access for all controls (e.g. enable Tab in modal dialogs)
+        AppleKeyboardUIMode = 3;
+        # Set a shorter Delay until key repeat
+        InitialKeyRepeat = 10;
+        # Set a blazingly fast keyboard repeat rate
+        KeyRepeat = 2;
+        # Automatic text replacement settings
+        NSAutomaticCapitalizationEnabled = false;
+        NSAutomaticDashSubstitutionEnabled = false;
+        NSAutomaticPeriodSubstitutionEnabled = false;
+        NSAutomaticQuoteSubstitutionEnabled = false;
+        NSAutomaticSpellingCorrectionEnabled = false;
+        # Expand save panel by default
+        NSNavPanelExpandedStateForSaveMode = true;
+        NSNavPanelExpandedStateForSaveMode2 = true;
+        # Expand print panel by default
+        PMPrintingExpandedStateForPrint = true;
+        # Hide the menubar
+        # _HIHideMenuBar = true;
+      };
+      dock = {
+        autohide = true;
+        mru-spaces = false;
+        showhidden = true;
+      };
+      finder = {
+        AppleShowAllExtensions = true;
+      };
+      WindowManager = {
+        # Disable click to show desktop
+        EnableStandardClickToShowDesktop = false;
+      };
+    };
+    keyboard = {
+      enableKeyMapping = true;
+      remapCapsLockToControl = true;
+    };
+    stateVersion = 5;
   };
 
   programs.nix-index.enable = true;
@@ -75,10 +122,9 @@
       "iterm2"
       "linearmouse"
       "lunar"
-      "microsoft-remote-desktop"
       "multipass"
-      "multiviewer-for-f1"
-      "ollama"
+      "multiviewer"
+      "ollama-app"
       "orbstack"
       "pearcleaner"
       "raycast"
@@ -90,8 +136,8 @@
       "stats"
       "steam"
       "swiftformat-for-xcode"
-      "syncthing"
-      "tailscale"
+      "syncthing-app"
+      "tailscale-app"
       # This freezes on quit, using desktop.telegram.org for now
       # "telegram-desktop"
       "utm"
@@ -109,38 +155,4 @@
   };
 
   # more https://gist.github.com/DAddYE/2108403
-  # Disable press-and-hold for keys in favor of key repeat
-  system.defaults.NSGlobalDomain.ApplePressAndHoldEnabled = false;
-  # Enable full keyboard access for all controls (e.g. enable Tab in modal dialogs)
-  system.defaults.NSGlobalDomain.AppleKeyboardUIMode = 3;
-  # Set a shorter Delay until key repeat
-  system.defaults.NSGlobalDomain.InitialKeyRepeat = 10;
-  # Set a blazingly fast keyboard repeat rate
-  system.defaults.NSGlobalDomain.KeyRepeat = 2;
-  # Automatic text replacement settings
-  system.defaults.NSGlobalDomain.NSAutomaticCapitalizationEnabled = false;
-  system.defaults.NSGlobalDomain.NSAutomaticDashSubstitutionEnabled = false;
-  system.defaults.NSGlobalDomain.NSAutomaticPeriodSubstitutionEnabled = false;
-  system.defaults.NSGlobalDomain.NSAutomaticQuoteSubstitutionEnabled = false;
-  system.defaults.NSGlobalDomain.NSAutomaticSpellingCorrectionEnabled = false;
-  # Expand save panel by default
-  system.defaults.NSGlobalDomain.NSNavPanelExpandedStateForSaveMode = true;
-  system.defaults.NSGlobalDomain.NSNavPanelExpandedStateForSaveMode2 = true;
-  # Expand print panel by default
-  system.defaults.NSGlobalDomain.PMPrintingExpandedStateForPrint = true;
-  # Hide the menubar
-  # system.defaults.NSGlobalDomain._HIHideMenuBar = true;
-  # Dock setting
-  system.defaults.dock.autohide = true;
-  system.defaults.dock.mru-spaces = false;
-  system.defaults.dock.showhidden = true;
-  # Show all filename extensions
-  system.defaults.finder.AppleShowAllExtensions = true;
-  # Keyboard settings
-  system.keyboard.enableKeyMapping = true;
-  system.keyboard.remapCapsLockToControl = true;
-  # Disable click to show desktop
-  system.defaults.WindowManager.EnableStandardClickToShowDesktop = false;
-
-  system.stateVersion = 5;
 }

@@ -14,14 +14,14 @@
     # example = prev.example.overrideAttrs (oldAttrs: rec {
     # ...
     # });
-    inherit (inputs.tailscale.packages.${prev.system}) tailscale;
+    inherit (inputs.tailscale.packages.${prev.stdenv.hostPlatform.system}) tailscale;
   };
 
   # When applied, the unstable nixpkgs set (declared in the flake inputs) will
   # be accessible through 'pkgs.unstable'
   unstable-packages = final: _prev: rec {
     unstable = import inputs.nixpkgs-unstable {
-      inherit (final) system;
+      inherit (final.stdenv.hostPlatform) system;
       config.allowUnfree = true;
     };
 
