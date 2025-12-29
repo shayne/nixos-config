@@ -136,7 +136,6 @@
       "stats"
       "steam"
       "swiftformat-for-xcode"
-      "syncthing-app"
       "tailscale-app"
       # This freezes on quit, using desktop.telegram.org for now
       # "telegram-desktop"
