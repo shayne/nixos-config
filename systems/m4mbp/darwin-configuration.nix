@@ -116,7 +116,6 @@
       "discord"
       "diffusionbee"
       "google-chrome"
-      "grammarly-desktop"
       "homerow"
       "inkscape"
       "iterm2"
@@ -139,6 +138,7 @@
       "tailscale-app"
       # This freezes on quit, using desktop.telegram.org for now
       # "telegram-desktop"
+      "upscayl"
       "utm"
       "visual-studio-code"
       "vlc"
