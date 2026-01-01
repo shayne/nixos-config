@@ -65,6 +65,14 @@
         autohide = true;
         mru-spaces = false;
         showhidden = true;
+        # Example dock layout (disabled for now)
+        # persistent-apps = [
+        #   "/Applications/Google Chrome.app"
+        #   "/Applications/Signal.app"
+        #   "/Applications/Discord.app"
+        #   "/Applications/Obsidian.app"
+        #   "/Applications/Visual Studio Code.app"
+        # ];
       };
       finder = {
         AppleShowAllExtensions = true;
@@ -100,6 +108,7 @@
       "swiftlint"
       "swtpm"
       "usbutils"
+      "uv"
       "zsync"
     ];
     casks = [
@@ -131,6 +140,7 @@
       "shortcat"
       "shureplus-motiv"
       "signal"
+      "spotify"
       "stats"
       "steam"
       "swiftformat-for-xcode"
@@ -142,6 +152,9 @@
       "visual-studio-code"
       "vlc"
     ];
+    masApps = {
+      "Xcode" = 497799835;
+    };
   };
 
   launchd.daemons.ttl65.serviceConfig = {

@@ -37,6 +37,8 @@ in
       baseSystemConfig
       systemsPath
       (systemsPath + "/${name}/${configFile}")
+    ] ++ lib.optionals isDarwin [
+      inputs.nix-homebrew.darwinModules.nix-homebrew
     ] ++ lib.optionals (builtins.pathExists "${systemsPath}/${name}/hardware.nix") [
       (systemsPath + "/${name}/hardware.nix")
     ] ++ [

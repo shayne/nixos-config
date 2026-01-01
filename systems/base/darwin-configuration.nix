@@ -103,6 +103,19 @@
     };
   };
 
+  nix-homebrew = {
+    enable = true;
+    enableRosetta = true;
+    autoMigrate = true;
+    mutableTaps = true;
+    user = config.system.primaryUser;
+    taps = with inputs; {
+      "homebrew/homebrew-core" = homebrew-core;
+      "homebrew/homebrew-cask" = homebrew-cask;
+      "homebrew/homebrew-bundle" = homebrew-bundle;
+    };
+  };
+
   # The user should already exist, but we need to set this up so Nix knows
   # what our home directory is (https://github.com/LnL7/nix-darwin/issues/423).
   system = {
@@ -114,9 +127,87 @@
       '';
     };
   };
+  system.keyboard = {
+    enableKeyMapping = true;
+    remapCapsLockToControl = true;
+  };
   users.users.shayne = {
     home = "/Users/shayne";
     shell = pkgs.fish;
+  };
+
+  security.pam.services.sudo_local.touchIdAuth = true;
+
+  system.defaults = {
+    NSGlobalDomain = {
+      AppleShowAllExtensions = true;
+      NSUseAnimatedFocusRing = false;
+      NSNavPanelExpandedStateForSaveMode = true;
+      NSNavPanelExpandedStateForSaveMode2 = true;
+      PMPrintingExpandedStateForPrint = true;
+      PMPrintingExpandedStateForPrint2 = true;
+      NSDocumentSaveNewDocumentsToCloud = false;
+      ApplePressAndHoldEnabled = false;
+      "com.apple.mouse.tapBehavior" = 1;
+      NSWindowShouldDragOnGesture = true;
+      NSAutomaticSpellingCorrectionEnabled = false;
+    };
+    LaunchServices.LSQuarantine = false;
+    loginwindow.GuestEnabled = false;
+    finder.FXPreferredViewStyle = "Nlsv";
+  };
+
+  system.defaults.CustomUserPreferences = {
+    "com.apple.desktopservices" = {
+      DSDontWriteNetworkStores = true;
+      DSDontWriteUSBStores = true;
+    };
+    # Opinionated Dock defaults.
+    "com.apple.dock" = {
+      autohide = true;
+      launchanim = false;
+      static-only = false;
+      show-recents = false;
+      show-process-indicators = true;
+      orientation = "bottom";
+      tilesize = 64;
+      minimize-to-application = true;
+      mineffect = "scale";
+      enable-window-tool = false;
+    };
+    "com.apple.ActivityMonitor" = {
+      OpenMainWindow = true;
+      IconType = 5;
+      SortColumn = "CPUUsage";
+      SortDirection = 0;
+    };
+    "com.apple.Safari" = {
+      UniversalSearchEnabled = false;
+      SuppressSearchSuggestions = true;
+    };
+    "com.apple.AdLib" = {
+      allowApplePersonalizedAdvertising = false;
+    };
+    "com.apple.SoftwareUpdate" = {
+      AutomaticCheckEnabled = true;
+      ScheduleFrequency = 1;
+      AutomaticDownload = 1;
+      CriticalUpdateInstall = 1;
+    };
+    "com.apple.TimeMachine" = {
+      DoNotOfferNewDisksForBackup = true;
+    };
+    "com.apple.ImageCapture" = {
+      disableHotPlug = true;
+    };
+    "com.apple.commerce" = {
+      AutoUpdate = true;
+    };
+    "com.google.Chrome" = {
+      AppleEnableSwipeNavigateWithScrolls = true;
+      DisablePrintPreview = true;
+      PMPrintingExpandedStateForPrint2 = true;
+    };
   };
 
   # zsh is the default shell on Mac and we want to make sure that we're
@@ -145,5 +236,9 @@
   };
 
   # Keep Homebrew in sync with declared brews/casks.
-  homebrew.onActivation.cleanup = "zap";
+  homebrew.onActivation = {
+    cleanup = "zap";
+    autoUpdate = true;
+    upgrade = true;
+  };
 }
