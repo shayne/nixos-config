@@ -143,4 +143,7 @@
       '';
     };
   };
+
+  # Keep Homebrew in sync with declared brews/casks.
+  homebrew.onActivation.cleanup = "zap";
 }
