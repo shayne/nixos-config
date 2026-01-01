@@ -131,7 +131,6 @@
       "shortcat"
       "shureplus-motiv"
       "signal"
-      "slack"
       "stats"
       "steam"
       "swiftformat-for-xcode"
