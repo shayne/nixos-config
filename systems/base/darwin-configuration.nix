@@ -140,73 +140,91 @@
 
   system.defaults = {
     NSGlobalDomain = {
-      AppleShowAllExtensions = true;
-      NSUseAnimatedFocusRing = false;
-      NSNavPanelExpandedStateForSaveMode = true;
-      NSNavPanelExpandedStateForSaveMode2 = true;
-      PMPrintingExpandedStateForPrint = true;
-      PMPrintingExpandedStateForPrint2 = true;
-      NSDocumentSaveNewDocumentsToCloud = false;
-      ApplePressAndHoldEnabled = false;
-      "com.apple.mouse.tapBehavior" = 1;
-      NSWindowShouldDragOnGesture = true;
-      NSAutomaticSpellingCorrectionEnabled = false;
+      AppleShowAllExtensions = true; # Show all file extensions
+      NSUseAnimatedFocusRing = false; # Disable focus ring animation
+      NSNavPanelExpandedStateForSaveMode = true; # Expand save dialog
+      NSNavPanelExpandedStateForSaveMode2 = true; # Expand save dialog (v2)
+      PMPrintingExpandedStateForPrint = true; # Expand print dialog
+      PMPrintingExpandedStateForPrint2 = true; # Expand print dialog (v2)
+      NSDocumentSaveNewDocumentsToCloud = false; # Save to disk by default
+      ApplePressAndHoldEnabled = false; # Use key repeat (no accents)
+      AppleKeyboardUIMode = 3; # Full keyboard access
+      InitialKeyRepeat = 10; # Delay until repeat
+      KeyRepeat = 2; # Key repeat rate
+      NSAutomaticCapitalizationEnabled = false; # Disable auto-capitalization
+      NSAutomaticDashSubstitutionEnabled = false; # Disable smart dashes
+      NSAutomaticPeriodSubstitutionEnabled = false; # Disable double-space period
+      NSAutomaticQuoteSubstitutionEnabled = false; # Disable smart quotes
+      NSAutomaticSpellingCorrectionEnabled = false; # Disable autocorrect
+      "com.apple.mouse.tapBehavior" = 1; # Tap-to-click
+      NSWindowShouldDragOnGesture = true; # Cmd+Ctrl drag windows
     };
-    LaunchServices.LSQuarantine = false;
-    loginwindow.GuestEnabled = false;
-    finder.FXPreferredViewStyle = "Nlsv";
+    LaunchServices.LSQuarantine = false; # Disable app quarantine prompt
+    loginwindow.GuestEnabled = false; # Disable Guest login
+    finder.FXPreferredViewStyle = "Nlsv"; # Finder default view (List)
+    WindowManager.EnableStandardClickToShowDesktop = false; # Disable click-to-show-desktop
   };
 
   system.defaults.CustomUserPreferences = {
     "com.apple.desktopservices" = {
-      DSDontWriteNetworkStores = true;
-      DSDontWriteUSBStores = true;
+      DSDontWriteNetworkStores = true; # No .DS_Store on network volumes
+      DSDontWriteUSBStores = true; # No .DS_Store on USB volumes
     };
     # Opinionated Dock defaults.
     "com.apple.dock" = {
-      autohide = true;
-      launchanim = false;
-      static-only = false;
-      show-recents = false;
-      show-process-indicators = true;
-      orientation = "bottom";
-      tilesize = 64;
-      minimize-to-application = true;
-      mineffect = "scale";
-      enable-window-tool = false;
+      autohide = true; # Auto-hide Dock
+      mru-spaces = false; # Don't rearrange Spaces
+      launchanim = false; # Disable Dock launch animation
+      static-only = false; # Show pinned + running apps
+      show-recents = false; # Hide recent apps section
+      show-process-indicators = true; # Show running app dots
+      showhidden = true; # Translucent hidden apps
+      orientation = "bottom"; # Dock position
+      tilesize = 64; # Dock icon size
+      minimize-to-application = true; # Minimize into app icon
+      mineffect = "scale"; # Minimize animation style
+      enable-window-tool = false; # Dock window tool (undocumented)
+      # Example dock layout (disabled for now)
+      # persistent-apps = [
+      #   "/Applications/Google Chrome.app"
+      #   "/Applications/Signal.app"
+      #   "/Applications/Discord.app"
+      #   "/Applications/Obsidian.app"
+      #   "/Applications/Visual Studio Code.app"
+      # ];
     };
     "com.apple.ActivityMonitor" = {
-      OpenMainWindow = true;
-      IconType = 5;
-      SortColumn = "CPUUsage";
-      SortDirection = 0;
+      OpenMainWindow = true; # Open main window on launch
+      IconType = 5; # Dock icon: CPU usage meter
+      SortColumn = "CPUUsage"; # Sort by CPU usage
+      SortDirection = 0; # Sort order
     };
     "com.apple.Safari" = {
-      UniversalSearchEnabled = false;
-      SuppressSearchSuggestions = true;
+      UniversalSearchEnabled = false; # Don't send searches to Apple
+      SuppressSearchSuggestions = true; # Disable search suggestions
     };
     "com.apple.AdLib" = {
-      allowApplePersonalizedAdvertising = false;
+      allowApplePersonalizedAdvertising = false; # Disable personalized ads
     };
     "com.apple.SoftwareUpdate" = {
-      AutomaticCheckEnabled = true;
-      ScheduleFrequency = 1;
-      AutomaticDownload = 1;
-      CriticalUpdateInstall = 1;
+      AutomaticCheckEnabled = true; # Auto check for updates
+      ScheduleFrequency = 1; # Check daily
+      AutomaticDownload = 1; # Download updates automatically
+      CriticalUpdateInstall = 1; # Install critical updates
     };
     "com.apple.TimeMachine" = {
-      DoNotOfferNewDisksForBackup = true;
+      DoNotOfferNewDisksForBackup = true; # Don't prompt for new disks
     };
     "com.apple.ImageCapture" = {
-      disableHotPlug = true;
+      disableHotPlug = true; # Stop Photos auto-launch on plug-in
     };
     "com.apple.commerce" = {
-      AutoUpdate = true;
+      AutoUpdate = true; # App Store auto-updates
     };
     "com.google.Chrome" = {
-      AppleEnableSwipeNavigateWithScrolls = true;
-      DisablePrintPreview = true;
-      PMPrintingExpandedStateForPrint2 = true;
+      AppleEnableSwipeNavigateWithScrolls = true; # Enable swipe back/forward
+      DisablePrintPreview = true; # Use system print dialog
+      PMPrintingExpandedStateForPrint2 = true; # Expand print dialog
     };
   };
 

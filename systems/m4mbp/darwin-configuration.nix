@@ -29,62 +29,11 @@
     };
   };
 
-  security.pam.services.sudo_local.touchIdAuth = true;
-
   system = {
     systemBuilderArgs = lib.mkIf (config.nix.settings.sandbox == "relaxed") {
       sandboxProfile = ''
         (allow file-read* file-write* process-exec mach-lookup (subpath "${builtins.storeDir}"))
       '';
-    };
-    defaults = {
-      NSGlobalDomain = {
-        # Disable press-and-hold for keys in favor of key repeat
-        ApplePressAndHoldEnabled = false;
-        # Enable full keyboard access for all controls (e.g. enable Tab in modal dialogs)
-        AppleKeyboardUIMode = 3;
-        # Set a shorter Delay until key repeat
-        InitialKeyRepeat = 10;
-        # Set a blazingly fast keyboard repeat rate
-        KeyRepeat = 2;
-        # Automatic text replacement settings
-        NSAutomaticCapitalizationEnabled = false;
-        NSAutomaticDashSubstitutionEnabled = false;
-        NSAutomaticPeriodSubstitutionEnabled = false;
-        NSAutomaticQuoteSubstitutionEnabled = false;
-        NSAutomaticSpellingCorrectionEnabled = false;
-        # Expand save panel by default
-        NSNavPanelExpandedStateForSaveMode = true;
-        NSNavPanelExpandedStateForSaveMode2 = true;
-        # Expand print panel by default
-        PMPrintingExpandedStateForPrint = true;
-        # Hide the menubar
-        # _HIHideMenuBar = true;
-      };
-      dock = {
-        autohide = true;
-        mru-spaces = false;
-        showhidden = true;
-        # Example dock layout (disabled for now)
-        # persistent-apps = [
-        #   "/Applications/Google Chrome.app"
-        #   "/Applications/Signal.app"
-        #   "/Applications/Discord.app"
-        #   "/Applications/Obsidian.app"
-        #   "/Applications/Visual Studio Code.app"
-        # ];
-      };
-      finder = {
-        AppleShowAllExtensions = true;
-      };
-      WindowManager = {
-        # Disable click to show desktop
-        EnableStandardClickToShowDesktop = false;
-      };
-    };
-    keyboard = {
-      enableKeyMapping = true;
-      remapCapsLockToControl = true;
     };
     stateVersion = 5;
   };
