@@ -1,9 +1,9 @@
 repos:
   - repo: local
     hooks:
-      - id: make-lint
-        name: make lint
-        entry: make lint
+      - id: mise-lint
+        name: mise lint
+        entry: mise run lint
         language: system
         pass_filenames: false
       - id: sort-nix-lists

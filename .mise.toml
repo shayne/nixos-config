@@ -1,0 +1,44 @@
+[tools]
+pre-commit = "latest"
+
+[tasks.default]
+description = "Build and switch the current host"
+quiet = true
+run = '''
+echo "Switching host $(hostname -s)..."
+host="$(hostname -s)"
+if [ "$(uname)" = "Darwin" ]; then
+  nix build ".#darwinConfigurations.${host}.system"
+  sudo ./result/sw/bin/darwin-rebuild switch --flake "$(pwd)#${host}"
+else
+  sudo nixos-rebuild switch --flake .
+fi
+'''
+
+[tasks.lint]
+description = "Run deadnix, nixpkgs-fmt, statix"
+quiet = true
+run = [
+  "echo \"Linting nix files...\"",
+  "echo \"Running deadnix...\"",
+  "nix run nixpkgs#deadnix -- --fail .",
+  "echo \"Running nixpkgs-fmt...\"",
+  "nix run nixpkgs#nixpkgs-fmt -- .",
+  "echo \"Running statix...\"",
+  "nix run nixpkgs#statix -- check .",
+]
+
+[tasks.check]
+description = "Run lint, flake check, and build current host"
+quiet = true
+depends = ["lint"]
+run = '''
+echo "Running flake checks and host build for $(hostname -s)..."
+nix flake check --all-systems
+host="$(hostname -s)"
+if [ "$(uname)" = "Darwin" ]; then
+  nix build ".#darwinConfigurations.${host}.system"
+else
+  sudo nixos-rebuild build --flake .
+fi
+'''

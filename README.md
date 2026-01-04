@@ -14,10 +14,9 @@ This repository houses my NixOS and macOS (nix-darwin) configurations. The syste
 
 ## Common Commands
 
-- `make lint`: run `deadnix`, `nixpkgs-fmt`, and `statix` (same as pre-commit)
-- `make check`: run lint + `nix flake check --all-systems`, then build the current host
-- `make` or `make switch`: build and switch the current host (Darwin uses `darwin-rebuild switch`)
-- `make test`: NixOS test build (Linux only)
+- `mise run lint`: run `deadnix`, `nixpkgs-fmt`, and `statix` (same as pre-commit)
+- `mise run check`: run lint + `nix flake check --all-systems`, then build the current host
+- `mise run` (or `mise run default`): build and switch the current host (Darwin uses `darwin-rebuild switch`)
 
 ## Pre-commit
 

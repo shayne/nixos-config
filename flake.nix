@@ -62,12 +62,6 @@
       nixosConfigs = systems.nixosConfigurations or { };
     in
     systems // {
-      # Devshell for bootstrapping; acessible via 'nix develop' or 'nix-shell' (legacy)
-      devShells = libx.forAllSystems (system:
-        let pkgs = nixpkgs.legacyPackages.${system};
-        in import ./shell.nix { inherit pkgs; }
-      );
-
       # nix fmt
       formatter = libx.forAllSystems (system:
         nix-formatter-pack.lib.mkFormatter {
