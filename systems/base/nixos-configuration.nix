@@ -63,13 +63,13 @@
   fonts = {
     fontDir.enable = true;
     packages = with pkgs; [
-      nerd-fonts.fira-code
-      nerd-fonts.sauce-code-pro
-      nerd-fonts.ubuntu-mono
       fira
       fira-go
       joypixels
       liberation_ttf
+      nerd-fonts.fira-code
+      nerd-fonts.sauce-code-pro
+      nerd-fonts.ubuntu-mono
       noto-fonts-emoji
       source-serif
       ubuntu_font_family

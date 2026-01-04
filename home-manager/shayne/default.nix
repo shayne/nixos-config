@@ -39,9 +39,9 @@ in
       ookla-speedtest
       python3
       ripgrep
+      rlwrap
       silver-searcher
       sops
-      rlwrap
       tree
       upterm # Terminal sharing
       watch

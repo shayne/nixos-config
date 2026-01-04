@@ -30,17 +30,17 @@
     };
     # https://github.com/nix-community/home-manager/pull/2408
     pathsToLink = [ "/share/fish" ];
-    shells = with pkgs; [ bashInteractive zsh fish ];
+    shells = with pkgs; [ bashInteractive fish zsh ];
   };
 
   fonts = {
     packages = with pkgs; [
-      nerd-fonts.fira-code
-      nerd-fonts.ubuntu-mono
       fira
       fira-go
       joypixels
       liberation_ttf
+      nerd-fonts.fira-code
+      nerd-fonts.ubuntu-mono
       noto-fonts-color-emoji
       source-serif
       ubuntu-classic

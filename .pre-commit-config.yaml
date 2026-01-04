@@ -1,0 +1,14 @@
+repos:
+  - repo: local
+    hooks:
+      - id: make-lint
+        name: make lint
+        entry: make lint
+        language: system
+        pass_filenames: false
+      - id: sort-nix-lists
+        name: sort nix lists
+        entry: python scripts/sort_nix_lists.py --fail-on-change --files
+        language: system
+        files: '\.nix$'
+        pass_filenames: true

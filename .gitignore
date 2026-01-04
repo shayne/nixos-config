@@ -2,3 +2,4 @@
 .direnv
 result
 iso/nixos.iso
+__pycache__/
