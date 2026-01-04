@@ -19,6 +19,11 @@ This repository houses my NixOS and macOS (nix-darwin) configurations. The syste
 - `make` or `make switch`: build and switch the current host (Darwin uses `darwin-rebuild switch`)
 - `make test`: NixOS test build (Linux only)
 
+## Pre-commit
+
+Install the git hook with `pre-commit install`. You can run all hooks manually with
+`pre-commit run --all-files`.
+
 ## Current Systems
 
 - `m4mbp` — Apple Silicon MacBook Pro running nix-darwin
