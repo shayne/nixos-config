@@ -6,6 +6,11 @@ repos:
         entry: mise run lint
         language: system
         pass_filenames: false
+      - id: prepare-commit-msg
+        name: prepare-commit-msg
+        entry: scripts/prepare-commit-msg
+        language: system
+        stages: [prepare-commit-msg]
       - id: sort-nix-lists
         name: sort nix lists
         entry: python scripts/sort_nix_lists.py --fail-on-change --files

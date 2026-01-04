@@ -20,8 +20,11 @@ This repository houses my NixOS and macOS (nix-darwin) configurations. The syste
 
 ## Pre-commit
 
-Install the git hook with `pre-commit install`. You can run all hooks manually with
-`pre-commit run --all-files`.
+Install hooks with:
+`pre-commit install` and `pre-commit install --hook-type prepare-commit-msg`.
+Note: `pre-commit install` only installs the default `pre-commit` hook; the
+`prepare-commit-msg` hook must be installed explicitly.
+You can run all hooks manually with `pre-commit run --all-files`.
 
 ## Current Systems
 
