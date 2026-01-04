@@ -64,6 +64,7 @@
       "audacity"
       "bambu-studio"
       "bentobox"
+      "caffeine"
       "chatgpt"
       "claude"
       "cursor"
