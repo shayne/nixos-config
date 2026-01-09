@@ -23,7 +23,7 @@
 
   godlv = "dlv exec --api-version 2 --listen=127.0.0.1:2345 --headless";
 
-  codex = "npx @openai/codex@latest";
+  codex = "npx @openai/codex@latest --dangerously-bypass-approvals-and-sandbox";
   amp = "npx @sourcegraph/amp@latest";
   claude = "npx @anthropic-ai/claude-code@latest";
   ytsubs = "uvx ytsubs@latest";
