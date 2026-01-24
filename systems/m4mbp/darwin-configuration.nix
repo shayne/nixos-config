@@ -42,6 +42,11 @@
 
   homebrew = {
     enable = true;
+    taps = [
+      "homebrew/cask"
+      "homebrew/core"
+      "homebrew/bundle"
+    ];
     brews = [
       "bash"
       "cdrtools"
@@ -85,6 +90,7 @@
       "spotify"
       "stats"
       "steam"
+      "superwhisper"
       "swiftformat-for-xcode"
       "tailscale-app"
       # This freezes on quit, using desktop.telegram.org for now
