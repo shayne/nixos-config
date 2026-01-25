@@ -90,7 +90,6 @@
       "spotify"
       "stats"
       "steam"
-      "superwhisper"
       "swiftformat-for-xcode"
       "tailscale-app"
       # This freezes on quit, using desktop.telegram.org for now
