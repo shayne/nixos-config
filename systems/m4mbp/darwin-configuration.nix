@@ -72,6 +72,7 @@
       "caffeine"
       "chatgpt"
       "claude"
+      "codex"
       "cursor"
       "deskpad"
       "discord"
