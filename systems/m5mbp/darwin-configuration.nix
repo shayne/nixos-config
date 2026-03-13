@@ -1,7 +1,7 @@
 { config, lib, ... }: {
   nixpkgs.hostPlatform = "aarch64-darwin";
 
-  networking.hostName = "m4mbp";
+  networking.hostName = "m5mbp";
 
   nix = {
     settings = {

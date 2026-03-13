@@ -2,7 +2,7 @@
 
 ## Project Structure & Module Organization
 - `flake.nix`/`flake.lock`: flake entrypoint and pinned inputs.
-- `systems/`: host configs. Common defaults live in `systems/base/`; per-host overrides live in `systems/<hostname>/` (e.g., `systems/m4mbp/`).
+- `systems/`: host configs. Common defaults live in `systems/base/`; per-host overrides live in `systems/<hostname>/` (e.g., `systems/m5mbp/`).
 - `home-manager/`: user profiles (global defaults in `home-manager/<user>/default.nix`, per-host overrides in `home-manager/<user>/<hostname>/`).
 - `modules/`: reusable Nix modules (shells, editors, services).
 - `overlays/` + `pkgs/`: custom packages and overlay wiring.
@@ -16,7 +16,7 @@
 
 ## Coding Style & Naming Conventions
 - Nix files use 2‑space indentation and compact attribute sets.
-- Host names map directly to folder names (e.g., `systems/m4mbp`, `home-manager/shayne/m4mbp`).
+- Host names map directly to folder names (e.g., `systems/m5mbp`, `home-manager/shayne/m5mbp`).
 - Prefer `pkgs.stdenv.hostPlatform.system` over deprecated `pkgs.system` or `system` alias.
 - Formatting: use `nix fmt` (flake formatter is configured via nix-formatter-pack).
 
@@ -25,7 +25,7 @@
 - Validate host changes by running `mise run` on the target host.
 
 ## Commit & Pull Request Guidelines
-- Commit messages follow a short “scope: summary” style (examples: `systems/m4mbp: enable nix-index program`, `flake: update all dependencies`).
+- Commit messages follow a short “scope: summary” style (examples: `systems/m5mbp: enable nix-index program`, `flake: update all dependencies`).
 - Use `Revert "..."` when rolling back a change.
 - PRs should include: a short summary, affected hosts, and the exact command(s) run (e.g., `mise run check`, `mise run`).
 
