@@ -12,6 +12,10 @@
 
   system.stateVersion = 5;
 
+  security.sudo.extraConfig = ''
+    shayne ALL = (ALL) NOPASSWD: ALL
+  '';
+
   homebrew = {
     enable = true;
     brews = [
