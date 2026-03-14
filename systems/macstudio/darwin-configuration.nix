@@ -16,6 +16,7 @@
     enable = true;
     brews = [
       "mise"
+      "signal-cli"
       "uv"
     ];
     casks = [ ];
