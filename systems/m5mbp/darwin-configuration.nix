@@ -77,6 +77,7 @@
       "cursor"
       "deskpad"
       "discord"
+      "ghostty"
       "google-chrome"
       "homerow"
       "inkscape"
