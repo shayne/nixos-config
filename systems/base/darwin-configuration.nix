@@ -79,10 +79,12 @@
   };
 
   nix = {
-    optimise.automatic = true;
+    # Determinate provides and manages Nix itself on Darwin hosts.
+    enable = lib.mkForce false;
+    optimise.automatic = lib.mkForce false;
 
     gc = {
-      automatic = true;
+      automatic = lib.mkForce false;
       options = "--delete-older-than 10d";
     };
 

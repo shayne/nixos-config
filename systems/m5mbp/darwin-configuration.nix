@@ -71,6 +71,7 @@
       "bentobox"
       "caffeine"
       "chatgpt"
+      "chatgpt-atlas"
       "claude"
       "codex"
       "cursor"

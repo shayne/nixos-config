@@ -16,16 +16,16 @@ fi
 '''
 
 [tasks.lint]
-description = "Run deadnix, nixpkgs-fmt, statix"
+description = "Auto-fix deadnix, nixpkgs-fmt, and statix issues"
 quiet = true
 run = [
-  "echo \"Linting nix files...\"",
-  "echo \"Running deadnix...\"",
-  "nix run nixpkgs#deadnix -- --fail .",
+  "echo \"Auto-fixing nix files...\"",
+  "echo \"Running deadnix --edit...\"",
+  "nix run nixpkgs#deadnix -- --edit .",
   "echo \"Running nixpkgs-fmt...\"",
   "nix run nixpkgs#nixpkgs-fmt -- .",
-  "echo \"Running statix...\"",
-  "nix run nixpkgs#statix -- check .",
+  "echo \"Running statix fix...\"",
+  "nix run nixpkgs#statix -- fix .",
 ]
 
 [tasks.check]
