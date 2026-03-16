@@ -1,3 +1,2 @@
-{ pkgs, myModulesPath, ... }:
-{
-}
+_:
+{ }
