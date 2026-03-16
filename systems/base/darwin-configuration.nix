@@ -141,6 +141,10 @@
   security.pam.services.sudo_local.touchIdAuth = true;
 
   system.defaults = {
+    dock = {
+      persistent-apps = [ ];
+      persistent-others = [ ];
+    };
     NSGlobalDomain = {
       AppleShowAllExtensions = true; # Show all file extensions
       NSUseAnimatedFocusRing = false; # Disable focus ring animation
