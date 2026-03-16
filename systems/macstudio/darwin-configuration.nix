@@ -18,8 +18,11 @@
 
   homebrew = {
     enable = true;
+    taps = [ "steipete/tap" ];
     brews = [
       "mise"
+      "steipete/tap/gogcli"
+      "steipete/tap/peekaboo"
       "signal-cli"
       "uv"
     ];
