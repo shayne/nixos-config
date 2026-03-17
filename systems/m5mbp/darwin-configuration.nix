@@ -95,8 +95,7 @@
       "steam"
       "swiftformat-for-xcode"
       "tailscale-app"
-      # This freezes on quit, using desktop.telegram.org for now
-      # "telegram-desktop"
+      "telegram-desktop"
       "upscayl"
       "utm"
       "visual-studio-code"
