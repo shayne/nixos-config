@@ -146,6 +146,7 @@
       persistent-others = [ ];
     };
     NSGlobalDomain = {
+      AppleICUForce24HourTime = true; # Prefer 24-hour time
       AppleShowAllExtensions = true; # Show all file extensions
       NSUseAnimatedFocusRing = false; # Disable focus ring animation
       NSNavPanelExpandedStateForSaveMode = true; # Expand save dialog
@@ -165,6 +166,10 @@
       NSAutomaticSpellingCorrectionEnabled = false; # Disable autocorrect
       "com.apple.mouse.tapBehavior" = 1; # Tap-to-click
       NSWindowShouldDragOnGesture = true; # Cmd+Ctrl drag windows
+    };
+    menuExtraClock = {
+      Show24Hour = true; # Use 24-hour time in the menu bar clock
+      ShowAMPM = false; # Hide AM/PM when using 24-hour time
     };
     LaunchServices.LSQuarantine = false; # Disable app quarantine prompt
     loginwindow.GuestEnabled = false; # Disable Guest login
