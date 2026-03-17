@@ -74,6 +74,7 @@
       "chatgpt-atlas"
       "claude"
       "codex"
+      "codex-app"
       "cursor"
       "deskpad"
       "discord"
