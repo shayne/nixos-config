@@ -1,7 +1,7 @@
-{ lib, pkgs, sources, myModulesPath, ... }:
+{ config, lib, pkgs, sources, myModulesPath, ... }:
 
 let
-  inherit (pkgs.stdenv) isLinux;
+  inherit (pkgs.stdenv) isDarwin isLinux;
   env = import ./environment.enc.nix;
 in
 {
@@ -171,10 +171,34 @@ in
   };
 
   services.gpg-agent = {
-    enable = isLinux;
+    enable = isLinux || isDarwin;
 
     # cache the keys forever so we don't get asked for a password
     defaultCacheTtl = 31536000;
     maxCacheTtl = 31536000;
+    pinentry.package = if isDarwin then pkgs.pinentry_mac else null;
+  };
+
+  # Home Manager's Darwin gpg-agent launchd job currently uses socket activation
+  # with `--supervised`, which exits on this setup. Keep the config file it
+  # generates, but use launchd to restart a normal agent in the GUI session
+  # whenever the standard socket disappears so SSH and local shells share it.
+  launchd.agents.gpg-agent = lib.mkIf isDarwin {
+    config = {
+      KeepAlive = lib.mkForce {
+        PathState."${config.programs.gpg.homedir}/S.gpg-agent" = false;
+      };
+      ProgramArguments = lib.mkForce [
+        (lib.getExe pkgs.bash)
+        "-lc"
+        ''
+          if ! ${lib.getExe' config.programs.gpg.package "gpg-connect-agent"} /bye >/dev/null 2>&1; then
+            exec ${lib.getExe' config.programs.gpg.package "gpg-agent"} --daemon
+          fi
+        ''
+      ];
+      RunAtLoad = lib.mkForce true;
+      Sockets = lib.mkForce null;
+    };
   };
 }
