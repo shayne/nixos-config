@@ -45,7 +45,6 @@
     taps = [
       "homebrew/cask"
       "homebrew/core"
-      "homebrew/bundle"
     ];
     brews = [
       "bash"

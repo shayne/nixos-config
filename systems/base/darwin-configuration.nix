@@ -114,7 +114,6 @@
     taps = with inputs; {
       "homebrew/homebrew-core" = homebrew-core;
       "homebrew/homebrew-cask" = homebrew-cask;
-      "homebrew/homebrew-bundle" = homebrew-bundle;
     };
   };
 
@@ -268,7 +267,7 @@
   # Keep Homebrew in sync with declared brews/casks.
   homebrew.onActivation = {
     cleanup = "zap";
-    autoUpdate = true;
+    autoUpdate = false;
     upgrade = true;
   };
 }

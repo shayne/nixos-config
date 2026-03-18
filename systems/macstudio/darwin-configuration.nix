@@ -11,7 +11,10 @@ _: {
 
   homebrew = {
     enable = true;
-    taps = [ "steipete/tap" ];
+    taps = [
+      "homebrew/cask"
+      "steipete/tap"
+    ];
     brews = [
       "mise"
       "steipete/tap/gogcli"

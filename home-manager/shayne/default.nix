@@ -84,6 +84,14 @@ in
 
   xdg.enable = true;
 
+  # Home Manager's manpage generation currently forces options docs evaluation
+  # and triggers an upstream string-context warning during darwin-rebuild.
+  manual = {
+    manpages.enable = false;
+    html.enable = false;
+    json.enable = false;
+  };
+
   #---------------------------------------------------------------------
   # Programs
   #---------------------------------------------------------------------
