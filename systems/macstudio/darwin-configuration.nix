@@ -19,7 +19,7 @@ _: {
       "signal-cli"
       "uv"
     ];
-    casks = [ ];
+    casks = [ "orbstack" ];
     masApps = { };
   };
 }
