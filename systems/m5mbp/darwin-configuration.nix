@@ -70,7 +70,6 @@
       "bentobox"
       "caffeine"
       "chatgpt"
-      "chatgpt-atlas"
       "claude"
       "codex"
       "codex-app"
