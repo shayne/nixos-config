@@ -23,6 +23,8 @@ _: {
       "uv"
     ];
     casks = [ "orbstack" ];
-    masApps = { };
+    masApps = {
+      "Xcode" = 497799835;
+    };
   };
 }

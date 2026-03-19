@@ -87,6 +87,7 @@
       "portalbox"
       "raycast"
       "screen-studio"
+      "sf-symbols"
       "shureplus-motiv"
       "signal"
       "spotify"
