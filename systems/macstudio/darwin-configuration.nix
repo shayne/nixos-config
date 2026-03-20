@@ -14,10 +14,12 @@ _: {
     taps = [
       "homebrew/cask"
       "steipete/tap"
+      "sichengchen/tap"
     ];
     brews = [
       "gh"
       "mise"
+      "sichengchen/tap/apple-calendar-cli"
       "steipete/tap/gogcli"
       "steipete/tap/peekaboo"
       "signal-cli"
