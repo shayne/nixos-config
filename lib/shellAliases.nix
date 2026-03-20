@@ -22,6 +22,7 @@
   gt = "git tag";
 
   godlv = "dlv exec --api-version 2 --listen=127.0.0.1:2345 --headless";
+  ta = "tmux new -A -s";
 
   codex = "npx @openai/codex@latest --dangerously-bypass-approvals-and-sandbox";
   amp = "npx @sourcegraph/amp@latest";
