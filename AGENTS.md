@@ -9,6 +9,13 @@
 - `nix/` and `nixpkgs.nix`: source pinning helpers.
 - `iso/`: ISO build scripts.
 
+## Darwin / Homebrew Conventions
+- Darwin hosts use `systems/<hostname>/darwin-configuration.nix`; shared Darwin defaults live in `systems/base/darwin-configuration.nix`.
+- Manage Homebrew declaratively through nix-darwin/nix-homebrew, not with imperative `brew install`.
+- Use `homebrew.brews` for CLI formulae, `homebrew.casks` for GUI apps, `homebrew.masApps` for Mac App Store apps, and `homebrew.taps` for extra tap repos needed by tap-qualified packages.
+- Prefer host-scoped edits for host-specific Darwin packages unless the user explicitly asks for a shared/base change.
+- For small Darwin package changes, prefer targeted verification with `nix eval --json .#darwinConfigurations.<host>.config.homebrew.brews` or `nix eval --json .#darwinConfigurations.<host>.config.homebrew.casks` before running `mise run` on the target host.
+
 ## Build, Test, and Development Commands
 - `mise run` (or `mise run default`): builds and switches the system for the current host (Darwin uses `darwin-rebuild switch`).
 - `mise run lint`: runs `deadnix`, `nixpkgs-fmt`, and `statix` (same checks as the pre-commit hook).
