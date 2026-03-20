@@ -16,6 +16,7 @@ _: {
       "steipete/tap"
     ];
     brews = [
+      "gh"
       "mise"
       "steipete/tap/gogcli"
       "steipete/tap/peekaboo"
