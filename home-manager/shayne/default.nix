@@ -158,6 +158,7 @@ in
 
       extraConfig = ''
         set -ga terminal-overrides ",*256col*:Tc"
+        set -g mouse on
 
         set -g @dracula-show-battery false
         set -g @dracula-show-network false
