@@ -37,7 +37,9 @@ in
       nodejs # Node is required for Copilot.vim
       nodePackages.prettier
       ookla-speedtest
-      python3
+      (python3.withPackages (ps: with ps; [
+        pyyaml
+      ]))
       ripgrep
       rlwrap
       silver-searcher

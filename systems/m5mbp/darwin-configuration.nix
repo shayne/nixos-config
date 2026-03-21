@@ -54,7 +54,6 @@
       "jq"
       "llama.cpp"
       "mise"
-      "python3"
       "qemu"
       "samba"
       "socat"
