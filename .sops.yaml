@@ -1,14 +1,11 @@
 keys:
-  - &shared_age_key age1wwu0lccjmzlghcwln7wycvevshyrj77d804nk66c9h84ytl3muys77zk3p
-  - &shared_ssh_key "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKxq71dQw4zBQAe3mtfiNwuCwP0Lu8x9PdRVxy2+T8Pw shayne@tailscale.com"
+  - &shared_ssh_key "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKxq71dQw4zBQAe3mtfiNwuCwP0Lu8x9PdRVxy2+T8Pw"
 creation_rules:
   - path_regex: ^secrets/shayne\.yaml$
     key_groups:
       - age:
-          - *shared_age_key
           - *shared_ssh_key
   - path_regex: ^secrets/custom-fonts\.tar\.gz$
     key_groups:
       - age:
-          - *shared_age_key
           - *shared_ssh_key
