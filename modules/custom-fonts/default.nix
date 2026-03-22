@@ -10,7 +10,7 @@ in
   };
 
   home.activation.installCustomFonts = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-    font_dir="$HOME/Library/Fonts"
+    font_dir="$HOME/Library/Fonts/HomeManager/custom-fonts"
     archive=${lib.escapeShellArg archivePath}
     tmp_dir="$(mktemp -d)"
     trap 'rm -rf "$tmp_dir"' EXIT
