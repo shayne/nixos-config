@@ -77,6 +77,7 @@ in
   imports = [
     ./sops.nix
     (myModulesPath + "/bash")
+    (myModulesPath + "/custom-fonts")
     (myModulesPath + "/fish")
     (myModulesPath + "/neovim")
     (myModulesPath + "/ssh")
