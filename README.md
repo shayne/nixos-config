@@ -42,5 +42,6 @@ You can run all hooks manually with `pre-commit run --all-files`.
 ## Current Systems
 
 - `m5mbp` — Apple Silicon MacBook Pro running nix-darwin
+- `macstudio` — Apple Silicon Mac Studio running nix-darwin
 
 The flake still exports cross-platform packages and formatter outputs, but the active system configs in this repo are Darwin-only.

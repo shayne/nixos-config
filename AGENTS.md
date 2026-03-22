@@ -38,7 +38,8 @@
 - Commit messages follow a short “scope: summary” style (examples: `systems/m5mbp: enable nix-index program`, `flake: update all dependencies`).
 - Use `Revert "..."` when rolling back a change.
 - PRs should include: a short summary, affected hosts, and the exact command(s) run (e.g., `mise run check`, `mise run`).
+- When a change affects active hosts, secret bootstrap/decryption, or common operator commands, update `README.md` in the same change so the repo docs stay current.
 
 ## Security & Configuration Tips
-- Treat `*.enc.nix` files as sensitive (e.g., `home-manager/shayne/environment.enc.nix`, `systems/**/.*.enc.nix`). Avoid editing without the proper secrets workflow.
-- Keep `modules/custom-fonts.enc/` and its font assets unless the user explicitly asks to remove them. They are intentionally retained even if the current host graph does not reference them.
+- Treat [secrets/shayne.yaml](/Users/shayne/nixos-config/secrets/shayne.yaml) and [secrets/custom-fonts.tar.gz](/Users/shayne/nixos-config/secrets/custom-fonts.tar.gz) as sensitive. Edit them with `sops`; do not reintroduce legacy `git-crypt` or `*.enc.nix` workflows.
+- The repo decrypts secrets with `~/.ssh/id_ed25519` via `SOPS_AGE_SSH_PRIVATE_KEY_FILE`. Do not switch back to `keys.txt` or implicit key discovery unless the user explicitly asks for it.
