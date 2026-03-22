@@ -67,7 +67,7 @@ in
       PAGER = "less -FirSwX";
       MANPAGER = "${pkgs.bat}/bin/bat -l man -p";
       AWS_VAULT_BACKEND = "pass";
-      SOPS_AGE_KEY_FILE = "${config.home.homeDirectory}/Library/Application Support/sops/age/keys.txt";
+      SOPS_AGE_SSH_PRIVATE_KEY_FILE = "${config.home.homeDirectory}/.ssh/id_ed25519";
     };
 
     # Prevent the "Last login" message from showing up

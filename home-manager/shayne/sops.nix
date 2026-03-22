@@ -1,9 +1,10 @@
 { config, lib, ... }: {
   sops = {
-    age.keyFile =
-      "${config.home.homeDirectory}/Library/Application Support/sops/age/keys.txt";
+    age.sshKeyPaths = [ "${config.home.homeDirectory}/.ssh/id_ed25519" ];
     defaultSopsFile = ../../secrets/shayne.yaml;
     defaultSopsFormat = "yaml";
+    environment.SOPS_AGE_SSH_PRIVATE_KEY_FILE =
+      "${config.home.homeDirectory}/.ssh/id_ed25519";
 
     secrets.openai_api_key = { };
     secrets.anthropic_api_key = { };

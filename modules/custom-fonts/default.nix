@@ -2,7 +2,7 @@
 lib.mkIf pkgs.stdenv.isDarwin (
   let
     encryptedArchive = ../../secrets/custom-fonts.tar.gz;
-    ageKeyFile = config.sops.age.keyFile;
+    sshPrivateKeyFile = "${config.home.homeDirectory}/.ssh/id_ed25519";
   in
   {
     home.activation.installCustomFonts = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
@@ -14,7 +14,7 @@ lib.mkIf pkgs.stdenv.isDarwin (
 
       mkdir -p "$font_dir"
       mkdir -p "$unpack_dir"
-      SOPS_AGE_KEY_FILE=${lib.escapeShellArg ageKeyFile} \
+      SOPS_AGE_SSH_PRIVATE_KEY_FILE=${lib.escapeShellArg sshPrivateKeyFile} \
         ${lib.getExe pkgs.sops} decrypt --input-type binary --output-type binary \
         ${lib.escapeShellArg "${encryptedArchive}"} > "$archive"
       /usr/bin/tar -xzf "$archive" -C "$unpack_dir"
