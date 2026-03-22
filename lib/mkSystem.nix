@@ -22,6 +22,7 @@ let
   configFile = if isDarwin then "darwin-configuration.nix" else "configuration.nix";
   configKey = if isDarwin then "darwinConfigurations" else "nixosConfigurations";
   systemFn = if isDarwin then inputs.nix-darwin.lib.darwinSystem else inputs.nixpkgs.lib.nixosSystem;
+  sopsSystemFn = if isDarwin then inputs.sops-nix.darwinModules.sops else inputs.sops-nix.nixosModules.sops;
   homeManagerFn = if isDarwin then inputs.home-manager.darwinModules.home-manager else inputs.home-manager.nixosModules.home-manager;
   baseSystemConfig = systemsPath + "/base/${(if isDarwin then "darwin-configuration.nix" else "nixos-configuration.nix")}";
   args = {
@@ -35,6 +36,7 @@ in
   ${configKey}.${name} = systemFn {
     modules = [
       baseSystemConfig
+      sopsSystemFn
       (systemsPath + "/${name}/${configFile}")
     ] ++ lib.optionals isDarwin [
       inputs.nix-homebrew.darwinModules.nix-homebrew
@@ -49,6 +51,7 @@ in
           extraSpecialArgs = args;
           sharedModules = [
             homeManagerPath
+            inputs.sops-nix.homeManagerModules.sops
           ];
           users = lib.genAttrs users (user: {
             imports =

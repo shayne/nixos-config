@@ -1,0 +1,11 @@
+keys:
+  - &shared_age_key age1wwu0lccjmzlghcwln7wycvevshyrj77d804nk66c9h84ytl3muys77zk3p
+creation_rules:
+  - path_regex: ^secrets/shayne\.yaml$
+    key_groups:
+      - age:
+          - *shared_age_key
+  - path_regex: ^secrets/custom-fonts\.tar\.gz$
+    key_groups:
+      - age:
+          - *shared_age_key

@@ -19,6 +19,18 @@ This repository houses my macOS (nix-darwin) configurations and related Nix tool
 - `mise run check`: run lint + `nix flake check --all-systems`, then build the current host
 - `mise run` (or `mise run default`): build and switch the current host (Darwin uses `darwin-rebuild switch`)
 
+## Secrets
+
+This repo is migrating from `git-crypt` to `sops` + `age`.
+
+- Commit 1 adds the `sops-nix` plumbing and the Darwin key path:
+  `~/Library/Application Support/sops/age/keys.txt`
+- Switch commit 1 on every host before switching the cutover commit.
+- Future secret edits should use `sops`, not `git-crypt unlock`.
+
+During the migration window, copy the same `age` key file to each host that
+needs to decrypt the next commit.
+
 ## Pre-commit
 
 Install hooks with:

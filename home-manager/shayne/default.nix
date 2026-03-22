@@ -76,6 +76,7 @@ in
   };
 
   imports = [
+    ./sops.nix
     (myModulesPath + "/bash")
     (myModulesPath + "/fish")
     (myModulesPath + "/neovim")
