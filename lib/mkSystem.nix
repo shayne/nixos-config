@@ -35,7 +35,6 @@ in
   ${configKey}.${name} = systemFn {
     modules = [
       baseSystemConfig
-      systemsPath
       (systemsPath + "/${name}/${configFile}")
     ] ++ lib.optionals isDarwin [
       inputs.nix-homebrew.darwinModules.nix-homebrew

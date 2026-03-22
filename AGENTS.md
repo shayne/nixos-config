@@ -4,6 +4,7 @@
 - `flake.nix`/`flake.lock`: flake entrypoint and pinned inputs.
 - `systems/`: host configs. Common defaults live in `systems/base/`; per-host overrides live in `systems/<hostname>/` (e.g., `systems/m5mbp/`).
 - `home-manager/`: user profiles (global defaults in `home-manager/<user>/default.nix`, per-host overrides in `home-manager/<user>/<hostname>/`).
+- Do not remove seemingly empty `home-manager/<user>/<hostname>/default.nix` files without checking `lib/mkSystem.nix`; those tracked host directories determine which users attach to which hosts.
 - `modules/`: reusable Nix modules (shells, editors, services).
 - `overlays/` + `pkgs/`: custom packages and overlay wiring.
 - `nix/` and `nixpkgs.nix`: source pinning helpers.
@@ -30,6 +31,8 @@
 ## Testing Guidelines
 - No standalone test suite; rely on `mise run check` for evaluation/build sanity.
 - Validate host changes by running `mise run` on the target host.
+- When deciding whether a Home Manager module is actually used, verify all three layers: the import site, the host/user attachment in `lib/mkSystem.nix`, and the built closure or generated config output. A successful system build alone can miss accidentally detaching a user from a host.
+- Stage newly added host marker files before trusting flake evaluation results. Untracked files may not be visible to the Git-based flake source that `nix` evaluates.
 
 ## Commit & Pull Request Guidelines
 - Commit messages follow a short “scope: summary” style (examples: `systems/m5mbp: enable nix-index program`, `flake: update all dependencies`).
@@ -38,3 +41,4 @@
 
 ## Security & Configuration Tips
 - Treat `*.enc.nix` files as sensitive (e.g., `home-manager/shayne/environment.enc.nix`, `systems/**/.*.enc.nix`). Avoid editing without the proper secrets workflow.
+- Keep `modules/custom-fonts.enc/` and its font assets unless the user explicitly asks to remove them. They are intentionally retained even if the current host graph does not reference them.

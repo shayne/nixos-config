@@ -1,9 +1,5 @@
-{ pkgs, myModulesPath, ... }:
+{ pkgs, ... }:
 {
-  imports = [
-    (myModulesPath + "/rectangle")
-  ];
-
   home.packages = with pkgs; [
     docker-client
     gnugrep

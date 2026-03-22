@@ -1,5 +1,6 @@
 .DS_Store
 .direnv
+docs/
 result
 iso/nixos.iso
 __pycache__/

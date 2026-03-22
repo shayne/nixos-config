@@ -1,16 +1,17 @@
-# NixOS & nix-darwin Configurations
+# nix-darwin Configurations
 
-This repository houses my NixOS and macOS (nix-darwin) configurations. The system loader lives in
+This repository houses my macOS (nix-darwin) configurations and related Nix tooling. The system loader lives in
 `lib/loadSystems.nix` and `lib/mkSystem.nix`, with per-host configs under `systems/` and user config under
 `home-manager/`.
 
 ## Structure
 
-- `systems/base/`: shared defaults for Linux and Darwin
+- `systems/base/`: shared Darwin defaults
 - `systems/<hostname>/`: per-host overrides (current host: `m5mbp`)
 - `home-manager/<user>/`: shared user config and per-host overlays
 - `modules/`: reusable Nix modules
 - `overlays/` + `pkgs/`: custom overlays/packages
+- `nix/` + `nixpkgs.nix`: source pinning helpers
 
 ## Common Commands
 
@@ -30,4 +31,4 @@ You can run all hooks manually with `pre-commit run --all-files`.
 
 - `m5mbp` — Apple Silicon MacBook Pro running nix-darwin
 
-The repo remains multi-system capable (aarch64/x86_64, Linux/Darwin) for future hosts.
+The flake still exports cross-platform packages and formatter outputs, but the active system configs in this repo are Darwin-only.

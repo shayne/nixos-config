@@ -1,10 +1,5 @@
 { config, lib, inputs, outputs, pkgs, ... }:
 {
-  # TODO: darwin error: boot does not exist
-  # imports = [
-  #   ../modules/services/tailscale.nix # unstable service override
-  # ];
-
   # Only install the docs I use
   documentation = {
     enable = true;
