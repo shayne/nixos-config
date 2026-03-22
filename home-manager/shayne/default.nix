@@ -2,7 +2,6 @@
 
 let
   inherit (pkgs.stdenv) isDarwin isLinux;
-  env = import ./environment.enc.nix;
 in
 {
   # Home-manager 22.11 requires this be set. We never set it so we have
@@ -24,7 +23,6 @@ in
       fzf
       gcc
       gh
-      git-crypt
       # go
       google-cloud-sdk
       gopls
@@ -69,7 +67,8 @@ in
       PAGER = "less -FirSwX";
       MANPAGER = "${pkgs.bat}/bin/bat -l man -p";
       AWS_VAULT_BACKEND = "pass";
-    } // env;
+      SOPS_AGE_KEY_FILE = "${config.home.homeDirectory}/Library/Application Support/sops/age/keys.txt";
+    };
 
     # Prevent the "Last login" message from showing up
     file.".hushlogin".text = "";

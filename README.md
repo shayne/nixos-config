@@ -21,15 +21,18 @@ This repository houses my macOS (nix-darwin) configurations and related Nix tool
 
 ## Secrets
 
-This repo is migrating from `git-crypt` to `sops` + `age`.
+This repo stores secrets with `sops` + `age`.
 
-- Commit 1 adds the `sops-nix` plumbing and the Darwin key path:
+- Each host that needs to decrypt secrets must have the shared key at:
   `~/Library/Application Support/sops/age/keys.txt`
-- Switch commit 1 on every host before switching the cutover commit.
-- Future secret edits should use `sops`, not `git-crypt unlock`.
+- Shells export `SOPS_AGE_KEY_FILE` to that same path so `sops secrets/shayne.yaml`
+  works without extra flags.
+- Switch the plumbing commit on every host before switching the cutover commit.
+- Edit shell secrets with `sops secrets/shayne.yaml`
+- Rebuild the encrypted font archive from a local plaintext font directory with:
+  `tar -C /path/to/fonts -czf /tmp/custom-fonts.tar.gz . && cp /tmp/custom-fonts.tar.gz secrets/custom-fonts.tar.gz && sops encrypt -i --input-type binary secrets/custom-fonts.tar.gz`
 
-During the migration window, copy the same `age` key file to each host that
-needs to decrypt the next commit.
+Copy the same `age` key file to each host before switching the cutover commit.
 
 ## Pre-commit
 
