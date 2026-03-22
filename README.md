@@ -23,16 +23,13 @@ This repository houses my macOS (nix-darwin) configurations and related Nix tool
 
 This repo stores secrets with `sops` + `age`.
 
-- Each host that needs to decrypt secrets must have the shared key at:
-  `~/Library/Application Support/sops/age/keys.txt`
-- Shells export `SOPS_AGE_KEY_FILE` to that same path so `sops secrets/shayne.yaml`
-  works without extra flags.
-- Switch the plumbing commit on every host before switching the cutover commit.
+- Each host that needs to decrypt secrets must have the shared SSH private key at:
+  `~/.ssh/id_ed25519`
+- Shells export `SOPS_AGE_SSH_PRIVATE_KEY_FILE=~/.ssh/id_ed25519` so `sops
+  secrets/shayne.yaml` works without extra flags.
 - Edit shell secrets with `sops secrets/shayne.yaml`
 - Rebuild the encrypted font archive from a local plaintext font directory with:
   `tar -C /path/to/fonts -czf /tmp/custom-fonts.tar.gz . && cp /tmp/custom-fonts.tar.gz secrets/custom-fonts.tar.gz && sops encrypt -i --input-type binary secrets/custom-fonts.tar.gz`
-
-Copy the same `age` key file to each host before switching the cutover commit.
 
 ## Pre-commit
 
