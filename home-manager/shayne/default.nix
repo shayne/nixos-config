@@ -152,7 +152,7 @@ in
 
     go = {
       enable = true;
-      package = pkgs.unstable.go_1_24;
+      package = pkgs.unstable.go_1_26;
     };
 
     ssh.enableDefaultConfig = false;
