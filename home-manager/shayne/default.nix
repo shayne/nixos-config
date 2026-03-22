@@ -85,6 +85,8 @@ in
   ];
 
   xdg.enable = true;
+  xdg.configFile."git/allowed_signers".text =
+    "79330+shayne@users.noreply.github.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKxq71dQw4zBQAe3mtfiNwuCwP0Lu8x9PdRVxy2+T8Pw\n";
 
   # Home Manager's manpage generation currently forces options docs evaluation
   # and triggers an upstream string-context warning during darwin-rebuild.
@@ -115,7 +117,8 @@ in
     git = {
       enable = true;
       signing = {
-        key = "69DA13E86BF403B0";
+        format = "ssh";
+        key = "${config.home.homeDirectory}/.ssh/id_ed25519.pub";
         signByDefault = true;
       };
       settings = {
@@ -135,6 +138,7 @@ in
         credential.helper = "store"; # want to make this more secure
         fetch.prune = true;
         github.user = "shayne";
+        gpg.ssh.allowedSignersFile = "${config.xdg.configHome}/git/allowed_signers";
         init.defaultBranch = "main";
         push.default = "tracking";
       };
