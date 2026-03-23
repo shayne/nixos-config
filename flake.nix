@@ -36,10 +36,7 @@
       # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
       stateVersion = "23.11";
       libx = import ./lib { inherit inputs outputs stateVersion user; };
-      inherit (nixpkgs) lib;
-
       systems = libx.loadSystems;
-      nixosConfigs = systems.nixosConfigurations or { };
     in
     systems // {
       # nix fmt
@@ -66,14 +63,5 @@
         in import ./pkgs { inherit pkgs; inherit inputs; }
       );
 
-    }
-    // lib.optionalAttrs (nixosConfigs != { }) {
-      colmena = {
-        meta = {
-          nixpkgs = import inputs.nixpkgs { system = "x86_64-linux"; };
-          nodeNixpkgs = builtins.mapAttrs (_name: value: value.pkgs) nixosConfigs;
-          nodeSpecialArgs = builtins.mapAttrs (_name: value: value._module.specialArgs) nixosConfigs;
-        };
-      } // builtins.mapAttrs (_name: value: { imports = value._module.args.modules; }) nixosConfigs;
     };
 }
