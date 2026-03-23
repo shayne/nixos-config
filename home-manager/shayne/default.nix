@@ -1,7 +1,7 @@
 { config, lib, pkgs, sources, myModulesPath, ... }:
 
 let
-  inherit (pkgs.stdenv) isDarwin isLinux;
+  inherit (pkgs.stdenv) isLinux;
 in
 {
   # Home-manager 22.11 requires this be set. We never set it so we have
@@ -15,7 +15,6 @@ in
 
     packages = with pkgs; [
       age
-      aws-vault
       bat
       bind
       fd
@@ -66,7 +65,6 @@ in
       EDITOR = "nvim";
       PAGER = "less -FirSwX";
       MANPAGER = "${pkgs.bat}/bin/bat -l man -p";
-      AWS_VAULT_BACKEND = "pass";
       SOPS_AGE_SSH_PRIVATE_KEY_FILE = "${config.home.homeDirectory}/.ssh/id_ed25519";
     };
 
@@ -101,8 +99,6 @@ in
   # Programs
   #---------------------------------------------------------------------
   programs = {
-    gpg.enable = true;
-
     direnv = {
       enable = true;
       nix-direnv = {
@@ -178,43 +174,5 @@ in
       '';
     };
 
-    password-store = {
-      enable = true;
-      settings = {
-        PASSWORD_STORE_KEY = "6BF403B0";
-      };
-    };
-  };
-
-  services.gpg-agent = {
-    enable = isLinux || isDarwin;
-
-    # cache the keys forever so we don't get asked for a password
-    defaultCacheTtl = 31536000;
-    maxCacheTtl = 31536000;
-    pinentry.package = if isDarwin then pkgs.pinentry_mac else null;
-  };
-
-  # Home Manager's Darwin gpg-agent launchd job currently uses socket activation
-  # with `--supervised`, which exits on this setup. Keep the config file it
-  # generates, but use launchd to restart a normal agent in the GUI session
-  # whenever the standard socket disappears so SSH and local shells share it.
-  launchd.agents.gpg-agent = lib.mkIf isDarwin {
-    config = {
-      KeepAlive = lib.mkForce {
-        PathState."${config.programs.gpg.homedir}/S.gpg-agent" = false;
-      };
-      ProgramArguments = lib.mkForce [
-        (lib.getExe pkgs.bash)
-        "-lc"
-        ''
-          if ! ${lib.getExe' config.programs.gpg.package "gpg-connect-agent"} /bye >/dev/null 2>&1; then
-            exec ${lib.getExe' config.programs.gpg.package "gpg-agent"} --daemon
-          fi
-        ''
-      ];
-      RunAtLoad = lib.mkForce true;
-      Sockets = lib.mkForce null;
-    };
   };
 }

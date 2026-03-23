@@ -28,10 +28,6 @@ if not test -d $HOME/.ssh
     chmod 0700 $HOME/.ssh
 end
 
-if test -d $HOME/.gnupg
-    chmod 0700 $HOME/.gnupg
-end
-
 if test -z "$SSH_ENV"
     set -xg SSH_ENV $HOME/.ssh/environment
 end
@@ -134,11 +130,6 @@ set -gx fish_pager_color_secondary_description $comment
 # Modify our path to include our Go binaries
 contains $HOME/go/bin $fish_user_paths; or set -Ua fish_user_paths $HOME/go/bin
 contains $HOME/bin $fish_user_paths; or set -Ua fish_user_paths $HOME/bin
-
-# Exported variables
-if isatty
-    set -x GPG_TTY (tty)
-end
 
 # Editor
 set -gx EDITOR nvim
