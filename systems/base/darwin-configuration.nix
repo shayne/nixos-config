@@ -1,4 +1,7 @@
 { config, lib, inputs, outputs, pkgs, ... }:
+let
+  primaryUserHome = config.users.users.${config.system.primaryUser}.home;
+in
 {
   # Only install the docs I use
   documentation = {
@@ -139,7 +142,14 @@
   system.defaults = {
     dock = {
       persistent-apps = [ ];
-      persistent-others = [ ];
+      persistent-others = [{
+        folder = {
+          path = "${primaryUserHome}/Downloads";
+          arrangement = "date-added";
+          displayas = "stack";
+          showas = "fan";
+        };
+      }];
     };
     NSGlobalDomain = {
       AppleICUForce24HourTime = true; # Prefer 24-hour time
