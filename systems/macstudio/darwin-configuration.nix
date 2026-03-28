@@ -12,12 +12,14 @@ _: {
   homebrew = {
     enable = true;
     taps = [
+      "henrygd/beszel"
       "homebrew/cask"
       "steipete/tap"
       "sichengchen/tap"
     ];
     brews = [
       "gh"
+      "henrygd/beszel/beszel-agent"
       "mise"
       "sichengchen/tap/apple-calendar-cli"
       "steipete/tap/gogcli"
