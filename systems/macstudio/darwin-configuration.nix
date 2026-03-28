@@ -29,7 +29,10 @@ _: {
       "signal-cli"
       "uv"
     ];
-    casks = [ "orbstack" ];
+    casks = [
+      "ngrok"
+      "orbstack"
+    ];
     masApps = {
       "Xcode" = 497799835;
     };
