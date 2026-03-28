@@ -22,6 +22,7 @@ _: {
       "gh"
       "henrygd/beszel/beszel-agent"
       "mise"
+      "openclaw-cli"
       "sichengchen/tap/apple-calendar-cli"
       "steipete/tap/gogcli"
       "steipete/tap/peekaboo"
