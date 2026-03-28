@@ -18,6 +18,7 @@ _: {
       "sichengchen/tap"
     ];
     brews = [
+      "bitwarden-cli"
       "gh"
       "henrygd/beszel/beszel-agent"
       "mise"
