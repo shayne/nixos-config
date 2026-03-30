@@ -1,7 +1,7 @@
 { config, lib, pkgs, sources, myModulesPath, ... }:
 
 let
-  inherit (pkgs.stdenv) isLinux;
+  inherit (pkgs.stdenv) isDarwin isLinux;
 in
 {
   # Home-manager 22.11 requires this be set. We never set it so we have
@@ -155,6 +155,7 @@ in
 
     tmux = {
       enable = true;
+      package = if isDarwin then null else pkgs.tmux;
       terminal = "xterm-256color";
       shortcut = "a";
       secureSocket = false;
