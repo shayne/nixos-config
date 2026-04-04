@@ -95,6 +95,22 @@
         "type": "github"
       }
     },
+    "homebrew-arthur-ficial-tap": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1775224087,
+        "narHash": "sha256-UiHsfb1/T2K4sTyPO/97wGuxSBZ4rsyOhmX2FS5N3MQ=",
+        "owner": "Arthur-Ficial",
+        "repo": "homebrew-tap",
+        "rev": "4720995e3dba3d9698da65629df201d4ca534cbe",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Arthur-Ficial",
+        "repo": "homebrew-tap",
+        "type": "github"
+      }
+    },
     "homebrew-cask": {
       "flake": false,
       "locked": {
@@ -357,6 +373,7 @@
       "inputs": {
         "home-manager": "home-manager",
         "home-manager-unstable": "home-manager-unstable",
+        "homebrew-arthur-ficial-tap": "homebrew-arthur-ficial-tap",
         "homebrew-cask": "homebrew-cask",
         "homebrew-core": "homebrew-core",
         "neovim-nightly-overlay": "neovim-nightly-overlay",
