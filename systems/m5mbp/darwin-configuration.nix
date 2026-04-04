@@ -75,6 +75,7 @@
       "bentobox"
       "caffeine"
       "chatgpt"
+      "cinebench"
       "claude"
       "codex"
       "codex-app"
