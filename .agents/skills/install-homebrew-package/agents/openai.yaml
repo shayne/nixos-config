@@ -1,0 +1,4 @@
+interface:
+  display_name: "Install Homebrew Package"
+  short_description: "Add Homebrew taps, brews, and casks in this repo."
+  default_prompt: "Use $install-homebrew-package to add a requested Homebrew brew, cask, or tap to this nixos-config repo."
