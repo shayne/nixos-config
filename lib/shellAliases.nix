@@ -27,6 +27,7 @@
   codex = "npx @openai/codex@latest --dangerously-bypass-approvals-and-sandbox";
   amp = "npx @sourcegraph/amp@latest";
   claude = "npx @anthropic-ai/claude-code@latest";
+  derpcat = "npx -y derpcat@dev";
   ytsubs = "uvx ytsubs@latest";
   cmtr = "uvx cmtr@latest";
 }
