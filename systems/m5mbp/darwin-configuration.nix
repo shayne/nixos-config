@@ -87,6 +87,7 @@
       "homerow"
       "inkscape"
       "linearmouse"
+      "lm-studio"
       "lunar"
       "multiviewer"
       "orbstack"
