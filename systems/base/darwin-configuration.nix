@@ -19,6 +19,7 @@ in
       iperf3
       killall
       niv
+      pv
       rsync
       wget
     ];
