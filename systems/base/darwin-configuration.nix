@@ -16,6 +16,7 @@ in
       gitMinimal
       gnumake
       home-manager
+      iperf3
       killall
       niv
       rsync
