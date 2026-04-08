@@ -1,5 +1,8 @@
 # Repository Guidelines
 
+## Agent Skill Usage
+- Do not use `using-superpowers` or other Superpowers skills for work in this repository unless the user explicitly asks for that specific skill or workflow.
+
 ## Project Structure & Module Organization
 - `flake.nix`/`flake.lock`: flake entrypoint and pinned inputs.
 - `systems/`: host configs. Common defaults live in `systems/base/`; per-host overrides live in `systems/<hostname>/` (e.g., `systems/m5mbp/`).
