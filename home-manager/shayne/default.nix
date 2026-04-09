@@ -42,6 +42,7 @@ in
       silver-searcher
       sops
       tree
+      tui-use # TUI automation for terminal sessions
       upterm # Terminal sharing
       watch
       zoxide

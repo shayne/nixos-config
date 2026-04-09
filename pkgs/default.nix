@@ -3,4 +3,5 @@
 
 { pkgs ? (import ../nixpkgs.nix) { }, ... }: {
   caddy = pkgs.callPackage ../pkgs/caddy.nix { };
+  tui-use = pkgs.callPackage ../pkgs/tui-use.nix { };
 }

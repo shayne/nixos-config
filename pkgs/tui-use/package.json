@@ -1,0 +1,28 @@
+{
+  "name": "tui-use",
+  "version": "0.1.17",
+  "description": "TUI automation for AI agents - like BrowserUse, but for the terminal",
+  "bin": "./dist/cli.js",
+  "files": [
+    "dist/",
+    "scripts/",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "clean": "rm -rf node_modules package-lock.json dist ~/.tui-use",
+    "postinstall": "node scripts/install.js",
+    "publish:patch": "npm version patch && npm publish",
+    "publish:minor": "npm version minor && npm publish",
+    "publish:major": "npm version major && npm publish",
+    "start": "node dist/cli.js"
+  },
+  "dependencies": {
+    "@xterm/headless": "^6.0.0",
+    "commander": "^12.0.0",
+    "node-pty": "^1.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
