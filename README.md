@@ -15,9 +15,14 @@ This repository houses my macOS (nix-darwin) configurations and related Nix tool
 
 ## Common Commands
 
+- `make bootstrap`: first build and switch on a host where Nix is installed but this config has not installed system tools yet
+- `make`: run the default `mise` task after `mise` is installed
 - `mise run lint`: run `deadnix`, `nixpkgs-fmt`, and `statix` (same as pre-commit)
 - `mise run check`: run lint + `nix flake check --all-systems`, then build the current host
 - `mise run` (or `mise run default`): build and switch the current host (Darwin uses `darwin-rebuild switch`)
+
+If `make` itself is missing on a fresh host, run the bootstrap target through Nix:
+`nix --extra-experimental-features "nix-command flakes" run nixpkgs#gnumake -- bootstrap`
 
 ## Secrets
 

@@ -4,16 +4,7 @@ pre-commit = "latest"
 [tasks.default]
 description = "Build and switch the current host"
 quiet = true
-run = '''
-echo "Switching host $(hostname -s)..."
-host="$(hostname -s)"
-if [ "$(uname)" = "Darwin" ]; then
-  nix build ".#darwinConfigurations.${host}.system"
-  sudo ./result/sw/bin/darwin-rebuild switch --flake "$(pwd)#${host}"
-else
-  sudo nixos-rebuild switch --flake .
-fi
-'''
+run = "scripts/switch_host.sh"
 
 [tasks.lint]
 description = "Auto-fix deadnix, nixpkgs-fmt, and statix issues"
