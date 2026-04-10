@@ -137,7 +137,9 @@ in
     enableKeyMapping = true;
     remapCapsLockToControl = true;
   };
+  users.knownUsers = [ "shayne" ];
   users.users.shayne = {
+    uid = 501;
     home = "/Users/shayne";
     shell = pkgs.fish;
   };
