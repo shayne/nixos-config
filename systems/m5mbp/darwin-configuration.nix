@@ -37,9 +37,6 @@
     };
     stateVersion = 5;
   };
-
-  programs.nix-index.enable = true;
-
   nix-homebrew.taps = {
     "Arthur-Ficial/homebrew-tap" = inputs.homebrew-arthur-ficial-tap;
   };

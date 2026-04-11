@@ -51,6 +51,7 @@ in
           extraSpecialArgs = args;
           sharedModules = [
             homeManagerPath
+            inputs.nix-index-database.homeModules.default
             inputs.sops-nix.homeManagerModules.sops
           ];
           users = lib.genAttrs users (user: {

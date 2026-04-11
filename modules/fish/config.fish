@@ -146,8 +146,4 @@ function frun
     nix-shell -p $argv[1] --run $argv[1]
 end
 
-function ,
-  nix run nixpkgs#comma -- "$argv[1]" $argv[2..-1]
-end
-
 mise activate fish | source
