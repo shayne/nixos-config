@@ -169,6 +169,7 @@ in
         set -g @dracula-show-network false
         set -g @dracula-show-weather false
 
+        bind a send-prefix
         bind -n C-k send-keys "clear"\; send-keys "Enter"
 
         run-shell ${sources.tmux-pain-control}/pain_control.tmux
