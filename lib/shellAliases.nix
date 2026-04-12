@@ -28,6 +28,7 @@
   amp = "npx @sourcegraph/amp@latest";
   claude = "npx @anthropic-ai/claude-code@latest";
   derpcat = "npx -y derpcat@dev";
+  derphole = "npx -y derphole@dev";
   ytsubs = "uvx ytsubs@latest";
   cmtr = "uvx cmtr@latest";
 }
