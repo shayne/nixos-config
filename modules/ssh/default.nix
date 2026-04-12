@@ -4,6 +4,11 @@ _:
   programs.ssh = {
     enable = true;
     matchBlocks = {
+      "*" = {
+        identityFile = "~/.ssh/id_ed25519";
+        identitiesOnly = true;
+      };
+
       "orb" = {
         hostname = "localhost";
         user = "default";
