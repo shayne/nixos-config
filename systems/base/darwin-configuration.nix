@@ -18,7 +18,6 @@ in
       home-manager
       iperf3
       killall
-      niv
       pv
       rsync
       wget

@@ -28,7 +28,6 @@ let
   args = {
     inherit inputs users myLibPath myModulesPath;
     currentSystemName = name;
-    sources = import ../nix/sources.nix;
     unstableModulesPath = "${inputs.home-manager-unstable.outPath}";
   };
 in

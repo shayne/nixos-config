@@ -17,6 +17,38 @@
         "type": "github"
       }
     },
+    "fish-foreign-env": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1692819433,
+        "narHash": "sha256-4+k5rSoxkTtYFh/lEjhRkVYa2S4KEzJ/IJbyJl+rJjQ=",
+        "owner": "oh-my-fish",
+        "repo": "plugin-foreign-env",
+        "rev": "7f0cf099ae1e1e4ab38f46350ed6757d54471de7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "oh-my-fish",
+        "repo": "plugin-foreign-env",
+        "type": "github"
+      }
+    },
+    "fish-fzf": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1620776412,
+        "narHash": "sha256-28QW/WTLckR4lEfHv6dSotwkAKpNJFCShxmKFGQQ1Ew=",
+        "owner": "jethrokuan",
+        "repo": "fzf",
+        "rev": "479fa67d7439b23095e01b64987ae79a91a4e283",
+        "type": "github"
+      },
+      "original": {
+        "owner": "jethrokuan",
+        "repo": "fzf",
+        "type": "github"
+      }
+    },
     "flake-compat": {
       "locked": {
         "lastModified": 1761640442,
@@ -391,6 +423,8 @@
     },
     "root": {
       "inputs": {
+        "fish-foreign-env": "fish-foreign-env",
+        "fish-fzf": "fish-fzf",
         "home-manager": "home-manager",
         "home-manager-unstable": "home-manager-unstable",
         "homebrew-arthur-ficial-tap": "homebrew-arthur-ficial-tap",
@@ -404,7 +438,11 @@
         "nixos-apple-silicon": "nixos-apple-silicon",
         "nixpkgs": "nixpkgs_4",
         "nixpkgs-unstable": "nixpkgs-unstable",
-        "sops-nix": "sops-nix"
+        "sops-nix": "sops-nix",
+        "tmux-dracula": "tmux-dracula",
+        "tmux-pain-control": "tmux-pain-control",
+        "tree-sitter-proto": "tree-sitter-proto",
+        "zoxide-fish": "zoxide-fish"
       }
     },
     "sops-nix": {
@@ -424,6 +462,70 @@
       "original": {
         "owner": "Mic92",
         "repo": "sops-nix",
+        "type": "github"
+      }
+    },
+    "tmux-dracula": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1775542713,
+        "narHash": "sha256-MITEAZcWgpRdbojlA3aXFJKviDrH3pDh/iryKEwJVE8=",
+        "owner": "dracula",
+        "repo": "tmux",
+        "rev": "f4a82e014835f9cf4b7ef92d84af3d1b54b2338e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "dracula",
+        "repo": "tmux",
+        "type": "github"
+      }
+    },
+    "tmux-pain-control": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1628510980,
+        "narHash": "sha256-2VI9w7Naj9OHF3iuV63Ij4QcYhbrtngyJ3GpeyzIKxs=",
+        "owner": "tmux-plugins",
+        "repo": "tmux-pain-control",
+        "rev": "32b760f6652f2305dfef0acd444afc311cf5c077",
+        "type": "github"
+      },
+      "original": {
+        "owner": "tmux-plugins",
+        "repo": "tmux-pain-control",
+        "type": "github"
+      }
+    },
+    "tree-sitter-proto": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1623515344,
+        "narHash": "sha256-cX+0YARIa9i8UymPPviyoj+Wh37AFYl9fsoNZMQXPgA=",
+        "owner": "mitchellh",
+        "repo": "tree-sitter-proto",
+        "rev": "42d82fa18f8afe59b5fc0b16c207ee4f84cb185f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mitchellh",
+        "repo": "tree-sitter-proto",
+        "type": "github"
+      }
+    },
+    "zoxide-fish": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1660831028,
+        "narHash": "sha256-Hq9UXB99kmbWKUVFDeJL790P8ek+xZR5LDvS+Qih+N4=",
+        "owner": "kidonng",
+        "repo": "zoxide.fish",
+        "rev": "bfd5947bcc7cd01beb23c6a40ca9807c174bba0e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "kidonng",
+        "repo": "zoxide.fish",
         "type": "github"
       }
     }

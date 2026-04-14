@@ -29,7 +29,14 @@
     # Other packages
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     nixos-apple-silicon.url = "github:tpwrules/nixos-apple-silicon";
+
     # Non-flakes
+    fish-foreign-env = { url = "github:oh-my-fish/plugin-foreign-env"; flake = false; };
+    fish-fzf = { url = "github:jethrokuan/fzf"; flake = false; };
+    tmux-dracula = { url = "github:dracula/tmux"; flake = false; };
+    tmux-pain-control = { url = "github:tmux-plugins/tmux-pain-control"; flake = false; };
+    tree-sitter-proto = { url = "github:mitchellh/tree-sitter-proto"; flake = false; };
+    zoxide-fish = { url = "github:kidonng/zoxide.fish"; flake = false; };
   };
 
   outputs = { nixpkgs, ... }@inputs:

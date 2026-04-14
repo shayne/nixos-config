@@ -1,4 +1,4 @@
-{ inputs, outputs, user, stateVersion, myLibPath, lib, pkgs, sources, ... }:
+{ inputs, outputs, user, stateVersion, myLibPath, lib, pkgs, ... }:
 let
   libx = import myLibPath { inherit inputs outputs user stateVersion; };
 in
@@ -12,14 +12,19 @@ in
 
     inherit (libx) shellAliases;
 
-    plugins = map
-      (n: {
-        name = n;
-        src = sources.${n};
-      }) [
-      "fish-fzf"
-      "fish-foreign-env"
-      "zoxide.fish"
+    plugins = [
+      {
+        name = "fish-fzf";
+        src = inputs.fish-fzf;
+      }
+      {
+        name = "fish-foreign-env";
+        src = inputs.fish-foreign-env;
+      }
+      {
+        name = "zoxide.fish";
+        src = inputs.zoxide-fish;
+      }
     ];
   };
 

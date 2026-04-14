@@ -11,7 +11,8 @@ This repository houses my macOS (nix-darwin) configurations and related Nix tool
 - `home-manager/<user>/`: shared user config and per-host overlays
 - `modules/`: reusable Nix modules
 - `overlays/` + `pkgs/`: custom overlays/packages
-- `nix/` + `nixpkgs.nix`: source pinning helpers
+- `flake.nix`/`flake.lock`: source pinning and flake outputs
+- `nixpkgs.nix`: compatibility helper for importing the flake-pinned nixpkgs
 
 ## Common Commands
 

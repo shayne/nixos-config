@@ -10,7 +10,8 @@
 - Do not remove seemingly empty `home-manager/<user>/<hostname>/default.nix` files without checking `lib/mkSystem.nix`; those tracked host directories determine which users attach to which hosts.
 - `modules/`: reusable Nix modules (shells, editors, services).
 - `overlays/` + `pkgs/`: custom packages and overlay wiring.
-- `nix/` and `nixpkgs.nix`: source pinning helpers.
+- `flake.nix`/`flake.lock`: source pinning and flake outputs.
+- `nixpkgs.nix`: compatibility helper for importing the flake-pinned nixpkgs.
 - `iso/`: ISO build scripts.
 
 ## Darwin / Homebrew Conventions

@@ -1,4 +1,4 @@
-{ config, lib, pkgs, sources, myModulesPath, ... }:
+{ config, inputs, lib, pkgs, myModulesPath, ... }:
 
 let
   inherit (pkgs.stdenv) isDarwin isLinux;
@@ -165,15 +165,13 @@ in
         set -ga terminal-overrides ",*256col*:Tc"
         set -g mouse on
 
-        set -g @dracula-show-battery false
-        set -g @dracula-show-network false
-        set -g @dracula-show-weather false
+        set -g @dracula-plugins "time"
 
         bind a send-prefix
         bind -n C-k send-keys "clear"\; send-keys "Enter"
 
-        run-shell ${sources.tmux-pain-control}/pain_control.tmux
-        run-shell ${sources.tmux-dracula}/dracula.tmux
+        run-shell ${inputs.tmux-pain-control}/pain_control.tmux
+        run-shell ${inputs.tmux-dracula}/dracula.tmux
       '';
     };
 
