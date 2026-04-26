@@ -74,8 +74,6 @@
       "chatgpt"
       "cinebench"
       "claude"
-      "codex"
-      "codex-app"
       "cursor"
       "deskpad"
       "discord"

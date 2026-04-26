@@ -19,6 +19,7 @@
 - Manage Homebrew declaratively through nix-darwin/nix-homebrew, not with imperative `brew install`.
 - Use `homebrew.brews` for CLI formulae, `homebrew.casks` for GUI apps, `homebrew.masApps` for Mac App Store apps, and `homebrew.taps` for extra tap repos needed by tap-qualified packages.
 - Prefer host-scoped edits for host-specific Darwin packages unless the user explicitly asks for a shared/base change.
+- When the user asks to upgrade Homebrew packages, formulae, or casks, update only the pinned Homebrew tap inputs in `flake.lock` with `nix flake update homebrew-core homebrew-cask homebrew-arthur-ficial-tap`, then apply the Darwin config with `mise run` on the target host. Do not run bare `nix flake update` for this request, and do not run imperative `brew update` or `brew upgrade`; `homebrew.onActivation.upgrade = true` makes nix-darwin's generated `brew bundle` upgrade declared formulae/casks from the flake-pinned taps during activation.
 - For small Darwin package changes, prefer targeted verification with `nix eval --json .#darwinConfigurations.<host>.config.homebrew.brews` or `nix eval --json .#darwinConfigurations.<host>.config.homebrew.casks` before running `mise run` on the target host.
 
 ## Build, Test, and Development Commands
