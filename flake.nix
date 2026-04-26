@@ -24,7 +24,6 @@
     nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
     homebrew-core = { url = "github:homebrew/homebrew-core"; flake = false; };
     homebrew-cask = { url = "github:homebrew/homebrew-cask"; flake = false; };
-    homebrew-arthur-ficial-tap = { url = "github:Arthur-Ficial/homebrew-tap"; flake = false; };
 
     # Other packages
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";

@@ -1,4 +1,4 @@
-{ config, inputs, lib, ... }: {
+{ config, lib, ... }: {
   nixpkgs.hostPlatform = "aarch64-darwin";
 
   networking.hostName = "m5mbp";
@@ -37,19 +37,13 @@
     };
     stateVersion = 5;
   };
-  nix-homebrew.taps = {
-    "Arthur-Ficial/homebrew-tap" = inputs.homebrew-arthur-ficial-tap;
-  };
-
   homebrew = {
     enable = true;
     taps = [
-      "Arthur-Ficial/tap"
       "homebrew/cask"
       "homebrew/core"
     ];
     brews = [
-      "Arthur-Ficial/tap/apfel"
       "bash"
       "cdrtools"
       "coreutils"
