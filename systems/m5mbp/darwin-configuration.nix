@@ -98,6 +98,7 @@
       "utm"
       "visual-studio-code"
       "vlc"
+      "wispr-flow"
     ];
     masApps = {
       "Xcode" = 497799835;
