@@ -117,6 +117,7 @@ in
   };
 
   homebrew.brews = [
+    "container"
     "mas"
     "tmux"
   ];
