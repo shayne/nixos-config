@@ -1,0 +1,4 @@
+interface:
+  display_name: "Update Flake Lock Safely"
+  short_description: "Update flake.lock with build-first rollback discipline."
+  default_prompt: "Use $update-flake-lock-safely to update this nixos-config flake.lock carefully and keep only inputs that build."
