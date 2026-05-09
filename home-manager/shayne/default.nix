@@ -63,6 +63,7 @@ in
       LANG = "en_US.UTF-8";
       LC_CTYPE = "en_US.UTF-8";
       LC_ALL = "en_US.UTF-8";
+      CLICOLOR = "1";
       EDITOR = "nvim";
       PAGER = "less -FirSwX";
       MANPAGER = "${pkgs.bat}/bin/bat -l man -p";
