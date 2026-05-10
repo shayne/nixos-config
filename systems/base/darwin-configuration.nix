@@ -117,6 +117,7 @@ in
   };
 
   homebrew.brews = [
+    "agent-browser"
     "container"
     "mas"
     "tmux"
