@@ -1,4 +1,48 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
+let
+  # tmux is a second place where macOS launchd/audit sessions matter. Panes are
+  # forked by the long-lived tmux server, not by whichever SSH client attaches to
+  # it later. If that server was originally created from a normal macOS SSH
+  # session, it can keep launchd's "Background" session even after OpenSSH itself
+  # has been fixed to re-enter the desktop "Aqua" session.
+  #
+  # That means `security show-keychain-info` can work in a fresh SSH shell while
+  # failing in a new tmux pane attached to an older server. Using default-command
+  # makes each new pane shell perform the same Aqua handoff before starting the
+  # user's login shell, so keychain-dependent tools behave consistently.
+  #
+  # This affects newly-created panes/windows. Existing pane shells keep whatever
+  # session context they already had; restart those shells if they need keychain
+  # access.
+  tmuxAquaShell = pkgs.writeShellScript "tmux-aqua-shell" ''
+    set -eu
+
+    uid=$(/usr/bin/id -u)
+    user=$(/usr/bin/id -un)
+    current_manager=$(/bin/launchctl managername 2>/dev/null || true)
+    shell=$(/usr/bin/dscl . -read "/Users/$user" UserShell 2>/dev/null | /usr/bin/awk '{print $2; exit}')
+
+    if [ -z "$shell" ] || [ ! -x "$shell" ]; then
+      shell=''${SHELL:-/bin/zsh}
+    fi
+
+    if [ "$current_manager" = "Aqua" ]; then
+      exec "$shell" -l
+    fi
+
+    if ! /bin/launchctl print "gui/$uid" >/dev/null 2>&1; then
+      echo "tmux-aqua-shell: no gui/$uid session; log in through the desktop session first" >&2
+      exit 69
+    fi
+
+    exec /usr/bin/sudo -n /bin/launchctl asuser "$uid" \
+      /usr/bin/sudo -n -u "$user" /usr/bin/env \
+        HOME="$HOME" USER="$user" LOGNAME="$user" SHELL="$shell" TERM="''${TERM-}" \
+        SSH_AUTH_SOCK="''${SSH_AUTH_SOCK-}" SSH_CLIENT="''${SSH_CLIENT-}" \
+        SSH_CONNECTION="''${SSH_CONNECTION-}" SSH_TTY="''${SSH_TTY-}" \
+        "$shell" -l
+  '';
+in
 {
   sops.secrets = {
     beszel_agent_macstudio_key = { };
@@ -16,6 +60,10 @@
     source = config.lib.file.mkOutOfStoreSymlink config.sops.templates."beszel-agent-macstudio.env".path;
     force = true;
   };
+
+  programs.tmux.extraConfig = ''
+    set -g default-command ${tmuxAquaShell}
+  '';
 
   home.activation.beszelDirs = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     mkdir -p "$HOME/.cache/beszel"
