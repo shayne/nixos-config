@@ -71,8 +71,6 @@
       "cursor"
       "deskpad"
       "discord"
-      "elgato-stream-deck"
-      "elgato-wave-link"
       "ghostty"
       "google-chrome"
       "homerow"
