@@ -17,7 +17,6 @@ in
       age
       bat
       bind
-      eternal-terminal
       fd
       ffmpeg
       fzf

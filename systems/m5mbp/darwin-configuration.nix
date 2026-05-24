@@ -47,6 +47,7 @@
       "bash"
       "cdrtools"
       "coreutils"
+      "et"
       "gnu-tar"
       "jq"
       "llama.cpp"

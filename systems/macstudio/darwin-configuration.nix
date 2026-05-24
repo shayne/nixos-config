@@ -86,6 +86,10 @@ in
     ];
     brews = [
       "bitwarden-cli"
+      {
+        name = "et";
+        start_service = true;
+      }
       "gh"
       "henrygd/beszel/beszel-agent"
       "mise"
