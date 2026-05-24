@@ -29,7 +29,6 @@ in
       httpie
       hub
       jq
-      mosh
       nix-diff
       nodejs # Node is required for Copilot.vim
       nodePackages.prettier
