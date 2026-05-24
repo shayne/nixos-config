@@ -91,7 +91,10 @@ in
         start_service = true;
       }
       "gh"
-      "henrygd/beszel/beszel-agent"
+      {
+        name = "henrygd/beszel/beszel-agent";
+        start_service = true;
+      }
       "mise"
       "sichengchen/tap/apple-calendar-cli"
       "steipete/tap/gogcli"
