@@ -17,6 +17,7 @@ in
       age
       bat
       bind
+      eternal-terminal
       fd
       ffmpeg
       fzf
@@ -65,6 +66,7 @@ in
       LC_ALL = "en_US.UTF-8";
       CLICOLOR = "1";
       EDITOR = "nvim";
+      ET_NO_TELEMETRY = "1";
       PAGER = "less -FirSwX";
       MANPAGER = "${pkgs.bat}/bin/bat -l man -p";
       SOPS_AGE_SSH_PRIVATE_KEY_FILE = "${config.home.homeDirectory}/.ssh/id_ed25519";
