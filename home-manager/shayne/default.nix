@@ -31,7 +31,7 @@ in
       jq
       nix-diff
       nodejs # Node is required for Copilot.vim
-      nodePackages.prettier
+      prettier
       ookla-speedtest
       (python3.withPackages (ps: with ps; [
         pyyaml
