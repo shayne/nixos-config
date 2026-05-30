@@ -3,17 +3,17 @@ _:
 {
   programs.ssh = {
     enable = true;
-    matchBlocks = {
+    settings = {
       "*" = {
-        identityFile = "~/.ssh/id_ed25519";
-        identitiesOnly = true;
+        IdentityFile = "~/.ssh/id_ed25519";
+        IdentitiesOnly = true;
       };
 
       "orb" = {
-        hostname = "localhost";
-        user = "default";
-        port = 32222;
-        identityFile = "~/.orbstack/ssh/id_ed25519";
+        HostName = "localhost";
+        User = "default";
+        Port = 32222;
+        IdentityFile = "~/.orbstack/ssh/id_ed25519";
       };
     };
   };
