@@ -136,6 +136,7 @@ in
         core.askPass = ""; # needs to be empty to use terminal for ask pass
         credential.helper = "store"; # want to make this more secure
         fetch.prune = true;
+        gitbutler.signCommits = true;
         github.user = "shayne";
         gpg.ssh.allowedSignersFile = "${config.xdg.configHome}/git/allowed_signers";
         init.defaultBranch = "main";
