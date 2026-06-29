@@ -52,6 +52,7 @@
       "jq"
       "llama.cpp"
       "mise"
+      "opencode"
       "qemu"
       "samba"
       "socat"
