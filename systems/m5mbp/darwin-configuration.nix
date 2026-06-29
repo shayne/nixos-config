@@ -73,6 +73,7 @@
       "cursor"
       "deskpad"
       "discord"
+      "fluidvoice"
       "ghostty"
       "google-chrome"
       "homerow"
