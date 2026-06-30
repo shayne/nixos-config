@@ -29,6 +29,7 @@
   claude = "npx @anthropic-ai/claude-code@latest";
   derpcat = "npx -y derpcat@dev";
   derphole = "npx -y derphole@dev";
+  derpssh = "npx -y derpssh@latest";
   ytsubs = "uvx ytsubs@latest";
   cmtr = "uvx cmtr@latest";
 }
