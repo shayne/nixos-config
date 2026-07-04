@@ -24,12 +24,12 @@
   godlv = "dlv exec --api-version 2 --listen=127.0.0.1:2345 --headless";
   ta = "tmux new -A -s";
 
-  codex = "npx @openai/codex@latest --dangerously-bypass-approvals-and-sandbox";
   amp = "npx @sourcegraph/amp@latest";
   claude = "npx @anthropic-ai/claude-code@latest";
-  derpcat = "npx -y derpcat@dev";
-  derphole = "npx -y derphole@dev";
-  derpssh = "npx -y derpssh@latest";
-  ytsubs = "uvx ytsubs@latest";
   cmtr = "uvx cmtr@latest";
+  codex = "npx @openai/codex@latest --dangerously-bypass-approvals-and-sandbox";
+  derphole = "npx -y derphole@dev";
+  derpssh = "npx -y derpssh@dev";
+  derptun = "npx -y derptun@dev";
+  ytsubs = "uvx ytsubs@latest";
 }
