@@ -88,6 +88,10 @@ in
   xdg.enable = true;
   xdg.configFile."git/allowed_signers".text =
     "79330+shayne@users.noreply.github.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKxq71dQw4zBQAe3mtfiNwuCwP0Lu8x9PdRVxy2+T8Pw\n";
+  xdg.configFile."yeet/config.toml".text = ''
+    default_host = "yeet-hetz"
+    workspaces = ["/Users/shayne/yeet-services"]
+  '';
 
   # Home Manager's manpage generation currently forces options docs evaluation
   # and triggers an upstream string-context warning during darwin-rebuild.
