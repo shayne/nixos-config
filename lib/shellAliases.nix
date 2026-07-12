@@ -24,10 +24,9 @@
   godlv = "dlv exec --api-version 2 --listen=127.0.0.1:2345 --headless";
   ta = "tmux new -A -s";
 
-  amp = "npx @sourcegraph/amp@latest";
-  claude = "npx @anthropic-ai/claude-code@latest";
+  claude = "npx -y @anthropic-ai/claude-code@latest";
   cmtr = "uvx cmtr@latest";
-  codex = "npx @openai/codex@latest --dangerously-bypass-approvals-and-sandbox";
+  codex = "npx -y @openai/codex@latest --dangerously-bypass-approvals-and-sandbox";
   derphole = "npx -y derphole@dev";
   derpssh = "npx -y derpssh@dev";
   derptun = "npx -y derptun@dev";
