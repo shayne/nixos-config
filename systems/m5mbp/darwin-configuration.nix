@@ -1,7 +1,9 @@
-{ config, lib, ... }: {
+{ config, lib, pkgs, ... }: {
   nixpkgs.hostPlatform = "aarch64-darwin";
 
   networking.hostName = "m5mbp";
+
+  environment.systemPackages = [ pkgs.umbra ];
 
   nix = {
     settings = {
