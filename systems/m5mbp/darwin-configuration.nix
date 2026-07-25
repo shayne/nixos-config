@@ -3,10 +3,7 @@
 
   networking.hostName = "m5mbp";
 
-  environment.systemPackages = [
-    pkgs.hermes-agent
-    pkgs.umbra
-  ];
+  environment.systemPackages = [ pkgs.umbra ];
 
   nix = {
     settings = {
