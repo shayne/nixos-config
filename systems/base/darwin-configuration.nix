@@ -123,8 +123,8 @@ in
     "tmux"
   ];
   homebrew.casks = [
+    "chatgpt"
     "codex"
-    "codex-app"
     "gitbutler"
   ];
 

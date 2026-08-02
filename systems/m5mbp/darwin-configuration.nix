@@ -69,7 +69,6 @@
       "bambu-studio"
       "bentobox"
       "caffeine"
-      "chatgpt"
       "cinebench"
       "claude"
       "cursor"
