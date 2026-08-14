@@ -1,4 +1,6 @@
 { config, lib, pkgs, ... }: {
+  imports = [ ./lunar.nix ];
+
   nixpkgs.hostPlatform = "aarch64-darwin";
 
   networking.hostName = "m5mbp";

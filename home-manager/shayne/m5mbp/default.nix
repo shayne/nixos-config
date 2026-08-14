@@ -42,10 +42,18 @@
     };
   };
 
-  sops.secrets.ghostty_dracula_pro = { };
+  sops.secrets = {
+    ghostty_dracula_pro = { };
+    linearmouse_config = { };
+  };
 
   xdg.configFile."ghostty/themes/Dracula PRO" = {
     force = true;
     source = config.lib.file.mkOutOfStoreSymlink config.sops.secrets.ghostty_dracula_pro.path;
+  };
+
+  xdg.configFile."linearmouse/linearmouse.json" = {
+    force = true;
+    source = config.lib.file.mkOutOfStoreSymlink config.sops.secrets.linearmouse_config.path;
   };
 }
