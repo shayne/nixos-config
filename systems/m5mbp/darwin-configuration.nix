@@ -5,7 +5,10 @@
 
   networking.hostName = "m5mbp";
 
-  environment.systemPackages = [ pkgs.umbra ];
+  environment.systemPackages = [
+    pkgs.nurb
+    pkgs.umbra
+  ];
 
   nix = {
     settings = {

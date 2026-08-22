@@ -3,6 +3,7 @@
 
 { pkgs ? (import ../nixpkgs.nix) { }, ... }: {
   caddy = pkgs.callPackage ../pkgs/caddy.nix { };
+  nurb = pkgs.callPackage ../pkgs/nurb.nix { };
   tui-use = pkgs.callPackage ../pkgs/tui-use.nix { };
   umbra = pkgs.callPackage ../pkgs/umbra.nix { };
 }
