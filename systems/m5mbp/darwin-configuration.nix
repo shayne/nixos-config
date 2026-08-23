@@ -105,6 +105,7 @@
       "utm"
       "visual-studio-code"
       "vlc"
+      "windows-app"
       "wispr-flow"
     ];
     masApps = {
