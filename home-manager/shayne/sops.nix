@@ -11,16 +11,19 @@
     secrets = {
       openai_api_key = { };
       anthropic_api_key = { };
+      local_llm_api_key = { };
     };
 
     templates."shell-secrets.sh".content = ''
       export OPENAI_API_KEY='${config.sops.placeholder.openai_api_key}'
       export ANTHROPIC_API_KEY='${config.sops.placeholder.anthropic_api_key}'
+      export LOCAL_LLM_API_KEY='${config.sops.placeholder.local_llm_api_key}'
     '';
 
     templates."shell-secrets.fish".content = ''
       set -gx OPENAI_API_KEY '${config.sops.placeholder.openai_api_key}'
       set -gx ANTHROPIC_API_KEY '${config.sops.placeholder.anthropic_api_key}'
+      set -gx LOCAL_LLM_API_KEY '${config.sops.placeholder.local_llm_api_key}'
     '';
   };
 

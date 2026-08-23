@@ -56,4 +56,9 @@
     force = true;
     source = config.lib.file.mkOutOfStoreSymlink config.sops.secrets.linearmouse_config.path;
   };
+
+  xdg.configFile."opencode/opencode.json" = {
+    force = true;
+    source = ./opencode.json;
+  };
 }

@@ -1,0 +1,29 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "model": "local-4090/qwen3.8-27b-local",
+  "provider": {
+    "local-4090": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Local RTX 4090",
+      "options": {
+        "baseURL": "http://10.0.1.47:8080/v1",
+        "apiKey": "{env:LOCAL_LLM_API_KEY}",
+        "timeout": false
+      },
+      "models": {
+        "qwen3.8-27b-local": {
+          "name": "Qwen3.8 27B - RTX 4090",
+          "reasoning": true,
+          "tool_call": true,
+          "interleaved": {
+            "field": "reasoning_content"
+          },
+          "limit": {
+            "context": 45056,
+            "output": 32768
+          }
+        }
+      }
+    }
+  }
+}
