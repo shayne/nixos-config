@@ -32,6 +32,8 @@
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     nixos-apple-silicon.url = "github:tpwrules/nixos-apple-silicon";
 
+    superpowers = { url = "github:obra/superpowers"; flake = false; };
+
     # Non-flakes
     fish-foreign-env = { url = "github:oh-my-fish/plugin-foreign-env"; flake = false; };
     fish-fzf = { url = "github:jethrokuan/fzf"; flake = false; };

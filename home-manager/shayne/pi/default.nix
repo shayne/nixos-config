@@ -162,6 +162,7 @@ let
       }
       rpivBtwSource
       rpivTodoSource
+      "${inputs.superpowers}"
     ];
 
     extensions = [ ];
