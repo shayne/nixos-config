@@ -75,6 +75,7 @@ in
   };
 
   imports = [
+    ./pi
     ./sops.nix
     (myModulesPath + "/bash")
     (myModulesPath + "/custom-fonts")

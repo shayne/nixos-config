@@ -27,6 +27,18 @@ Home Manager imports `nix-community/nix-index-database`, so `nix-locate`, shell
 index data. There is no local `nix-index` database build step to run on Darwin
 hosts in this repo.
 
+## Pi coding agent
+
+The shared `shayne` Home Manager profile installs `pi` from the pinned
+`numtide/llm-agents.nix` flake on every Mac. Its default provider and model are
+derived from `home-manager/shayne/m5mbp/opencode.json`, so OpenCode and Pi use
+the same NInfer endpoint, model identifiers, and token limits. The local API key
+comes from the existing `local_llm_api_key` SOPS secret at runtime.
+
+Home Manager owns Pi's settings, model catalog, extension configuration, and
+pinned package list. Pi still owns mutable authentication, sessions, and npm
+package state under `~/.pi/agent/`.
+
 If `make` itself is missing on a fresh host, run the bootstrap target through Nix:
 `nix --extra-experimental-features "nix-command flakes" run nixpkgs#gnumake -- bootstrap`
 

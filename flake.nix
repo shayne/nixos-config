@@ -25,6 +25,9 @@
     homebrew-core = { url = "github:homebrew/homebrew-core"; flake = false; };
     homebrew-cask = { url = "github:homebrew/homebrew-cask"; flake = false; };
 
+    llm-agents.url = "github:numtide/llm-agents.nix";
+    llm-agents.inputs.nixpkgs.follows = "nixpkgs-unstable";
+
     # Other packages
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     nixos-apple-silicon.url = "github:tpwrules/nixos-apple-silicon";
