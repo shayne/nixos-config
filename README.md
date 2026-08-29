@@ -39,6 +39,22 @@ Home Manager owns Pi's settings, model catalog, extension configuration, and
 pinned package list. Pi still owns mutable authentication, sessions, and npm
 package state under `~/.pi/agent/`.
 
+## Hermes Agent and Computer Use
+
+The shared `shayne` Home Manager profile installs Hermes Agent from the pinned
+`numtide/llm-agents.nix` flake on both Macs. The Nix wrapper supplies Hermes'
+Computer Use HTTP dependency and a writable lazy-package target, while Hermes
+continues to own mutable configuration, credentials, sessions, skills, and
+other state under `~/.hermes/`. Update Hermes through this flake and rebuild the
+host rather than using `hermes update`.
+
+On Darwin, Home Manager also installs the pinned, signed CUA driver package and
+places `CuaDriver.app` in `/Applications`, falling back to `~/Applications` if
+the system Applications directory is not writable. After the first install,
+grant `CuaDriver.app` both Accessibility and Screen & System Audio Recording in
+System Settings -> Privacy & Security. Re-grant them after a driver upgrade if
+the upstream code signature changes.
+
 If `make` itself is missing on a fresh host, run the bootstrap target through Nix:
 `nix --extra-experimental-features "nix-command flakes" run nixpkgs#gnumake -- bootstrap`
 

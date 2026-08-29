@@ -75,12 +75,12 @@ in
   };
 
   imports = [
+    ./hermes
     ./pi
     ./sops.nix
     (myModulesPath + "/bash")
     (myModulesPath + "/custom-fonts")
     (myModulesPath + "/fish")
-    (myModulesPath + "/llm-agents.nix")
     (myModulesPath + "/neovim")
     (myModulesPath + "/ssh")
     (myModulesPath + "/starship")
