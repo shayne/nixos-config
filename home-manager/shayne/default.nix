@@ -25,7 +25,6 @@ in
       # go
       google-cloud-sdk
       gopls
-      config.llmAgents.hermes-agent
       htop
       httpie
       hub

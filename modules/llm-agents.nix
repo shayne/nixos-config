@@ -14,11 +14,15 @@
 # - It is redefined via pythonPackagesExtensions with dontCheckRuntimeDeps so
 #   the build-time runtime dependency check does not fail (hermes only uses
 #   its path helpers).
-#
-# Provides `config.llmAgents`, the full package set.
-{ inputs, pkgs, ... }:
+# - pythonPackagesExtensions is the supported hook for overriding python
+#   packages; plain `pkg.override` with new attributes does not work in this
+#   nixpkgs generation.
+{ inputs
+, pkgs
+, ...
+}:
 
-{
+let
   llmAgents =
     (import inputs.nixpkgs-unstable {
       inherit (pkgs.stdenv.hostPlatform) system;
@@ -48,4 +52,11 @@
         })
       ];
     }).llm-agents;
+in
+{
+  # Install the agents from llm-agents.nix; add more from `llmAgents` here as
+  # needed.
+  home.packages = [
+    llmAgents.hermes-agent
+  ];
 }
