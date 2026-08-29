@@ -25,6 +25,7 @@ in
       # go
       google-cloud-sdk
       gopls
+      config.llmAgents.hermes-agent
       htop
       httpie
       hub
@@ -80,6 +81,7 @@ in
     (myModulesPath + "/bash")
     (myModulesPath + "/custom-fonts")
     (myModulesPath + "/fish")
+    (myModulesPath + "/llm-agents")
     (myModulesPath + "/neovim")
     (myModulesPath + "/ssh")
     (myModulesPath + "/starship")
