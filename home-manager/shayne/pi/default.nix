@@ -14,15 +14,16 @@ let
   localProvider = opencodeConfig.provider.${localProviderName};
   localModel = localProvider.models.${localModelId};
 
-  piMcpAdapterVersion = "2.21.1";
-  piSubagentsVersion = "0.44.0";
-  piLensVersion = "3.8.74";
+  piMcpAdapterVersion = "2.28.0";
+  piSubagentsVersion = "0.57.0";
+  piLensVersion = "4.1.2";
   piLensTypescriptVersion = "7.0.2";
   piFooterVersion = "0.5.1";
   piSubCoreVersion = "1.5.0";
-  piCcHeaderVersion = "0.9.4";
-  rpivBtwVersion = "2.4.0";
-  rpivTodoVersion = "2.4.0";
+  piCcHeaderVersion = "1.1.1";
+  piPrettyVersion = "0.6.24";
+  rpivBtwVersion = "2.7.1";
+  rpivTodoVersion = "2.7.1";
 
   piMcpAdapterSource = "npm:pi-mcp-adapter@${piMcpAdapterVersion}";
   piSubagentsSource = "npm:pi-subagents@${piSubagentsVersion}";
@@ -31,22 +32,9 @@ let
   piFooterSource = "npm:pi-footer@${piFooterVersion}";
   piSubCoreSource = "npm:@marckrenn/pi-sub-core@${piSubCoreVersion}";
   piCcHeaderSource = "npm:pi-cc-header@${piCcHeaderVersion}";
+  piPrettySource = "npm:@heyhuynhgiabuu/pi-pretty@${piPrettyVersion}";
   rpivBtwSource = "npm:@juicesharp/rpiv-btw@${rpivBtwVersion}";
   rpivTodoSource = "npm:@juicesharp/rpiv-todo@${rpivTodoVersion}";
-
-  piCcHeaderUpstream = pkgs.fetchFromGitHub {
-    owner = "eriiic7z";
-    repo = "pi-cc-header";
-    rev = "v${piCcHeaderVersion}";
-    hash = "sha256-lBYwrsQh2mywAucvOePVgoWtC7jZJIiOlv8r5t6lwm8=";
-  };
-  piCcHeaderPatched =
-    pkgs.runCommand "pi-cc-header-${piCcHeaderVersion}-patched" { nativeBuildInputs = [ pkgs.patch ]; }
-      ''
-        cp -R ${piCcHeaderUpstream} "$out"
-        chmod -R u+w "$out"
-        patch -d "$out" -p1 < ${./patches/pi-cc-header-writable-state.patch}
-      '';
 
   # Pi installs npm-backed packages globally. Keep those mutable resources in
   # Pi's user-owned state rather than pointing npm at the read-only Nix store.
@@ -126,6 +114,7 @@ let
     doubleEscapeAction = "tree";
     treeFilterMode = "default";
     autocompleteMaxVisible = 8;
+    editorPaddingX = 2;
 
     compaction = {
       enabled = true;
@@ -143,6 +132,10 @@ let
     };
     markdown.codeBlockIndent = " ";
 
+    # Keep the Home Manager-owned settings file read-only. Header commands can
+    # still change the current session, but declarative settings remain intact.
+    ccHeader.readOnlyConfig = true;
+
     packages = [
       piMcpAdapterSource
       piSubagentsSource
@@ -156,10 +149,8 @@ let
       }
       piFooterSource
       piSubCoreSource
-      {
-        source = piCcHeaderSource;
-        extensions = [ ];
-      }
+      piCcHeaderSource
+      piPrettySource
       rpivBtwSource
       rpivTodoSource
       "${inputs.superpowers}"
@@ -230,11 +221,26 @@ let
       colorLevel = "ansi256";
     };
     extensionStatusRow = {
-      hiddenKeys = [ "pi-quota:usage" ];
-      knownKeys = [ "pi-quota:usage" ];
+      hiddenKeys = [
+        "mcp"
+        "mcp-auth"
+        "pi-lens-lsp"
+        "pi-quota:usage"
+      ];
+      knownKeys = [
+        "mcp"
+        "mcp-auth"
+        "pi-lens-lsp"
+        "pi-quota:usage"
+      ];
     };
     lines = [
       [
+        (footerWidget "agent-icon" "custom-text" {
+          raw = true;
+          fg = "pi:text";
+          text = " ";
+        })
         (footerWidget "model-provider" "model-provider" {
           raw = true;
           fg = "pi:warning";
@@ -244,11 +250,9 @@ let
           fg = "pi:thinkingHigh";
           hideWhenEmpty = true;
         })
-        (footerWidget "cwd" "cwd" {
+        (footerWidget "cwd" "cwd-basename" {
           icon = " · ";
           fg = "pi:success";
-          cwdDisplayStyle = "full-home";
-          segments = 3;
         })
         (footerWidget "quota" "external-status" {
           icon = " · ";
@@ -288,6 +292,13 @@ let
     ];
   };
 
+  piLensConfig.widget.visible = false;
+
+  piPrettyConfig = {
+    icons = "nerd";
+    enableTools = [ "ls" ];
+  };
+
   piSubCoreConfig = {
     version = 3;
     behavior = {
@@ -324,17 +335,9 @@ lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
       fi
     '';
 
-    activation.piStateDirectories = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-      mkdir -p \
-        "${config.home.homeDirectory}/.pi-lens" \
-        "${config.home.homeDirectory}/.pi/agent/state"
-      chmod 700 \
-        "${config.home.homeDirectory}/.pi-lens" \
-        "${config.home.homeDirectory}/.pi/agent/state"
-      if [[ ! -e "${config.home.homeDirectory}/.pi/agent/state/pi-cc-header.json" ]]; then
-        printf '{}\n' > "${config.home.homeDirectory}/.pi/agent/state/pi-cc-header.json"
-      fi
-      chmod 600 "${config.home.homeDirectory}/.pi/agent/state/pi-cc-header.json"
+    activation.piLensDirectory = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      mkdir -p "${config.home.homeDirectory}/.pi-lens"
+      chmod 700 "${config.home.homeDirectory}/.pi-lens"
     '';
 
     packages = [
@@ -351,10 +354,10 @@ lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
       ".pi/agent/mcp.json".text = builtins.toJSON piMcpConfig;
       ".pi/agent/keybindings.json".text = builtins.toJSON piKeybindings;
       ".pi/agent/extensions/pi-footer.json".text = builtins.toJSON piFooterConfig;
+      ".pi/agent/pi-pretty.json".text = builtins.toJSON piPrettyConfig;
       ".pi/agent/pi-sub-core-settings.json".text = builtins.toJSON piSubCoreConfig;
       ".pi/agent/extensions/subagent/config.json".text = builtins.toJSON piSubagentsConfig;
-      ".pi/agent/extensions/pi-cc-header.ts".source =
-        "${piCcHeaderPatched}/extensions/pi-cc-header.ts";
+      ".pi-lens/config.json".text = builtins.toJSON piLensConfig;
       ".pi/agent/extensions/prompt-template-display/index.ts".source =
         ./extensions/prompt-template-display/index.ts;
       ".pi/agent/extensions/prompt-template-display/types.d.ts".source =

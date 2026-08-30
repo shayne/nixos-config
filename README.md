@@ -37,7 +37,10 @@ comes from the existing `local_llm_api_key` SOPS secret at runtime.
 
 Home Manager owns Pi's settings, model catalog, extension configuration, and
 pinned package list. Pi still owns mutable authentication, sessions, and npm
-package state under `~/.pi/agent/`.
+package state under `~/.pi/agent/`. The managed extensions include
+syntax-highlighted and frecency-aware tool output from `pi-pretty`, a compact
+Pi-labelled footer, and read-only `pi-cc-header` configuration that preserves
+the declarative settings file.
 
 ## Hermes Agent and Computer Use
 
