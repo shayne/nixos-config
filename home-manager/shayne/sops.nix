@@ -11,6 +11,7 @@
     secrets = {
       openai_api_key = { };
       anthropic_api_key = { };
+      lemonsqueezy_api_key = { };
       local_llm_api_key = { };
       tailscale_client_id = { };
       tailscale_client_secret = { };
@@ -19,6 +20,7 @@
     templates."shell-secrets.sh".content = ''
       export OPENAI_API_KEY='${config.sops.placeholder.openai_api_key}'
       export ANTHROPIC_API_KEY='${config.sops.placeholder.anthropic_api_key}'
+      export LEMONSQUEEZY_API_KEY='${config.sops.placeholder.lemonsqueezy_api_key}'
       export LOCAL_LLM_API_KEY='${config.sops.placeholder.local_llm_api_key}'
       export TAILSCALE_CLIENT_ID='${config.sops.placeholder.tailscale_client_id}'
       export TAILSCALE_CLIENT_SECRET='${config.sops.placeholder.tailscale_client_secret}'
@@ -27,6 +29,7 @@
     templates."shell-secrets.fish".content = ''
       set -gx OPENAI_API_KEY '${config.sops.placeholder.openai_api_key}'
       set -gx ANTHROPIC_API_KEY '${config.sops.placeholder.anthropic_api_key}'
+      set -gx LEMONSQUEEZY_API_KEY '${config.sops.placeholder.lemonsqueezy_api_key}'
       set -gx LOCAL_LLM_API_KEY '${config.sops.placeholder.local_llm_api_key}'
       set -gx TAILSCALE_CLIENT_ID '${config.sops.placeholder.tailscale_client_id}'
       set -gx TAILSCALE_CLIENT_SECRET '${config.sops.placeholder.tailscale_client_secret}'
