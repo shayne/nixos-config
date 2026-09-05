@@ -82,6 +82,7 @@
       "fluidvoice"
       "ghostty"
       "google-chrome"
+      "grok-bot"
       "homerow"
       "inkscape"
       "linearmouse"
