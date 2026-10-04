@@ -91,7 +91,6 @@
       "multiviewer"
       "orbstack"
       "portalbox"
-      "raycast"
       "screen-studio"
       "sf-symbols"
       "shureplus-motiv"
