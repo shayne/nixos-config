@@ -175,7 +175,7 @@ in
       NSDocumentSaveNewDocumentsToCloud = false; # Save to disk by default
       ApplePressAndHoldEnabled = false; # Use key repeat (no accents)
       AppleKeyboardUIMode = 3; # Full keyboard access
-      "com.apple.keyboard.fnState" = true; # Use F1-F12 as standard function keys
+      "com.apple.keyboard.fnState" = false; # F1-F12 act as media keys (fn for standard function keys)
       InitialKeyRepeat = 10; # Delay until repeat
       KeyRepeat = 2; # Key repeat rate
       NSAutomaticCapitalizationEnabled = false; # Disable auto-capitalization
