@@ -84,7 +84,6 @@
       "google-chrome"
       "grok-bot"
       "homerow"
-      "hopper-disassembler"
       "inkscape"
       "linearmouse"
       "lm-studio"

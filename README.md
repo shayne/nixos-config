@@ -26,10 +26,6 @@ Homebrew apps are declared in the shared and per-host Darwin configs. Remove an
 app from those lists to stop managing it; the next `mise run` applies the removal
 using the configured Homebrew cleanup policy.
 
-`m5mbp` installs Hopper Disassembler through the `hopper-disassembler` cask
-for native binary analysis with REA. On first launch, choose demo mode or
-activate a Hopper license.
-
 Home Manager imports `nix-community/nix-index-database`, so `nix-locate`, shell
 `command-not-found`, and `comma`/`,` use the upstream wrappers and prebuilt
 index data. There is no local `nix-index` database build step to run on Darwin
