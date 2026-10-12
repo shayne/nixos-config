@@ -12,7 +12,7 @@
 
 - Prefer host-specific edits unless the user explicitly asks for a shared/base install.
 - Use `systems/base/darwin-configuration.nix` for packages that should apply to every Darwin host.
-- If a request names a host such as `m5mbp` or `macstudio`, edit that host file directly.
+- If a request names a host such as `m5mbp` or `m5studio`, edit that host file directly.
 - If scope is omitted and the current machine hostname matches `systems/<hostname>/`, prefer that host for a local install and mention the assumption.
 
 ## Package Edit Targets

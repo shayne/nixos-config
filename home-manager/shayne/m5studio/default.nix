@@ -45,19 +45,19 @@ let
 in
 {
   sops.secrets = {
-    beszel_agent_macstudio_key = { };
-    beszel_agent_macstudio_token = { };
+    beszel_agent_m5studio_key = { };
+    beszel_agent_m5studio_token = { };
   };
 
-  sops.templates."beszel-agent-macstudio.env".content = ''
-    KEY="${config.sops.placeholder.beszel_agent_macstudio_key}"
+  sops.templates."beszel-agent-m5studio.env".content = ''
+    KEY="${config.sops.placeholder.beszel_agent_m5studio_key}"
     LISTEN=45876
-    TOKEN="${config.sops.placeholder.beszel_agent_macstudio_token}"
+    TOKEN="${config.sops.placeholder.beszel_agent_m5studio_token}"
     HUB_URL="https://beszel.shayne.ts.net"
   '';
 
   home.file.".config/beszel/beszel-agent.env" = {
-    source = config.lib.file.mkOutOfStoreSymlink config.sops.templates."beszel-agent-macstudio.env".path;
+    source = config.lib.file.mkOutOfStoreSymlink config.sops.templates."beszel-agent-m5studio.env".path;
     force = true;
   };
 
@@ -76,7 +76,7 @@ in
       exit 0
     fi
 
-    rendered_env=${lib.escapeShellArg config.sops.templates."beszel-agent-macstudio.env".path}
+    rendered_env=${lib.escapeShellArg config.sops.templates."beszel-agent-m5studio.env".path}
     for _ in {1..50}; do
       if [[ -s "$rendered_env" ]]; then
         break

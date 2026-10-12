@@ -63,7 +63,7 @@ in
 {
   nixpkgs.hostPlatform = "aarch64-darwin";
 
-  networking.hostName = "macstudio";
+  networking.hostName = "m5studio";
 
   system.stateVersion = 5;
 
