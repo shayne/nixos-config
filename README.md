@@ -31,6 +31,12 @@ Google Chrome is declared in the shared Darwin config for all Macs.
 Tailscale (`tailscale-app`) is also shared by all Macs. After installation,
 open Tailscale and authenticate the Mac to join the tailnet.
 
+On `m5studio`, computer sleep, display sleep, and the idle screen saver are
+disabled declaratively to match `macstudio`. Apply with `mise run` on `m5studio`;
+verify with `pmset -g custom` and
+`defaults -currentHost read com.apple.screensaver idleTime` (all three idle
+timeouts should be `0`). The existing password requirement remains unchanged.
+
 The Beszel agent on `m5studio` is installed through Homebrew and runs as the
 Home Manager LaunchAgent `org.nix-community.home.beszel-agent` in `gui/501`.
 Home Manager renders its SOPS credentials into `~/.config/beszel/beszel-agent.env`

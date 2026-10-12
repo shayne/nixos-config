@@ -44,6 +44,8 @@ let
   '';
 in
 {
+  targets.darwin.currentHostDefaults."com.apple.screensaver".idleTime = 0;
+
   sops.secrets = {
     beszel_agent_m5studio_key = { };
     beszel_agent_m5studio_token = { };

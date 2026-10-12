@@ -67,6 +67,11 @@ in
 
   system.stateVersion = 5;
 
+  power.sleep = {
+    computer = "never";
+    display = "never";
+  };
+
   security.sudo.extraConfig = ''
     ${primaryUser} ALL = (ALL) NOPASSWD: ALL
   '';
