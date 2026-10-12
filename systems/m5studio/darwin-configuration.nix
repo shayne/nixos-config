@@ -72,6 +72,11 @@ in
     display = "never";
   };
 
+  # Keep the desktop unlocked after unlocking it through Screen Sharing.
+  system.defaults.CustomSystemPreferences."/Library/Preferences/com.apple.RemoteManagement" = {
+    RestoreMachineState = false;
+  };
+
   security.sudo.extraConfig = ''
     ${primaryUser} ALL = (ALL) NOPASSWD: ALL
   '';

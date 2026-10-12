@@ -36,6 +36,11 @@ disabled declaratively to match `macstudio`. Apply with `mise run` on `m5studio`
 verify with `pmset -g custom` and
 `defaults -currentHost read com.apple.screensaver idleTime` (all three idle
 timeouts should be `0`). The existing password requirement remains unchanged.
+Screen Sharing also has `RestoreMachineState = false` on this host, so a session
+unlocked remotely is not re-locked on disconnect just because it began locked.
+Verify the preference with
+`sudo defaults read /Library/Preferences/com.apple.RemoteManagement RestoreMachineState`
+(expected `0`), then reconnect, unlock, and disconnect to check the live behavior.
 
 The Beszel agent on `m5studio` is installed through Homebrew and runs as the
 Home Manager LaunchAgent `org.nix-community.home.beszel-agent` in `gui/501`.
