@@ -126,6 +126,7 @@ in
     "chatgpt"
     "codex"
     "gitbutler"
+    "google-chrome"
     "hopper-disassembler"
   ];
 

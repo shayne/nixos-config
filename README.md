@@ -27,6 +27,8 @@ app from those lists to stop managing it; the next `mise run` applies the remova
 using the configured Homebrew cleanup policy. Run this on the affected host;
 for `m5studio` package changes, run `mise run` on `m5studio`.
 
+Google Chrome is declared in the shared Darwin config for all Macs.
+
 The Beszel agent on `m5studio` is currently commented out, including its Homebrew
 tap/formula, Home Manager secret setup, and service activation hooks.
 
