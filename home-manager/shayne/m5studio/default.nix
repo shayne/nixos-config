@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ /* config, lib, */ pkgs, ... }:
 let
   # tmux is a second place where macOS launchd/audit sessions matter. Panes are
   # forked by the long-lived tmux server, not by whichever SSH client attaches to
@@ -44,34 +44,38 @@ let
   '';
 in
 {
-  sops.secrets = {
+  # Beszel agent setup is paused alongside its Homebrew declaration.
+  /*
+    sops.secrets = {
     beszel_agent_m5studio_key = { };
     beszel_agent_m5studio_token = { };
-  };
+    };
 
-  sops.templates."beszel-agent-m5studio.env".content = ''
+    sops.templates."beszel-agent-m5studio.env".content = ''
     KEY="${config.sops.placeholder.beszel_agent_m5studio_key}"
     LISTEN=45876
     TOKEN="${config.sops.placeholder.beszel_agent_m5studio_token}"
     HUB_URL="https://beszel.shayne.ts.net"
-  '';
+    '';
 
-  home.file.".config/beszel/beszel-agent.env" = {
+    home.file.".config/beszel/beszel-agent.env" = {
     source = config.lib.file.mkOutOfStoreSymlink config.sops.templates."beszel-agent-m5studio.env".path;
     force = true;
-  };
+    };
+  */
 
   programs.tmux.extraConfig = ''
     set -g default-command ${tmuxAquaShell}
   '';
 
-  home.activation.beszelDirs = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+  /*
+    home.activation.beszelDirs = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     mkdir -p "$HOME/.cache/beszel"
-  '';
+    '';
 
-  # nix-darwin runs Homebrew before Home Manager on Darwin, so restart the
-  # brew-managed agent only after sops-nix has rendered the env file.
-  home.activation.beszelService = lib.hm.dag.entryAfter [ "sops-nix" "linkGeneration" ] ''
+    # nix-darwin runs Homebrew before Home Manager on Darwin, so restart the
+    # brew-managed agent only after sops-nix has rendered the env file.
+    home.activation.beszelService = lib.hm.dag.entryAfter [ "sops-nix" "linkGeneration" ] ''
     if ! /opt/homebrew/bin/brew list --formula beszel-agent >/dev/null 2>&1; then
       exit 0
     fi
@@ -91,5 +95,6 @@ in
 
     /opt/homebrew/bin/brew services restart beszel-agent >/dev/null 2>&1 \
       || /opt/homebrew/bin/brew services start beszel-agent >/dev/null
-  '';
+    '';
+  */
 }

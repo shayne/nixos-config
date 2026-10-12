@@ -79,7 +79,7 @@ in
   homebrew = {
     enable = true;
     taps = [
-      "henrygd/beszel"
+      # "henrygd/beszel"
       "homebrew/cask"
       "steipete/tap"
       "sichengchen/tap"
@@ -91,10 +91,10 @@ in
         start_service = true;
       }
       "gh"
-      {
-        name = "henrygd/beszel/beszel-agent";
-        start_service = true;
-      }
+      # {
+      #   name = "henrygd/beszel/beszel-agent";
+      #   start_service = true;
+      # }
       "mise"
       "sichengchen/tap/apple-calendar-cli"
       "steipete/tap/peekaboo"

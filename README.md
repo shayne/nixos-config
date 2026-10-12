@@ -27,6 +27,9 @@ app from those lists to stop managing it; the next `mise run` applies the remova
 using the configured Homebrew cleanup policy. Run this on the affected host;
 for `m5studio` package changes, run `mise run` on `m5studio`.
 
+The Beszel agent on `m5studio` is currently commented out, including its Homebrew
+tap/formula, Home Manager secret setup, and service activation hooks.
+
 Home Manager imports `nix-community/nix-index-database`, so `nix-locate`, shell
 `command-not-found`, and `comma`/`,` use the upstream wrappers and prebuilt
 index data. There is no local `nix-index` database build step to run on Darwin
