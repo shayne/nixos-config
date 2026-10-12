@@ -128,6 +128,7 @@ in
     "gitbutler"
     "google-chrome"
     "hopper-disassembler"
+    "tailscale-app"
   ];
 
   # The user should already exist, but we need to set this up so Nix knows

@@ -1,4 +1,4 @@
-{ /* config, lib, */ pkgs, ... }:
+{ config, lib, pkgs, ... }:
 let
   # tmux is a second place where macOS launchd/audit sessions matter. Panes are
   # forked by the long-lived tmux server, not by whichever SSH client attaches to
@@ -44,57 +44,69 @@ let
   '';
 in
 {
-  # Beszel agent setup is paused alongside its Homebrew declaration.
-  /*
-    sops.secrets = {
+  sops.secrets = {
     beszel_agent_m5studio_key = { };
     beszel_agent_m5studio_token = { };
-    };
+  };
 
-    sops.templates."beszel-agent-m5studio.env".content = ''
+  sops.templates."beszel-agent-m5studio.env".content = ''
     KEY="${config.sops.placeholder.beszel_agent_m5studio_key}"
     LISTEN=45876
     TOKEN="${config.sops.placeholder.beszel_agent_m5studio_token}"
     HUB_URL="https://beszel.shayne.ts.net"
-    '';
+  '';
 
-    home.file.".config/beszel/beszel-agent.env" = {
+  home.file.".config/beszel/beszel-agent.env" = {
     source = config.lib.file.mkOutOfStoreSymlink config.sops.templates."beszel-agent-m5studio.env".path;
     force = true;
-    };
-  */
+  };
 
   programs.tmux.extraConfig = ''
     set -g default-command ${tmuxAquaShell}
   '';
 
-  /*
-    home.activation.beszelDirs = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-    mkdir -p "$HOME/.cache/beszel"
-    '';
+  launchd.agents.beszel-agent = {
+    enable = true;
+    config = {
+      ProgramArguments = [ "/opt/homebrew/opt/beszel-agent/bin/beszel-agent-launcher" ];
+      EnvironmentVariables.HOME = config.home.homeDirectory;
+      RunAtLoad = true;
+      KeepAlive = true;
+      ThrottleInterval = 5;
+      ProcessType = "Background";
+      StandardOutPath = "${config.home.homeDirectory}/.cache/beszel/beszel-agent.log";
+      StandardErrorPath = "${config.home.homeDirectory}/.cache/beszel/beszel-agent.log";
+    };
+  };
 
-    # nix-darwin runs Homebrew before Home Manager on Darwin, so restart the
-    # brew-managed agent only after sops-nix has rendered the env file.
-    home.activation.beszelService = lib.hm.dag.entryAfter [ "sops-nix" "linkGeneration" ] ''
-    if ! /opt/homebrew/bin/brew list --formula beszel-agent >/dev/null 2>&1; then
-      exit 0
-    fi
-
-    rendered_env=${lib.escapeShellArg config.sops.templates."beszel-agent-m5studio.env".path}
-    for _ in {1..50}; do
-      if [[ -s "$rendered_env" ]]; then
-        break
-      fi
-      sleep 0.1
+  home.activation.beszelDirs = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    run mkdir -p "$HOME/.cache/beszel"
+    # Migrate the previous Homebrew service out of either launchd domain.
+    # An agent left in user/<uid> can conflict with a new gui/<uid> agent.
+    for domain in "user/$(id -u)" "gui/$(id -u)"; do
+      run /bin/launchctl bootout "$domain/homebrew.mxcl.beszel-agent" 2>/dev/null || true
     done
+    run rm -f "$HOME/Library/LaunchAgents/homebrew.mxcl.beszel-agent.plist"
+  '';
 
-    if [[ ! -s "$rendered_env" ]]; then
-      echo "Beszel env was not rendered at $rendered_env" >&2
-      exit 1
+  # Homebrew activation runs under sudo before SOPS has rendered the env file.
+  # Use Home Manager's gui/<uid> agent and restart it after secrets are ready.
+  home.activation.beszelService = lib.hm.dag.entryAfter [ "sops-nix" "setupLaunchAgents" "linkGeneration" ] ''
+    if [[ ! -v DRY_RUN ]]; then
+      rendered_env=${lib.escapeShellArg config.sops.templates."beszel-agent-m5studio.env".path}
+      for _ in {1..50}; do
+        if [[ -s "$rendered_env" ]]; then
+          break
+        fi
+        sleep 0.1
+      done
+
+      if [[ ! -s "$rendered_env" ]]; then
+        echo "Beszel env was not rendered at $rendered_env" >&2
+        exit 1
+      fi
+
+      /bin/launchctl kickstart -k "gui/$(id -u)/org.nix-community.home.beszel-agent"
     fi
-
-    /opt/homebrew/bin/brew services restart beszel-agent >/dev/null 2>&1 \
-      || /opt/homebrew/bin/brew services start beszel-agent >/dev/null
-    '';
-  */
+  '';
 }

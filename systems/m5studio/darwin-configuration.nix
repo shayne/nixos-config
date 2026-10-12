@@ -79,7 +79,7 @@ in
   homebrew = {
     enable = true;
     taps = [
-      # "henrygd/beszel"
+      "henrygd/beszel"
       "homebrew/cask"
       "steipete/tap"
       "sichengchen/tap"
@@ -91,10 +91,8 @@ in
         start_service = true;
       }
       "gh"
-      # {
-      #   name = "henrygd/beszel/beszel-agent";
-      #   start_service = true;
-      # }
+      # Home Manager starts the agent after rendering its SOPS credentials.
+      "henrygd/beszel/beszel-agent"
       "mise"
       "sichengchen/tap/apple-calendar-cli"
       "steipete/tap/peekaboo"

@@ -99,7 +99,6 @@
       "stats"
       "steam"
       "swiftformat-for-xcode"
-      "tailscale-app"
       "telegram-desktop"
       "upscayl"
       "utm"

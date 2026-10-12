@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   sops = {
@@ -34,6 +34,15 @@
       set -gx TAILSCALE_CLIENT_ID '${config.sops.placeholder.tailscale_client_id}'
       set -gx TAILSCALE_CLIENT_SECRET '${config.sops.placeholder.tailscale_client_secret}'
     '';
+  };
+
+  # Home Manager owns loading/updating the LaunchAgent. Restart it only after
+  # that step; SOPS' default bootout/bootstrap races with launchd when the
+  # manifest changes and setupLaunchAgents has just reloaded the same agent.
+  home.activation = lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
+    sops-nix = lib.mkForce (lib.hm.dag.entryAfter [ "setupLaunchAgents" ] ''
+      run /bin/launchctl kickstart -k "gui/$(id -u)/org.nix-community.home.sops-nix"
+    '');
   };
 
   programs.bash.initExtra = lib.mkAfter ''

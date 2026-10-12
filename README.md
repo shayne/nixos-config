@@ -28,9 +28,20 @@ using the configured Homebrew cleanup policy. Run this on the affected host;
 for `m5studio` package changes, run `mise run` on `m5studio`.
 
 Google Chrome is declared in the shared Darwin config for all Macs.
+Tailscale (`tailscale-app`) is also shared by all Macs. After installation,
+open Tailscale and authenticate the Mac to join the tailnet.
 
-The Beszel agent on `m5studio` is currently commented out, including its Homebrew
-tap/formula, Home Manager secret setup, and service activation hooks.
+The Beszel agent on `m5studio` is installed through Homebrew and runs as the
+Home Manager LaunchAgent `org.nix-community.home.beszel-agent` in `gui/501`.
+Home Manager renders its SOPS credentials into `~/.config/beszel/beszel-agent.env`
+and restarts the agent after the secrets are ready. Do not enable Homebrew's
+`start_service` for this formula: Darwin's sudo activation targets `user/501`
+and can fail before Home Manager renders the credentials. Apply changes with
+`mise run`; check the agent with
+`launchctl print gui/501/org.nix-community.home.beszel-agent` and read logs at
+`~/.cache/beszel/beszel-agent.log`.
+Connect `m5studio` to the tailnet so the agent can reach
+`https://beszel.shayne.ts.net`.
 
 Home Manager imports `nix-community/nix-index-database`, so `nix-locate`, shell
 `command-not-found`, and `comma`/`,` use the upstream wrappers and prebuilt
@@ -80,6 +91,8 @@ This repo stores secrets with `sops` + `age`.
 - Shells export `SOPS_AGE_SSH_PRIVATE_KEY_FILE=~/.ssh/id_ed25519` so `sops
   secrets/shayne.yaml` works without extra flags.
 - Edit shell secrets with `sops secrets/shayne.yaml`
+- On Darwin, Home Manager loads the SOPS LaunchAgent before restarting it to
+  render updated secrets, avoiding an immediate unload/reload race in launchd.
 - Rebuild the encrypted font archive from a local plaintext font directory with:
   `tar -C /path/to/fonts -czf /tmp/custom-fonts.tar.gz . && cp /tmp/custom-fonts.tar.gz secrets/custom-fonts.tar.gz && sops encrypt -i --input-type binary secrets/custom-fonts.tar.gz`
 
