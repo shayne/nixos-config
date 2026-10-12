@@ -97,7 +97,6 @@ in
       }
       "mise"
       "sichengchen/tap/apple-calendar-cli"
-      "steipete/tap/gogcli"
       "steipete/tap/peekaboo"
       "signal-cli"
       "uv"

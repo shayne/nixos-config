@@ -24,7 +24,8 @@ This repository houses my macOS (nix-darwin) configurations and related Nix tool
 
 Homebrew apps are declared in the shared and per-host Darwin configs. Remove an
 app from those lists to stop managing it; the next `mise run` applies the removal
-using the configured Homebrew cleanup policy.
+using the configured Homebrew cleanup policy. Run this on the affected host;
+for `m5studio` package changes, run `mise run` on `m5studio`.
 
 Home Manager imports `nix-community/nix-index-database`, so `nix-locate`, shell
 `command-not-found`, and `comma`/`,` use the upstream wrappers and prebuilt
