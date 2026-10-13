@@ -112,6 +112,7 @@ in
     casks = [
       "ngrok"
       "orbstack"
+      "raycast"
     ];
     masApps = {
       "Xcode" = 497799835;

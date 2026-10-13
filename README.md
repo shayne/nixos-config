@@ -28,6 +28,7 @@ using the configured Homebrew cleanup policy. Run this on the affected host;
 for `m5studio` package changes, run `mise run` on `m5studio`.
 
 Google Chrome is declared in the shared Darwin config for all Macs.
+Raycast is declared in the `m5studio` host config.
 Tailscale (`tailscale-app`) is also shared by all Macs. After installation,
 open Tailscale and authenticate the Mac to join the tailnet.
 
