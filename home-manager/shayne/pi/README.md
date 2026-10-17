@@ -38,7 +38,7 @@ The pinned set is adapted from
   with typed options.
 - `npm:@juicesharp/rpiv-btw@2.12.0` — explicit side model calls using the
   current conversation context.
-- `npm:@tintinweb/pi-tasks@0.9.0` — Claude Code-style task tracking
+- `npm:@tintinweb/pi-tasks@0.9.1` — Claude Code-style task tracking
   (`TaskCreate`, `TaskList`, `TaskGet`, `TaskUpdate`, `TaskOutput`,
   `TaskStop`, `TaskExecute`), a persistent widget above the editor, reminder
   injection, and dependency tracking. The `/tasks` command saves display

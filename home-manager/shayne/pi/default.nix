@@ -32,7 +32,7 @@ let
   piPrettyVersion = "0.6.31";
   rpivAskUserQuestionVersion = "2.12.0";
   rpivBtwVersion = "2.12.0";
-  piTasksVersion = "0.9.0";
+  piTasksVersion = "0.9.1";
 
   piMcpAdapterSource = "git:github.com/nicobailon/pi-mcp-adapter@${piMcpAdapterRevision}";
   piSubagentsSource = "npm:@tintinweb/pi-subagents@${piSubagentsVersion}";
