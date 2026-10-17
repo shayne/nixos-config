@@ -1,3 +1,5 @@
+/// <reference path="./types.d.ts" />
+
 import { readFile } from "node:fs/promises";
 import type { ExtensionAPI } from "@earendil-works/pi-coding-agent";
 import type { ImageContent, TextContent } from "@earendil-works/pi-ai";
@@ -112,11 +114,7 @@ export default function registerPromptTemplateDisplay(pi: ExtensionAPI): void {
 	pi.on("context", async (event) => {
 		const messages = [...event.messages];
 
-		for (
-			let markerIndex = messages.length - 1;
-			markerIndex >= 0;
-			markerIndex--
-		) {
+		for (let markerIndex = messages.length - 1; markerIndex >= 0; markerIndex--) {
 			const marker = messages[markerIndex];
 			if (marker.customType !== MESSAGE_TYPE) continue;
 
