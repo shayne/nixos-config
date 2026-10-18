@@ -9,6 +9,9 @@
       "${config.home.homeDirectory}/.ssh/id_ed25519";
 
     secrets = {
+      agents_md = {
+        path = "${config.home.homeDirectory}/.agents/AGENTS.md";
+      };
       openai_api_key = { };
       anthropic_api_key = { };
       lemonsqueezy_api_key = { };
@@ -35,6 +38,9 @@
       set -gx TAILSCALE_CLIENT_SECRET '${config.sops.placeholder.tailscale_client_secret}'
     '';
   };
+
+  home.file.".codex/AGENTS.md".source =
+    config.lib.file.mkOutOfStoreSymlink config.sops.secrets.agents_md.path;
 
   # Home Manager owns loading/updating the LaunchAgent. Restart it only after
   # that step; SOPS' default bootout/bootstrap races with launchd when the

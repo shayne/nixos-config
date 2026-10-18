@@ -98,6 +98,12 @@ If `make` itself is missing on a fresh host, run the bootstrap target through Ni
 
 This repo stores secrets with `sops` + `age`.
 
+- Shared agent instructions are stored in the encrypted `agents_md` value in
+  `secrets/shayne.yaml`. SOPS installs them at `~/.agents/AGENTS.md` with mode
+  `0400`; Home Manager links `~/.codex/AGENTS.md` to that shared file so Codex
+  discovers it as global guidance. Edit the value with `sops secrets/shayne.yaml`
+  and apply with `mise run` on each host. Start a new Codex session to load
+  updated instructions. The plaintext stays outside the repository and Nix store.
 - Each host that needs to decrypt secrets must have the shared SSH private key at:
   `~/.ssh/id_ed25519`
 - Shells export `SOPS_AGE_SSH_PRIVATE_KEY_FILE=~/.ssh/id_ed25519` so `sops
