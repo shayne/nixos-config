@@ -6,6 +6,7 @@
   networking.hostName = "m5mbp";
 
   environment.systemPackages = [
+    pkgs._1password-gui
     pkgs.nurb
     pkgs.umbra
   ];

@@ -29,6 +29,8 @@ for `m5studio` package changes, run `mise run` on `m5studio`.
 
 Google Chrome is declared in the shared Darwin config for all Macs.
 Raycast is declared in the `m5studio` host config.
+1Password (`pkgs._1password-gui`) is declared in the `m5mbp` host config.
+After applying the config, open 1Password and sign in to the family account.
 Tailscale (`tailscale-app`) is also shared by all Macs. After installation,
 open Tailscale and authenticate the Mac to join the tailnet.
 
