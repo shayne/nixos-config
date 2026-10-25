@@ -192,7 +192,6 @@ let
       rpivAskUserQuestionSource
       rpivBtwSource
       piTasksSource
-      "${inputs.superpowers}"
     ];
   };
 

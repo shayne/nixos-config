@@ -77,6 +77,9 @@ syntax-highlighted and frecency-aware tool output from `pi-pretty`, a compact
 Pi-labelled footer, and read-only `pi-cc-header` configuration that preserves
 the declarative settings file.
 
+Pi discovers shared user skills from `~/.agents/skills/`. Superpowers is managed
+there rather than installed again through Pi's pinned package list.
+
 ## Hermes Agent and Computer Use
 
 The shared `shayne` Home Manager profile installs Hermes Agent from the pinned

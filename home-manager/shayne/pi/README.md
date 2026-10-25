@@ -43,7 +43,11 @@ The pinned set is adapted from
   `TaskStop`, `TaskExecute`), a persistent widget above the editor, reminder
   injection, and dependency tracking. The `/tasks` command saves display
   overrides to project-local `.pi/tasks-config.json`, which stays user-owned.
-- `${inputs.superpowers}` — the Superpowers skill collection.
+
+Pi automatically discovers shared user skills from `~/.agents/skills/`,
+including Superpowers. The package list does not install a second Superpowers
+collection or its bootstrap extension, avoiding duplicate skill registrations
+and conflicting versions.
 
 `pi-mcp-adapter` is configured through `~/.pi/agent/mcp-adapter.json` (not
 the native `mcp.json`). Native MCP is disabled via
