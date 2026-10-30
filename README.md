@@ -83,7 +83,8 @@ there rather than installed again through Pi's pinned package list.
 ## Hermes Agent and Computer Use
 
 The shared `shayne` Home Manager profile installs Hermes Agent from the pinned
-`numtide/llm-agents.nix` flake on both Macs. The Nix wrapper supplies Hermes'
+`numtide/llm-agents.nix` flake on hosts other than `m5air`. The laptop excludes
+the Hermes module, its packages, and its dedicated CUA driver. The Nix wrapper supplies Hermes'
 Computer Use HTTP dependency and a writable lazy-package target, while Hermes
 continues to own mutable configuration, credentials, sessions, skills, and
 other state under `~/.hermes/`. Update Hermes through this flake and rebuild the
