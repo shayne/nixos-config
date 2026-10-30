@@ -5,7 +5,7 @@
 
 ## Project Structure & Module Organization
 - `flake.nix`/`flake.lock`: flake entrypoint and pinned inputs.
-- `systems/`: host configs. Common defaults live in `systems/base/`; per-host overrides live in `systems/<hostname>/` (e.g., `systems/m5mbp/`).
+- `systems/`: host configs. Common defaults live in `systems/base/`; per-host overrides live in `systems/<hostname>/` (e.g., `systems/m5air/`).
 - `home-manager/`: user profiles (global defaults in `home-manager/<user>/default.nix`, per-host overrides in `home-manager/<user>/<hostname>/`).
 - Do not remove seemingly empty `home-manager/<user>/<hostname>/default.nix` files without checking `lib/mkSystem.nix`; those tracked host directories determine which users attach to which hosts.
 - `modules/`: reusable Nix modules (shells, editors, services).
@@ -29,7 +29,7 @@
 
 ## Coding Style & Naming Conventions
 - Nix files use 2‑space indentation and compact attribute sets.
-- Host names map directly to folder names (e.g., `systems/m5mbp`, `home-manager/shayne/m5mbp`).
+- Host names map directly to folder names (e.g., `systems/m5air`, `home-manager/shayne/m5air`).
 - Prefer `pkgs.stdenv.hostPlatform.system` over deprecated `pkgs.system` or `system` alias.
 - Formatting: use `nix fmt` (flake formatter is configured via nix-formatter-pack).
 
@@ -40,7 +40,7 @@
 - Stage newly added host marker files before trusting flake evaluation results. Untracked files may not be visible to the Git-based flake source that `nix` evaluates.
 
 ## Commit & Pull Request Guidelines
-- Commit messages follow a short “scope: summary” style (examples: `systems/m5mbp: enable nix-index program`, `flake: update all dependencies`).
+- Commit messages follow a short “scope: summary” style (examples: `systems/m5air: enable nix-index program`, `flake: update all dependencies`).
 - Use `Revert "..."` when rolling back a change.
 - PRs should include: a short summary, affected hosts, and the exact command(s) run (e.g., `mise run check`, `mise run`).
 - When a change affects active hosts, secret bootstrap/decryption, or common operator commands, update `README.md` in the same change so the repo docs stay current.

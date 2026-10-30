@@ -2,7 +2,7 @@
 
 This shared Home Manager module installs Pi from the pinned
 [`numtide/llm-agents.nix`](https://github.com/numtide/llm-agents.nix) flake and
-translates the local provider from `../m5mbp/opencode.json` into Pi's native
+translates the local provider from `../m5air/opencode.json` into Pi's native
 model schema. OpenCode remains the source of truth for the NInfer endpoint,
 default model, display name, and token limits.
 

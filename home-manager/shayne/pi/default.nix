@@ -11,7 +11,7 @@ let
 
   # OpenCode's checked-in configuration is the source of truth for the local
   # provider. Pi translates that provider into its native models.json schema.
-  opencodeConfig = builtins.fromJSON (builtins.readFile ../m5mbp/opencode.json);
+  opencodeConfig = builtins.fromJSON (builtins.readFile ../m5air/opencode.json);
   localModelParts = lib.splitString "/" opencodeConfig.model;
   localProviderName = builtins.head localModelParts;
   localModelId = lib.last localModelParts;

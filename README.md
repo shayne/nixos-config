@@ -7,7 +7,7 @@ This repository houses my macOS (nix-darwin) configurations and related Nix tool
 ## Structure
 
 - `systems/base/`: shared Darwin defaults
-- `systems/<hostname>/`: per-host overrides (current host: `m5mbp`)
+- `systems/<hostname>/`: per-host overrides (current host: `m5air`)
 - `home-manager/<user>/`: shared user config and per-host overlays
 - `modules/`: reusable Nix modules
 - `overlays/` + `pkgs/`: custom overlays/packages
@@ -29,7 +29,7 @@ for `m5studio` package changes, run `mise run` on `m5studio`.
 
 Google Chrome is declared in the shared Darwin config for all Macs.
 Raycast is declared in the `m5studio` host config.
-1Password (`pkgs._1password-gui`) is declared in the `m5mbp` host config.
+1Password (`pkgs._1password-gui`) is declared in the `m5air` host config.
 After applying the config, open 1Password and sign in to the family account.
 Tailscale (`tailscale-app`) is also shared by all Macs. After installation,
 open Tailscale and authenticate the Mac to join the tailnet.
@@ -66,7 +66,7 @@ hosts in this repo.
 
 The shared `shayne` Home Manager profile installs `pi` from the pinned
 `numtide/llm-agents.nix` flake on every Mac. Its default provider and model are
-derived from `home-manager/shayne/m5mbp/opencode.json`, so OpenCode and Pi use
+derived from `home-manager/shayne/m5air/opencode.json`, so OpenCode and Pi use
 the same NInfer endpoint, model identifiers, and token limits. The local API key
 comes from the existing `local_llm_api_key` SOPS secret at runtime.
 
@@ -129,7 +129,7 @@ You can run all hooks manually with `pre-commit run --all-files`.
 
 ## Current Systems
 
-- `m5mbp` — Apple Silicon MacBook Pro running nix-darwin
+- `m5air` — Apple Silicon MacBook Air running nix-darwin
 - `m5studio` — Apple Silicon Mac Studio running nix-darwin
 
 The flake still exports cross-platform packages and formatter outputs, but the active system configs in this repo are Darwin-only.
