@@ -1,4 +1,4 @@
-{ config, inputs, lib, pkgs, myModulesPath, currentSystemName, ... }:
+{ config, inputs, lib, pkgs, myModulesPath, ... }:
 
 let
   inherit (pkgs.stdenv) isDarwin isLinux;
@@ -74,7 +74,8 @@ in
     file.".hushlogin".text = "";
   };
 
-  imports = lib.optional (currentSystemName != "m5air") ./hermes ++ [
+  imports = [
+    ./hermes
     ./pi
     ./sops.nix
     (myModulesPath + "/bash")
