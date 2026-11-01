@@ -46,10 +46,10 @@ let
   rpivBtwSource = "npm:@juicesharp/rpiv-btw@${rpivBtwVersion}";
   piTasksSource = "npm:@tintinweb/pi-tasks@${piTasksVersion}";
 
-  # Pi installs npm-backed packages globally. Keep those mutable resources in
-  # Pi's user-owned state rather than pointing npm at the read-only Nix store.
+  # Keep npm's legacy global prefix in Pi's user-owned state. The private
+  # wrapper must be named npm so Pi selects its production/peer install flags.
   piNpmPackage = pkgs.writeShellApplication {
-    name = "pi-npm";
+    name = "npm";
     runtimeInputs = [ pkgs.nodejs ];
     text = ''
       export NPM_CONFIG_PREFIX="${config.home.homeDirectory}/.pi/agent/npm-global"
@@ -57,7 +57,7 @@ let
       export NPM_CONFIG_FUND=false
       export NPM_CONFIG_LOGLEVEL=error
 
-      exec npm --loglevel=error --no-audit --no-fund "$@"
+      exec ${pkgs.nodejs}/bin/npm --loglevel=error --no-audit --no-fund "$@"
     '';
   };
 
@@ -172,7 +172,7 @@ let
     skills = [ "skills" ];
     prompts = [ "prompts/*.md" ];
     enableSkillCommands = true;
-    npmCommand = [ "${piNpmPackage}/bin/pi-npm" ];
+    npmCommand = [ "${piNpmPackage}/bin/npm" ];
 
     packages = [
       piMcpAdapterSource
@@ -436,7 +436,6 @@ lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
     '';
 
     packages = [
-      piNpmPackage
       piWrapperPackage
     ];
 

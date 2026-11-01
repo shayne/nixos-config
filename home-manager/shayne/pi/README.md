@@ -15,6 +15,11 @@ adapter defaults, pinned package list, extension configuration, theme, and
 local extensions under `~/.pi/agent/`. Pi continues to own `auth.json`,
 sessions, package state, and other mutable runtime data.
 
+Pi's `npmCommand` points to a private Nix wrapper named `npm`, so Pi recognizes
+the package manager and installs Git package dependencies with `--omit=dev
+--legacy-peer-deps`. The wrapper invokes the pinned Node package's npm by
+absolute path and is not added to the user's shell PATH.
+
 ## Pinned packages
 
 The pinned set is adapted from
@@ -103,6 +108,12 @@ intentionally omitted.
 
 ## Migration notes
 
+- After activating the npm wrapper fix with `mise run`, repair an existing
+  MCP adapter checkout that is missing dependencies with
+  `pi update git:github.com/nicobailon/pi-mcp-adapter@80fcdef8d9f6958751f1e225f88b272440caa542`.
+  This reconciles the configured commit and reinstalls missing runtime
+  dependencies. Ordinary startup does not repair an existing Git checkout;
+  adding `zod` alone would leave the other adapter dependencies missing.
 - When upgrading from the former `pi-subagents` package, run
   `pi remove pi-subagents` (and `pi remove @juicesharp/rpiv-todo`, if
   installed) once after activation, then start a fresh Pi session. Do not run
