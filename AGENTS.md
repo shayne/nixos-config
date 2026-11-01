@@ -43,7 +43,8 @@
 - Commit messages follow a short “scope: summary” style (examples: `systems/m5air: enable nix-index program`, `flake: update all dependencies`).
 - Use `Revert "..."` when rolling back a change.
 - PRs should include: a short summary, affected hosts, and the exact command(s) run (e.g., `mise run check`, `mise run`).
-- When a change affects active hosts, secret bootstrap/decryption, or common operator commands, update `README.md` in the same change so the repo docs stay current.
+- Keep the root `README.md` focused on high-level repository structure, supported hosts, and shared operator workflows. Update it when those change, including changes to secret bootstrap/decryption or common operator commands.
+- Document package-specific configuration, implementation details, and troubleshooting in the relevant module's README or nearby documentation. A package change or activation on an active host alone does not require a root `README.md` update.
 
 ## Security & Configuration Tips
 - Treat [secrets/shayne.yaml](/Users/shayne/nixos-config/secrets/shayne.yaml) and [secrets/custom-fonts.tar.gz](/Users/shayne/nixos-config/secrets/custom-fonts.tar.gz) as sensitive. Edit them with `sops`; do not reintroduce legacy `git-crypt` or `*.enc.nix` workflows.
