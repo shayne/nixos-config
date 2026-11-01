@@ -40,6 +40,8 @@
 - Stage newly added host marker files before trusting flake evaluation results. Untracked files may not be visible to the Git-based flake source that `nix` evaluates.
 
 ## Commit & Pull Request Guidelines
+- Work directly on `main` unless the user specifies another branch or workflow. Do not create feature branches or worktrees by default.
+- Use normal `git` commands for version control. Use GitButler only when the user explicitly requests it.
 - Commit messages follow a short “scope: summary” style (examples: `systems/m5air: enable nix-index program`, `flake: update all dependencies`).
 - Use `Revert "..."` when rolling back a change.
 - PRs should include: a short summary, affected hosts, and the exact command(s) run (e.g., `mise run check`, `mise run`).
