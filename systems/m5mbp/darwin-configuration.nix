@@ -3,7 +3,7 @@
 
   nixpkgs.hostPlatform = "aarch64-darwin";
 
-  networking.hostName = "m5air";
+  networking.hostName = "m5mbp";
 
   environment.systemPackages = [
     pkgs._1password-gui
