@@ -38,6 +38,14 @@
   };
 
   system = {
+    defaults = {
+      # Accessibility > Touch > Ignore Touch Gestures (also affects Sidecar).
+      CustomUserPreferences."com.apple.universalaccess".SidecarTouchInputDisabled = true;
+
+      # Run as root, matching Apple's documented sudo defaults command:
+      # https://support.apple.com/en-us/149248
+      CustomSystemPreferences."com.apple.CoreBrightness".LEBacklightMode = 0;
+    };
     systemBuilderArgs = lib.mkIf (config.nix.settings.sandbox == "relaxed") {
       sandboxProfile = ''
         (allow file-read* file-write* process-exec mach-lookup (subpath "${builtins.storeDir}"))
